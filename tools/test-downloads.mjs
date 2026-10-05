@@ -6,7 +6,7 @@ import vm from "node:vm";
 const source = await readFile(new URL("../snippets/Downloads.jsx", import.meta.url), "utf8");
 const helpers = source.split("// UI rendering")[0].replaceAll("export const ", "const ");
 const context = vm.createContext({ URL });
-vm.runInContext(`${helpers}\nglobalThis.helpers = { releaseSections, selectKiteMarketAssets, localizedReleaseBody, safeWebLink, selectSingleAsset, downloadUrl, normalizeReleases };`, context);
+vm.runInContext(`${helpers}\nglobalThis.helpers = { releaseSections, selectKiteMarketAssets, localizedReleaseBody, safeWebLink, selectSingleAsset, downloadUrl, normalizeReleases, splitReleaseTableRow, releaseNoteBlocks };`, context);
 const h = context.helpers;
 const release = (tag, prerelease = false, draft = false, assets = []) => ({
   tag_name: tag, name: tag, prerelease, draft, assets,
@@ -58,6 +58,42 @@ const normalized = h.normalizeReleases([{
 assert.equal(normalized[0].assets.length, 1);
 assert.equal(normalized[0].html_url, "https://github.com/KiteMC/KiteMarket/releases/tag/v1.0.0");
 assert.throws(() => h.normalizeReleases({}, "KiteMC", "KiteMarket"), /Invalid/);
+const runtimeTable = [
+  "| 运行包 | Minecraft 范围 | 字节码 |",
+  "| --- | --- | --- |",
+  "| Legacy | 1.16.5–1.20.4 | Java 11 |",
+  "| Modern | 1.20.5–1.21.11 | Java 21 |",
+  "| Current | 26.2 | Java 25 |",
+].join("\n");
+const runtimeBlocks = plain(h.releaseNoteBlocks(runtimeTable));
+assert.equal(runtimeBlocks[0].type, "table", "Release runtime tables must render as a table, not raw pipe text");
+assert.deepEqual(runtimeBlocks[0].headers, ["运行包", "Minecraft 范围", "字节码"]);
+assert.deepEqual(runtimeBlocks[0].rows, [
+  ["Legacy", "1.16.5–1.20.4", "Java 11"],
+  ["Modern", "1.20.5–1.21.11", "Java 21"],
+  ["Current", "26.2", "Java 25"],
+]);
+assert.equal(runtimeBlocks.length, 1);
+assert.deepEqual(plain(h.splitReleaseTableRow("  | `a\\|b` |  **Safe**  |  ")), ["`a|b`", "**Safe**"]);
+assert.equal(h.splitReleaseTableRow("An escaped \\| is not a table row"), null);
+const borderless = plain(h.releaseNoteBlocks("First | Middle | Last\n:--- | :---: | ---:\nA | B | C\nOnly | two\nOne | two | three | ignored"));
+assert.deepEqual(borderless[0].headers, ["First", "Middle", "Last"]);
+assert.deepEqual(borderless[0].alignments, ["left", "center", "right"]);
+assert.deepEqual(borderless[0].rows, [["A", "B", "C"], ["Only", "two", ""], ["One", "two", "three"]]);
+for (const delimiter of ["| --- | nope | --- |", "| -- | --- | --- |", "| --- | --- |"]) {
+  assert.ok(!h.releaseNoteBlocks(`| A | B | C |\n${delimiter}\n| X | Y | Z |`).some((block) => block.type === "table"));
+}
+for (const fence of ["```", "~~~~"]) {
+  const blocks = plain(h.releaseNoteBlocks(`${fence}md\n${runtimeTable}\n${fence}`));
+  assert.deepEqual(blocks, [{ type: "code", text: runtimeTable }], "Fenced pipe text must stay code");
+}
+const listBlocks = plain(h.releaseNoteBlocks("- A | B\n- --- | ---\n- X | Y"));
+assert.deepEqual(listBlocks, [{ type: "list", items: ["A | B", "--- | ---", "X | Y"] }]);
+const mixedBlocks = plain(h.releaseNoteBlocks(`# Notes\n\n- Changed\n\n${runtimeTable}\n\nText\n\`\`\`js\n| code |\n\`\`\``));
+assert.deepEqual(mixedBlocks.map((block) => block.type), ["heading", "list", "table", "text", "code"]);
+const unsafeCell = "<script>alert(1)</script> [bad](javascript:alert(1))";
+const unsafeTable = plain(h.releaseNoteBlocks(`| Value | Other |\n| --- | --- |\n| ${unsafeCell} | <img src=x onerror=alert(1)> |`));
+assert.equal(unsafeTable[0].rows[0][0], unsafeCell, "Parser preserves raw text for React escaping, never interprets HTML");
 assert.ok(!source.includes("dangerouslySetInnerHTML"));
 assert.ok(!source.includes("Authorization"));
 // Mintlify compiles only parent-imported exports; helpers in the same JSX file
@@ -74,4 +110,4 @@ for (const page of [
   const names = new Set(imports[1].split(",").map((name) => name.trim()).filter(Boolean));
   for (const name of expectedImports) assert.ok(names.has(name), `${page}: missing parent import ${name}`);
 }
-console.log("Download helpers: release sections, 13 exact assets, missing files, language selection, safe links and 6 complete Mintlify imports passed.");
+console.log("Download helpers: release sections, 13 exact assets, safe links, GFM tables, escaped pipes, code/list isolation and 6 complete Mintlify imports passed.");
