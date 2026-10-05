@@ -28,6 +28,7 @@ mint dev --no-open
 ```sh
 mint validate
 node tools/check-site.mjs
+node tools/generate-sitemap.mjs --check
 node tools/test-downloads.mjs
 mint broken-links --check-anchors --check-redirects
 ```
@@ -45,6 +46,7 @@ CI 在 Linux 上执行上述检查。固定的 CLI 版本在 Windows 下可能�
 | `snippets/` | 共用组件，包括下载和截图占位 |
 | `images/` | 产品图标与实际引用的媒体 |
 | `migration/routes.json`、`migration/anchors.json` | 旧路径和标题 ID 的兼容清单 |
+| `sitemap.xml` | 规范地址及中英文页面的语言关联 |
 | `styles.css` | 首页和共享组件的补充样式 |
 | `tools/` | 内容、链接与下载行为检查工具 |
 
@@ -53,6 +55,8 @@ CI 在 Linux 上执行上述检查。固定的 CLI 版本在 Windows 下可能�
 ## 内容维护
 
 中文和英文页面使用相同目录结构。更新页面时同步另一语言，保留既有标题 ID，并更新站内链接。`docs.json` 中的旧地址重定向指向对应页面，不统一跳到首页。
+
+调整 `migration/routes.json` 后运行 `node tools/generate-sitemap.mjs`，更新中英文规范地址及互相对应的 `hreflang`。媒体按原始字节保留；替换图片后同步 `migration/media.json` 中的大小和 SHA-256。
 
 KiteMarket 的六处截图位共用 `images/kitemarket/screenshot-{home,market,rule-editor,supply-preview,auction-confirm,wallet}.png`。将实际游戏截图添加到对应位置，组件会自动显示；缺图时保留带说明的空框。
 

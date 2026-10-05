@@ -1,0 +1,2 @@
+# Preserve media bytes, including SVG line endings, for the SHA-256 manifest.
+images/** -text

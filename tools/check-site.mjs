@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
 import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { resolve, dirname, posix } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -23,9 +24,18 @@ assert.ok(config.navigation.languages?.length === 2);
 assert.ok(config.navigation.languages[0].language.startsWith('zh'));
 const redirects = new Map((config.redirects || []).map(r => [r.source, r.destination]));
 assert.equal(redirects.size, config.redirects.length, 'Redirect sources must be unique');
-for (const [source, destination] of redirects) {
-  assert.notEqual(source.replace(/\/$/, '') || '/', destination.replace(/\/$/, '') || '/', `Self redirect: ${source}`);
+// Mintlify treats a trailing /index as the containing page even when matching
+// redirect sources. An explicit /index -> / therefore redirects / to itself.
+function canonicalRoute(path) {
+  return path.replace(/\/$/, '').replace(/\/index$/, '') || '/';
 }
+for (const [source, destination] of redirects) {
+  assert.notEqual(canonicalRoute(source), canonicalRoute(destination), `Self redirect after Mintlify normalization: ${source}`);
+}
+const englishHomeAlias = readFileSync(resolve(root, 'en/index.mdx'), 'utf8');
+assert.match(englishHomeAlias, /^url: "\/en"$/m, 'The legacy English index must redirect only its own page');
+assert.match(englishHomeAlias, /^noindex: true$/m);
+assert.match(englishHomeAlias, /^hidden: true$/m);
 for (const route of routes) {
   const text = texts.get(route.file);
   const prose = text.replace(/```[\s\S]*?```/g, '').replace(/`[^`\n]*`/g, '');
@@ -33,7 +43,7 @@ for (const route of routes) {
   assert.ok(!/:::\s|<script setup|<ActionButton|<LinkGrid|<ProductDownloadLayout|:show-|<template>/.test(prose), `Unconverted Vue: ${route.file}`);
   if (route.target.includes('/archive/verifymc')) assert.match(text, /停止维护|no longer maintained|discontinued/i);
   for (const old of route.oldPaths) {
-    if ((old.replace(/\/$/, '') || '/') === route.target) continue;
+    if (canonicalRoute(old) === route.target) continue;
     assert.equal(redirects.get(old), route.target, `Missing redirect: ${old}`);
   }
 }
@@ -86,6 +96,12 @@ function checkNav(node) {
   }
 }
 checkNav(config.navigation);
+const media = JSON.parse(readFileSync(resolve(root, 'migration/media.json'), 'utf8')).assets;
+for (const asset of media) {
+  const bytes = readFileSync(resolve(root, `.${asset.path}`));
+  assert.equal(bytes.length, asset.bytes, `Media size changed: ${asset.path}`);
+  assert.equal(createHash('sha256').update(bytes).digest('hex'), asset.sha256, `Media digest changed: ${asset.path}`);
+}
 for (const locale of ['', 'en/']) {
   const text = [...texts.entries()].filter(([file]) => locale ? file === 'en.mdx' || file.startsWith(locale) : file !== 'en.mdx' && !file.startsWith('en/')).map(([, text]) => text).join('\n');
   for (const name of ['home', 'market', 'rule-editor', 'supply-preview', 'auction-confirm', 'wallet']) {
