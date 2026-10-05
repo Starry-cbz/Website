@@ -28,7 +28,8 @@ lines.push('</urlset>');
 const content = lines.join('\n') + '\n';
 const output = resolve(root, 'sitemap.xml');
 if (process.argv.includes('--check')) {
-  assert.equal(readFileSync(output, 'utf8'), content, 'Run node tools/generate-sitemap.mjs after changing the route map');
+  assert.ok(readFileSync(output, 'utf8').replace(/\r\n/g, '\n') === content,
+    'Run node tools/generate-sitemap.mjs after changing the route map');
   console.log(`Sitemap checks passed: ${pages.length} canonical URLs with reciprocal language links.`);
 } else {
   writeFileSync(output, content);
