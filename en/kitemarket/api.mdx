@@ -1,0 +1,179 @@
+---
+title: "KiteMarket Market API Quick Start"
+description: "Independent Java 11/MIT read-only market SDK with immutable DTOs, asynchronous registration and safe trade notifications."
+canonical: "https://www.kitemc.com/en/kitemarket/api"
+---
+
+<span id="market-api-quick-start" />
+
+`KiteMarket-API` is an independent Java 11/MIT SDK without a dependency on the proprietary `market-core`. It exposes read-only queries and post-commit notifications, not transaction writes. See [downloads](/en/kitemarket/download) for runtimes, public interfaces and examples.
+
+## Reference the SDK {#reference-the-sdk}
+
+Project examples reference SDK Maven coordinates on GitHub Packages. Direct GitHub Releases downloads remain a fallback. Both provide the same public interfaces without the proprietary trading core.
+
+### GitHub Packages {#github-packages}
+
+| SDK | Maven coordinates |
+|---|---|
+| Read-only market API | `com.kitemc:kitemarket-api:1.0.0` |
+| UI SDK | `com.kitemc:kitemarket-ui-api:1.0.0` |
+
+The registry is `https://maven.pkg.github.com/kitemc/KiteMarket`. The release workflow uploads both SDKs, sources, Javadoc and POM files after the corresponding stable release. Check the [public repository](https://github.com/KiteMC/KiteMarket)'s Packages list for the version before using it. The configuration below does not mean the version has already been uploaded. Runtime plugins, examples and language/configuration bundles remain on GitHub Releases.
+
+GitHub's Maven/Gradle registry requires authentication even for public packages. Locally, use a **personal access token (classic)** with `read:packages` and your GitHub username. Read-only downloads do not need `write:packages`. Store credentials in the user-level `~/.gradle/gradle.properties`, never in project files or Git:
+
+```properties
+gpr.user=YOUR_GITHUB_USERNAME
+gpr.key=YOUR_CLASSIC_PAT_WITH_READ_PACKAGES
+```
+
+Gradle Kotlin DSL:
+
+```kotlin
+repositories {
+    maven("https://repo.papermc.io/repository/maven-public/")
+    maven {
+        name = "GitHubKiteMarket"
+        url = uri("https://maven.pkg.github.com/kitemc/KiteMarket")
+        credentials {
+            username = providers.gradleProperty("gpr.user")
+                .orElse(providers.environmentVariable("GITHUB_ACTOR")).orNull
+            password = providers.gradleProperty("gpr.key")
+                .orElse(providers.environmentVariable("GITHUB_TOKEN")).orNull
+        }
+        content {
+            includeModule("com.kitemc", "kitemarket-api")
+            includeModule("com.kitemc", "kitemarket-ui-api")
+        }
+    }
+}
+dependencies {
+    compileOnly("com.kitemc:kitemarket-api:1.0.0")
+    compileOnly("com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT")
+}
+tasks.withType<JavaCompile>().configureEach {
+    options.release.set(11)
+}
+```
+
+Alternatively, provide the same download credentials through `GITHUB_ACTOR`/`GITHUB_TOKEN` environment variables. Retain the project's existing Paper/Bukkit compile dependency and registry.
+
+In a Maven project's `pom.xml`, add the registry and dependency:
+
+```xml
+<repositories>
+  <repository>
+    <id>github-kitemarket</id>
+    <url>https://maven.pkg.github.com/kitemc/KiteMarket</url>
+  </repository>
+</repositories>
+<dependencies>
+  <dependency>
+    <groupId>com.kitemc</groupId>
+    <artifactId>kitemarket-api</artifactId>
+    <version>1.0.0</version>
+    <scope>provided</scope>
+  </dependency>
+</dependencies>
+```
+
+Add a matching server in the user-level `~/.m2/settings.xml`, reading credentials from environment variables. If the file exists, merge only the `server` entry:
+
+```xml
+<settings>
+  <servers>
+    <server>
+      <id>github-kitemarket</id>
+      <username>${env.GITHUB_ACTOR}</username>
+      <password>${env.GITHUB_TOKEN}</password>
+    </server>
+  </servers>
+</settings>
+```
+
+For `401`/`403`, check the token type, scopes, expiry and username. For `404`, also check the coordinates and whether the version is published. GitHub's [Gradle](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-gradle-registry) and [Maven](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-apache-maven-registry) documentation defines registry authentication.
+
+### Release-download fallback {#release-download-fallback}
+
+For offline development or when Packages authentication is unavailable, download the matching `KiteMarket-API-1.0.0.jar` directly from [GitHub Releases](https://github.com/KiteMC/KiteMarket/releases) and manage it as a compile-only dependency. Release-file downloads do not require a Packages Token. The public repository provides interface sources, Javadoc and runnable examples. This fallback does not change the runtime requirements below.
+
+Add `depend: [KiteMarket]` to `plugin.yml`. If your plugin also works without the market, use `softdepend`, but load classes referencing the API only after confirming the host exists.
+
+**Do not bundle, shade or relocate the SDK.** KiteMarket supplies the unique runtime interface classes; duplicate copies can prevent service lookup. The SDK JAR is not a server plugin.
+
+## Wait for registration, then query asynchronously {#wait-for-registration-then-query-asynchronously}
+
+```java
+import com.kitemc.market.api.KiteMarketApi;
+
+KiteMarketApi api = getServer().getServicesManager().load(KiteMarketApi.class);
+if (api == null) return; // Database not ready: wait for ServiceRegisterEvent.
+
+api.orders(null, null, "", 0, 36).whenComplete((orders, failure) -> {
+    if (!isEnabled()
+        || getServer().getServicesManager().load(KiteMarketApi.class) != api) return;
+    if (failure != null) {
+        getLogger().warning("Market query unavailable");
+        return;
+    }
+    orders.forEach(order -> getLogger().info(
+        order.getId() + " " +
+        order.getCurrency().display(order.getUnitPrice()).toPlainString()));
+});
+```
+
+`depend` guarantees load order, not a connected database. Reacquire the service on `ServiceRegisterEvent` and discard results from unloaded or replaced services. The runnable `examples/api-java` project in the public repository handles delayed registration, failures and bounded recent-event deduplication without adding player commands.
+
+Queries return `CompletableFuture`. Never `get()` or `join()` on the main, Folia region or entity thread. Callbacks do not promise a player scheduling context; GUI updates, player messages and inventory access need separate appropriate scheduling. Report failures as unavailable rather than inventing zero balances or empty markets.
+
+## Queries and results {#queries-and-results}
+
+| Method | Result |
+|---|---|
+| `networkId()` | Persistent market-network UUID |
+| `currencies()` | Currency IDs and fixed precision |
+| `orders(type, owner, search, offset, limit)` | Order page; optional type, null owner means open orders, an explicit owner includes their terminal orders |
+| `order(id)` | One order; missing orders complete exceptionally |
+| `wallets(player)` | Available and reserved balances |
+| `assets(player)` | Available claim IDs, quantities and item summaries |
+| `history(player, offset, limit)` | Allowlisted audit summaries for that player |
+
+Pagination requires `offset >= 0` and `1 <= limit <= 100`, with at most 256 search characters. History pagination follows stored audit rows; unknown internal kinds become `OTHER` instead of exposing raw records.
+
+Amounts use `long` integer minor units. At `CurrencyView.getPrecision() == 2`, `128` means `1.28`; format with `currency.display(amount).toPlainString()`. Timestamps are Unix milliseconds and tax rates are basis points.
+
+For fixed-price `SELL` and procurement `BUY` orders, `getUnitPrice()` is the price per item; for `AUCTION`, it is the starting amount for the entire lot. Fixed-price sales allow partial purchases. Multiply the unit price by the quantity purchased with overflow checking, for example using `Math.multiplyExact`.
+
+`OrderView.getMinimumPurchaseQuantity()` is fixed when published and defaults to 1. SELL orders accept a minimum from 1 to the published quantity; other types use 1. A purchase must be positive, no greater than the remainder, and at least `min(getMinimumPurchaseQuantity(), getRemaining())`. A remainder below the minimum must be bought in full. The original constructor remains available with a default of 1; the new overload appends `long minimumPurchaseQuantity`. Snapshots do not replace final quantity, funds and revision checks by the core. History and notifications report the actual amount of each transaction.
+
+Standalone DTOs live under `com.kitemc.market.api.model`: `CurrencyView`, `OrderView`, `WalletView`, `ClaimAssetView`, `HistoryEntry`, `TradeSummary`, `ItemSummary` and enums. Fields and nested lists, sets and maps are immutable. Optional order samples expose only material, name, lore, enchantments and durability; they cannot recreate or claim assets.
+
+Results exclude raw audit JSON, serialized item bytes, exact-sample fingerprints, license credentials, execution tokens and recovery evidence. Missing historical amounts remain `null` rather than becoming zero. `RECORDED` does not prove an external side effect succeeded; `PENDING_REVIEW` needs investigation. Item matching and transaction submission are handled by the host plugin, outside the public query API.
+
+## Post-commit notifications {#post-commit-notifications}
+
+```java
+import com.kitemc.market.api.MarketCommittedEvent;
+import com.kitemc.market.api.model.TradeSummary;
+import org.bukkit.event.EventHandler;
+
+@EventHandler
+public void onTrade(MarketCommittedEvent event) {
+    String deduplicationKey = event.getNetworkId() + ":" + event.getEventId();
+    TradeSummary trade = event.getTrade();
+    // Deduplicate first; the runnable example includes a bounded recent cache.
+    getLogger().info(deduplicationKey + " " + event.getTopic()
+        + " net=" + trade.getCurrency().display(trade.getNetIncome()).toPlainString());
+}
+```
+
+`MarketCommittedEvent` is asynchronous and non-cancellable, reporting committed `BUY`, `SUPPLY` and `AUCTION_WON` only. `getTrade()` exposes order/operation IDs, type, item and income recipients, quantity, currency, gross, tax and net income. There is no raw `getPayload()`.
+
+Node polling can delay or miss a notification, historical entries before startup are not replayed, and multiple nodes may see the same event. Deduplicate by **network UUID plus event ID**; IDs need not be consecutive. Persist your own long-term deduplication when required. Notifications are not evidence for issuing replacement money or items; re-query authoritative state after downtime.
+
+## Extending the player interface? {#extending-the-player-interface}
+
+Use the separate [UI SDK](/en/kitemarket/ui-development) to receive current page snapshots and return registered host actions. KiteMarket still owns permissions, quotes, final inventory checks and confirmation. Neither SDK permits arbitrary currency creation, item removal, confirmation bypass or remote transaction writes.
+
+Configuration themes and Java IA renderers require no official DLC. Third parties may use, freely distribute or independently sell their own themes. Real IA example adapter code targets Java 21, independently of the two Java 11 SDKs.

@@ -1,0 +1,186 @@
+---
+title: "License Activation"
+canonical: "https://www.kitemc.com/en/arcpass/setup/license"
+---
+
+<span id="license-activation" />
+
+ArcPass is a paid plugin requiring a valid license for full functionality.
+
+## Purchase a License {#purchase-a-license}
+
+### Available Plans {#available-plans}
+
+| Plan | Price | Devices | Ports per Device | Developer API | Best For |
+|------|-------|---------|------------------|:---:|----------|
+| Standard | \$10.99 | 5 | 3 | ❌ | Personal/small servers |
+| Professional | \$29.99 | 25 | 15 | ✅ | Commercial servers, API integrations |
+
+<Tip>
+
+**Note**
+
+
+- **Devices**: Number of "Machine ID + IP + Port" combinations that can be bound
+- **Ports per Device**: Number of different ports on the same machine (same machine ID and IP)
+- All plans are **one-time purchase**, lifetime access
+- **Developer API** is only available with the Professional plan. Standard plan users can upgrade at any time.
+
+</Tip>
+
+### Purchase Options {#purchase-options}
+
+<Columns cols={2}>
+  <Card title="Purchase Now" icon="shopping-cart" href="https://license.kitemc.com/products/arcpass" />
+  <Card title="Register Account" icon="user-plus" href="https://license.kitemc.com/register" />
+</Columns>
+
+After purchase, you can view your key on the [License Management Page](https://license.kitemc.com/dashboard/licenses).
+
+## Activation Steps {#activation-steps}
+
+### 1. Edit Configuration {#_1-edit-configuration}
+
+Open `plugins/ArcPass/license.yml`:
+
+```yaml
+# ========================================
+#       ArcPass License Configuration
+# ========================================
+
+# Config version (DO NOT MODIFY)
+config-version: 1
+
+# Your license key (obtain from KiteMC)
+# Format: XXXX-XXXX-XXXX-XXXX
+license-key: ""
+
+# Note: License verification uses local cache (24hr validity)
+# with a 7-day grace period for network issues.
+# Cache file: plugins/ArcPass/license.cache
+```
+
+### 2. Enter Your Key {#_2-enter-your-key}
+
+Replace the empty string with your license key:
+
+```yaml
+license-key: "XXXX-XXXX-XXXX-XXXX"
+```
+
+### 3. Reload Configuration {#_3-reload-configuration}
+
+Run the command or restart:
+
+```
+/arcpass admin reload
+```
+
+### 4. Verify Activation {#_4-verify-activation}
+
+On successful activation, console shows:
+
+```
+[ArcPass] License validated successfully!
+[ArcPass] Licensed to: YourName
+[ArcPass] Plan: Unlimited (50 devices)
+[ArcPass] ArcPass v1.9.2 enabled!
+```
+
+## License Binding {#license-binding}
+
+### Binding Mechanism {#binding-mechanism}
+
+ArcPass uses these identifiers for server binding:
+
+- **Machine ID** - Unique hardware identifier
+- **IP Address** - Server public IP
+- **Port** - Server running port
+
+On first activation, the license binds to the current server.
+
+### Check Binding Status {#check-binding-status}
+
+```
+/arcpass admin debug
+```
+
+### Unbind/Transfer {#unbind-transfer}
+
+All plans support **unlimited transfers**. Follow these steps:
+
+1. Login to [KiteMC License Center](https://license.kitemc.com/dashboard/licenses)
+2. Find your ArcPass license on the "My Licenses" page
+3. Click "View Details" to enter the license details page
+4. Manage bindings in the "Bound Devices" section on the right:
+   - Click "Reset Bindings" to clear all bindings
+   - Click the delete button next to a device to unbind a single device
+   - Click the delete button next to a port to unbind a single port
+
+<Tip>
+
+After unbinding, configure the same license key on the new server and start it to automatically complete the binding.
+
+</Tip>
+
+## License Status {#license-status}
+
+### Status Codes {#status-codes}
+
+| Status | Description |
+|--------|-------------|
+| `VALID` | License valid, plugin running |
+| `INVALID` | Key invalid or malformed |
+| `EXPIRED` | License expired (subscription) |
+| `SUSPENDED` | License suspended (TOS violation) |
+| `UNBOUND` | Not bound to server |
+| `LIMIT_EXCEEDED` | Exceeded binding limit |
+
+### Offline Mode {#offline-mode}
+
+When license server is unreachable:
+
+- Cached validation continues to work
+- Cache validity is 24 hours with a 7-day grace period
+- Cache file located at `plugins/ArcPass/license.cache`
+- Features limited after grace period expires
+
+## Common Issues {#common-issues}
+
+### Validation Failed {#validation-failed}
+
+1. Check network connectivity
+2. Verify key is entered correctly (case-sensitive)
+3. Check firewall settings
+
+### Binding Limit Reached {#binding-limit-reached}
+
+1. Login to [License Center](https://license.kitemc.com/dashboard/licenses) to view current bindings
+2. Unbind unused devices/ports on the license details page
+3. Or upgrade to a higher plan
+
+### Server Migration {#server-migration}
+
+1. Login to [License Center](https://license.kitemc.com/dashboard/licenses)
+2. Go to license details and click "Reset Bindings" or delete the device
+3. Configure same key on new server
+4. Start new server to auto-bind
+
+## Support {#support}
+
+Having license issues?
+
+<Columns cols={2}>
+  <Card title="Discord Community" icon="messages-square" href="https://discord.gg/dcsBw5Z5ZT">
+  Get real-time help from our community
+</Card>
+  <Card title="Email Support" icon="mail" href="mailto:starry_cbz@outlook.com">
+  starry_cbz@outlook.com
+</Card>
+  <Card title="License Center" icon="ticket" href="https://license.kitemc.com/dashboard/licenses">
+  Manage licenses and bindings
+</Card>
+  <Card title="Login" icon="key" href="https://license.kitemc.com/login">
+  Login to manage your licenses
+</Card>
+</Columns>

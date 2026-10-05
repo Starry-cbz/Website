@@ -1,0 +1,39 @@
+---
+title: "VerifyMC - 历史文档"
+description: "已停止维护的 Minecraft 白名单与注册插件。保留历史安装说明、API 和已有版本下载。"
+mode: "custom"
+canonical: "https://www.kitemc.com/archive/verifymc"
+---
+
+import { LandingHero, ActionLinks, LandingFooter } from "/snippets/landing.jsx";
+
+<div className="km-landing">
+  <LandingHero
+    title="VerifyMC"
+    subtitle="白名单与注册插件 · 历史文档"
+    description="VerifyMC 已停止维护。本区保留历史功能说明、配置和下载，供已有用户查阅。"
+    image="/images/logo/verifymc.svg"
+    eyebrow="归档项目"
+    links={[
+      { label: "阅读历史文档", href: "/archive/verifymc/guide" },
+      { label: "历史版本下载", href: "/archive/verifymc/download" },
+      { label: "GitHub", href: "https://github.com/KiteMC/VerifyMC" }
+    ]}
+  />
+
+  <section className="km-section">
+    <Warning>VerifyMC 已停止维护，不再提供新功能、兼容更新或维护承诺。以下内容描述历史版本，不代表对当前 Minecraft、依赖或外部服务的支持。</Warning>
+    <h2 id="历史功能">历史功能</h2>
+    <Columns cols={3}>
+      <Card title="邮箱与图形验证码" icon="envelope">邮箱验证、自托管数学或文字验证码、域名白名单及别名限制。</Card>
+      <Card title="Discord 集成" icon="comments">OAuth2 账户绑定，可选或强制模式与持久化存储。</Card>
+      <Card title="审核与通知" icon="shield">网页管理、实时审核及结果邮件通知。</Card>
+      <Card title="管理界面" icon="desktop">GlassX 前端支持移动端，默认中文并可切换英文。</Card>
+      <Card title="代理与基岩版" icon="link">BungeeCord、Velocity 代理及 Geyser、Floodgate 接入。</Card>
+      <Card title="注册问卷" icon="list-check">自定义问卷、多语言与多种问题类型。</Card>
+      <Card title="可选问卷评分" icon="clipboard-check">手动审核，或历史 DeepSeek、Google 自动评分接入。</Card>
+    </Columns>
+    <p>历史版本 v1.8.0 及其他已公开版本见<a href="/archive/verifymc/download">下载页</a>，也可直接查阅 <a href="https://github.com/KiteMC/VerifyMC/releases">GitHub Releases</a>。</p>
+  </section>
+  <LandingFooter lang="zh" />
+</div>

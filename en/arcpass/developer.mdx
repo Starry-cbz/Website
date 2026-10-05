@@ -1,0 +1,247 @@
+---
+title: "Developer API"
+canonical: "https://www.kitemc.com/en/arcpass/developer"
+---
+
+<span id="developer-api" />
+
+<Warning>
+
+**Professional License Required**
+
+The Developer API is only available with the **Professional** plan. If you are using the Standard plan, `ArcPassProvider.isLoaded()` will return `false`. You can upgrade your license at any time on the [License Center](https://license.kitemc.com/products/arcpass).
+
+</Warning>
+
+ArcPass provides a complete API for third-party plugin integration.
+
+## API Overview {#api-overview}
+
+The ArcPass API module (`arcpass-api`) is open source under the MIT License.
+
+### Features {#features}
+
+- Get and modify player data
+- Query passes, quests, rewards
+- Manage season system
+- Listen to events
+- Trigger custom quest progress
+
+### Documentation {#documentation}
+
+<Columns cols={3}>
+  <Card title="Getting Started" icon="rocket" href="/en/arcpass/developer/getting-started">
+  Add dependency and basic usage
+</Card>
+  <Card title="Event System" icon="zap" href="/en/arcpass/developer/events">
+  Listen to ArcPass events
+</Card>
+  <Card title="Code Examples" icon="code" href="/en/arcpass/developer/examples">
+  Common scenario examples
+</Card>
+</Columns>
+
+## Quick Start {#quick-start}
+
+### Add Dependency {#add-dependency}
+
+**Maven**
+
+```xml
+<repository>
+    <id>github</id>
+    <url>https://maven.pkg.github.com/KiteMC/ArcPass</url>
+</repository>
+
+<dependency>
+    <groupId>com.kitemc</groupId>
+    <artifactId>arcpass-api</artifactId>
+    <version>1.9.4</version>
+    <scope>provided</scope>
+</dependency>
+```
+
+**Gradle (Kotlin DSL)**
+
+```kotlin
+repositories {
+    maven {
+        url = uri("https://maven.pkg.github.com/KiteMC/ArcPass")
+    }
+}
+
+dependencies {
+    compileOnly("com.kitemc:arcpass-api:1.9.4")
+}
+```
+
+### Get API Instance {#get-api-instance}
+
+```java
+import com.kitemc.arcpass.api.ArcPassAPI;
+import com.kitemc.arcpass.api.ArcPassProvider;
+
+ArcPassAPI api = ArcPassProvider.get();
+```
+
+### Basic Example {#basic-example}
+
+```java
+// Get player level
+api.getPlayerData(player.getUniqueId())
+    .thenAccept(optionalData -> {
+        optionalData.ifPresent(data -> {
+            int level = data.getLevel();
+            long exp = data.getTotalExperience();
+            player.sendMessage("Your level: " + level);
+        });
+    });
+
+// Give experience
+api.addExperience(player.getUniqueId(), 100)
+    .thenAccept(newTotal -> {
+        player.sendMessage("Gained 100 XP! Total: " + newTotal);
+    });
+```
+
+## API Interface {#api-interface}
+
+### ArcPassAPI {#arcpassapi}
+
+Main API interface:
+
+```java
+public interface ArcPassAPI {
+    // Player data
+    CompletableFuture<Optional<PlayerData>> getPlayerData(UUID playerId);
+    PlayerData getPlayerDataIfCached(UUID playerId);
+    CompletableFuture<Long> addExperience(UUID playerId, long amount);
+    CompletableFuture<Boolean> claimReward(UUID playerId, int level, String tierId);
+
+    // Pass system
+    Collection<Pass> getPasses();
+    Optional<Pass> getPass(String passId);
+    Pass getDefaultPass();
+
+    // Quest system
+    Collection<Quest> getActiveQuests(UUID playerId);
+    CompletableFuture<Boolean> completeQuest(UUID playerId, String questId);
+    void triggerCustomEvent(UUID playerId, String eventId, Object data);
+
+    // Season system
+    Optional<Season> getCurrentSeason();
+    CompletableFuture<Boolean> startNewSeason(String seasonId);
+    CompletableFuture<Boolean> endSeason();
+
+    // Utilities
+    void reload();
+    String getVersion();
+}
+```
+
+## Data Models {#data-models}
+
+### PlayerData {#playerdata}
+
+```java
+public interface PlayerData {
+    UUID getPlayerId();
+    int getLevel();
+    long getTotalExperience();
+    long getCurrentLevelExperience();
+    long getExperienceToNextLevel();
+    Set<String> getUnlockedTiers();
+    boolean hasTier(String tierId);
+    Set<String> getCompletedQuests();
+    boolean hasCompletedQuest(String questId);
+    Set<String> getClaimedRewards();
+    boolean hasClaimedReward(int level, String tierId);
+}
+```
+
+### Pass {#pass}
+
+```java
+public interface Pass {
+    String getId();
+    String getDisplayName();
+    List<String> getDescription();
+    int getMaxLevel();
+    long getExperienceForLevel(int level);
+    Collection<PassTier> getTiers();
+    Optional<PassTier> getTier(String tierId);
+    Optional<PassLevel> getLevel(int level);
+}
+```
+
+### Quest {#quest}
+
+```java
+public interface Quest {
+    String getId();
+    String getDisplayName();
+    String getDescription();
+    QuestType getType();
+    int getExperienceReward();
+    List<QuestObjective> getObjectives();
+    List<QuestCondition> getConditions();
+}
+```
+
+### Season {#season}
+
+```java
+public interface Season {
+    String getId();
+    String getDisplayName();
+    int getSeasonNumber();
+    SeasonStatus getStatus();
+    long getStartTime();
+    long getEndTime();
+    long getTimeRemainingSeconds();
+    boolean isActive();
+}
+```
+
+## Async Operations {#async-operations}
+
+ArcPass API uses `CompletableFuture` for async operations:
+
+```java
+api.getPlayerData(playerId)
+    .thenAccept(data -> {
+        // Process data on async thread
+    })
+    .exceptionally(ex -> {
+        plugin.getLogger().warning("Failed: " + ex.getMessage());
+        return null;
+    });
+
+// If main thread needed
+api.getPlayerData(playerId)
+    .thenAccept(data -> {
+        Bukkit.getScheduler().runTask(plugin, () -> {
+            // Update UI on main thread
+        });
+    });
+```
+
+## Thread Safety {#thread-safety}
+
+- API methods can be called from any thread
+- Returned data objects are immutable or thread-safe
+- CompletableFuture callbacks may execute on any thread
+
+## Next Steps {#next-steps}
+
+<Columns cols={3}>
+  <Card title="Detailed Getting Started" icon="rocket" href="/en/arcpass/developer/getting-started">
+  Complete tutorial
+</Card>
+  <Card title="Event System" icon="zap" href="/en/arcpass/developer/events">
+  Event handling
+</Card>
+  <Card title="Code Examples" icon="code" href="/en/arcpass/developer/examples">
+  Practical code samples
+</Card>
+</Columns>

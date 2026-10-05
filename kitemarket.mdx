@@ -1,0 +1,86 @@
+---
+title: "KiteMarket - Minecraft 交易集市"
+description: "高级收购、一口价、公开竞拍与共享钱包。完整原版 GUI、ItemsAdder 兼容和公开 SDK。¥68 买断，一个市场网络不限节点。"
+mode: "custom"
+canonical: "https://www.kitemc.com/kitemarket"
+"og:image": "https://www.kitemc.com/images/kitemarket/kitemarket-icon-512.png"
+---
+
+import { LandingHero, ActionLinks, LandingFooter } from "/snippets/landing.jsx";
+import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
+
+<div className="km-landing">
+  <LandingHero
+    title="KiteMarket"
+    subtitle="买卖有章法，集市有人情。"
+    description="高级收购、一口价出售与公开竞拍。让玩家看清交易，知道钱和物品去了哪里。一个市场网络，节点不限。"
+    image="/images/kitemarket/kitemarket-icon.svg"
+    eyebrow="玩家交易集市"
+    links={[
+      { label: "快速入门", href: "/kitemarket/guide" },
+      { label: "下载", href: "/kitemarket/download" },
+      { label: "购买许可证", href: "https://license.kitemc.com/products/kitemarket" }
+    ]}
+  />
+
+  <section className="km-section">
+    <Columns cols={3}>
+      <Card title="高级收购" icon="cart-shopping">全额冻结预算，按材料、附魔、耐久、名称、Lore 或精确样品收货，支持多人部分供货。</Card>
+      <Card title="一口价出售" icon="box">先托管真实物品，按单价部分购买。卖家可设置最低购买量，成交商品进入领取箱。</Card>
+      <Card title="公开竞拍" icon="gavel">手动出价，冻结最高有效报价；被超价立即释放，末秒有效出价延长结束时间。</Card>
+      <Card title="个性化原版 GUI" icon="sliders">无需资源包，在文件中配置全部35页的标题、功能物品、Lore、位置与背景。</Card>
+      <Card title="同版本共享市场" icon="globe">同一 Minecraft 版本的节点共享钱包、订单与领取资产，一个网络不限节点。</Card>
+      <Card title="公开开发接口" icon="code">Java 11 / MIT 查询与界面 SDK，支持 ItemsAdder 自有主题和独立开发插件。</Card>
+    </Columns>
+  </section>
+
+  <section className="km-section">
+    <h2 id="看清交易-再放心确认">看清交易，再放心确认</h2>
+    <p>买、卖、交货和竞拍使用统一流程。确认前查看数量、总额、税额与净收入；供货时能看到实际交出和保留的物品。收入进入钱包，商品进入领取箱，背包满时仍保留资产，不掉落或删除。</p>
+    <p>发布后价格、条件和费率固定，管理员干预必须填写原因。结果不确定时进入待核对，保留可查询的操作编号。<a href="/kitemarket/trading">查看交易与物品条件</a>。</p>
+    <ScreenshotPlaceholder image="/images/kitemarket/screenshot-market.png" title="市场列表" description="真实游戏截图待补充：搜索、筛选、真实商品与翻页。" lang="zh" />
+  </section>
+
+  <section className="km-section">
+    <h2 id="原版就能用-外观由你决定">原版就能用，外观由你决定</h2>
+    <p>完整原版 GUI 无需资源包。默认54槽布局、36格商品列表、分步发布和金额按钮，让玩家知道当前步骤与操作后果。首页区分一口价、收购供货和竞拍，四角连接我的集市、领取箱、钱包与我的挂单；资产及待核对提醒查询失败时明确显示暂不可用。</p>
+    <p>服主在配置文件中调整全部35页的标题、功能物品、Lore、位置和背景，支持双语内容及旧首页配置。无效重载保留上一份有效配置，不提供游戏内样式编辑器。真实商品名称、附魔及 Lore 始终保留，不能用外观配置伪装交易标的。</p>
+    <ScreenshotPlaceholder image="/images/kitemarket/screenshot-home.png" title="集市首页" description="真实游戏截图待补充：交易入口、个人近况与资产提醒。" lang="zh" />
+    <p>ItemsAdder v4 兼容属于基础能力。安装自有或第三方主题后使用资源包界面；资源未就绪时说明原因并回退原版，切换保留草稿。开发者可通过配置或 Java SDK 自用、免费分发或独立销售主题，无需额外的 KiteMC 主题授权。插件不内置 IA 主题资源。</p>
+    <Columns cols={2}>
+      <Card title="ItemsAdder 接入" icon="puzzle-piece" href="/kitemarket/dlc">安装自己的主题，登记资源并检查就绪状态。</Card>
+      <Card title="界面 SDK 与主题开发" icon="code" href="/kitemarket/ui-development">配置主题、Java 呈现器与实际页面示例。</Card>
+    </Columns>
+  </section>
+
+  <section className="km-section">
+    <h2 id="¥68-usd-9-99-买断完整功能">¥68 / USD 9.99，买断完整功能</h2>
+    <p>一个许可证绑定一个独立市场网络，网络内不限节点。独立购买产生独立许可证，不自动合并网络。买断包含基础插件更新，维护期间提供问题支持，不承诺永久维护服务。第三方经济插件、ItemsAdder 与资源包不包含在价格中。</p>
+    <p>查询 SDK 与示例采用独立 MIT 许可，核心实现保持闭源。<a href="/kitemarket/license">查看网络授权</a>。</p>
+    <ActionLinks links={[
+      { label: "购买许可证", href: "https://license.kitemc.com/products/kitemarket" },
+      { label: "下载与版本", href: "/kitemarket/download" },
+      { label: "GitHub 仓库", href: "https://github.com/KiteMC/KiteMarket" }
+    ]} />
+  </section>
+
+  <section className="km-section">
+    <h2 id="共享账本-明确边界">共享账本，明确边界</h2>
+    <p>MySQL 8 或 MariaDB 10.11 是市场权威账本，每种货币使用固定精度的整数最小单位。Vault、PlayerPoints、CoinsEngine 与 ExcellentEconomy 使用独立充提适配器；网关不可用时，已有钱包余额仍可交易。外部结果不确定时进入待核对，不盲目重复扣款或补发。</p>
+    <p>基础目标从 Minecraft 1.16.5 起，按版本提供三个运行包。同一市场网络的节点使用相同 Minecraft 版本；目标范围、已有实测及仅启动检查见<a href="/kitemarket/compatibility">兼容说明</a>。首版不提供以物易物、网页市场、混版本市场或第三方物品 ID 语义适配；精确样品仍受特殊物品名单与保真检查约束。</p>
+    <p>标准 bStats 基础统计（ID 34434）默认开启，可在插件或 bStats 全局配置中关闭。没有自定义玩家、交易、许可证或数据库统计项。</p>
+  </section>
+
+  <section className="km-section">
+    <h2 id="从这里开始">从这里开始</h2>
+    <Columns cols={3}>
+      <Card title="安装与配置" icon="rocket" href="/kitemarket/guide">选择运行包，连接数据库并配置币种。</Card>
+      <Card title="交易与物品条件" icon="cart-shopping" href="/kitemarket/trading">三类交易与高级匹配规则。</Card>
+      <Card title="共享钱包" icon="wallet" href="/kitemarket/wallet">余额、充提、冻结与收入去向。</Card>
+      <Card title="命令与权限" icon="terminal" href="/kitemarket/commands">玩家入口、管理和只读审计。</Card>
+      <Card title="市场 API" icon="code" href="/kitemarket/api">异步查询、不可变数据及成交通知。</Card>
+      <Card title="故障与升级" icon="shield" href="/kitemarket/operations">核对操作，备份资产并安全升级。</Card>
+    </Columns>
+  </section>
+  <LandingFooter lang="zh" />
+</div>

@@ -1,0 +1,94 @@
+---
+title: "插件指令"
+canonical: "https://www.kitemc.com/archive/verifymc/command"
+---
+
+<Warning>
+VerifyMC 已停止维护。本页保留供已有用户查阅历史配置与使用方法，不表示当前仍在维护或已验证新版本兼容性。
+</Warning>
+
+<span id="插件指令" />
+
+## 主指令 {#主指令}
+
+```
+/vmc [子命令] [参数...]
+```
+
+## 子命令列表 {#子命令列表}
+
+| 子命令    | 权限             | 说明                 | 用法示例                                         |
+|-----------|-----------------|----------------------|--------------------------------------------------|
+| reload    | verifymc.admin  | 重载插件配置和资源    | `/vmc reload`                                    |
+| approve   | verifymc.admin  | 通过待审核用户       | `/vmc approve <用户名>`                          |
+| reject    | verifymc.admin  | 拒绝待审核用户       | `/vmc reject <用户名> [原因]`                    |
+| delete    | verifymc.admin  | 删除用户             | `/vmc delete <用户名>`                           |
+| ban       | verifymc.admin  | 封禁用户             | `/vmc ban <用户名> [原因]`                       |
+| unban     | verifymc.admin  | 解封用户             | `/vmc unban <用户名>`                            |
+| list      | verifymc.admin  | 按状态列出用户       | `/vmc list [all\|pending\|approved\|rejected\|banned]` |
+| info      | verifymc.admin  | 查看用户信息         | `/vmc info <用户名>`                             |
+| version   | 所有人           | 显示插件版本         | `/vmc version`                                   |
+
+---
+
+## 指令详细说明 {#指令详细说明}
+
+### `/vmc reload` {#vmc-reload}
+
+- 重新加载插件配置文件、语言文件和资源。
+- 需要 `verifymc.admin` 权限。
+
+### `/vmc approve <用户名>` {#vmc-approve-用户名}
+
+- 通过待审核用户并将其添加到白名单。
+- 如已配置，会自动发送审核通过邮件通知。
+- 需要 `verifymc.admin` 权限。
+- 例如：`/vmc approve Steve`
+
+### `/vmc reject <用户名> [原因]` {#vmc-reject-用户名-原因}
+
+- 拒绝待审核用户，可附带拒绝原因。
+- 如已配置，会自动发送审核拒绝邮件通知。
+- 需要 `verifymc.admin` 权限。
+- 例如：`/vmc reject Steve 不符合要求`
+
+### `/vmc delete <用户名>` {#vmc-delete-用户名}
+
+- 从系统中删除用户并从白名单中移除。
+- 需要 `verifymc.admin` 权限。
+- 例如：`/vmc delete Steve`
+
+### `/vmc ban <用户名> [原因]` {#vmc-ban-用户名-原因}
+
+- 封禁用户并从白名单中移除。
+- 需要 `verifymc.admin` 权限。
+- 例如：`/vmc ban Steve 作弊`
+
+### `/vmc unban <用户名>` {#vmc-unban-用户名}
+
+- 解封用户并重新添加到白名单。
+- 需要 `verifymc.admin` 权限。
+- 例如：`/vmc unban Steve`
+
+### `/vmc list [状态]` {#vmc-list-状态}
+
+- 按状态筛选列出用户，默认为 `all`。
+- 可用状态：`all`、`pending`、`approved`、`rejected`、`banned`。
+- 需要 `verifymc.admin` 权限。
+- 例如：`/vmc list pending`
+
+### `/vmc info <用户名>` {#vmc-info-用户名}
+
+- 查看用户的详细信息（用户名、邮箱、状态）。
+- 需要 `verifymc.admin` 权限。
+- 例如：`/vmc info Steve`
+
+### `/vmc version` {#vmc-version}
+
+- 显示当前插件版本号。
+- 所有人可用。
+
+## 权限说明 {#权限说明}
+
+- `verifymc.use`：允许使用 VerifyMC 插件的基础功能（默认所有人）。
+- `verifymc.admin`：允许使用管理相关指令（reload、approve、reject、delete、ban、unban、list、info），默认仅 OP。

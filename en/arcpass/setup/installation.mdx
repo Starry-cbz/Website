@@ -1,0 +1,147 @@
+---
+title: "Installation Guide"
+canonical: "https://www.kitemc.com/en/arcpass/setup/installation"
+---
+
+<span id="installation-guide" />
+
+This page provides detailed instructions for installing ArcPass on different server types.
+
+## Supported Servers {#supported-servers}
+
+| Server | Supported Versions | Notes |
+|--------|-------------------|-------|
+| Paper | 1.18 - 1.21+ | Recommended |
+| Spigot | 1.18 - 1.21+ | Full support |
+| Folia | 1.20 - 1.21+ | Full multi-threaded support |
+| Purpur | 1.18 - 1.21+ | Paper-based, full support |
+| Bukkit | 1.18 - 1.21+ | Basic features supported |
+
+<Warning>
+
+**Note**
+
+CraftBukkit and versions below 1.18 are not supported.
+
+</Warning>
+
+## Installation Steps {#installation-steps}
+
+### 1. Download the Plugin {#_1-download-the-plugin}
+
+Get the latest version from:
+<Columns cols={2}>
+  <Card title="GitHub Releases" icon="download" href="https://github.com/KiteMC/ArcPass/releases">
+  Download from GitHub
+</Card>
+  <Card title="KiteMC Website" icon="shopping-cart" href="https://license.kitemc.com/products/arcpass">
+  Purchase and download
+</Card>
+</Columns>
+
+### 2. Place the File {#_2-place-the-file}
+
+Put the downloaded `ArcPass-x.x.x.jar` in your server's `plugins` folder:
+
+```
+your-server/
+├── plugins/
+│   ├── ArcPass-1.9.2.jar    ← Place here
+│   └── ... other plugins
+├── server.jar
+└── ...
+```
+
+### 3. Start the Server {#_3-start-the-server}
+
+On first startup, the plugin will:
+
+1. Detect server type (Paper/Spigot/Folia)
+2. Generate default configuration files
+3. Create database (SQLite by default)
+4. Wait for license activation
+
+### 4. Check Startup Logs {#_4-check-startup-logs}
+
+On successful startup, you'll see logs like:
+
+```
+[ArcPass] Loading ArcPass v1.9.2
+[ArcPass] Detected platform: PAPER
+[ArcPass] Loading configuration files...
+[ArcPass] Initializing database (SQLite)...
+[ArcPass] Waiting for license validation...
+[ArcPass] License validation required. Please configure license.yml
+```
+
+## Generated File Structure {#generated-file-structure}
+
+```
+plugins/ArcPass/
+├── config.yml              # Main config
+├── database.yml            # Database config
+├── license.yml             # License config
+├── lang/
+│   ├── en_US.yml          # English
+│   └── zh_CN.yml          # Chinese
+├── passes/
+│   └── default.yml        # Default pass
+├── quests/
+│   ├── daily/             # Daily quests
+│   ├── weekly/            # Weekly quests
+│   └── seasonal/          # Seasonal quests
+├── rewards/
+│   └── default.yml        # Default rewards
+└── gui/
+    ├── main-menu.yml      # Main menu
+    ├── quests.yml         # Quests GUI
+    └── rewards.yml        # Rewards GUI
+```
+
+## Folia Server Notes {#folia-server-notes}
+
+ArcPass fully supports Folia's regionalized multi-threading:
+
+- All scheduler calls use Folia-compatible APIs
+- Database operations run asynchronously
+- GUI operations execute on correct region threads
+
+No additional configuration needed - the plugin auto-detects and adapts to Folia.
+
+## Troubleshooting {#troubleshooting}
+
+### Plugin Not Loading {#plugin-not-loading}
+
+Check:
+
+1. JAR filename is correct (don't rename it)
+2. Java version is 17+
+3. Console for error messages
+
+### Config Files Not Generated {#config-files-not-generated}
+
+1. Ensure plugins folder has write permissions
+2. Check disk space
+3. Try manually creating `plugins/ArcPass` folder
+
+### Dependency Plugin Issues {#dependency-plugin-issues}
+
+Ensure compatible versions:
+
+| Plugin | Recommended Version |
+|--------|-------------------|
+| Vault | 1.7.3+ |
+| PlaceholderAPI | 2.11.0+ |
+| LuckPerms | 5.4+ |
+
+## Next Steps {#next-steps}
+
+After installation:
+<Columns cols={2}>
+  <Card title="Activate License" icon="key" href="/en/arcpass/setup/license">
+  Configure license key
+</Card>
+  <Card title="View Requirements" icon="settings" href="/en/arcpass/setup/requirements">
+  See full requirements
+</Card>
+</Columns>

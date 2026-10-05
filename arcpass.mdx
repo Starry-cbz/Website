@@ -1,0 +1,106 @@
+---
+title: "ArcPass - Minecraft 服务器通行证插件"
+description: "多等级奖励、赛季任务与自定义 GUI，为 Minecraft 服务器提供持续的游戏目标。"
+mode: "custom"
+canonical: "https://www.kitemc.com/arcpass"
+keywords: ["ArcPass", "Minecraft", "通行证", "Paper", "Spigot", "Folia", "任务", "赛季"]
+---
+
+import { LandingHero, ActionLinks, MediaGallery, LandingFooter } from "/snippets/landing.jsx";
+
+<div className="km-landing">
+  <LandingHero
+    title="ArcPass"
+    subtitle="让每个赛季，都有值得期待的目标。"
+    description="Minecraft 服务器通行证插件。多等级奖励路线、丰富任务与赛季管理，支持 Paper、Spigot 和 Folia。"
+    image="/images/logo/arcpass.svg"
+    eyebrow="通行证 · 任务 · 赛季"
+    links={[
+      { label: "快速入门", href: "/arcpass/guide" },
+      { label: "下载", href: "/arcpass/download" },
+      { label: "购买许可证", href: "https://license.kitemc.com/products/arcpass" }
+    ]}
+  />
+
+  <section className="km-section">
+    <h2 id="为什么选择-arcpass">为什么选择 ArcPass？</h2>
+    <p>无论是小型私服还是服务器网络，ArcPass 都能为玩家提供持续的游戏目标和丰富奖励。通行证、任务、奖励与赛季独立配置，可按你的玩法组合。</p>
+    <Columns cols={3}>
+      <Card title="多等级通行证" icon="ticket">
+        免费、付费、VIP 等多个通行证等级，各自拥有独立奖励路线。
+      </Card>
+      <Card title="丰富的任务系统" icon="list-check">
+        日常、周常、赛季与剧情任务，覆盖不同周期和玩法目标。
+      </Card>
+      <Card title="灵活的奖励类型" icon="gift">
+        物品、经济、权限、称号与装饰品；可接入 Oraxen、ItemsAdder 自定义物品。
+      </Card>
+      <Card title="赛季管理" icon="calendar">
+        手动开启和结束赛季，自动重置玩家进度。
+      </Card>
+      <Card title="自定义 GUI" icon="paintbrush">
+        配置布局、物品与动画效果，匹配服务器风格。
+      </Card>
+      <Card title="排行榜" icon="ranking-star">
+        等级、经验和赛季排行，为玩家提供竞争目标。
+      </Card>
+      <Card title="第三方插件集成" icon="puzzle-piece">
+        Vault、LuckPerms、PlaceholderAPI、DeluxeTags、TAB、MythicMobs、Jobs 等。
+      </Card>
+      <Card title="Folia 调度支持" icon="bolt">
+        提供面向 Folia 多线程服务端的调度适配。
+      </Card>
+      <Card title="跨服同步" icon="globe">
+        通过 Redis 或共享 MySQL 同步数据，包含迁移锁与分布式锁。
+      </Card>
+    </Columns>
+    <img className="km-cover" src="/images/arcpass/cover-16x9.png" alt="ArcPass 通行证插件封面" />
+  </section>
+
+  <section className="km-section">
+    <h2 id="功能演示">功能演示</h2>
+    <MediaGallery images={[
+      { src: "/images/arcpass/scenes/S02.gif", caption: "多等级通行证" },
+      { src: "/images/arcpass/scenes/S05.gif", caption: "任务系统" },
+      { src: "/images/arcpass/scenes/S06.gif", caption: "任务完成流程" },
+      { src: "/images/arcpass/scenes/S07.gif", caption: "排行榜" }
+    ]} />
+    <h3 id="截图展示">截图展示</h3>
+    <MediaGallery images={[
+      { src: "/images/arcpass/screenshot-main-menu.png", caption: "主菜单" },
+      { src: "/images/arcpass/screenshot-reward-track.png", caption: "奖励轨道" },
+      { src: "/images/arcpass/screenshot-quest-list.png", caption: "任务列表" },
+      { src: "/images/arcpass/screenshot-leaderboard.png", caption: "排行榜" },
+      { src: "/images/arcpass/screenshot-admin-panel.png", caption: "管理面板" }
+    ]} />
+  </section>
+
+  <section className="km-section">
+    <h2 id="核心优势">按服务器需要，自由组合</h2>
+    <Columns cols={2}>
+      <Card title="模块化配置" icon="sliders">通行证、任务、奖励和赛季分别配置。</Card>
+      <Card title="异步数据库操作" icon="database">数据库操作异步执行，减少主线程等待。</Card>
+      <Card title="多语言" icon="language">中文默认，支持英文与自定义语言包。</Card>
+      <Card title="开发者 API" icon="code">使用公开 API 和事件连接自己的插件。</Card>
+    </Columns>
+  </section>
+
+  <section className="km-section">
+    <h2 id="快速链接">从这里开始</h2>
+    <Columns cols={3}>
+      <Card title="快速入门" icon="rocket" href="/arcpass/guide">安装后完成你的首份通行证。</Card>
+      <Card title="配置文件" icon="gear" href="/arcpass/config">通行证、任务、奖励与界面配置。</Card>
+      <Card title="命令与权限" icon="terminal" href="/arcpass/commands">玩家入口和管理命令。</Card>
+      <Card title="开发者 API" icon="code" href="/arcpass/developer">接口、事件和代码示例。</Card>
+      <Card title="常见问题" icon="circle-question" href="/arcpass/faq">查找配置与运行问题。</Card>
+      <Card title="下载" icon="download" href="/arcpass/download">运行包、语言包和历史版本。</Card>
+    </Columns>
+    <h3 id="获取-arcpass">获取 ArcPass</h3>
+    <ActionLinks links={[
+      { label: "购买许可证", href: "https://license.kitemc.com/products/arcpass" },
+      { label: "注册账户", href: "https://license.kitemc.com/register" },
+      { label: "加入社区", href: "https://qm.qq.com/q/R83fq82HWm" }
+    ]} />
+  </section>
+  <LandingFooter lang="zh" />
+</div>

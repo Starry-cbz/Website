@@ -1,0 +1,284 @@
+---
+title: "Event System"
+canonical: "https://www.kitemc.com/en/arcpass/developer/events"
+---
+
+<span id="event-system" />
+
+ArcPass provides custom events for other plugins to listen to and handle.
+
+## Event List {#event-list}
+
+| Event | Description | Cancellable |
+|-------|-------------|-------------|
+| `PlayerLevelUpEvent` | Player levels up | Yes |
+| `QuestCompleteEvent` | Quest completed | Yes |
+| `RewardClaimEvent` | Reward claimed | Yes |
+| `SeasonStartEvent` | Season starts | No |
+| `SeasonEndEvent` | Season ends | No |
+
+## Register Listener {#register-listener}
+
+```java
+import com.kitemc.arcpass.api.event.*;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+
+public class ArcPassListener implements Listener {
+
+    @EventHandler
+    public void onLevelUp(PlayerLevelUpEvent event) {
+        // Handle level up
+    }
+
+    @EventHandler
+    public void onQuestComplete(QuestCompleteEvent event) {
+        // Handle quest completion
+    }
+}
+```
+
+Register the listener:
+
+```java
+@Override
+public void onEnable() {
+    getServer().getPluginManager().registerEvents(new ArcPassListener(), this);
+}
+```
+
+## PlayerLevelUpEvent {#playerlevelupevent}
+
+Fired when a player's pass level increases.
+
+```java
+@EventHandler
+public void onLevelUp(PlayerLevelUpEvent event) {
+    UUID playerId = event.getPlayerId();
+    int oldLevel = event.getOldLevel();
+    int newLevel = event.getNewLevel();
+    long totalExperience = event.getTotalExperience();
+
+    Player player = Bukkit.getPlayer(playerId);
+    if (player != null) {
+        player.sendMessage("§6Congratulations! §e" + oldLevel + " → " + newLevel);
+        player.getWorld().spawn(player.getLocation(), Firework.class);
+        myRewardSystem.checkMilestone(player, newLevel);
+    }
+
+    getLogger().info(player.getName() + " reached level " + newLevel);
+}
+```
+
+### Properties {#properties}
+
+| Method | Return Type | Description |
+|--------|-------------|-------------|
+| `getPlayerId()` | `UUID` | Player UUID |
+| `getOldLevel()` | `int` | Previous level |
+| `getNewLevel()` | `int` | New level |
+| `getTotalExperience()` | `long` | Current total XP |
+
+## QuestCompleteEvent {#questcompleteevent}
+
+Fired when a quest is completed. Can be cancelled.
+
+```java
+@EventHandler
+public void onQuestComplete(QuestCompleteEvent event) {
+    UUID playerId = event.getPlayerId();
+    Quest quest = event.getQuest();
+    int experienceReward = event.getExperienceReward();
+
+    Player player = Bukkit.getPlayer(playerId);
+    if (player == null) return;
+
+    // Anti-cheat check
+    if (antiCheat.isSuspicious(player)) {
+        event.setCancelled(true);
+        getLogger().warning("Suspicious completion: " + player.getName());
+        return;
+    }
+
+    // Double XP event
+    if (isDoubleExpActive()) {
+        event.setExperienceReward(experienceReward * 2);
+        player.sendMessage("§aDouble XP! Extra +" + experienceReward);
+    }
+
+    questStats.recordCompletion(player, quest);
+}
+```
+
+### Properties {#properties-1}
+
+| Method | Return Type | Description |
+|--------|-------------|-------------|
+| `getPlayerId()` | `UUID` | Player UUID |
+| `getQuest()` | `Quest` | Completed quest |
+| `getExperienceReward()` | `int` | XP reward |
+| `setExperienceReward(int)` | `void` | Modify XP reward |
+| `isCancelled()` | `boolean` | Is cancelled |
+| `setCancelled(boolean)` | `void` | Set cancelled |
+
+## RewardClaimEvent {#rewardclaimevent}
+
+Fired when a player claims a reward. Can be cancelled.
+
+```java
+@EventHandler
+public void onRewardClaim(RewardClaimEvent event) {
+    UUID playerId = event.getPlayerId();
+    int level = event.getLevel();
+    String tierId = event.getTierId();
+    List<Reward> rewards = event.getRewards();
+
+    Player player = Bukkit.getPlayer(playerId);
+    if (player == null) return;
+
+    // Check inventory space
+    int requiredSlots = countRequiredSlots(rewards);
+    int emptySlots = countEmptySlots(player.getInventory());
+
+    if (emptySlots < requiredSlots) {
+        event.setCancelled(true);
+        player.sendMessage("§cNot enough inventory space!");
+        return;
+    }
+
+    getLogger().info(player.getName() + " claimed Lv." + level + " " + tierId);
+    achievementSystem.checkRewardMilestone(player, level);
+}
+```
+
+### Properties {#properties-2}
+
+| Method | Return Type | Description |
+|--------|-------------|-------------|
+| `getPlayerId()` | `UUID` | Player UUID |
+| `getLevel()` | `int` | Claimed level |
+| `getTierId()` | `String` | Claimed tier |
+| `getRewards()` | `List<Reward>` | Reward list |
+| `isCancelled()` | `boolean` | Is cancelled |
+| `setCancelled(boolean)` | `void` | Set cancelled |
+
+## SeasonStartEvent {#seasonstartevent}
+
+Fired when a new season starts.
+
+```java
+@EventHandler
+public void onSeasonStart(SeasonStartEvent event) {
+    Season season = event.getSeason();
+
+    Bukkit.broadcastMessage("");
+    Bukkit.broadcastMessage("§6§l★ " + season.getDisplayName() + " Started! ★");
+    Bukkit.broadcastMessage("§7Complete quests for exclusive rewards!");
+    Bukkit.broadcastMessage("");
+
+    for (Player player : Bukkit.getOnlinePlayers()) {
+        player.playSound(player.getLocation(), Sound.UI_TOAST_CHALLENGE_COMPLETE, 1.0f, 1.0f);
+    }
+
+    seasonTracker.initNewSeason(season);
+    discordBot.sendSeasonAnnouncement(season);
+}
+```
+
+### Properties {#properties-3}
+
+| Method | Return Type | Description |
+|--------|-------------|-------------|
+| `getSeason()` | `Season` | New season info |
+
+## SeasonEndEvent {#seasonendevent}
+
+Fired when a season ends.
+
+```java
+@EventHandler
+public void onSeasonEnd(SeasonEndEvent event) {
+    Season season = event.getSeason();
+
+    Bukkit.broadcastMessage("");
+    Bukkit.broadcastMessage("§c§l★ " + season.getDisplayName() + " Ended! ★");
+    Bukkit.broadcastMessage("§7Thanks to all participants!");
+    Bukkit.broadcastMessage("");
+
+    seasonTracker.saveSeasonStats(season);
+    distributeLeaderboardRewards(season);
+    discordBot.sendSeasonEndAnnouncement(season);
+}
+```
+
+### Properties {#properties-4}
+
+| Method | Return Type | Description |
+|--------|-------------|-------------|
+| `getSeason()` | `Season` | Ended season info |
+
+## Event Priority {#event-priority}
+
+Use standard Bukkit event priorities:
+
+```java
+@EventHandler(priority = EventPriority.HIGH)
+public void onQuestComplete(QuestCompleteEvent event) {
+    // High priority processing
+}
+
+@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+public void onQuestCompleteMonitor(QuestCompleteEvent event) {
+    // Only log if not cancelled
+    getLogger().info("Quest completed: " + event.getQuest().getId());
+}
+```
+
+## Best Practices {#best-practices}
+
+### 1. Check Player Online Status {#_1-check-player-online-status}
+
+```java
+@EventHandler
+public void onLevelUp(PlayerLevelUpEvent event) {
+    Player player = Bukkit.getPlayer(event.getPlayerId());
+    if (player == null || !player.isOnline()) {
+        return;
+    }
+    // ...
+}
+```
+
+### 2. Avoid Blocking Main Thread {#_2-avoid-blocking-main-thread}
+
+```java
+@EventHandler
+public void onSeasonEnd(SeasonEndEvent event) {
+    Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
+        saveToDatabaseAsync(event.getSeason());
+
+        Bukkit.getScheduler().runTask(plugin, () -> {
+            notifyPlayers();
+        });
+    });
+}
+```
+
+### 3. Handle Cancellation Properly {#_3-handle-cancellation-properly}
+
+```java
+@EventHandler(priority = EventPriority.LOW)
+public void onRewardClaim(RewardClaimEvent event) {
+    if (shouldBlock(event)) {
+        event.setCancelled(true);
+    }
+}
+```
+
+## Next Steps {#next-steps}
+
+<Columns cols={1}>
+  <Card title="Code Examples" icon="code" href="/en/arcpass/developer/examples">
+  More practical scenarios
+</Card>
+</Columns>

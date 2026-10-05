@@ -1,0 +1,39 @@
+---
+title: "VerifyMC - Historical Documentation"
+description: "Archived documentation for the discontinued Minecraft whitelist and registration plugin, including configuration, API and previous downloads."
+mode: "custom"
+canonical: "https://www.kitemc.com/en/archive/verifymc"
+---
+
+import { LandingHero, ActionLinks, LandingFooter } from "/snippets/landing.jsx";
+
+<div className="km-landing">
+  <LandingHero
+    title="VerifyMC"
+    subtitle="Whitelist & registration · Historical archive"
+    description="VerifyMC is discontinued. This archive preserves historical feature descriptions, configuration and downloads for existing users."
+    image="/images/logo/verifymc.svg"
+    eyebrow="ARCHIVED PROJECT"
+    links={[
+      { label: "Historical documentation", href: "/en/archive/verifymc/guide" },
+      { label: "Previous downloads", href: "/en/archive/verifymc/download" },
+      { label: "GitHub", href: "https://github.com/KiteMC/VerifyMC" }
+    ]}
+  />
+
+  <section className="km-section">
+    <Warning>VerifyMC is discontinued. No new features, compatibility updates or maintenance are promised. These pages describe historical versions and do not imply support for current Minecraft, dependencies or external services.</Warning>
+    <h2 id="historical-features">Historical features</h2>
+    <Columns cols={3}>
+      <Card title="Email & CAPTCHA" icon="envelope">Email verification, self-hosted math or text CAPTCHA, domain allowlists and alias restrictions.</Card>
+      <Card title="Discord integration" icon="comments">OAuth2 account linking with optional or required modes and persistent storage.</Card>
+      <Card title="Review & notifications" icon="shield">Web administration, real-time review and decision emails.</Card>
+      <Card title="Admin interface" icon="desktop">Mobile-friendly GlassX frontend with Chinese by default and English switching.</Card>
+      <Card title="Proxy & Bedrock" icon="link">BungeeCord and Velocity proxies, plus Geyser and Floodgate integration.</Card>
+      <Card title="Questionnaires" icon="list-check">Custom questions, multiple languages and flexible question types.</Card>
+      <Card title="Optional scoring" icon="clipboard-check">Manual review or historical DeepSeek and Google scoring integrations.</Card>
+    </Columns>
+    <p>Historical v1.8.0 and other public versions remain on the <a href="/en/archive/verifymc/download">download page</a> and <a href="https://github.com/KiteMC/VerifyMC/releases">GitHub Releases</a>.</p>
+  </section>
+  <LandingFooter lang="en" />
+</div>

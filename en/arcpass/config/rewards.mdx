@@ -1,0 +1,320 @@
+---
+title: "Reward Configuration"
+canonical: "https://www.kitemc.com/en/arcpass/config/rewards"
+---
+
+<span id="reward-configuration" />
+
+Rewards are given to players for completing quests and reaching levels. ArcPass supports many reward types.
+
+## File Location {#file-location}
+
+```
+plugins/ArcPass/rewards/
+├── default.yml     # Default rewards
+├── items.yml       # Item rewards
+├── economy.yml     # Economy rewards
+├── titles.yml      # Title rewards
+└── ...
+```
+
+## Reward Types {#reward-types}
+
+| Type | Description | Dependency |
+|------|-------------|------------|
+| `ITEM` | Item rewards | None |
+| `ECONOMY` | Currency | Vault / CMI |
+| `COMMAND` | Execute commands | None |
+| `PERMISSION` | Permission nodes | LuckPerms |
+| `TITLE` | Titles/prefixes | DeluxeTags / TAB |
+| `COSMETIC` | Cosmetics | Custom |
+| `EXPERIENCE` | Vanilla XP | None |
+
+## Basic Structure {#basic-structure}
+
+```yaml
+# rewards/items.yml
+
+# Item reward example
+item_diamond_10:
+  type: ITEM
+  display-name: "&bDiamond x10"
+  description: "Receive 10 diamonds"
+  icon: DIAMOND
+  value: "DIAMOND"
+  amount: 10
+
+# Economy reward example
+economy_1000:
+  type: ECONOMY
+  display-name: "&6Gold x1000"
+  description: "Receive 1000 gold"
+  icon: GOLD_BLOCK
+  value: "1000"
+
+# Title reward example
+title_champion:
+  type: TITLE
+  display-name: "&bChampion Title"
+  description: "Unlock [Champion] prefix"
+  icon: NAME_TAG
+  value: "&b[Champion] "
+  data:
+    priority: 60
+```
+
+## Item Rewards {#item-rewards}
+
+### Vanilla Items {#vanilla-items}
+
+```yaml
+reward_diamond_sword:
+  type: ITEM
+  display-name: "&bDiamond Sword"
+  icon: DIAMOND_SWORD
+  value: "DIAMOND_SWORD"
+  amount: 1
+```
+
+### Oraxen Items {#oraxen-items}
+
+```yaml
+reward_custom_sword:
+  type: ITEM
+  display-name: "&6Legendary Sword"
+  icon: DIAMOND_SWORD
+  value: "oraxen:legendary_sword"
+  amount: 1
+```
+
+### ItemsAdder Items {#itemsadder-items}
+
+```yaml
+reward_magic_gem:
+  type: ITEM
+  display-name: "&dMagic Gem"
+  icon: EMERALD
+  value: "itemsadder:myitems:magic_gem"
+  amount: 5
+```
+
+## Custom Icons v1.1.5 {#custom-icons}
+
+By default, the `icon` field accepts a vanilla material name (e.g., `DIAMOND`). Starting from v1.1.5, you can use **CustomModelData**, **ItemsAdder**, or **Oraxen** items as GUI icons.
+
+### CustomModelData {#custommodeldata}
+
+```yaml
+reward_exchange_card:
+  type: ITEM
+  display-name: "&e Exchange Card"
+  icon: PAPER
+  custom-model-data: 10001    # CustomModelData value
+  value: "PAPER"
+  amount: 5
+```
+
+### ItemsAdder Icon {#itemsadder-icon}
+
+```yaml
+reward_magic_wand:
+  type: ITEM
+  display-name: "&dMagic Wand"
+  icon: "itemsadder:namespace:item_id"   # Uses ItemsAdder item as icon
+  value: "itemsadder:namespace:item_id"
+  amount: 1
+```
+
+### Oraxen Icon {#oraxen-icon}
+
+```yaml
+reward_oraxen_gem:
+  type: ITEM
+  display-name: "&bCrystal Gem"
+  icon: "oraxen:crystal_gem"   # Uses Oraxen item as icon
+  value: "oraxen:crystal_gem"
+  amount: 1
+```
+
+<Tip>
+
+The `icon` field controls what is displayed in the GUI. The `value` field controls what the player actually receives. They can be different.
+
+</Tip>
+
+### Capture Any Item as an Icon v1.9.2 {#capture-any-item-as-an-icon}
+
+The reward editor can capture any item from the player's main hand as the reward icon:
+
+1. Hold the desired icon item in your main hand.
+2. Left-click the Icon slot in the reward editor.
+3. Save the reward.
+
+Captured icons preserve the item's name, lore, enchantments, CustomModelData, and other custom data. Right-click the Icon slot to restore the default icon for that reward type. The icon only affects GUI display and does not change the reward delivered to the player.
+
+## Item Preview Slot v1.8.2 {#item-preview-slot}
+
+When editing item rewards in the admin GUI (`/arcpass admin rewards`), you can set the reward's display item by clicking an item from your inventory onto the preview slot:
+
+1. Open the reward edit GUI and locate the item preview slot (the empty slot with a red glass pane border)
+2. **Left-click** any item in your inventory — it will stick to your cursor
+3. Move your cursor over the preview slot and **left-click** again — the item will be captured as the reward's display item
+
+<Info>
+
+- The preview slot always shows **a single item** regardless of the stack size you drop in
+- The actual reward **amount** is controlled separately via the amount setting
+- Supports items with custom NBT, CustomModelData, enchantments, etc.
+
+</Info>
+
+## Economy Rewards {#economy-rewards}
+
+```yaml
+reward_gold_1000:
+  type: ECONOMY
+  display-name: "&6Gold x1000"
+  description: "Receive 1000 gold"
+  icon: GOLD_INGOT
+  value: "1000"
+
+reward_points_100:
+  type: ECONOMY
+  display-name: "&ePoints x100"
+  icon: SUNFLOWER
+  value: "100"
+  data:
+    currency: "points"
+```
+
+## Command Rewards {#command-rewards}
+
+```yaml
+reward_announce:
+  type: COMMAND
+  display-name: "&eServer Announcement"
+  icon: BOOK
+  value: "broadcast &6Congratulations to &e%player%!"
+
+reward_vip_package:
+  type: COMMAND
+  display-name: "&dVIP Package"
+  icon: CHEST
+  value: |
+    give %player% diamond 64
+    eco give %player% 10000
+    lp user %player% permission set vip.access true
+```
+
+## Permission Rewards {#permission-rewards}
+
+```yaml
+reward_fly:
+  type: PERMISSION
+  display-name: "&bFlight Permission"
+  description: "Unlock flying ability"
+  icon: FEATHER
+  value: "essentials.fly"
+
+reward_temp_vip:
+  type: PERMISSION
+  display-name: "&e7-Day VIP"
+  description: "VIP access for 7 days"
+  icon: PAPER
+  value: "group.vip"
+  data:
+    duration: 604800  # seconds
+
+reward_rank_elite:
+  type: PERMISSION
+  display-name: "&6Elite Rank"
+  icon: GOLDEN_HELMET
+  value: "group.elite"
+  data:
+    type: group
+```
+
+## Title Rewards {#title-rewards}
+
+### DeluxeTags {#deluxetags}
+
+```yaml
+reward_title_champion:
+  type: TITLE
+  display-name: "&6Champion Title"
+  description: "Unlock [Champion] title"
+  icon: NAME_TAG
+  value: "&e[&6Champion&e] "
+  data:
+    tag-id: "champion"
+    description: "Battle pass final reward"
+    priority: 100
+    auto-equip: true
+```
+
+### TAB (Folia Compatible) {#tab-folia-compatible}
+
+```yaml
+reward_title_legend:
+  type: TITLE
+  display-name: "&dLegend Title"
+  icon: NAME_TAG
+  value: "&5[&dLegend&5] "
+  data:
+    position: prefix
+    persistent: true
+```
+
+## Experience Rewards {#experience-rewards}
+
+```yaml
+reward_mc_exp_100:
+  type: EXPERIENCE
+  display-name: "&aXP x100"
+  icon: EXPERIENCE_BOTTLE
+  value: "100"
+```
+
+## Conditional Rewards {#conditional-rewards}
+
+```yaml
+reward_special:
+  type: ITEM
+  display-name: "&6Special Reward"
+  icon: NETHER_STAR
+  value: "NETHER_STAR"
+  amount: 1
+
+  conditions:
+    - type: permission
+      permission: arcpass.reward.special
+    - type: inventory_space
+      slots: 1
+```
+
+## Reward Groups {#reward-groups}
+
+```yaml
+reward_starter_pack:
+  type: GROUP
+  display-name: "&aStarter Pack"
+  description:
+    - "&7Contains:"
+    - "&7- Diamond Sword x1"
+    - "&7- Gold x500"
+  icon: CHEST
+  rewards:
+    - reward_diamond_sword
+    - reward_gold_500
+```
+
+## Next Steps {#next-steps}
+
+<Columns cols={2}>
+  <Card title="Configure Passes" icon="ticket" href="/en/arcpass/config/passes">
+  Set up tiers and levels
+</Card>
+  <Card title="Configure GUI" icon="palette" href="/en/arcpass/config/gui">
+  Set up interface layout
+</Card>
+</Columns>

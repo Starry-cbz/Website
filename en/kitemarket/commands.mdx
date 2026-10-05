@@ -1,0 +1,104 @@
+---
+title: "Commands and permissions"
+canonical: "https://www.kitemc.com/en/kitemarket/commands"
+---
+
+<span id="commands-and-permissions" />
+
+The main command is `/kitemarket`, with `/km` and `/market` aliases. `/km` alone opens the home menu. Transaction commands open a confirmation screen before committing. Console diagnostics are listed separately below.
+
+`<...>` means required and `[...]` optional; do not type the brackets. Currency arguments are IDs under `currencies`. Order and operation IDs are complete UUIDs.
+
+The default home separates fixed-price sales, buy-order fulfillment and auctions into three entrances. Its corners provide the player head, claims, wallet and my orders. “Create / edit draft” opens the wizard directly and continues the current draft; each market and “My orders” list retains the same entrance. Published orders must be cancelled and recreated to change them. The head opens “My market” for personal review operations, history and interface preferences. Existing customized home layouts remain supported; see [installation](/en/kitemarket/guide#customize-the-vanilla-gui).
+
+## Player commands {#player-commands}
+
+| Command | Purpose |
+|---|---|
+| `/km` | Open the home menu |
+| `/km help` | Show help |
+| `/km ui [auto/vanilla/itemsadder] [theme-id]` | Save the network-wide backend/theme preference and show actual selection/fallback; community interfaces need no official DLC |
+| `/km browse [BUY/SELL/AUCTION]` or `/km market [...]` | Browse one mode or all modes; the menu supports search and paging |
+| `/km wallet` | View available/reserved funds and access transfers |
+| `/km claims` or `/km assets` | Open item claims |
+| `/km history [all]` | View personal history; `all` requires global read-only audit or management permission |
+| `/km orders` or `/km mine` | View personal orders |
+| `/km create` or `/km rule` | Edit a listing draft and its conditions |
+| `/km preview` | Check inventory matches for the current rule |
+| `/km cancelinput` | Cancel a chat prompt and return to the previous page, retaining the draft and selections |
+| `/km order <order-id>` | Open an order |
+| `/km cancel <order-id>` | Confirm cancellation; other players' unfinished orders require management permission and a reason |
+| `/km inspect <operation-id>` | Inspect a personal operation and structured evidence; global auditors and managers can inspect other players' operations |
+| `/km deposit <currency> <amount>` | Move external funds into the market on the configured gateway |
+| `/km withdraw <currency> <amount>` | Move market funds back to the external backend on its gateway |
+| `/km buy <order-id> [quantity]` | Buy a quantity at the unit price, subject to the order's purchase minimum |
+| `/km supply <order-id> <quantity>` | Fulfill a buy order |
+| `/km bid <order-id> <amount>` | Bid a total amount for the entire auction lot |
+| `/km sell <currency> <unit-price> <quantity> [seconds] [minimum-quantity]` | Escrow matching items and create a fixed-price listing |
+| `/km request <currency> <unit-price> <quantity> [seconds]` | Create a buy order using the current draft rule |
+| `/km auction <currency> <starting-total> <quantity> [seconds] [increment]` | Auction the main-hand items as one lot |
+
+Durations are seconds, with a minimum of 60 and the configured `market.maximum-duration-seconds` as the maximum. Unspecified arguments retain values from the GUI draft; inspect the confirmation before publishing. Use `/km create` to set and preview buy-order conditions first. Cancellation is also available from an order's detail screen. Sellers cannot cancel an auction with an accepted bid.
+
+A sale uses a per-item unit price; the purchase total is that price multiplied by the chosen quantity. Set a minimum on the sale terms page, defaulting to 1 and ranging from 1 to the listed quantity. If the remainder is below the minimum, all remaining items must be bought together. Specify a quantity when buying or use the order's quantity page, then review the amount before confirming. Buy orders also use unit prices; auction starting prices and bids apply to the whole lot.
+
+You may also set the minimum after the duration in the sale command. For example, `/km sell points 8 16 86400 3` lists 16 items at a unit price of 8 for 86400 seconds, with a minimum purchase of 3. This final sale parameter differs from an auction's minimum increment.
+
+## Condition input {#condition-input}
+
+Select materials, enchantments, and ranges in the editor. Chat is used when entering precise values or text. Type `cancel` or run `/km cancelinput` to cancel a chat prompt.
+
+| Field | Example |
+|---|---|
+| Materials | Select from the catalog; bulk input accepts IDs such as `DIAMOND_SWORD,NETHERITE_SWORD` |
+| Enchantments | Search Chinese/English names or IDs, select an enchantment and use minimum/maximum level buttons, or import from the main hand |
+| Remaining durability | Percentage range buttons, presets, or a precise integer |
+| Name | Select exact/contains in the menu, then enter only text such as `Miner Pick` |
+| Lore | Same as name; literal `\n` inserts a newline, and the joined lines are compared |
+
+Name and lore do not need `=` or `~` prefixes. Separate buttons clear the condition or import held text. See [item conditions](/en/kitemarket/trading) for the complete rules.
+
+Result messages link to details. The receipt's “View / copy operation ID” control shows the complete UUID in chat when requested and lets you copy it for `/km inspect`. Default summaries omit long IDs; operation records and audit queries remain traceable.
+
+## Administrative commands {#administrative-commands}
+
+| Command | Purpose |
+|---|---|
+| `/km admin` | Inspect pending operations; read-only auditors view evidence while managers can reconcile |
+| `/km admin <player-UUID-or-online-name>` | Audit the player's wallets, all asset states, orders, and history; UUIDs work offline, names resolve only players online on this server |
+| `/km doctor` | Inspect initialization, network, license, node, and provider status with audit or management permission |
+| `/km doctor items` | Run real-server item-rule/codec diagnostics with per-sample logs; does not change player assets |
+| `/km license` | Request a refresh on the next maintenance pass; does not bypass verification or extend expiry |
+| `/km license reactivate` | Confirm reactivation of the same network and license after a signed `UNBOUND` receipt |
+| `/km inspect <operation-id>` | Inspect the node, execution stage, amounts/items, and before/after evidence for administrative repairs to this operation |
+| `/km cancel <order-id>` | Force-cancel an unfinished order after a reason of at least 5 characters and confirmation |
+| `/km resolve <operation-id> <SUCCEEDED/FAILED> <reason>` | Record a verified external outcome after GUI confirmation |
+| `/km reload` | Validate and update language, menu layouts/icons, and fees for new orders |
+
+Reasons must contain at least 5 characters and should describe the evidence. Never pick an outcome merely to empty the queue; see [operations](/en/kitemarket/operations). Administrators can cancel orders from their detail screen with an audit record.
+
+Third-party IA themes use configuration files, their own resources and `/km reload`, without an additional KiteMC theme license. See [ItemsAdder integration](/en/kitemarket/dlc) for installation.
+
+Player audit pages retain the selected UUID. Assets can be filtered and paged by available, escrowed, delivering, claimed, and spent states. These pages cannot claim items, transfer funds, or edit balances on the player's behalf. A `PREPARED` operation is read-only and can be refreshed; only `UNKNOWN` permits reconciliation, and an unfinished external call still blocks recording an outcome.
+
+| Permission | Default | Scope |
+|---|---|---|
+| `kitemarket.use` | All players | Base entry permission for player commands |
+| `kitemarket.browse` | All players | Browse and inspect public orders |
+| `kitemarket.create` | All players | Drafts, rule previews, publishing, and cancelling personal orders |
+| `kitemarket.trade` | All players | Buying, fulfillment, and bids |
+| `kitemarket.wallet` | All players | Wallet, transfers, and personal claims |
+| `kitemarket.audit` | All players | Personal history and operation inspection |
+| `kitemarket.audit.all` | OP | Player wallet/asset/order audits, global history, other players' operations, pending list, and diagnostics; read-only |
+| `kitemarket.manage` | OP | Management writes, diagnostics, license refresh, and reload |
+| `kitemarket.admin` | OP | Compatibility management permission; includes `kitemarket.manage` and `kitemarket.audit.all` |
+
+The base entry permission and each feature's permission are both required. Granting `kitemarket.audit.all` alone enables global read-only auditing, without force-cancellation, reconciliation writes, license refresh, or reload. `kitemarket.manage` also permits audit queries. There is no `/km pay` or arbitrary balance-edit command.
+
+## Console and reload {#console-and-reload}
+
+The server console and RCON support `km doctor`, `km doctor items`, `km license`, `km inspect <operation-id>`, and `km reload`. Explicit reactivation of the same network and license uses `km license reactivate confirm`; ordinary `km license` only refreshes and never automatically rebinds. They do not publish, trade, claim, transfer funds, or reconcile external results.
+
+Item diagnostics construct local samples and check fingerprints, quantities, metadata, and matching reasons, with container samples explicitly excluded. They do not create world blocks or item assets. Results cover diagnostic samples on that server; they do not automatically certify trading, economy providers, or the entire version matrix.
+
+`/km reload` validates KiteMarket presentation settings; it is not the server's `/reload`. It updates display settings and new-order fees only. Invalid language, icons, slots, or fees leave the current valid configuration in effect. Changes to `network`, `database`, `currencies`, `license`, or quantity/duration limits require a full restart. bStats switches also take effect after restarting. See [installation and configuration](/en/kitemarket/guide).

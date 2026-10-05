@@ -1,0 +1,492 @@
+---
+title: "Configuration File"
+canonical: "https://www.kitemc.com/en/archive/verifymc/file/config"
+---
+
+<Warning>
+VerifyMC is discontinued. These historical documents remain available for existing users and do not imply active maintenance or current compatibility.
+</Warning>
+
+<span id="configuration-file" />
+
+This document provides detailed explanations for all configuration options in `config.yml`.
+
+<Tip>
+
+**Apply changes**
+
+After editing `config.yml`, run `/vmc reload` to apply changes without restarting the server.
+The repository also contains the latest example configuration ([KiteMC/VerifyMC](https://github.com/KiteMC/VerifyMC)).
+
+</Tip>
+
+## General Settings {#general-settings}
+
+```yaml
+# Global language setting. Chinese is the default; use 'en' for the English interface.
+language: en
+
+# Enable detailed console logs for troubleshooting.
+debug: false
+```
+
+## Web Server {#web-server}
+
+```yaml
+# The port for the web interface.
+web_port: 8080
+
+# The server name displayed on the web interface.
+web_server_prefix: '[ Server Name ]'
+```
+
+## Verification & Whitelist {#verification-whitelist}
+
+```yaml
+# Supported authentication methods. Options: 'email' (email verification), 'captcha' (graphical captcha).
+# You can use multiple methods, e.g.: [email, captcha]
+#
+# [IMPORTANT] Configuring the captcha: section below does NOT enable captcha!
+# To enable captcha, you MUST add 'captcha' to this list:
+#   Captcha only: auth_methods: [captcha]
+#   Both email and captcha: auth_methods: [email, captcha]
+auth_methods:
+  - email
+
+# Maximum number of game accounts that can be linked to a single email address.
+max_accounts_per_email: 2
+
+# Whitelist mode: 'bukkit' (syncs with server's whitelist.json) or 'plugin' (uses internal database).
+whitelist_mode: plugin
+
+# Registration URL displayed to non-whitelisted players when in 'plugin' mode.
+web_register_url: https://domain.com/
+```
+
+## Registration {#registration}
+
+```yaml
+# If true, new user registrations are automatically approved.
+# If false, they require manual admin approval.
+register:
+  auto_approve: false
+```
+
+## User & Security {#user-security}
+
+```yaml
+# A regular expression to validate player names.
+username_regex: "^[a-zA-Z0-9_-]{3,16}$"
+
+# If false, usernames that only differ by case (e.g., "Player" and "player") are treated as the same.
+username_case_sensitive: false
+
+# The admin panel has no separate password.
+# Sign in with a registered player account; that player must also be a server OP.
+```
+
+## User Notification {#user-notification}
+
+```yaml
+# Send email notification to users when admin reviews their application.
+user_notification:
+  # Whether to enable user notification feature
+  enabled: true
+  # Whether to send notification when application is approved
+  on_approve: true
+  # Whether to send notification when application is rejected
+  on_reject: true
+```
+
+## Frontend (UI) {#frontend-ui}
+
+```yaml
+frontend:
+  # The visual theme for the web interface. Options: 'glassx'.
+  theme: glassx
+
+  # URL for the logo. Can be a web link or a local file path (e.g., '/logo.png').
+  logo_url: /logo.png
+
+  # A message to display on the homepage.
+  announcement: Welcome to our server!
+```
+
+## Email (SMTP) {#email-smtp}
+
+```yaml
+smtp:
+  host: smtp.gmail.com
+  port: 587
+  username: your_email@gmail.com
+  password: your_app_password
+  from: your_email@gmail.com
+  enable_ssl: true
+
+# Subject (title) of the verification code email
+email_subject: VerifyMC Verification Code
+```
+
+### Common SMTP Configurations {#common-smtp-configurations}
+
+| Provider | Host | Port | SSL |
+|----------|------|------|-----|
+| Gmail | smtp.gmail.com | 587 | true |
+| QQ Mail | smtp.qq.com | 587 | true |
+| Outlook | smtp.office365.com | 587 | true |
+| 163 Mail | smtp.163.com | 465 | true |
+
+## Auto Update Resources {#auto-update-resources}
+
+```yaml
+# If true, automatically updates i18n, email templates, and theme files on plugin updates.
+auto_update_resources: true
+```
+
+## Email Registration Restrictions {#email-registration-restrictions}
+
+```yaml
+# Enable email domain whitelist
+enable_email_domain_whitelist: true
+
+# Enable email alias limit (e.g. forbid user+xxx@gmail.com)
+enable_email_alias_limit: false
+
+# Email domain whitelist. Leave empty to use default mainstream domains
+email_domain_whitelist:
+  - gmail.com
+  - 163.com
+  - 126.com
+  - qq.com
+  - outlook.com
+  - hotmail.com
+  - icloud.com
+  - yahoo.com
+  - foxmail.com
+```
+
+## Storage & MySQL {#storage-mysql}
+
+```yaml
+# Storage type: 'data' (local file) or 'mysql' (external database)
+storage: data
+
+# MySQL connection settings (used when storage is 'mysql')
+mysql:
+    host: localhost
+    port: 3306
+    database: verifymc
+    user: root
+    password: yourpassword
+```
+
+## AuthMe Integration {#authme-integration}
+
+```yaml
+authme:
+  # Whether to enable AuthMe integration functionality
+  enabled: true
+
+  # Whether to require password input during web registration
+  require_password: true
+
+  # Password regex pattern
+  password_regex: "^[a-zA-Z0-9_]{8,26}$"
+
+  # AuthMe database configuration for direct integration
+  database:
+    # Database type: 'sqlite' or 'mysql'
+    type: sqlite
+    # AuthMe table name
+    table: authme
+    # Sync interval in seconds (for periodic data synchronization)
+    sync_interval_seconds: 30
+
+    # MySQL settings (used when database.type is 'mysql')
+    mysql:
+      host: 127.0.0.1
+      port: 3306
+      database: authme
+      user: root
+      password: yourpassword
+
+    # SQLite settings (used when database.type is 'sqlite')
+    sqlite:
+      path: plugins/AuthMe/authme.db
+
+    # Column name mapping (match your AuthMe database schema)
+    columns:
+      mySQLColumnName: username
+      mySQLRealName: realname
+      mySQLColumnPassword: password
+      mySQLColumnEmail: email
+```
+
+## Captcha Configuration {#captcha-configuration}
+
+```yaml
+# Captcha can be used as an alternative or supplement to email verification
+# Add 'captcha' to auth_methods to enable: auth_methods: [captcha]
+captcha:
+  # Captcha type: math (math expression) or text (random characters)
+  type: math
+
+  # Length of text captcha (ignored for math type)
+  length: 4
+
+  # Captcha expiration time in seconds
+  expire_seconds: 300
+```
+
+## Bedrock Player Support {#bedrock-player-support}
+
+```yaml
+# For Geyser/Floodgate bedrock players
+bedrock:
+  # Whether to enable bedrock player support
+  enabled: false
+
+  # Prefix for bedrock players (commonly "." for Floodgate)
+  prefix: "."
+
+  # Regex for bedrock usernames
+  username_regex: "^[a-zA-Z0-9._-]{3,15}$"
+```
+
+## Questionnaire Configuration {#questionnaire-configuration}
+
+```yaml
+# Detailed questions are configured in questionnaire.yml
+questionnaire:
+  # Whether to enable questionnaire feature
+  enabled: false
+
+  # Minimum score to pass
+  pass_score: 60
+
+  # Rate limiting for questionnaire submissions
+  rate_limit:
+    # Time window in milliseconds
+    window_ms: 300000
+    ip:
+      max: 20
+    uuid:
+      max: 8
+    email:
+      max: 6
+```
+
+## LLM Essay Scoring {#llm-essay-scoring}
+
+```yaml
+# AI-powered auto-scoring for text questionnaire answers
+llm:
+  # Whether to enable LLM scoring
+  enabled: true
+
+  # LLM provider: 'deepseek' or 'google'
+  provider: deepseek
+
+  # API base URL
+  api_base: https://api.deepseek.com/v1
+
+  # API key (keep this secret!)
+  api_key: ""
+
+  # Model name
+  model: deepseek-chat
+
+  # Request timeout in milliseconds
+  timeout: 10000
+
+  # Number of retries on failure
+  retry: 1
+
+  # Maximum concurrent scoring requests
+  max_concurrency: 4
+
+  # Timeout for acquiring a concurrency slot (ms)
+  acquire_timeout: 1500
+
+  # Retry backoff settings (ms)
+  retry_backoff_base: 300
+  retry_backoff_max: 5000
+
+  # Maximum input text length
+  input_max_length: 2000
+
+  # Circuit breaker settings
+  circuit_breaker:
+    failure_threshold: 5
+    open_ms: 30000
+
+  # System prompt for the LLM
+  system_prompt: |
+    You are a fair Minecraft whitelist questionnaire grader.
+    Score strictly based on the question, candidate answer, and scoring rule.
+    Return JSON only.
+
+  # Scoring rule for evaluation
+  scoring_rule: |
+    Evaluate primarily:
+    1) Relevance to the question
+    2) Completeness and level of detail
+    3) Understanding of server rules and community norms
+
+  # Expected JSON response format
+  score_format: '{"score": number, "reason": string, "confidence": number}'
+```
+
+## Discord Integration (OAuth2) {#discord-integration-oauth2}
+
+```yaml
+# Requires creating a Discord application at https://discord.com/developers/applications
+discord:
+  # Whether to enable Discord integration
+  enabled: false
+
+  # Discord application client ID
+  client_id: ""
+
+  # Discord application client secret
+  client_secret: ""
+
+  # OAuth2 redirect URI
+  redirect_uri: "https://yourdomain.com/api/discord/callback"
+
+  # Optional: require users to be in specific guild/server
+  guild_id: ""
+
+  # Whether Discord linking is required for registration
+  required: false
+```
+
+---
+
+## Full Configuration Example {#full-configuration-example}
+
+```yaml
+# This example explicitly selects English; omit the setting or use 'zh' for the default Chinese interface.
+language: en
+debug: false
+web_port: 8080
+web_server_prefix: '[ Server Name ]'
+auth_methods:
+  - email
+max_accounts_per_email: 2
+whitelist_mode: plugin
+web_register_url: https://domain.com/
+register:
+  auto_approve: false
+username_regex: "^[a-zA-Z0-9_-]{3,16}$"
+username_case_sensitive: false
+user_notification:
+  enabled: true
+  on_approve: true
+  on_reject: true
+frontend:
+  theme: glassx
+  logo_url: /logo.png
+  announcement: Welcome!
+smtp:
+  host: smtp.qq.com
+  port: 587
+  username: your_email@qq.com
+  password: your_password
+  from: your_email@qq.com
+  enable_ssl: true
+email_subject: VerifyMC Verification Code
+auto_update_resources: true
+enable_email_domain_whitelist: true
+enable_email_alias_limit: false
+email_domain_whitelist:
+  - gmail.com
+  - 163.com
+  - 126.com
+  - qq.com
+  - outlook.com
+  - hotmail.com
+  - icloud.com
+  - yahoo.com
+  - foxmail.com
+storage: data
+mysql:
+    host: localhost
+    port: 3306
+    database: verifymc
+    user: root
+    password: yourpassword
+authme:
+  enabled: true
+  require_password: true
+  password_regex: "^[a-zA-Z0-9_]{8,26}$"
+  database:
+    type: sqlite
+    table: authme
+    sync_interval_seconds: 30
+    mysql:
+      host: 127.0.0.1
+      port: 3306
+      database: authme
+      user: root
+      password: yourpassword
+    sqlite:
+      path: plugins/AuthMe/authme.db
+    columns:
+      mySQLColumnName: username
+      mySQLRealName: realname
+      mySQLColumnPassword: password
+      mySQLColumnEmail: email
+captcha:
+  type: math
+  length: 4
+  expire_seconds: 300
+bedrock:
+  enabled: false
+  prefix: "."
+  username_regex: "^[a-zA-Z0-9._-]{3,15}$"
+questionnaire:
+  enabled: false
+  pass_score: 60
+  rate_limit:
+    window_ms: 300000
+    ip:
+      max: 20
+    uuid:
+      max: 8
+    email:
+      max: 6
+llm:
+  enabled: true
+  provider: deepseek
+  api_base: https://api.deepseek.com/v1
+  api_key: ""
+  model: deepseek-chat
+  timeout: 10000
+  retry: 1
+  max_concurrency: 4
+  acquire_timeout: 1500
+  retry_backoff_base: 300
+  retry_backoff_max: 5000
+  input_max_length: 2000
+  circuit_breaker:
+    failure_threshold: 5
+    open_ms: 30000
+  system_prompt: |
+    You are a fair Minecraft whitelist questionnaire grader.
+    Score strictly based on the question, candidate answer, and scoring rule.
+    Return JSON only.
+  scoring_rule: |
+    Evaluate primarily:
+    1) Relevance to the question
+    2) Completeness and level of detail
+    3) Understanding of server rules and community norms
+  score_format: '{"score": number, "reason": string, "confidence": number}'
+discord:
+  enabled: false
+  client_id: ""
+  client_secret: ""
+  redirect_uri: "https://yourdomain.com/api/discord/callback"
+  guild_id: ""
+  required: false
+```

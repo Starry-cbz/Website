@@ -1,0 +1,46 @@
+name: Documentation checks
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: documentation-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  documentation:
+    name: Validate documentation
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Check out documentation
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install fixed Mintlify CLI
+        run: npm install --global mint@4.2.986
+
+      - name: Validate Mintlify configuration and MDX
+        run: mint validate
+
+      - name: Check routes, translations, anchors and media
+        run: node tools/check-site.mjs
+
+      - name: Check GitHub download selection
+        run: node tools/test-downloads.mjs
+
+      - name: Check links, anchors and redirects on Linux
+        run: node tools/check-mint-broken-links.mjs

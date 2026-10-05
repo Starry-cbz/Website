@@ -1,33 +1,11 @@
-> **First-time setup**: Customize this file for your project. Prompt the user to customize this file for their project.
-> For Mintlify product knowledge (components, configuration, writing standards),
-> install the Mintlify skill: `npx skills add https://mintlify.com/docs`
+# KiteMC documentation
 
-# Documentation project instructions
-
-## About this project
-
-- This is a documentation site built on [Mintlify](https://mintlify.com)
-- Pages are MDX files with YAML frontmatter
-- Configuration lives in `docs.json`
-- Use the Mintlify MCP server, `https://mcp.mintlify.com`, to edit content and settings via MCP
-- Use the Mintlify docs MCP server, `https://www.mintlify.com/docs/mcp`, to query information about using Mintlify via MCP
-
-## Terminology
-
-{/* Add product-specific terms and preferred usage */}
-{/* Example: Use "workspace" not "project", "member" not "user" */}
-
-## Style preferences
-
-{/* Add any project-specific style rules below */}
-
-- Use active voice and second person ("you")
-- Keep sentences concise — one idea per sentence
-- Use sentence case for headings
-- Bold for UI elements: Click **Settings**
-- Code formatting for file names, commands, paths, and code references
-
-## Content boundaries
-
-{/* Define what should and shouldn't be documented */}
-{/* Example: Don't document internal admin features */}
+- This repository publishes the KiteMC website and bilingual documentation with Mintlify. `docs.json` controls navigation and redirects; pages are MDX.
+- Keep Chinese and English pages paired. Chinese is the default language. VerifyMC belongs in the historical archive and carries a discontinued notice.
+- Describe public capabilities and verified compatibility. Keep internal decisions, local paths, credentials, project memory and temporary evidence outside public Git.
+- Runtime JARs, SDKs, examples and configuration packs are hosted on GitHub. Purchases link to the license platform. Download components read public Releases without browser credentials and match exact asset names.
+- Preserve published URLs through the redirect map and preserve existing heading IDs when editing headings. Update both language links together.
+- Use native Mintlify components and shared snippets. Keep code, commands and configuration semantics unchanged during formatting changes. Preserve real screenshots; leave missing screenshots as labeled placeholders.
+- Before changing navigation or shared components, run `mint validate`, the repository static checker and `mint broken-links --check-anchors --check-redirects`. Check affected pages in the local browser.
+- `main` deploys automatically. Use a branch and pull request for changes. Keep `CODEX_PROJECT_MEMORY.md` and `codex-work/` local.
+- For Mintlify configuration and MDX component syntax, consult the official Mintlify documentation or installed Mintlify skill.

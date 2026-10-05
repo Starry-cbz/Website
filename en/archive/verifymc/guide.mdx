@@ -1,0 +1,197 @@
+---
+title: "VerifyMC"
+canonical: "https://www.kitemc.com/en/archive/verifymc/guide"
+---
+
+<Warning>
+VerifyMC is discontinued. These historical documents remain available for existing users and do not imply active maintenance or current compatibility.
+</Warning>
+
+<span id="verifymc" />
+
+## Introduction {#introduction}
+
+**VerifyMC** is a whitelist verification and user management plugin for Minecraft servers. Players register from a web page while administrators review applications from the dashboard. Version **v1.8.0** uses Chinese by default and keeps English available whenever you need it.
+
+---
+
+## Key Features {#key-features}
+
+1. **Web registration and review** - Players submit applications while admins approve, reject, ban, or remove accounts online.
+2. **Flexible review modes** - Use automatic approval, manual review, optional questionnaires, or LLM scoring.
+3. **Email and built-in CAPTCHA** - Use SMTP verification or the built-in math/text CAPTCHA.
+4. **Chinese by default, English available** - The plugin, web UI, and proxy extension support both languages.
+5. **Clear admin workspace** - The GlassX frontend provides user lists, review history, search, and live notifications.
+6. **Discord and AuthMe integration** - Link Discord accounts and synchronize AuthMe users and passwords.
+7. **Multiple whitelist and storage modes** - Supports Bukkit whitelist sync, plugin-managed data, local files, and MySQL.
+8. **Proxy and Bedrock support** - Supports BungeeCord, Waterfall, Velocity, Geyser, and Floodgate.
+9. **Automatic configuration backup** - Configuration and language resources are backed up before upgrades.
+
+---
+
+## Tech Stack {#tech-stack}
+
+- Java (Bukkit/Spigot/Paper/Folia plugin)
+- Frontend: Vue3 + Tailwind CSS (custom themes supported)
+- WebSocket real-time communication
+- Email service: SMTP
+
+---
+
+## Installation & Configuration {#installation-configuration}
+
+1. Download the latest `verifymc-*.jar` from [GitHub Releases](https://github.com/KiteMC/VerifyMC/releases). If you use a proxy, download `verifymc-proxy-*.jar` as well.
+2. Put the main plugin in the backend server's `plugins` directory and the proxy plugin in the BungeeCord, Waterfall, or Velocity `plugins` directory.
+3. Start the server, then edit `plugins/VerifyMC/config.yml` to confirm the port, registration URL, authentication methods, and storage mode.
+4. Restart the server and open `http://your-server-ip:8080`.
+
+### Administrator Login {#administrator-login}
+
+The admin panel does not use a separate default password. It verifies a registered account and requires that player to be a server OP:
+
+1. Register an administrator account on the web page and keep its username and password.
+2. Run `/op player_name` from the console or in-game.
+3. Open “Login” in the page header and sign in with that account. The admin menus appear after authorization.
+
+If access is denied, confirm that the username matches the OP name in `ops.json`. Admin API calls use the session token issued after login.
+
+### Language {#language}
+
+Chinese is the default language. Use the language switcher in the web page header to choose English, or set the plugin default explicitly:
+
+```yaml
+# This example selects English; the plugin defaults to Chinese.
+language: en
+debug: false
+web_port: 8080
+web_server_prefix: '[ Name ]'
+auth_methods:
+  - email
+max_accounts_per_email: 2
+whitelist_mode: plugin
+web_register_url: https://domain.com/
+register:
+  auto_approve: false
+username_regex: "^[a-zA-Z0-9_-]{3,16}$"
+username_case_sensitive: false
+user_notification:
+  enabled: true
+  on_approve: true
+  on_reject: true
+frontend:
+  theme: glassx
+  logo_url: /logo.png
+  announcement: Welcome to [ Name ]!
+smtp:
+  host: smtp.qq.com
+  port: 587
+  username: your_email@qq.com
+  password: your_email_password
+  from: your_email@qq.com
+  enable_ssl: true
+email_subject: VerifyMC Verification Code
+auto_update_resources: true
+enable_email_domain_whitelist: true
+enable_email_alias_limit: false
+email_domain_whitelist:
+  - gmail.com
+  - 163.com
+  - 126.com
+  - qq.com
+  - outlook.com
+  - hotmail.com
+  - icloud.com
+  - yahoo.com
+  - foxmail.com
+storage: data
+mysql:
+    host: localhost
+    port: 3306
+    database: verifymc
+    user: root
+    password: yourpassword
+authme:
+  enabled: true
+  require_password: true
+  password_regex: "^[a-zA-Z0-9_]{8,26}$"
+  database:
+    type: sqlite
+    table: authme
+    sync_interval_seconds: 30
+    mysql:
+      host: 127.0.0.1
+      port: 3306
+      database: authme
+      user: root
+      password: yourpassword
+    sqlite:
+      path: plugins/AuthMe/authme.db
+    columns:
+      mySQLColumnName: username
+      mySQLRealName: realname
+      mySQLColumnPassword: password
+      mySQLColumnEmail: email
+captcha:
+  type: math
+  length: 4
+  expire_seconds: 300
+bedrock:
+  enabled: false
+  prefix: "."
+  username_regex: "^[a-zA-Z0-9._-]{3,15}$"
+questionnaire:
+  enabled: false
+  pass_score: 60
+  rate_limit:
+    window_ms: 300000
+    ip:
+      max: 20
+    uuid:
+      max: 8
+    email:
+      max: 6
+llm:
+  enabled: true
+  provider: deepseek
+  api_base: https://api.deepseek.com/v1
+  api_key: ""
+  model: deepseek-chat
+  timeout: 10000
+  retry: 1
+  max_concurrency: 4
+  acquire_timeout: 1500
+  retry_backoff_base: 300
+  retry_backoff_max: 5000
+  input_max_length: 2000
+  circuit_breaker:
+    failure_threshold: 5
+    open_ms: 30000
+  system_prompt: |
+    You are a fair Minecraft whitelist questionnaire grader.
+    Score strictly based on the question, candidate answer, and scoring rule.
+    Return JSON only.
+  scoring_rule: |
+    Evaluate primarily:
+    1) Relevance to the question
+    2) Completeness and level of detail
+    3) Understanding of server rules and community norms
+  score_format: '{"score": number, "reason": string, "confidence": number}'
+discord:
+  enabled: false
+  client_id: ""
+  client_secret: ""
+  redirect_uri: "https://yourdomain.com/api/discord/callback"
+  guild_id: ""
+  required: false
+```
+
+---
+
+## Official Community {#official-community}
+
+- **QQ Group**: 1041540576 ([Join](https://qm.qq.com/q/F7zuhZ7Mze))
+- **Discord**: [https://discord.gg/dcsBw5Z5ZT](https://discord.gg/dcsBw5Z5ZT)
+
+---
+
+> If you like this project, please Star, share, and give us feedback!

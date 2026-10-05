@@ -1,0 +1,92 @@
+---
+title: "ArcPass Downloads"
+description: "Get the ArcPass server plugin, Chinese and English language packs, and developer API."
+mode: "wide"
+canonical: "https://www.kitemc.com/en/arcpass/download"
+---
+
+import {
+  Downloads,
+  releaseSections,
+  selectKiteMarketAssets,
+  localizedReleaseBody,
+  safeWebLink,
+  selectSingleAsset,
+  downloadUrl,
+  normalizeReleases,
+} from "/snippets/Downloads.jsx";
+
+<Columns cols={2}>
+  <Card title="Installation" icon="rocket" href="/en/arcpass/setup/installation">Install and activate the plugin step by step.</Card>
+  <Card title="GitHub Releases" icon="github" href="https://github.com/KiteMC/ArcPass/releases">Browse and download public release files directly.</Card>
+</Columns>
+
+## Requirements {#requirements}
+
+| Component | Requirement |
+| --- | --- |
+| Minecraft | 1.18 – Latest |
+| Java | 17+ |
+| Paper / Spigot | 1.18+ |
+| Folia | 1.19+ |
+
+## Releases {#releases}
+
+<Downloads repo="ArcPass" lang="en" showLanguagePacks={true} />
+
+<Note>
+  The list reads public GitHub Releases. If it cannot load, use the GitHub button above. Downloads do not require a Token on this documentation site.
+</Note>
+
+## Purchase a license {#purchase-license}
+
+ArcPass requires a valid license to activate and run on your server.
+
+<Columns cols={2}>
+  <Card title="Standard · $10.99" icon="key" href="https://license.kitemc.com/en/products/arcpass">
+    5 devices, 3 ports per device and lifetime updates. Cross-server sync and developer API are not included.
+  </Card>
+  <Card title="Professional · $29.99" icon="star" href="https://license.kitemc.com/en/products/arcpass">
+    25 devices, 15 ports per device, lifetime updates, priority support, cross-server sync and developer API.
+  </Card>
+</Columns>
+
+<Card title="View my licenses" icon="key" href="https://license.kitemc.com/en/dashboard/licenses">
+  Manage existing licenses and activations.
+</Card>
+
+## API dependency {#api-dependency}
+
+Reference the API through GitHub Packages with `provided` or `compileOnly`. Do not bundle the SDK in your extension.
+
+<CodeGroup>
+```xml Maven
+<dependency>
+    <groupId>com.kitemc</groupId>
+    <artifactId>arcpass-api</artifactId>
+    <version>1.9.4</version>
+    <scope>provided</scope>
+</dependency>
+```
+
+```kotlin Gradle (Kotlin DSL)
+compileOnly("com.kitemc:arcpass-api:1.9.4")
+```
+
+```groovy Gradle (Groovy)
+compileOnly 'com.kitemc:arcpass-api:1.9.4'
+```
+</CodeGroup>
+
+<Card title="Developer quick start" icon="code" href="/en/arcpass/developer/getting-started">
+  Find the GitHub Packages registry, authentication setup and full API usage.
+</Card>
+
+## Feedback and support {#feedback-support}
+
+<Columns cols={2}>
+  <Card title="Bug reports" icon="bug" href="https://github.com/KiteMC/ArcPass/issues">Submit issues on GitHub.</Card>
+  <Card title="Feature requests" icon="lightbulb" href="https://github.com/KiteMC/ArcPass/discussions">Share ideas in GitHub Discussions.</Card>
+  <Card title="Discord community" icon="messages-square" href="https://discord.gg/dcsBw5Z5ZT">Get community support.</Card>
+  <Card title="Email support" icon="mail" href="mailto:starry_cbz@outlook.com">starry_cbz@outlook.com</Card>
+</Columns>

@@ -1,0 +1,63 @@
+---
+title: "Network license"
+canonical: "https://www.kitemc.com/en/kitemarket/license"
+---
+
+<span id="network-license" />
+
+One KiteMarket license binds to one market network with no limit on that network's server nodes. It is not a separate license per subserver, and unrelated markets may not reuse a binding.
+
+<Info>
+
+**One-time license**
+
+The complete product is **CNY 68 / USD 9.99 as a one-time purchase**, including base-plugin updates and issue support while maintained. Perpetual maintenance is not promised. Third-party economy plugins, ItemsAdder and resources are not included. See [downloads](/en/kitemarket/download) for runtime and configuration files.
+
+</Info>
+
+Purchase through the [KiteMC License Center](https://license.kitemc.com/en/products/kitemarket), then find your key under [your licenses](https://license.kitemc.com/en/dashboard/licenses). **Each independent purchase creates an independent license** instead of merging existing markets.
+
+<Columns cols={2}>
+  <Card title="Buy a License" icon="shopping-cart" href="https://license.kitemc.com/en/products/kitemarket" />
+  <Card title="Manage Licenses" icon="shield" href="https://license.kitemc.com/en/dashboard/licenses" />
+</Columns>
+
+A network uses the persistent UUID in its shared database, with no per-subserver-port fee. Copying configuration into another independent database does not make it the same licensed network. Production configuration supplies the correct product ID, endpoint and production signing public key; fill in your own license key. The public key is not a license key.
+
+## Refresh, offline grace, and expiry {#refresh-offline-grace-and-expiry}
+
+| Situation | Behavior |
+|---|---|
+| First activation | A successful online verification is required; no prior receipt means no offline grace |
+| Normal operation | Refresh every 6 hours after successful verification |
+| Temporary license-service outage | Use a valid signed receipt for at most 7 days after the last successful verification |
+| Earlier commercial expiry | Commercial expiry wins; no additional 7 days are added |
+| Explicit revocation, binding mismatch, or invalid signature | Do not treat as an ordinary network outage |
+
+An invalid license stops new trading and starts controlled wind-down. Queries, permitted cancellations, item claims, and supported withdrawal exits must remain available where safe. License expiry does not delete the database, claim inventory, or history.
+
+A single node's configuration, signature, or binding error prevents local trading admission without clearing other healthy nodes. Network wind-down requires a valid signed status or exhaustion of the saved receipt's validity.
+
+## Reactivating the same network and license {#reactivating-the-same-network-and-license}
+
+When the saved, verified signed state is `UNBOUND`, a manager can run `/km license reactivate` and confirm it in the menu. Console/RCON uses `km license reactivate confirm`. Ordinary `/km license` only refreshes; restarting or reconnecting does not automatically reclaim a binding.
+
+This entry restores only the original network UUID and original license, with that license's valid key retained in configuration. Both server and client check the original license identity; replacing the key with another license is not same-network recovery. `REVOKED`, `SUSPENDED`, and commercial expiry are not recoverable states through this entry. License or network ownership changes still require the license center's explicit management process.
+
+Reactivation preserves network identity, wallets, claims, and history. Trading reopens only after a valid new signed authorization, and cleared orders do not revive. If a request fails or its response is uncertain, inspect the license state instead of deleting bindings, tokens, or database records to repeat activation.
+
+## Identity and migration {#identity-and-migration}
+
+Persist and share the network ID, binding information, and random network token. Do not delete them to retry activation or generate a separate network for every node.
+
+Stop writes on the old nodes before backing up and restoring the complete database and configuration. Preserve the network identity. Use the license center's formal transfer process when a license transfer is needed. Copying only the JAR or editing binding fields is not a migration procedure.
+
+Maintain an accurate system clock and configure the correct endpoint and trusted public key. Never put private keys, complete license keys, or network tokens in public logs, chat, or screenshots.
+
+See [installation](/en/kitemarket/guide) for the actual fields and [recovery](/en/kitemarket/operations) for wind-down and uncertain operations.
+
+## Interfaces and third-party themes {#interfaces-and-third-party-themes}
+
+The vanilla GUI, ItemsAdder v4 adapter, configuration themes and Java SDK are base capabilities. Third parties may freely develop, use, distribute or independently sell their own themes without an additional KiteMC theme license. Theme resources follow their authors' licenses; third-party plugins and resources are not included in KiteMarket's price.
+
+An unavailable theme falls back to vanilla without changing market wallets, items or license status. The base license still governs the market as described above. See [ItemsAdder integration](/en/kitemarket/dlc) and the [UI SDK](/en/kitemarket/ui-development).

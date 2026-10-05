@@ -1,0 +1,190 @@
+---
+title: "常见问题"
+canonical: "https://www.kitemc.com/archive/verifymc/question"
+---
+
+<Warning>
+VerifyMC 已停止维护。本页保留供已有用户查阅历史配置与使用方法，不表示当前仍在维护或已验证新版本兼容性。
+</Warning>
+
+<span id="常见问题" />
+
+## 网页界面与访问 {#网页界面与访问}
+
+### 如何访问 VerifyMC 主页？ {#如何访问-verifymc-主页}
+网页界面默认运行在 **8080 端口**。访问地址：
+```
+http://你的服务器IP:8080
+```
+
+**特殊配置情况：**
+- **无公网IP / 内网穿透**：如果你的服务器没有公网IP或使用内网穿透（如 frp、ngrok），需要将8080端口映射为外部端口进行访问。
+- **推荐**：保持内外端口一致，便于配置。
+- **在 `config.yml` 中配置**：
+  ```yaml
+  web_port: 8080
+  web_register_url: https://你的域名.com/
+  ```
+
+### 管理面板无法加载 {#管理面板无法加载}
+1. 确保防火墙已开放 Web 服务器端口（默认：8080）
+2. 检查是否有其他应用占用了相同端口
+3. 查看控制台确认插件是否正确加载
+4. 确认 `config.yml` 中的 `web_port` 配置正确
+
+### 管理员如何登录？ {#管理员如何登录}
+管理员登录使用已注册玩家账号的密码，同时要求该玩家拥有服务器 OP 权限：
+
+1. 先通过网页注册账号。
+2. 在控制台或游戏内执行 `/op 玩家名`。
+3. 点击网页右上角“登录”，输入注册时的用户名和密码。
+
+VerifyMC 不提供单独的默认管理员密码。如果提示没有权限，请检查用户名是否与 `ops.json` 中的 OP 名称一致。
+
+---
+
+## Discord 集成 {#discord-集成}
+
+### 如何配置 Discord 服务器绑定？ {#如何配置-discord-服务器绑定}
+1. **创建 Discord 应用**：访问 [Discord 开发者门户](https://discord.com/developers/applications)
+2. **获取凭据**：
+   - 复制 **Client ID**（客户端ID）
+   - 在 OAuth2 设置中生成并复制 **Client Secret**（客户端密钥）
+3. **设置 OAuth2 回调**：
+   - 添加重定向 URI：`https://你的域名.com/api/discord/callback`
+4. **在 `config.yml` 中配置**：
+   ```yaml
+   discord:
+     enabled: true
+     client_id: "你的客户端ID"
+     client_secret: "你的客户端密钥"
+     redirect_uri: "https://你的域名.com/api/discord/callback"
+     guild_id: "你的服务器ID"  # 可选：要求用户加入指定服务器
+     required: false  # 设为 true 则强制要求绑定 Discord
+   ```
+5. 使用 `/vmc reload` 重载插件
+
+---
+
+## 邮箱配置（SMTP） {#邮箱配置-smtp}
+
+### 如何配置 SMTP 邮箱验证？ {#如何配置-smtp-邮箱验证}
+1. **在邮箱服务商启用 SMTP**（Gmail、QQ邮箱、Outlook 等）
+2. **Gmail 设置**：
+   - 启用两步验证
+   - 在 [Google 应用专用密码](https://myaccount.google.com/apppasswords) 生成密码
+3. **QQ 邮箱设置**：
+   - 在 设置 > 账户 中开启 SMTP 服务
+   - 使用授权码作为密码
+
+**在 `config.yml` 中配置**：
+```yaml
+smtp:
+  host: smtp.qq.com         # Gmail 用 smtp.gmail.com
+  port: 587                 # 或 465（SSL）
+  username: 你的邮箱@qq.com
+  password: 你的授权码
+  from: 你的邮箱@qq.com
+  enable_ssl: true
+email_subject: "VerifyMC 验证码"
+```
+
+### 没有邮箱服务器怎么办？ {#没有邮箱服务器怎么办}
+使用 **图形验证码模式** 替代邮箱验证：
+```yaml
+auth_methods:
+  - captcha  # 使用图形验证码替代邮箱
+# 或同时使用：
+# auth_methods:
+#   - email
+#   - captcha
+
+captcha:
+  type: math      # 'math'（数学计算）或 'text'（随机字符）
+  length: 4       # 文字验证码长度
+  expire_seconds: 300
+```
+
+### 玩家无法注册 / 邮件发送失败 {#玩家无法注册-邮件发送失败}
+1. 检查 `config.yml` 中的 SMTP 配置
+2. 确认邮箱服务商允许 SMTP 访问
+3. 查看服务器控制台的详细错误信息
+4. 启用调试模式：`debug: true`
+5. 检查邮箱域名白名单设置
+
+---
+
+## 代理插件配置 {#代理插件配置}
+
+### 如何配置 VerifyMC-Proxy 代理插件？ {#如何配置-verifymc-proxy-代理插件}
+1. **下载** `verifymc-proxy-*.jar` 从下载页面
+2. **放置** 到代理服务器的 `plugins` 文件夹（BungeeCord/Velocity）
+3. **配置代理插件文件夹中的 `config.yml`**：
+   ```yaml
+   # 后端服务器地址（运行主插件的服务器）
+   backend_url: "http://你的后端服务器IP:8080"
+
+   # 踢出消息中显示的注册地址
+   register_url: "https://你的域名.com/"
+
+   # 未注册玩家的踢出消息
+   kick_message: "&c[ VerifyMC ]\n&7请访问 &a{url} &7进行注册"
+
+   # 语言设置（zh 或 en）
+   language: zh
+
+   # 缓存设置
+   cache:
+     enabled: true
+     expire_seconds: 60
+   ```
+4. **重启** 代理服务器
+
+### 支持哪些代理平台？ {#支持哪些代理平台}
+- **Velocity**: 3.4.0+（推荐）
+- **BungeeCord/Waterfall**: 1.21+
+- **Velocity-CTD** 及其他 Velocity 分支自 v1.2.6 起支持
+
+---
+
+## 安装与兼容性 {#安装与兼容性}
+
+### 支持哪些 Minecraft 版本？ {#支持哪些-minecraft-版本}
+VerifyMC 支持 Minecraft **1.13.x 至 1.21.x+**。
+
+### VerifyMC 支持 Geyser/Floodgate（基岩版）吗？ {#verifymc-支持-geyser-floodgate-基岩版-吗}
+支持！在 `config.yml` 中配置：
+```yaml
+bedrock:
+  enabled: true
+  prefix: "."
+  username_regex: "^[a-zA-Z0-9._-]{3,15}$"
+```
+
+---
+
+## 插件更新 {#插件更新}
+
+### 如何更新插件？ {#如何更新插件}
+1. 从下载页面下载最新版本
+2. 停止服务器
+3. 用新的 JAR 文件替换旧文件
+4. 启动服务器
+5. 查看控制台中的配置迁移信息
+
+### 更新后数据会保留吗？ {#更新后数据会保留吗}
+会的，所有用户数据在更新过程中都会保留。插件会在需要时自动迁移配置并创建备份。
+
+---
+
+## 故障排查 {#故障排查}
+
+### Velocity 上出现 "No injectable constructor" 错误 {#velocity-上出现-no-injectable-constructor-错误}
+请更新到 VerifyMC-Proxy v1.2.6 或更高版本，该版本使用 `com.google.inject.Inject` 以提高与 Velocity 分支的兼容性。
+
+### 版本号显示不正确 {#版本号显示不正确}
+此问题已在 v1.2.6 中修复。请更新到最新版本。
+
+---
+
+> 更多配置选项，请参阅 [配置文档](/archive/verifymc/file/config)。

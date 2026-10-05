@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 512 512" fill="none">
+  <title>KiteMarket — 开张的小店</title>
+  <desc>A welcoming market shop drawn with bold rounded lines, a three-panel awning, a window and an open doorway.</desc>
+  <defs>
+    <linearGradient id="terracotta" x1="56" y1="18" x2="437" y2="509" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#DA784B"/>
+      <stop offset="1" stop-color="#BC4D3C"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#terracotta)"/>
+  <g transform="rotate(-5 256 256)" stroke="#FFF6DF" stroke-width="28" stroke-linecap="round" stroke-linejoin="round">
+    <path id="walls" d="M142 245V366Q142 391 167 391H353Q378 391 378 366V245"/>
+    <path id="door" d="M277 389V311Q277 296 292 296H318Q333 296 333 311V389"/>
+    <rect id="window" x="183" y="286" width="50" height="49" rx="9" stroke-width="25"/>
+    <path id="awning" d="M117 189L157 117Q162 106 177 106H336Q349 106 355 119L397 191C399 218 377 238 352 238C326 238 305 220 305 194C305 219 285 240 258 240C231 240 211 219 211 194C211 219 190 240 163 240C137 240 113 218 117 189Z"/>
+    <path id="awning-seams" d="M211 108V194M305 108V194"/>
+  </g>
+</svg>

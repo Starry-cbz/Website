@@ -1,0 +1,348 @@
+---
+title: "Code Examples"
+canonical: "https://www.kitemc.com/en/arcpass/developer/examples"
+---
+
+<span id="code-examples" />
+
+This page provides complete code examples for common scenarios.
+
+## Mob Kill XP Addon {#mob-kill-xp-addon}
+
+A simple plugin that gives pass XP for mob kills:
+
+```java
+package com.example.arcpassaddon;
+
+import com.kitemc.arcpass.api.ArcPassAPI;
+import com.kitemc.arcpass.api.ArcPassProvider;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class MobExpAddon extends JavaPlugin implements Listener {
+
+    private ArcPassAPI arcPassAPI;
+    private final Map<EntityType, Long> expValues = new HashMap<>();
+
+    @Override
+    public void onEnable() {
+        if (getServer().getPluginManager().getPlugin("ArcPass") == null) {
+            getLogger().severe("ArcPass not installed! Disabling...");
+            getServer().getPluginManager().disablePlugin(this);
+            return;
+        }
+
+        getServer().getScheduler().runTaskLater(this, () -> {
+            arcPassAPI = ArcPassProvider.get();
+            getLogger().info("ArcPass API connected");
+        }, 1L);
+
+        setupExpValues();
+        getServer().getPluginManager().registerEvents(this, this);
+    }
+
+    private void setupExpValues() {
+        expValues.put(EntityType.ZOMBIE, 5L);
+        expValues.put(EntityType.SKELETON, 5L);
+        expValues.put(EntityType.CREEPER, 10L);
+        expValues.put(EntityType.SPIDER, 5L);
+        expValues.put(EntityType.ENDERMAN, 15L);
+        expValues.put(EntityType.BLAZE, 20L);
+        expValues.put(EntityType.WITHER_SKELETON, 25L);
+        expValues.put(EntityType.ENDER_DRAGON, 500L);
+        expValues.put(EntityType.WITHER, 300L);
+    }
+
+    @EventHandler
+    public void onMobKill(EntityDeathEvent event) {
+        if (arcPassAPI == null) return;
+
+        Player killer = event.getEntity().getKiller();
+        if (killer == null) return;
+
+        EntityType type = event.getEntityType();
+        Long exp = expValues.get(type);
+
+        if (exp != null && exp > 0) {
+            arcPassAPI.addExperience(killer.getUniqueId(), exp)
+                .thenAccept(total -> {
+                    getServer().getScheduler().runTask(this, () -> {
+                        killer.sendActionBar("§a+" + exp + " Pass XP");
+                    });
+                });
+        }
+    }
+}
+```
+
+## Custom Quest Trigger {#custom-quest-trigger}
+
+A minigame plugin supporting ArcPass custom quests:
+
+```java
+package com.example.minigame;
+
+import com.kitemc.arcpass.api.ArcPassAPI;
+import com.kitemc.arcpass.api.ArcPassProvider;
+import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
+
+public class MiniGamePlugin extends JavaPlugin {
+
+    private ArcPassAPI arcPassAPI;
+
+    @Override
+    public void onEnable() {
+        if (getServer().getPluginManager().getPlugin("ArcPass") != null) {
+            getServer().getScheduler().runTaskLater(this, () -> {
+                arcPassAPI = ArcPassProvider.get();
+            }, 1L);
+        }
+    }
+
+    public void onPlayerWin(Player player, String gameType) {
+        giveGameRewards(player);
+
+        if (arcPassAPI != null) {
+            // Generic win event
+            arcPassAPI.triggerCustomEvent(
+                player.getUniqueId(),
+                "minigame_win",
+                gameType
+            );
+
+            // Specific game win event
+            arcPassAPI.triggerCustomEvent(
+                player.getUniqueId(),
+                "minigame_win_" + gameType.toLowerCase(),
+                null
+            );
+        }
+    }
+
+    public void onGameComplete(Player player, String gameType, int score) {
+        if (arcPassAPI != null) {
+            arcPassAPI.triggerCustomEvent(
+                player.getUniqueId(),
+                "minigame_complete",
+                new GameData(gameType, score)
+            );
+        }
+    }
+
+    private record GameData(String gameType, int score) {}
+}
+```
+
+Quest configuration:
+
+```yaml
+win_any_game:
+  type: daily
+  display-name: "&eMinigame Champion"
+  objectives:
+    - type: custom
+      event: minigame_win
+      amount: 1
+
+win_bedwars_3:
+  type: weekly
+  display-name: "&cBedWars Master"
+  objectives:
+    - type: custom
+      event: minigame_win_bedwars
+      amount: 3
+```
+
+## Level Milestone Rewards {#level-milestone-rewards}
+
+Extra rewards for specific levels:
+
+```java
+package com.example.milestone;
+
+import com.kitemc.arcpass.api.event.PlayerLevelUpEvent;
+import org.bukkit.Bukkit;
+import org.bukkit.Sound;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class MilestonePlugin extends JavaPlugin implements Listener {
+
+    private final Map<Integer, String[]> milestones = new HashMap<>();
+
+    @Override
+    public void onEnable() {
+        setupMilestones();
+        getServer().getPluginManager().registerEvents(this, this);
+    }
+
+    private void setupMilestones() {
+        milestones.put(10, new String[]{
+            "give %player% diamond 5",
+            "eco give %player% 1000"
+        });
+        milestones.put(25, new String[]{
+            "give %player% diamond 10",
+            "eco give %player% 5000",
+            "lp user %player% permission set vip.trial true 7d"
+        });
+        milestones.put(50, new String[]{
+            "give %player% diamond 20",
+            "eco give %player% 10000",
+            "crate give %player% legendary 1"
+        });
+        milestones.put(100, new String[]{
+            "give %player% nether_star 1",
+            "eco give %player% 50000",
+            "lp user %player% parent add elite"
+        });
+    }
+
+    @EventHandler
+    public void onLevelUp(PlayerLevelUpEvent event) {
+        int newLevel = event.getNewLevel();
+
+        String[] rewards = milestones.get(newLevel);
+        if (rewards == null) return;
+
+        Player player = Bukkit.getPlayer(event.getPlayerId());
+        if (player == null) return;
+
+        for (String command : rewards) {
+            String finalCommand = command.replace("%player%", player.getName());
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), finalCommand);
+        }
+
+        player.playSound(player.getLocation(), Sound.UI_TOAST_CHALLENGE_COMPLETE, 1.0f, 1.0f);
+        Bukkit.broadcastMessage("");
+        Bukkit.broadcastMessage("§6§l★ §e" + player.getName() + " §6reached Level §e" + newLevel + "§6 Milestone! §l★");
+        Bukkit.broadcastMessage("");
+    }
+}
+```
+
+## Double XP Event {#double-xp-event}
+
+Modify XP rewards via events:
+
+```java
+package com.example.doubleexp;
+
+import com.kitemc.arcpass.api.event.QuestCompleteEvent;
+import org.bukkit.Bukkit;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
+import org.bukkit.plugin.java.JavaPlugin;
+
+public class DoubleExpPlugin extends JavaPlugin implements Listener {
+
+    private boolean doubleExpActive = false;
+    private long doubleExpEndTime = 0;
+
+    @Override
+    public void onEnable() {
+        getServer().getPluginManager().registerEvents(this, this);
+    }
+
+    @Override
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        if (!command.getName().equalsIgnoreCase("doubleexp")) return false;
+        if (!sender.hasPermission("doubleexp.admin")) {
+            sender.sendMessage("§cNo permission");
+            return true;
+        }
+
+        if (args.length == 0) {
+            sender.sendMessage("§eUsage: /doubleexp <start|stop|status> [minutes]");
+            return true;
+        }
+
+        switch (args[0].toLowerCase()) {
+            case "start" -> {
+                int minutes = args.length > 1 ? Integer.parseInt(args[1]) : 60;
+                startDoubleExp(minutes);
+                sender.sendMessage("§aDouble XP started for " + minutes + " minutes");
+            }
+            case "stop" -> {
+                stopDoubleExp();
+                sender.sendMessage("§cDouble XP stopped");
+            }
+            case "status" -> {
+                if (isDoubleExpActive()) {
+                    long remaining = (doubleExpEndTime - System.currentTimeMillis()) / 1000 / 60;
+                    sender.sendMessage("§aDouble XP active, " + remaining + " minutes remaining");
+                } else {
+                    sender.sendMessage("§7Double XP not active");
+                }
+            }
+        }
+        return true;
+    }
+
+    private void startDoubleExp(int minutes) {
+        doubleExpActive = true;
+        doubleExpEndTime = System.currentTimeMillis() + (minutes * 60 * 1000L);
+
+        Bukkit.broadcastMessage("");
+        Bukkit.broadcastMessage("§6§l★ Double Pass XP Event Started! ★");
+        Bukkit.broadcastMessage("§eDuration: " + minutes + " minutes");
+        Bukkit.broadcastMessage("");
+
+        getServer().getScheduler().runTaskLater(this, this::stopDoubleExp, minutes * 60 * 20L);
+    }
+
+    private void stopDoubleExp() {
+        if (doubleExpActive) {
+            doubleExpActive = false;
+            Bukkit.broadcastMessage("§c§l★ Double Pass XP Event Ended! ★");
+        }
+    }
+
+    public boolean isDoubleExpActive() {
+        if (doubleExpActive && System.currentTimeMillis() > doubleExpEndTime) {
+            doubleExpActive = false;
+        }
+        return doubleExpActive;
+    }
+
+    @EventHandler(priority = EventPriority.HIGH)
+    public void onQuestComplete(QuestCompleteEvent event) {
+        if (isDoubleExpActive()) {
+            int originalExp = event.getExperienceReward();
+            event.setExperienceReward(originalExp * 2);
+
+            getServer().getScheduler().runTask(this, () -> {
+                var player = Bukkit.getPlayer(event.getPlayerId());
+                if (player != null) {
+                    player.sendMessage("§a§l[Double XP] §eExtra +" + originalExp + " XP!");
+                }
+            });
+        }
+    }
+}
+```
+
+## Best Practices Summary {#best-practices-summary}
+
+1. **Always check API availability** - Check for null before using API
+2. **Use async operations** - Don't block main thread
+3. **Handle main thread callbacks** - Return to main thread for player interaction
+4. **Add error handling** - Use `.exceptionally()` for exceptions
+5. **Check null for cached data** - `getPlayerDataIfCached` may return null
+6. **Follow event priority** - Choose appropriate priority for your use case

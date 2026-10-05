@@ -1,0 +1,77 @@
+---
+title: "KiteMarket Downloads"
+description: "Choose a runtime or get public SDKs, runnable examples, bilingual configuration and SHA-256 checksums."
+mode: "wide"
+canonical: "https://www.kitemc.com/en/kitemarket/download"
+---
+
+import {
+  Downloads,
+  releaseSections,
+  selectKiteMarketAssets,
+  localizedReleaseBody,
+  safeWebLink,
+  selectSingleAsset,
+  downloadUrl,
+  normalizeReleases,
+} from "/snippets/Downloads.jsx";
+
+<Columns cols={2}>
+  <Card title="Installation" icon="rocket" href="/en/kitemarket/guide">Choose the correct server plugin and configure your market.</Card>
+  <Card title="Buy a license" icon="shopping-cart" href="https://license.kitemc.com/en/products/kitemarket">One license covers one independent market network with unlimited nodes.</Card>
+  <Card title="Market API" icon="code" href="/en/kitemarket/api">Query market data and receive trade notifications.</Card>
+  <Card title="GitHub Releases" icon="github" href="https://github.com/KiteMC/KiteMarket/releases">Browse public versions and all release files directly.</Card>
+</Columns>
+
+All release files are hosted on GitHub Releases and download directly from GitHub without a GitHub Packages Token. Only public releases appear below.
+
+## Available versions {#available-versions}
+
+<Downloads repo="KiteMarket" lang="en" assetProfile="kitemarket" />
+
+## Server owners: choose exactly one runtime {#server-owners-choose-exactly-one-runtime}
+
+| Distribution | Target Minecraft range | Plugin bytecode | 1.0.0 filename |
+| --- | --- | --- | --- |
+| Legacy | 1.16.5–1.20.4 | Java 11 | `KiteMarket-legacy-1.0.0.jar` |
+| Modern | 1.20.5–1.21.11 | Java 21 | `KiteMarket-modern-1.0.0.jar` |
+| Current | 26.2 | Java 25 | `KiteMarket-current-1.0.0.jar` |
+
+Install only the matching main-plugin JAR in `plugins/`. The server JVM must meet the server software's own requirements; Legacy bytecode does not mean all older servers can use Java 11. Prepare ItemsAdder and economy plugins separately.
+
+<Card title="Compatibility" icon="list-checks" href="/en/kitemarket/compatibility">
+  Intended coverage does not certify every combination. Check representative tests, startup records and unverified combinations.
+</Card>
+
+## Developers: SDKs, sources and examples {#developers-sdks-sources-and-examples}
+
+| Purpose | Filename |
+| --- | --- |
+| Read-only market queries and trade notifications | `KiteMarket-API-1.0.0.jar` |
+| Market API sources / Javadoc | `KiteMarket-API-1.0.0-sources.jar` / `KiteMarket-API-1.0.0-javadoc.jar` |
+| Page and theme rendering interfaces | `KiteMarket-UI-API-1.0.0.jar` |
+| UI API sources / Javadoc | `KiteMarket-UI-API-1.0.0-sources.jar` / `KiteMarket-UI-API-1.0.0-javadoc.jar` |
+| Runnable query and IA extension examples | `KiteMarket-Examples-1.0.0.zip` |
+
+Both SDKs target Java 11 with MIT licenses. Use `compileOnly` or `provided`: **do not bundle or relocate the SDKs**. Do not install API, sources or Javadoc JARs in the server's `plugins/`. The host plugin supplies the services; SDKs do not replace its license.
+
+The GitHub Packages registry is `https://maven.pkg.github.com/kitemc/KiteMarket`, with coordinates `com.kitemc:kitemarket-api:1.0.0` and `com.kitemc:kitemarket-ui-api:1.0.0`. Packages dependencies require authentication; Release-file downloads do not. Check that the requested version is published in Packages before using it.
+
+<Columns cols={2}>
+  <Card title="Market API quick start" icon="code" href="/en/kitemarket/api">Maven, Gradle, authentication and query examples.</Card>
+  <Card title="UI SDK" icon="panels-top-left" href="/en/kitemarket/ui-development">Build your own themes and ItemsAdder extensions.</Card>
+</Columns>
+
+## Configuration and integrity {#configuration-and-integrity}
+
+The configuration bundles are `KiteMarket-config-zh_CN-1.0.0.zip` and `KiteMarket-config-en_US-1.0.0.zip`; checksums are in `SHA256SUMS.txt`. All are listed with the corresponding GitHub Release.
+
+Configuration carries the product information and trusted public key. Fill in your own license, database and actual economy configuration. Compare downloads against SHA-256 checksums:
+
+```powershell
+Get-FileHash -Algorithm SHA256 .\KiteMarket-modern-1.0.0.jar
+```
+
+<Card title="Backups, upgrades and rollback" icon="archive" href="/en/kitemarket/operations">
+  Stop a network cleanly and back up its full database and configuration before upgrading assets. Public files exclude obfuscation maps, private keys and network credentials.
+</Card>

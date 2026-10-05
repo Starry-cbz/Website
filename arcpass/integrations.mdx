@@ -1,0 +1,482 @@
+---
+title: "第三方插件集成"
+canonical: "https://www.kitemc.com/arcpass/integrations"
+---
+
+<span id="第三方插件集成" />
+
+ArcPass 支持与多种流行插件集成，扩展功能和玩法。
+
+## 集成概览 {#集成概览}
+
+| 插件 | 功能 | Folia 支持 |
+|------|------|-----------|
+| Vault | 经济系统 | ✅ |
+| CMI | 经济系统（直接） | ✅ |
+| PlayerPoints | 点卷货币 | ✅ |
+| CoinsEngine | 点卷货币 | ✅ |
+| TokenManager | 点卷货币 | ✅ |
+| LuckPerms | 权限奖励 | ✅ |
+| PlaceholderAPI | 变量占位符 | ✅ |
+| DeluxeTags | 称号奖励 | ❌ |
+| TAB | 称号奖励 | ✅ |
+| NametagEdit | 称号奖励 | ❌ |
+| PlayerTitle | 称号奖励 | ✅ |
+| PlayerParticles | 装饰粒子奖励 | ✅ |
+| MythicMobs | 自定义怪物任务 | ✅ |
+| Jobs Reborn | 职业任务 | ✅ |
+| Oraxen | 自定义物品奖励 | ✅ |
+| ItemsAdder | 自定义物品奖励 | ✅ |
+
+## 经济系统 {#经济系统}
+
+### Vault {#vault}
+
+Vault 是最常用的经济系统桥接插件。
+
+**安装要求：**
+
+- Vault 1.7.3+
+- 任意 Vault 兼容的经济插件（如 EssentialsX）
+
+**用途：**
+
+- 经济奖励（给予金币）
+- 购买通行证档位
+
+**配置示例：**
+
+```yaml
+# rewards/economy.yml
+reward_gold_1000:
+  type: ECONOMY
+  display-name: "&6金币 x1000"
+  value: "1000"
+```
+
+### CMI {#cmi}
+
+CMI 是一款功能全面的服务器管理插件，ArcPass 支持直接使用 CMI 经济。
+
+**安装要求：**
+
+- CMI 9.0+
+
+CMI 经济优先于 Vault，如果同时安装，将使用 CMI。
+
+## 点卷系统 {#点卷系统}
+
+ArcPass 支持多款点卷插件作为替代货币，用于购买通行证档位。
+
+### PlayerPoints {#playerpoints}
+
+PlayerPoints 是最流行的点卷插件。
+
+**安装要求：**
+
+- PlayerPoints 2.0+
+
+**用途：**
+
+- 购买通行证档位（通过 `currency-type: points` 配置）
+
+### CoinsEngine {#coinsengine}
+
+CoinsEngine 是一款多币种经济插件。
+
+**安装要求：**
+
+- CoinsEngine 2.0+
+
+### TokenManager {#tokenmanager}
+
+TokenManager 提供基于 Token 的货币系统。
+
+**安装要求：**
+
+- TokenManager 3.0+
+
+### 点卷优先级 {#点卷优先级}
+
+当同时安装多个点卷插件时，ArcPass 按以下顺序使用第一个可用的：
+
+1. **PlayerPoints**
+2. **CoinsEngine**
+3. **TokenManager**
+
+### 使用点卷购买档位 {#使用点卷购买档位}
+
+在通行证配置中，将 `currency-type` 设置为 `points` 即可使用点卷替代 Vault/CMI 经济：
+
+```yaml
+tiers:
+  premium:
+    display-name: "&6高级版"
+    price: 980
+    currency-type: points  # 使用点卷插件替代 Vault/CMI
+```
+
+详见 [通行证配置](/arcpass/config/passes)。
+
+## 权限系统 {#权限系统}
+
+### LuckPerms {#luckperms}
+
+LuckPerms 是最流行的权限管理插件。
+
+**安装要求：**
+
+- LuckPerms 5.4+
+
+**功能：**
+
+- 权限奖励
+- 权限组奖励
+- 前缀/后缀设置
+- 临时权限
+
+**配置示例：**
+
+```yaml
+# 永久权限奖励
+reward_fly:
+  type: PERMISSION
+  display-name: "&b飞行权限"
+  value: "essentials.fly"
+
+# 临时权限（7天）
+reward_temp_vip:
+  type: PERMISSION
+  display-name: "&e7天VIP"
+  value: "group.vip"
+  data:
+    duration: 604800
+
+# 权限组
+reward_rank_elite:
+  type: PERMISSION
+  display-name: "&6晋升精英"
+  value: "group.elite"
+  data:
+    type: group
+```
+
+## 称号系统 {#称号系统}
+
+### DeluxeTags {#deluxetags}
+
+DeluxeTags 是一款称号管理插件。
+
+<Warning>
+
+DeluxeTags 不支持 Folia。如果您使用 Folia 服务端，请使用 TAB 替代。
+
+</Warning>
+
+**安装要求：**
+
+- DeluxeTags 1.8+
+- LuckPerms（推荐）
+
+**配置示例：**
+
+```yaml
+reward_title_champion:
+  type: TITLE
+  display-name: "&6冠军称号"
+  value: "&e[&6冠军&e] "
+  data:
+    tag-id: "champion"
+    description: "战斗通行证最终奖励"
+    priority: 100
+    auto-equip: true
+```
+
+### TAB {#tab}
+
+TAB 是一款支持 Folia 的名牌/Tab 列表管理插件。
+
+**安装要求：**
+
+- TAB 4.0+
+
+**配置示例：**
+
+```yaml
+reward_title_legend:
+  type: TITLE
+  display-name: "&d传奇称号"
+  value: "&5[&d传奇&5] "
+  data:
+    position: prefix  # prefix 或 suffix
+    persistent: true
+```
+
+### NametagEdit {#nametagedit}
+
+NametagEdit 是一款名牌编辑插件。
+
+**安装要求：**
+
+- NametagEdit 4.0+
+
+NametagEdit 将称号设置为玩家名牌前缀。当其他称号插件不可用时作为回退方案。
+
+### PlayerTitle {#playertitle}
+
+PlayerTitle 是一款功能丰富的称号插件，支持粒子特效、属性 Buff 和 GUI 管理。
+
+**安装要求：**
+
+- PlayerTitle 4.0+
+
+ArcPass 通过 PlayerTitle 的开发者 API 进行集成。称号需要先在 PlayerTitle 中创建，然后在奖励配置中引用其整型 ID。
+
+**配置示例：**
+
+```yaml
+# 使用 data.title-id 指定 PlayerTitle 的称号 ID
+reward_arena_champion:
+  type: TITLE
+  display-name: "&6竞技场冠军"
+  value: "&e[&6冠军&e] "
+  data:
+    title-id: 5  # PlayerTitle 中的称号 ID
+
+# 或将 ID 嵌入奖励键名
+title_5:
+  type: TITLE
+  display-name: "&6竞技场冠军"
+  value: "&e[&6冠军&e] "
+```
+
+<Tip>
+
+如需通过 PlayerTitle 发放限时称号，可使用 COMMAND 奖励类型：
+
+```yaml
+reward_temp_title:
+  type: COMMAND
+  display-name: "&e限时称号（30天）"
+  value: "plt player setTitle %player% 5 30"
+```
+
+</Tip>
+
+### 称号优先级 {#称号优先级}
+
+ArcPass 按以下顺序尝试发放称号奖励：
+
+1. **DeluxeTags** - 如果可用且非 Folia
+2. **TAB** - 如果可用（支持 Folia）
+3. **PlayerTitle** - 如果可用（API 集成）
+4. **NametagEdit** - 如果可用
+5. **LuckPerms** - 作为前缀/后缀回退
+
+## 装饰系统 {#装饰系统}
+
+### PlayerParticles {#playerparticles}
+
+PlayerParticles 是最流行的装饰粒子插件，提供 118+ 种粒子效果和 38 种样式。
+
+**安装要求：**
+
+- PlayerParticles 8.0+
+
+ArcPass 通过 PlayerParticles 的开发者 API 进行集成。当玩家领取带有 `data.particle` 的 COSMETIC 奖励时，粒子效果会自动应用到玩家身上。
+
+**配置示例：**
+
+```yaml
+cosmetic_particle_flame:
+  type: COSMETIC
+  display-name: "&c火焰粒子特效"
+  description: "解锁火焰粒子效果"
+  icon: BLAZE_POWDER
+  value: "particle_flame"
+  data:
+    particle: FLAME       # PlayerParticles 效果名称
+    style: trail          # PlayerParticles 样式名称
+
+cosmetic_particle_enchant:
+  type: COSMETIC
+  display-name: "&5附魔粒子特效"
+  icon: ENCHANTED_BOOK
+  value: "particle_enchant"
+  data:
+    particle: ENCHANT
+    style: spiral
+```
+
+**常用粒子效果：** `FLAME`、`END_ROD`、`ENCHANT`、`TOTEM_OF_UNDYING`、`HEART`、`CRIT`、`SPELL_WITCH`、`DRIP_LAVA`
+
+**常用样式：** `normal`、`spiral`、`trail`、`aura`、`burst`、`orbit`、`pulse`
+
+## 任务触发器 {#任务触发器}
+
+### MythicMobs {#mythicmobs}
+
+MythicMobs 是一款自定义怪物插件，可创建击杀 MythicMobs 怪物的任务。
+
+**安装要求：**
+
+- MythicMobs 5.0+
+
+**任务配置：**
+
+```yaml
+# quests/daily/mythic.yml
+kill_dragon_boss:
+  type: daily
+  display-name: "&c击杀龙王"
+  objectives:
+    - type: mythicmobs_kill
+      mob: DragonBoss  # MythicMobs 怪物 ID
+      amount: 1
+```
+
+也可以使用通用格式：
+
+```yaml
+objectives:
+  - type: kill
+    entity: "mythicmob:DragonBoss"
+    amount: 1
+```
+
+### Jobs Reborn {#jobs-reborn}
+
+Jobs Reborn 是一款职业系统插件。
+
+**安装要求：**
+
+- Jobs Reborn 5.0+
+
+**任务配置：**
+
+```yaml
+# quests/weekly/jobs.yml
+miner_exp_1000:
+  type: weekly
+  display-name: "&e矿工经验"
+  description:
+    - "&7获得 1000 矿工职业经验"
+  objectives:
+    - type: jobs_exp
+      job: Miner
+      amount: 1000
+```
+
+## 自定义物品 {#自定义物品}
+
+### Oraxen {#oraxen}
+
+Oraxen 是一款自定义物品和资源包插件。
+
+**安装要求：**
+
+- Oraxen 1.150+
+
+**物品格式：**
+
+```
+oraxen:<物品ID>
+```
+
+**配置示例：**
+
+```yaml
+reward_custom_sword:
+  type: ITEM
+  display-name: "&6传说之剑"
+  icon: DIAMOND_SWORD
+  value: "oraxen:legendary_sword"
+  amount: 1
+```
+
+### ItemsAdder {#itemsadder}
+
+ItemsAdder 是另一款自定义物品插件。
+
+**安装要求：**
+
+- ItemsAdder 3.5+
+
+**物品格式：**
+
+```
+itemsadder:<命名空间>:<物品ID>
+```
+
+**配置示例：**
+
+```yaml
+reward_magic_gem:
+  type: ITEM
+  display-name: "&d魔法宝石"
+  icon: EMERALD
+  value: "itemsadder:myitems:magic_gem"
+  amount: 5
+```
+
+## PlaceholderAPI {#placeholderapi}
+
+PlaceholderAPI 让您可以在其他插件中使用 ArcPass 的数据。
+
+**安装要求：**
+
+- PlaceholderAPI 2.11.0+
+
+详细的变量列表请查看 [PlaceholderAPI 文档](/arcpass/placeholders)。
+
+## 检测集成状态 {#检测集成状态}
+
+启动服务器后，查看控制台日志确认集成状态：
+
+```
+[ArcPass] Vault economy hook enabled.
+[ArcPass] PlayerPoints hook enabled.
+[ArcPass] LuckPerms permission hook enabled.
+[ArcPass] PlaceholderAPI expansion registered.
+[ArcPass] TAB integration enabled!
+[ArcPass] MythicMobs integration enabled!
+[ArcPass] Jobs Reborn integration enabled!
+[ArcPass] Oraxen integration enabled!
+[ArcPass] ItemsAdder integration enabled!
+[ArcPass] PlayerTitle hook enabled (API mode).
+[ArcPass] PlayerParticles hook enabled (API mode).
+```
+
+## 故障排除 {#故障排除}
+
+### 经济奖励不生效 {#经济奖励不生效}
+
+1. 确认 Vault 和经济插件已安装
+2. 检查经济插件是否正常工作
+3. 查看控制台是否有错误信息
+
+### 称号奖励不生效 {#称号奖励不生效}
+
+1. 确认称号插件已安装（DeluxeTags、TAB、PlayerTitle 或 NametagEdit）
+2. 对于 Folia，必须使用 TAB
+3. 使用 PlayerTitle 时，确保称号 ID 在 PlayerTitle 中已存在
+4. LuckPerms 可作为最终回退方案
+
+### 装饰/粒子奖励不生效 {#装饰-粒子奖励不生效}
+
+1. 确认 PlayerParticles 已安装（8.0+）
+2. 检查 `data.particle` 值是否与 PlayerParticles 的效果名称匹配
+3. 检查 `data.style` 值是否与 PlayerParticles 的样式名称匹配
+4. 确保玩家在领取奖励时在线
+
+### MythicMobs 任务不触发 {#mythicmobs-任务不触发}
+
+1. 确认 MythicMobs 版本兼容
+2. 检查怪物 ID 是否正确（区分大小写）
+3. 确保玩家是击杀者
+
+### 自定义物品不显示 {#自定义物品不显示}
+
+1. 确认 Oraxen/ItemsAdder 版本兼容
+2. 检查物品 ID 格式是否正确
+3. 确保物品在对应插件中已定义
