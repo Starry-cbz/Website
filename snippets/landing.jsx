@@ -1,7 +1,7 @@
 export const ActionLinks = ({ links = [] }) => (
   <div className="km-actions">
-    {links.map((link, index) => (
-      <a key={link.href} className={index === 0 ? "km-button km-button-primary" : "km-button"} href={link.href}>
+    {links.map((link) => (
+      <a key={link.href} className="km-button" href={link.href}>
         {link.label}
         <span aria-hidden="true">↗</span>
       </a>

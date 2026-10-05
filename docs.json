@@ -94,6 +94,49 @@
             ]
           },
           {
+            "tab": "KiteMarket",
+            "icon": "store",
+            "groups": [
+              {
+                "group": "快速开始",
+                "pages": [
+                  "kitemarket",
+                  "kitemarket/download",
+                  "kitemarket/guide"
+                ]
+              },
+              {
+                "group": "使用指南",
+                "pages": [
+                  "kitemarket/trading",
+                  "kitemarket/wallet",
+                  "kitemarket/commands"
+                ]
+              },
+              {
+                "group": "界面集成",
+                "pages": [
+                  "kitemarket/dlc"
+                ]
+              },
+              {
+                "group": "开发者 API",
+                "pages": [
+                  "kitemarket/api",
+                  "kitemarket/ui-development"
+                ]
+              },
+              {
+                "group": "授权与运维",
+                "pages": [
+                  "kitemarket/license",
+                  "kitemarket/operations",
+                  "kitemarket/compatibility"
+                ]
+              }
+            ]
+          },
+          {
             "tab": "ArcPass",
             "icon": "ticket",
             "groups": [
@@ -145,49 +188,6 @@
                 "group": "帮助",
                 "pages": [
                   "arcpass/faq"
-                ]
-              }
-            ]
-          },
-          {
-            "tab": "KiteMarket",
-            "icon": "store",
-            "groups": [
-              {
-                "group": "快速开始",
-                "pages": [
-                  "kitemarket",
-                  "kitemarket/download",
-                  "kitemarket/guide"
-                ]
-              },
-              {
-                "group": "使用指南",
-                "pages": [
-                  "kitemarket/trading",
-                  "kitemarket/wallet",
-                  "kitemarket/commands"
-                ]
-              },
-              {
-                "group": "界面集成",
-                "pages": [
-                  "kitemarket/dlc"
-                ]
-              },
-              {
-                "group": "开发者 API",
-                "pages": [
-                  "kitemarket/api",
-                  "kitemarket/ui-development"
-                ]
-              },
-              {
-                "group": "授权与运维",
-                "pages": [
-                  "kitemarket/license",
-                  "kitemarket/operations",
-                  "kitemarket/compatibility"
                 ]
               }
             ]
@@ -313,6 +313,49 @@
             ]
           },
           {
+            "tab": "KiteMarket",
+            "icon": "store",
+            "groups": [
+              {
+                "group": "Getting started",
+                "pages": [
+                  "en/kitemarket",
+                  "en/kitemarket/download",
+                  "en/kitemarket/guide"
+                ]
+              },
+              {
+                "group": "Usage",
+                "pages": [
+                  "en/kitemarket/trading",
+                  "en/kitemarket/wallet",
+                  "en/kitemarket/commands"
+                ]
+              },
+              {
+                "group": "Interface integration",
+                "pages": [
+                  "en/kitemarket/dlc"
+                ]
+              },
+              {
+                "group": "Developer API",
+                "pages": [
+                  "en/kitemarket/api",
+                  "en/kitemarket/ui-development"
+                ]
+              },
+              {
+                "group": "Licensing & operations",
+                "pages": [
+                  "en/kitemarket/license",
+                  "en/kitemarket/operations",
+                  "en/kitemarket/compatibility"
+                ]
+              }
+            ]
+          },
+          {
             "tab": "ArcPass",
             "icon": "ticket",
             "groups": [
@@ -364,49 +407,6 @@
                 "group": "Help",
                 "pages": [
                   "en/arcpass/faq"
-                ]
-              }
-            ]
-          },
-          {
-            "tab": "KiteMarket",
-            "icon": "store",
-            "groups": [
-              {
-                "group": "Getting started",
-                "pages": [
-                  "en/kitemarket",
-                  "en/kitemarket/download",
-                  "en/kitemarket/guide"
-                ]
-              },
-              {
-                "group": "Usage",
-                "pages": [
-                  "en/kitemarket/trading",
-                  "en/kitemarket/wallet",
-                  "en/kitemarket/commands"
-                ]
-              },
-              {
-                "group": "Interface integration",
-                "pages": [
-                  "en/kitemarket/dlc"
-                ]
-              },
-              {
-                "group": "Developer API",
-                "pages": [
-                  "en/kitemarket/api",
-                  "en/kitemarket/ui-development"
-                ]
-              },
-              {
-                "group": "Licensing & operations",
-                "pages": [
-                  "en/kitemarket/license",
-                  "en/kitemarket/operations",
-                  "en/kitemarket/compatibility"
                 ]
               }
             ]

@@ -101,6 +101,85 @@ export const normalizeReleases = (data, owner, repo) => {
   });
 };
 
+export const splitReleaseTableRow = (line) => {
+  const row = line.trim();
+  const cells = [];
+  let cell = "";
+  let firstDelimiter = -1;
+  let lastDelimiter = -1;
+  for (let index = 0; index < row.length; index += 1) {
+    if (row[index] === "\\" && ["\\", "|"].includes(row[index + 1])) {
+      cell += row[index + 1] === "|" ? "|" : "\\\\";
+      index += 1;
+    } else if (row[index] === "|") {
+      if (firstDelimiter === -1) firstDelimiter = index;
+      lastDelimiter = index;
+      cells.push(cell.trim());
+      cell = "";
+    } else cell += row[index];
+  }
+  if (firstDelimiter === -1) return null;
+  cells.push(cell.trim());
+  if (firstDelimiter === 0) cells.shift();
+  if (lastDelimiter === row.length - 1) cells.pop();
+  return cells;
+};
+
+export const releaseNoteBlocks = (body) => {
+  const lines = body.split("\n");
+  const blocks = [];
+  let list = [];
+  let code = null;
+  let fence = null;
+  const flushList = () => {
+    if (list.length) {
+      blocks.push({ type: "list", items: list });
+      list = [];
+    }
+  };
+  for (let index = 0; index < lines.length; index += 1) {
+    const line = lines[index];
+    const marker = /^(`{3,}|~{3,})(.*)$/.exec(line.trim());
+    if (code !== null) {
+      if (marker && marker[1][0] === fence[0] && marker[1].length >= fence.length && !marker[2].trim()) {
+        blocks.push({ type: "code", text: code.join("\n") });
+        code = null;
+        fence = null;
+      } else code.push(line);
+    } else if (marker) {
+      flushList();
+      code = [];
+      fence = marker[1];
+    } else if (/^\s*[-*]\s+/.test(line)) list.push(line.replace(/^\s*[-*]\s+/, ""));
+    else {
+      flushList();
+      if (/^#{1,6}\s+/.test(line)) blocks.push({ type: "heading", text: line.replace(/^#{1,6}\s+/, "") });
+      else if (line.trim() && !/^[-*_]{3,}$/.test(line.trim())) {
+        const headers = splitReleaseTableRow(line);
+        const delimiter = splitReleaseTableRow(lines[index + 1] || "");
+        if (headers?.length && headers.length === delimiter?.length && delimiter.every((cell) => /^:?-{3,}:?$/.test(cell))) {
+          const alignments = delimiter.map((cell) => cell.endsWith(":")
+            ? (cell.startsWith(":") ? "center" : "right") : "left");
+          const rows = [];
+          let next = index + 2;
+          while (next < lines.length) {
+            if (/^\s*(?:[-*]\s+|#{1,6}\s+|`{3,}|~{3,})/.test(lines[next])) break;
+            const cells = splitReleaseTableRow(lines[next]);
+            if (!cells) break;
+            rows.push(headers.map((_, column) => cells[column] || ""));
+            next += 1;
+          }
+          blocks.push({ type: "table", headers, alignments, rows });
+          index = next - 1;
+        } else blocks.push({ type: "text", text: line });
+      }
+    }
+  }
+  flushList();
+  if (code) blocks.push({ type: "code", text: code.join("\n") });
+  return blocks;
+};
+
 // UI rendering uses React hooks supplied by Mintlify, not an external React import.
 export const Downloads = ({
   owner = "KiteMC",
@@ -313,35 +392,26 @@ export const Downloads = ({
         : <span key={index}>{part}</span>;
     });
   };
-  const notes = (body) => {
-    const blocks = [];
-    let list = [];
-    let code = null;
-    const flushList = () => {
-      if (list.length) {
-        blocks.push(<ul key={`list-${blocks.length}`} className="list-disc space-y-1 pl-5">{list.map((line, index) => <li key={index}>{inline(line)}</li>)}</ul>);
-        list = [];
-      }
-    };
-    body.split("\n").forEach((line) => {
-      if (line.trim().startsWith("```")) {
-        flushList();
-        if (code) {
-          blocks.push(<pre key={`code-${blocks.length}`} className="overflow-x-auto rounded-lg bg-zinc-100 p-3 text-xs dark:bg-zinc-900"><code>{code.join("\n")}</code></pre>);
-          code = null;
-        } else code = [];
-      } else if (code) code.push(line);
-      else if (/^\s*[-*]\s+/.test(line)) list.push(line.replace(/^\s*[-*]\s+/, ""));
-      else {
-        flushList();
-        if (/^#{1,6}\s+/.test(line)) blocks.push(<p key={`heading-${blocks.length}`} className="pt-2 font-semibold">{inline(line.replace(/^#{1,6}\s+/, ""))}</p>);
-        else if (line.trim() && !/^[-*_]{3,}$/.test(line.trim())) blocks.push(<p key={`text-${blocks.length}`}>{inline(line)}</p>);
-      }
-    });
-    flushList();
-    if (code) blocks.push(<pre key={`code-${blocks.length}`} className="overflow-x-auto rounded-lg bg-zinc-100 p-3 text-xs dark:bg-zinc-900"><code>{code.join("\n")}</code></pre>);
-    return blocks;
-  };
+  const notes = (body) => releaseNoteBlocks(body).map((block, index) => {
+    if (block.type === "code") return <pre key={index} className="overflow-x-auto rounded-lg bg-zinc-100 p-3 text-xs dark:bg-zinc-900"><code>{block.text}</code></pre>;
+    if (block.type === "list") return <ul key={index} className="list-disc space-y-1 pl-5">{block.items.map((line, itemIndex) => <li key={itemIndex}>{inline(line)}</li>)}</ul>;
+    if (block.type === "heading") return <p key={index} className="pt-2 font-semibold">{inline(block.text)}</p>;
+    if (block.type === "table") return (
+      <div key={index} className="max-w-full overflow-x-auto rounded-lg border border-zinc-200 dark:border-zinc-800">
+        <table className="w-full border-collapse text-sm">
+          <thead className="bg-zinc-100 dark:bg-zinc-900">
+            <tr>{block.headers.map((cell, column) => <th key={column} scope="col" style={{ textAlign: block.alignments[column] }} className="whitespace-nowrap border-b border-zinc-200 px-3 py-2 font-semibold dark:border-zinc-800">{inline(cell)}</th>)}</tr>
+          </thead>
+          <tbody>{block.rows.map((row, rowIndex) => (
+            <tr key={rowIndex} className="border-b border-zinc-200 last:border-b-0 dark:border-zinc-800">
+              {row.map((cell, column) => <td key={column} style={{ textAlign: block.alignments[column] }} className="px-3 py-2 align-top">{inline(cell)}</td>)}
+            </tr>
+          ))}</tbody>
+        </table>
+      </div>
+    );
+    return <p key={index}>{inline(block.text)}</p>;
+  });
   const releaseCard = (release) => {
     const main = selectSingleAsset(release);
     const proxy = release.assets.find((asset) => asset.name.toLowerCase().includes("proxy") && asset.name.endsWith(".jar"));
