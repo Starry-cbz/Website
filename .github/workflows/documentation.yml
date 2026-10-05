@@ -37,7 +37,9 @@ jobs:
         run: mint validate
 
       - name: Check routes, translations, anchors and media
-        run: node tools/check-site.mjs
+        run: |
+          node tools/check-site.mjs
+          node tools/generate-sitemap.mjs --check
 
       - name: Check GitHub download selection
         run: node tools/test-downloads.mjs

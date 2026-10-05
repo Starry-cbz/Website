@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="960" height="960" viewBox="0 0 72 72">
     <!-- 淡紫色圆角背景 -->
     <rect width="100%" height="100%" fill="#e6d5ff" rx="8" ry="8"/>
-
+    
     <!-- 向左上方平移的风筝图标（带裁剪） -->
     <g transform="translate(10,5)" clip-path="url(#clip-kite)">
         <path fill="#61b2e4" d="m15.036 4.719l-9.34 21.342L32.289 45.27l4.6-32.481z"/>
@@ -11,7 +11,7 @@
             <!-- 修改后的风筝线（缩短长度） -->
             <path d="M31.78 44.523s4.023 6.5 12.5 4.5c5.5-1.2 8.5 2.8 9.5 5.5"/>
         </g>
-
+        
         <!-- 定义裁剪区域（比背景小4px的边距） -->
         <clipPath id="clip-kite">
             <rect x="2" y="2" width="68" height="68" rx="6" ry="6"/>

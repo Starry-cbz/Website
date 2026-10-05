@@ -1600,16 +1600,8 @@
       "destination": "/en/archive/verifymc/question"
     },
     {
-      "source": "/en/index",
-      "destination": "/en"
-    },
-    {
       "source": "/en/index.html",
       "destination": "/en"
-    },
-    {
-      "source": "/index",
-      "destination": "/"
     },
     {
       "source": "/index.html",
