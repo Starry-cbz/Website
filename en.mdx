@@ -1,0 +1,66 @@
+---
+title: "KiteMC - Minecraft Server Tools & Plugins"
+description: "KiteMC documentation for KiteMarket, ArcPass, and archived projects."
+mode: "custom"
+canonical: "https://www.kitemc.com/en"
+keywords: ["KiteMC", "Minecraft", "KiteMarket", "ArcPass", "server plugins", "documentation"]
+---
+
+import { LandingHero, ActionLinks, LandingFooter } from "/snippets/landing.jsx";
+
+<div className="km-landing">
+  <LandingHero
+    title="KiteMC"
+    subtitle="Bring your server's ideas to your players."
+    description="From battle passes to player markets, find the tools for your server and learn how to install, configure and extend them."
+    image="/images/logo/kitemc.svg"
+    eyebrow="MINECRAFT SERVER TOOLS"
+    links={[
+      { label: "Explore KiteMarket", href: "/en/kitemarket" },
+      { label: "Read ArcPass docs", href: "/en/arcpass" },
+      { label: "GitHub", href: "https://github.com/KiteMC/" }
+    ]}
+  />
+
+  <section className="km-section">
+    <h2 id="our-projects">Our projects</h2>
+    <Columns cols={2}>
+      <Card title="KiteMarket" href="/en/kitemarket" icon="store">
+        <div className="km-product-name">
+          <img src="/images/kitemarket/kitemarket-icon-128.png" alt="" width="40" height="40" />
+          <span>A market for your players</span>
+        </div>
+        Advanced buy orders, fixed-price sales, public auctions and shared wallets. Complete vanilla GUI, ItemsAdder compatibility and extensible themes. USD 9.99 one-time purchase.
+      </Card>
+      <Card title="ArcPass" href="/en/arcpass" icon="ticket">
+        <div className="km-product-name">
+          <img src="/images/logo/arcpass.svg" alt="" width="40" height="40" />
+          <span>Seasonal battle passes</span>
+        </div>
+        Multiple reward tracks, daily and seasonal quests, leaderboards and configurable interfaces give your players ongoing goals.
+      </Card>
+    </Columns>
+    <Card title="VerifyMC · Historical archive" href="/en/archive/verifymc" icon="box-archive">
+      This whitelist and email registration plugin is discontinued. Historical documentation and existing downloads remain available for current users.
+    </Card>
+  </section>
+
+  <section className="km-section">
+    <h2 id="friend-links">Community and resources</h2>
+    <Columns cols={3}>
+      <Card title="License Center" icon="key" href="https://license.kitemc.com/en">
+        Purchase products and manage your licenses.
+      </Card>
+      <Card title="Join the community" icon="comments" href="https://discord.gg/dcsBw5Z5ZT">
+        Share your setup and find support.
+      </Card>
+      <Card title="Afdian" icon="heart" href="https://ifdian.net/a/kitemc">
+        Support KiteMC creators.
+      </Card>
+    </Columns>
+    <Card title="Rainyun" icon="cloud" href="https://cloud.kitemc.com/">
+      Cloud service provider.
+    </Card>
+  </section>
+  <LandingFooter lang="en" />
+</div>

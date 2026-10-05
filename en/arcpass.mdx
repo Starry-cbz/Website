@@ -1,0 +1,88 @@
+---
+title: "ArcPass - Battle Pass Plugin for Minecraft Servers"
+description: "Multi-tier rewards, seasonal quests and configurable interfaces give your Minecraft players ongoing goals."
+mode: "custom"
+canonical: "https://www.kitemc.com/en/arcpass"
+keywords: ["ArcPass", "Minecraft", "battle pass", "Paper", "Spigot", "Folia", "quests", "seasons"]
+---
+
+import { LandingHero, ActionLinks, MediaGallery, LandingFooter } from "/snippets/landing.jsx";
+
+<div className="km-landing">
+  <LandingHero
+    title="ArcPass"
+    subtitle="Give every season something to look forward to."
+    description="A battle pass plugin for Minecraft servers. Multiple reward tracks, rich quests and season management for Paper, Spigot and Folia."
+    image="/images/logo/arcpass.svg"
+    eyebrow="PASSES · QUESTS · SEASONS"
+    links={[
+      { label: "Getting started", href: "/en/arcpass/guide" },
+      { label: "Download", href: "/en/arcpass/download" },
+      { label: "Purchase a license", href: "https://license.kitemc.com/en/products/arcpass" }
+    ]}
+  />
+
+  <section className="km-section">
+    <h2 id="why-choose-arcpass">Why choose ArcPass?</h2>
+    <p>From a private server to a server network, ArcPass gives players ongoing goals and rich rewards. Configure passes, quests, rewards and seasons independently to suit your gameplay.</p>
+    <Columns cols={3}>
+      <Card title="Multiple pass tiers" icon="ticket">Free, premium and VIP tiers with independent reward tracks.</Card>
+      <Card title="Rich quest system" icon="list-check">Daily, weekly, seasonal and story quests with different objectives.</Card>
+      <Card title="Flexible rewards" icon="gift">Items, economy, permissions, titles and cosmetics, including custom items through Oraxen and ItemsAdder.</Card>
+      <Card title="Season management" icon="calendar">Start and end seasons manually, with automatic progress resets.</Card>
+      <Card title="Configurable GUI" icon="paintbrush">Customize layouts, items and animation effects.</Card>
+      <Card title="Leaderboards" icon="ranking-star">Level, experience and season rankings encourage competition.</Card>
+      <Card title="Plugin integrations" icon="puzzle-piece">Vault, LuckPerms, PlaceholderAPI, DeluxeTags, TAB, MythicMobs, Jobs and more.</Card>
+      <Card title="Folia scheduling" icon="bolt">Scheduling adapters for Folia's multi-threaded server model.</Card>
+      <Card title="Cross-server sync" icon="globe">Synchronize through Redis or shared MySQL with migration locks and distributed locking.</Card>
+    </Columns>
+    <img className="km-cover" src="/images/arcpass/cover-16x9.png" alt="ArcPass battle pass cover" />
+  </section>
+
+  <section className="km-section">
+    <h2 id="feature-demos">Feature demos</h2>
+    <MediaGallery images={[
+      { src: "/images/arcpass/scenes/S02.gif", caption: "Multi-tier pass system" },
+      { src: "/images/arcpass/scenes/S05.gif", caption: "Quest system" },
+      { src: "/images/arcpass/scenes/S06.gif", caption: "Quest completion flow" },
+      { src: "/images/arcpass/scenes/S07.gif", caption: "Leaderboard" }
+    ]} />
+    <h3 id="screenshots">Screenshots</h3>
+    <MediaGallery images={[
+      { src: "/images/arcpass/screenshot-main-menu.png", caption: "Main menu" },
+      { src: "/images/arcpass/screenshot-reward-track.png", caption: "Reward track" },
+      { src: "/images/arcpass/screenshot-quest-list.png", caption: "Quest list" },
+      { src: "/images/arcpass/screenshot-leaderboard.png", caption: "Leaderboard" },
+      { src: "/images/arcpass/screenshot-admin-panel.png", caption: "Admin panel" }
+    ]} />
+  </section>
+
+  <section className="km-section">
+    <h2 id="core-advantages">Build around your server</h2>
+    <Columns cols={2}>
+      <Card title="Modular configuration" icon="sliders">Configure passes, quests, rewards and seasons independently.</Card>
+      <Card title="Async database operations" icon="database">Run database work asynchronously to reduce main-thread waiting.</Card>
+      <Card title="Multiple languages" icon="language">Chinese by default, with English and custom language packs.</Card>
+      <Card title="Developer API" icon="code">Connect your own plugins through public interfaces and events.</Card>
+    </Columns>
+  </section>
+
+  <section className="km-section">
+    <h2 id="quick-links">Get started</h2>
+    <Columns cols={3}>
+      <Card title="Getting started" icon="rocket" href="/en/arcpass/guide">Install and create your first pass.</Card>
+      <Card title="Configuration" icon="gear" href="/en/arcpass/config">Passes, quests, rewards and interfaces.</Card>
+      <Card title="Commands & permissions" icon="terminal" href="/en/arcpass/commands">Player entrances and admin commands.</Card>
+      <Card title="Developer API" icon="code" href="/en/arcpass/developer">Interfaces, events and code examples.</Card>
+      <Card title="FAQ" icon="circle-question" href="/en/arcpass/faq">Find configuration and runtime answers.</Card>
+      <Card title="Download" icon="download" href="/en/arcpass/download">Runtimes, language packs and previous releases.</Card>
+    </Columns>
+    <h3 id="get-arcpass">Get ArcPass</h3>
+    <ActionLinks links={[
+      { label: "Purchase a license", href: "https://license.kitemc.com/en/products/arcpass" },
+      { label: "Register an account", href: "https://license.kitemc.com/en/register" },
+      { label: "Join the community", href: "https://discord.gg/dcsBw5Z5ZT" }
+    ]} />
+  </section>
+  <LandingFooter lang="en" />
+</div>

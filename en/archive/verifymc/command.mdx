@@ -1,0 +1,101 @@
+---
+title: "Plugin Commands"
+canonical: "https://www.kitemc.com/en/archive/verifymc/command"
+---
+
+<Warning>
+VerifyMC is discontinued. These historical documents remain available for existing users and do not imply active maintenance or current compatibility.
+</Warning>
+
+<span id="plugin-commands" />
+
+## Main Command {#main-command}
+
+```
+/vmc [subcommand] [arguments...]
+```
+
+## Subcommand List {#subcommand-list}
+
+| Subcommand | Permission      | Description                        | Example Usage                              |
+|------------|-----------------|------------------------------------|--------------------------------------------|
+| reload     | verifymc.admin  | Reload plugin config and resources | `/vmc reload`                              |
+| approve    | verifymc.admin  | Approve a pending user             | `/vmc approve <username>`                  |
+| reject     | verifymc.admin  | Reject a pending user              | `/vmc reject <username> [reason]`          |
+| delete     | verifymc.admin  | Delete a user                      | `/vmc delete <username>`                   |
+| ban        | verifymc.admin  | Ban a user                         | `/vmc ban <username> [reason]`             |
+| unban      | verifymc.admin  | Unban a user                       | `/vmc unban <username>`                    |
+| list       | verifymc.admin  | List users by status               | `/vmc list [all\|pending\|approved\|rejected\|banned]` |
+| info       | verifymc.admin  | Show user info                     | `/vmc info <username>`                     |
+| version    | everyone        | Show plugin version                | `/vmc version`                             |
+
+---
+
+## Command Details {#command-details}
+
+### `/vmc reload` {#vmc-reload}
+
+- Reloads the plugin config, language files, and resources.
+- Requires `verifymc.admin` permission.
+
+### `/vmc approve <username>` {#vmc-approve-username}
+
+- Approves a pending user and adds them to the whitelist.
+- Sends an approval email notification if configured.
+- Requires `verifymc.admin` permission.
+- Example: `/vmc approve Steve`
+
+### `/vmc reject <username> [reason]` {#vmc-reject-username-reason}
+
+- Rejects a pending user with an optional reason.
+- Sends a rejection email notification if configured.
+- Requires `verifymc.admin` permission.
+- Example: `/vmc reject Steve Not meeting requirements`
+
+### `/vmc delete <username>` {#vmc-delete-username}
+
+- Deletes a user from the system and removes them from the whitelist.
+- Requires `verifymc.admin` permission.
+- Example: `/vmc delete Steve`
+
+### `/vmc ban <username> [reason]` {#vmc-ban-username-reason}
+
+- Bans a user and removes them from the whitelist.
+- Requires `verifymc.admin` permission.
+- Example: `/vmc ban Steve Cheating`
+
+### `/vmc unban <username>` {#vmc-unban-username}
+
+- Unbans a user and re-adds them to the whitelist.
+- Requires `verifymc.admin` permission.
+- Example: `/vmc unban Steve`
+
+### `/vmc list [status]` {#vmc-list-status}
+
+- Lists users filtered by status. Default is `all`.
+- Available statuses: `all`, `pending`, `approved`, `rejected`, `banned`.
+- Requires `verifymc.admin` permission.
+- Example: `/vmc list pending`
+
+### `/vmc info <username>` {#vmc-info-username}
+
+- Shows detailed information about a user (username, email, status).
+- Requires `verifymc.admin` permission.
+- Example: `/vmc info Steve`
+
+### `/vmc version` {#vmc-version}
+
+- Shows the current plugin version.
+- Available to everyone.
+
+## Permission Notes {#permission-notes}
+
+<Tip>
+
+**Default permissions**
+
+
+- **verifymc.use**: Allows use of VerifyMC's basic features (default: everyone).
+- **verifymc.admin**: Required for admin commands (reload, approve, reject, delete, ban, unban, list, info). Default: OP only.
+
+</Tip>

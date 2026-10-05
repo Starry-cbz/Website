@@ -5,3 +5,11 @@
 # Draft content
 drafts/
 *.draft.mdx
+codex-work/
+tools/
+migration/
+CODEX_PROJECT_MEMORY.md
+AGENTS.md
+package.json
+package-lock.json
+pnpm-lock.yaml

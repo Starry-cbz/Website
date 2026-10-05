@@ -1,0 +1,195 @@
+---
+title: "Backend API"
+canonical: "https://www.kitemc.com/en/archive/verifymc/front/api"
+---
+
+<Warning>
+VerifyMC is discontinued. These historical documents remain available for existing users and do not imply active maintenance or current compatibility.
+</Warning>
+
+<span id="backend-api" />
+
+## API Reference Documentation {#api-reference-documentation}
+
+All API endpoints use JSON for request and response bodies. Admin endpoints require `Authorization: Bearer <token>` in the request header.
+
+## Configuration {#configuration}
+
+### Get Config {#get-config}
+- **Endpoint**: `GET /api/config`
+- **Purpose**: Get frontend theme, announcement, auth methods, and other public config info.
+- **Permission**: Public
+
+## Captcha {#captcha}
+
+### Generate Captcha {#generate-captcha}
+- **Endpoint**: `GET /api/captcha/generate`
+- **Purpose**: Generate a new graphical captcha image.
+- **Permission**: Public
+
+## Email Verification {#email-verification}
+
+### Send Verification Code {#send-verification-code}
+- **Endpoint**: `POST /api/verify/send`
+- **Purpose**: Send a registration verification code to the specified email.
+- **Permission**: Public
+- **Request Header**: `Content-Type: application/json`
+- **Request Parameters**:
+  | Field    | Type   | Required | Description         | Example             |
+  |----------|--------|----------|---------------------|---------------------|
+  | email    | string | Yes      | User email          | user@example.com    |
+  | language | string | No       | Language (zh/en)    | en                  |
+- **Notes**:
+  - Email sending is rate-limited per day/minute to prevent abuse.
+  - Email format must comply with RFC standards.
+
+## Questionnaire {#questionnaire}
+
+### Get Questionnaire Config {#get-questionnaire-config}
+- **Endpoint**: `GET /api/questionnaire/config`
+- **Purpose**: Get questionnaire questions and configuration.
+- **Permission**: Public
+
+### Submit Questionnaire {#submit-questionnaire}
+- **Endpoint**: `POST /api/questionnaire/submit`
+- **Purpose**: Submit questionnaire answers for scoring.
+- **Permission**: Public
+
+## Registration {#registration}
+
+### Register {#register}
+- **Endpoint**: `POST /api/register`
+- **Purpose**: User submits verification code and info to register.
+- **Permission**: Public
+- **Request Header**: `Content-Type: application/json`
+- **Request Parameters**:
+  | Field    | Type   | Required | Description         |
+  |----------|--------|----------|---------------------|
+  | email    | string | Yes      | User email          |
+  | code     | string | Yes      | Verification code   |
+  | username | string | Yes      | Player name         |
+  | language | string | No       | Language            |
+- **Notes**:
+  - Verification code is usually valid for 5 minutes.
+  - Username and email must be unique.
+  - Registration may require admin approval.
+
+### Check Review Status {#check-review-status}
+- **Endpoint**: `GET /api/review/status`
+- **Purpose**: Check the review status of a registration.
+- **Permission**: Public
+
+## User {#user}
+
+### Get User Status {#get-user-status}
+- **Endpoint**: `GET /api/user/status`
+- **Purpose**: Query the current status of a user.
+- **Permission**: Public
+
+## Authentication {#authentication}
+
+### User Login {#user-login}
+- **Endpoint**: `POST /api/login`
+- **Purpose**: User login (non-admin).
+- **Permission**: Public
+
+### Admin Login {#admin-login}
+- **Endpoint**: `POST /api/admin/login`
+- **Purpose**: Admin login to backend management panel.
+- **Permission**: Public
+- **Request Header**: `Content-Type: application/json`
+- **Request Parameters**:
+  | Field    | Type   | Required | Description            |
+  |----------|--------|----------|------------------------|
+  | username | string | Yes      | Player username        |
+  | password | string | Yes      | Player password        |
+  | language | string | No       | Language               |
+- **Notes**:
+  - Admin login verifies against registered player credentials. Only server OPs can access the admin panel.
+  - All admin APIs require `Authorization: Bearer <token>` in the header after login.
+
+## Admin Endpoints {#admin-endpoints}
+
+### Verify Admin Token {#verify-admin-token}
+- **Endpoint**: `GET /api/admin/verify`
+- **Purpose**: Verify if the admin token is still valid.
+- **Permission**: Admin (token required)
+
+### Get User List {#get-user-list}
+- **Endpoint**: `GET /api/admin/users`
+- **Purpose**: Get users with pagination, search, and status filtering.
+- **Permission**: Admin (token required)
+- **Query Parameters**: `page`, `size`, `search`, `status`
+
+### Approve User {#approve-user}
+- **Endpoint**: `POST /api/admin/user/approve`
+- **Purpose**: Approve a pending user's registration.
+- **Permission**: Admin (token required)
+
+### Reject User {#reject-user}
+- **Endpoint**: `POST /api/admin/user/reject`
+- **Purpose**: Reject a pending user's registration.
+- **Permission**: Admin (token required)
+
+### Delete User {#delete-user}
+- **Endpoint**: `POST /api/admin/user/delete`
+- **Purpose**: Delete a user from the system.
+- **Permission**: Admin (token required)
+
+### Ban User {#ban-user}
+- **Endpoint**: `POST /api/admin/user/ban`
+- **Purpose**: Ban a user (change status to banned).
+- **Permission**: Admin (token required)
+
+### Unban User {#unban-user}
+- **Endpoint**: `POST /api/admin/user/unban`
+- **Purpose**: Unban a user (change status from banned to approved).
+- **Permission**: Admin (token required)
+
+### Change User Password {#change-user-password}
+- **Endpoint**: `POST /api/admin/user/password`
+- **Purpose**: Change a user's password.
+- **Permission**: Admin (token required)
+
+### Get Audit Logs {#get-audit-logs}
+- **Endpoint**: `GET /api/admin/audits`
+- **Purpose**: Get audit log records.
+- **Permission**: Admin (token required)
+
+### Sync AuthMe Data {#sync-authme-data}
+- **Endpoint**: `POST /api/admin/sync`
+- **Purpose**: Trigger AuthMe data synchronization.
+- **Permission**: Admin (token required)
+
+## Discord Integration {#discord-integration}
+
+### Discord Auth {#discord-auth}
+- **Endpoint**: `GET /api/discord/auth`
+- **Purpose**: Initiate Discord OAuth2 authorization flow.
+- **Permission**: Public
+
+### Discord Callback {#discord-callback}
+- **Endpoint**: `GET /api/discord/callback`
+- **Purpose**: Handle Discord OAuth2 callback.
+- **Permission**: Public
+
+### Discord Status {#discord-status}
+- **Endpoint**: `GET /api/discord/status`
+- **Purpose**: Check Discord linking status for a user.
+- **Permission**: Public
+
+### Discord Unlink {#discord-unlink}
+- **Endpoint**: `POST /api/discord/unlink`
+- **Purpose**: Unlink a user's Discord account.
+- **Permission**: Public
+
+## Version {#version}
+
+### Get Version {#get-version}
+- **Endpoint**: `GET /api/version`
+- **Purpose**: Get the plugin version and check for updates.
+- **Permission**: Public
+
+---
+
+> For more APIs and parameters, see the source code or frontend `src/services/api.ts`.

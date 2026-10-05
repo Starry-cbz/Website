@@ -1,0 +1,242 @@
+---
+title: "命令与权限"
+canonical: "https://www.kitemc.com/arcpass/commands"
+---
+
+<span id="命令与权限" />
+
+本页面列出 ArcPass 的所有命令和权限节点。
+
+## 命令别名 {#命令别名}
+
+主命令 `/arcpass` 支持以下别名：
+
+- `/ap`
+- `/battlepass`
+- `/bp`
+- `/pass`
+
+## 玩家命令 {#玩家命令}
+
+| 命令 | 说明 | 权限 |
+|------|------|------|
+| `/arcpass` | 打开通行证主界面 | `arcpass.use` |
+| `/arcpass help` | 查看帮助信息 | `arcpass.use` |
+| `/arcpass level` | 查看等级和经验 | `arcpass.command.level` |
+| `/arcpass quests` | 查看当前任务 | `arcpass.command.quests` |
+| `/arcpass claim <等级> [档位]` | 领取等级奖励 | `arcpass.command.claim` |
+| `/arcpass buy <档位>` | 购买通行证档位 | `arcpass.command.buy` |
+| `/arcpass leaderboard [类型]` | 查看排行榜 | `arcpass.use` |
+| `/arcpass top [类型]` | 查看排行榜（别名） | `arcpass.use` |
+| `/arcpass rewards` | 查看可领取奖励 | `arcpass.use` |
+
+### 命令详解 {#命令详解}
+
+#### /arcpass level {#arcpass-level}
+
+显示玩家当前的通行证状态：
+
+```
+/arcpass level
+```
+
+输出示例：
+```
+=== 通行证等级 ===
+当前等级: 15
+总经验值: 2500
+升级进度: 75/100 (75%)
+已拥有档位: 免费, 高级
+```
+
+#### /arcpass claim {#arcpass-claim}
+
+领取指定等级的奖励：
+
+```
+/arcpass claim <等级> [档位]
+```
+
+- `等级` - 要领取的等级（必填）
+- `档位` - 要领取的档位，默认为 `free`（可选）
+
+示例：
+```
+/arcpass claim 10 free      # 领取 10 级免费奖励
+/arcpass claim 10 premium   # 领取 10 级高级奖励
+```
+
+#### /arcpass buy {#arcpass-buy}
+
+购买通行证档位：
+
+```
+/arcpass buy <档位>
+```
+
+示例：
+```
+/arcpass buy premium   # 购买高级通行证
+/arcpass buy vip       # 购买 VIP 通行证
+```
+
+#### /arcpass leaderboard {#arcpass-leaderboard}
+
+查看排行榜：
+
+```
+/arcpass leaderboard [类型] [页码]
+```
+
+类型选项：
+- `level` / `lvl` - 等级排行（默认）
+- `exp` / `experience` - 经验排行
+- `season` - 赛季排行
+
+## 管理员命令 {#管理员命令}
+
+所有管理员命令需要 `arcpass.admin` 权限。
+
+| 命令 | 说明 |
+|------|------|
+| `/arcpass admin` | 打开管理面板 |
+| `/arcpass admin help` | 查看管理员帮助 |
+| `/arcpass admin reload` | 重载配置文件 |
+| `/arcpass admin season start <名称>` | 开始新赛季 |
+| `/arcpass admin season end` | 结束当前赛季 |
+| `/arcpass admin season info` | 查看赛季信息 |
+| `/arcpass admin give <玩家> exp <数量>` | 给予玩家经验 |
+| `/arcpass admin give <玩家> level <数量>` | 给予玩家等级 |
+| `/arcpass admin set <玩家> tier <档位>` | 设置玩家档位 |
+| `/arcpass admin reset <玩家>` | 重置玩家数据 |
+| `/arcpass admin lookup <玩家>` | 查询玩家数据 |
+| `/arcpass admin quest complete <玩家> <任务ID>` | 完成指定任务 |
+| `/arcpass admin leaderboard refresh` | 刷新排行榜缓存 |
+| `/arcpass admin debug [toggle]` | 切换调试模式 |
+| `/arcpass admin save` | 保存所有数据 |
+| `/arcpass admin broadcast <消息>` | 全服广播 |
+| `/arcpass admin confirm` | 确认待执行的危险操作 |
+| `/arcpass admin cancel` | 取消待执行的危险操作 |
+
+### 管理命令详解 {#管理命令详解}
+
+#### /arcpass admin season {#arcpass-admin-season}
+
+赛季管理命令：
+
+```bash
+# 开始新赛季
+/arcpass admin season start 第一赛季
+
+# 结束当前赛季
+/arcpass admin season end
+
+# 查看赛季信息
+/arcpass admin season info
+```
+
+<Warning>
+
+**危险操作**
+
+开始/结束赛季是重要操作，会影响所有玩家数据。命令执行前会要求确认。
+
+</Warning>
+
+#### /arcpass admin give {#arcpass-admin-give}
+
+给予玩家经验或等级：
+
+```bash
+# 给予 1000 经验
+/arcpass admin give Steve exp 1000
+
+# 给予 5 个等级
+/arcpass admin give Steve level 5
+```
+
+#### /arcpass admin lookup {#arcpass-admin-lookup}
+
+查询玩家详细数据：
+
+```
+/arcpass admin lookup Steve
+```
+
+输出示例：
+```
+=== 玩家数据: Steve ===
+UUID: 12345678-1234-...
+等级: 25
+总经验: 5000
+升级进度: 30/150
+已拥有档位: free, premium
+已完成任务: 42
+已领取奖励: 38
+```
+
+## 权限节点 {#权限节点}
+
+### 玩家权限 {#玩家权限}
+
+| 权限 | 说明 | 默认 |
+|------|------|------|
+| `arcpass.use` | 基本使用权限 | true |
+| `arcpass.command.level` | 使用 /arcpass level | true |
+| `arcpass.command.quests` | 使用 /arcpass quests | true |
+| `arcpass.command.claim` | 使用 /arcpass claim | true |
+| `arcpass.command.buy` | 使用 /arcpass buy | true |
+| `arcpass.command.*` | 所有玩家命令 | op |
+
+### 管理员权限 {#管理员权限}
+
+| 权限 | 说明 | 默认 |
+|------|------|------|
+| `arcpass.admin` | 所有管理权限 | op |
+| `arcpass.bypass.cooldown` | 绕过冷却时间 | op |
+
+### 权限示例（LuckPerms） {#权限示例-luckperms}
+
+```bash
+# 给予基本使用权限
+/lp group default permission set arcpass.use true
+
+# 给予 VIP 组购买权限
+/lp group vip permission set arcpass.command.buy true
+
+# 给予管理员全部权限
+/lp group admin permission set arcpass.admin true
+```
+
+## Tab 补全 {#tab-补全}
+
+ArcPass 支持智能 Tab 补全：
+
+- 命令参数自动补全
+- 玩家名称补全
+- 档位/任务 ID 补全
+- 在线玩家列表
+
+## 控制台命令 {#控制台命令}
+
+以下命令可在控制台执行：
+
+```bash
+# 重载配置
+arcpass admin reload
+
+# 赛季管理
+arcpass admin season start 测试赛季
+
+# 给予玩家奖励
+arcpass admin give Steve exp 1000
+
+# 查询玩家数据
+arcpass admin lookup Steve
+```
+
+<Tip>
+
+控制台执行危险操作时，会跳过 GUI 确认，直接要求命令确认。输入 `/arcpass admin confirm` 确认操作。
+
+</Tip>

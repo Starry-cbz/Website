@@ -1,0 +1,233 @@
+---
+title: "Commands & Permissions"
+canonical: "https://www.kitemc.com/en/arcpass/commands"
+---
+
+<span id="commands-permissions" />
+
+This page lists all ArcPass commands and permission nodes.
+
+## Command Aliases {#command-aliases}
+
+The main command `/arcpass` supports these aliases:
+- `/ap`
+- `/battlepass`
+- `/bp`
+- `/pass`
+
+## Player Commands {#player-commands}
+
+| Command | Description | Permission |
+|---------|-------------|------------|
+| `/arcpass` | Open main interface | `arcpass.use` |
+| `/arcpass help` | View help information | `arcpass.use` |
+| `/arcpass level` | View level and XP | `arcpass.command.level` |
+| `/arcpass quests` | View current quests | `arcpass.command.quests` |
+| `/arcpass claim <level> [tier]` | Claim level reward | `arcpass.command.claim` |
+| `/arcpass buy <tier>` | Purchase pass tier | `arcpass.command.buy` |
+| `/arcpass leaderboard [type]` | View leaderboard | `arcpass.use` |
+| `/arcpass top [type]` | View leaderboard (alias) | `arcpass.use` |
+| `/arcpass rewards` | View available rewards | `arcpass.use` |
+
+### Command Details {#command-details}
+
+#### /arcpass level {#arcpass-level}
+
+Displays player's current pass status:
+
+```
+/arcpass level
+```
+
+Output example:
+```
+=== Pass Level ===
+Current Level: 15
+Total XP: 2500
+Progress: 75/100 (75%)
+Owned Tiers: Free, Premium
+```
+
+#### /arcpass claim {#arcpass-claim}
+
+Claim rewards for a specific level:
+
+```
+/arcpass claim <level> [tier]
+```
+
+- `level` - Level to claim (required)
+- `tier` - Tier to claim, defaults to `free` (optional)
+
+Examples:
+```
+/arcpass claim 10 free      # Claim level 10 free reward
+/arcpass claim 10 premium   # Claim level 10 premium reward
+```
+
+#### /arcpass buy {#arcpass-buy}
+
+Purchase a pass tier:
+
+```
+/arcpass buy <tier>
+```
+
+Examples:
+```
+/arcpass buy premium   # Purchase premium pass
+/arcpass buy vip       # Purchase VIP pass
+```
+
+#### /arcpass leaderboard {#arcpass-leaderboard}
+
+View leaderboards:
+
+```
+/arcpass leaderboard [type] [page]
+```
+
+Type options:
+- `level` / `lvl` - Level ranking (default)
+- `exp` / `experience` - XP ranking
+- `season` - Season ranking
+
+## Admin Commands {#admin-commands}
+
+All admin commands require `arcpass.admin` permission.
+
+| Command | Description |
+|---------|-------------|
+| `/arcpass admin` | Open admin panel |
+| `/arcpass admin help` | View admin help |
+| `/arcpass admin reload` | Reload configuration |
+| `/arcpass admin season start <name>` | Start new season |
+| `/arcpass admin season end` | End current season |
+| `/arcpass admin season info` | View season info |
+| `/arcpass admin give <player> exp <amount>` | Give player XP |
+| `/arcpass admin give <player> level <amount>` | Give player levels |
+| `/arcpass admin set <player> tier <tier>` | Set player tier |
+| `/arcpass admin reset <player>` | Reset player data |
+| `/arcpass admin lookup <player>` | Query player data |
+| `/arcpass admin quest complete <player> <quest_id>` | Complete quest |
+| `/arcpass admin leaderboard refresh` | Refresh leaderboard cache |
+| `/arcpass admin debug [toggle]` | Toggle debug mode |
+| `/arcpass admin save` | Save all data |
+| `/arcpass admin broadcast <message>` | Server broadcast |
+| `/arcpass admin confirm` | Confirm pending dangerous action |
+| `/arcpass admin cancel` | Cancel pending dangerous action |
+
+### Admin Command Details {#admin-command-details}
+
+#### /arcpass admin season {#arcpass-admin-season}
+
+Season management:
+
+```bash
+# Start new season
+/arcpass admin season start Season1
+
+# End current season
+/arcpass admin season end
+
+# View season info
+/arcpass admin season info
+```
+
+<Warning>
+
+**Dangerous Operation**
+
+Starting/ending seasons affects all player data. Confirmation required.
+
+</Warning>
+
+#### /arcpass admin give {#arcpass-admin-give}
+
+Give player XP or levels:
+
+```bash
+# Give 1000 XP
+/arcpass admin give Steve exp 1000
+
+# Give 5 levels
+/arcpass admin give Steve level 5
+```
+
+#### /arcpass admin lookup {#arcpass-admin-lookup}
+
+Query player data:
+
+```
+/arcpass admin lookup Steve
+```
+
+Output example:
+```
+=== Player Data: Steve ===
+UUID: 12345678-1234-...
+Level: 25
+Total XP: 5000
+Progress: 30/150
+Owned Tiers: free, premium
+Completed Quests: 42
+Claimed Rewards: 38
+```
+
+## Permission Nodes {#permission-nodes}
+
+### Player Permissions {#player-permissions}
+
+| Permission | Description | Default |
+|------------|-------------|---------|
+| `arcpass.use` | Basic usage | true |
+| `arcpass.command.level` | Use /arcpass level | true |
+| `arcpass.command.quests` | Use /arcpass quests | true |
+| `arcpass.command.claim` | Use /arcpass claim | true |
+| `arcpass.command.buy` | Use /arcpass buy | true |
+| `arcpass.command.*` | All player commands | op |
+
+### Admin Permissions {#admin-permissions}
+
+| Permission | Description | Default |
+|------------|-------------|---------|
+| `arcpass.admin` | All admin permissions | op |
+| `arcpass.bypass.cooldown` | Bypass cooldowns | op |
+
+### LuckPerms Examples {#luckperms-examples}
+
+```bash
+# Grant basic usage
+/lp group default permission set arcpass.use true
+
+# Grant VIP group purchase permission
+/lp group vip permission set arcpass.command.buy true
+
+# Grant admin full permissions
+/lp group admin permission set arcpass.admin true
+```
+
+## Tab Completion {#tab-completion}
+
+ArcPass supports smart tab completion:
+- Command arguments auto-complete
+- Player names
+- Tier/quest IDs
+- Online player list
+
+## Console Commands {#console-commands}
+
+These commands can run from console:
+
+```bash
+arcpass admin reload
+arcpass admin season start TestSeason
+arcpass admin give Steve exp 1000
+arcpass admin lookup Steve
+```
+
+<Tip>
+
+Console dangerous operations skip GUI confirmation, requiring command confirmation via `/arcpass admin confirm`.
+
+</Tip>

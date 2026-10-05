@@ -1,0 +1,163 @@
+---
+title: "PlaceholderAPI 变量"
+canonical: "https://www.kitemc.com/arcpass/placeholders"
+---
+
+<span id="placeholderapi-变量" />
+
+ArcPass 提供丰富的 PlaceholderAPI 变量，可在计分板、聊天、全息图等插件中使用。
+
+## 前置要求 {#前置要求}
+
+- PlaceholderAPI 2.11.0+
+
+安装后，ArcPass 会自动注册扩展，无需额外配置。
+
+## 变量列表 {#变量列表}
+
+### 玩家数据 {#玩家数据}
+
+| 变量 | 说明 | 示例输出 |
+|------|------|----------|
+| `%arcpass_level%` | 当前等级 | `25` |
+| `%arcpass_exp%` | 总经验值 | `5000` |
+| `%arcpass_experience%` | 总经验值（别名） | `5000` |
+| `%arcpass_total_exp%` | 总经验值（别名） | `5000` |
+| `%arcpass_current_exp%` | 当前等级经验 | `75` |
+| `%arcpass_required_exp%` | 升级所需经验 | `150` |
+| `%arcpass_exp_to_level%` | 升级所需经验（别名） | `150` |
+| `%arcpass_progress%` | 升级进度百分比 | `50.0` |
+| `%arcpass_progress_bar%` | 进度条（10格） | `§a█████§7█████` |
+
+### 档位信息 {#档位信息}
+
+| 变量 | 说明 | 示例输出 |
+|------|------|----------|
+| `%arcpass_tiers%` | 已拥有档位列表 | `free, premium` |
+| `%arcpass_unlocked_tiers%` | 已拥有档位列表（别名） | `free, premium` |
+| `%arcpass_tier_count%` | 已拥有档位数量 | `2` |
+| `%arcpass_has_premium%` | 是否拥有 premium 档位 | `true` |
+| `%arcpass_has_tier_<档位>%` | 是否拥有指定档位 | `true` / `false` |
+
+### 任务信息 {#任务信息}
+
+| 变量 | 说明 | 示例输出 |
+|------|------|----------|
+| `%arcpass_quests_completed%` | 已完成任务数 | `42` |
+| `%arcpass_quest_<任务ID>%` | 指定任务进度 | `5/10` |
+
+### 奖励信息 {#奖励信息}
+
+| 变量 | 说明 | 示例输出 |
+|------|------|----------|
+| `%arcpass_rewards_claimed%` | 已领取奖励数 | `38` |
+
+### 赛季信息 {#赛季信息}
+
+| 变量 | 说明 | 示例输出 |
+|------|------|----------|
+| `%arcpass_season%` | 当前赛季名称 | `第一赛季` |
+| `%arcpass_season_name%` | 当前赛季名称（别名） | `第一赛季` |
+| `%arcpass_season_number%` | 赛季编号 | `1` |
+| `%arcpass_season_status%` | 赛季状态 | `ACTIVE` |
+| `%arcpass_season_time_remaining%` | 赛季剩余时间 | `7d 12h` |
+
+### 排行榜 {#排行榜}
+
+| 变量 | 说明 | 示例输出 |
+|------|------|----------|
+| `%arcpass_rank%` | 等级排名 | `5` |
+| `%arcpass_rank_level%` | 等级排名（别名） | `5` |
+| `%arcpass_rank_exp%` | 经验排名 | `3` |
+| `%arcpass_rank_experience%` | 经验排名（别名） | `3` |
+| `%arcpass_rank_season%` | 赛季排名 | `10` |
+
+## 使用示例 {#使用示例}
+
+### 计分板（FeatherBoard） {#计分板-featherboard}
+
+```yaml
+lines:
+  - "&6通行证等级: &e%arcpass_level%"
+  - "&7经验: &f%arcpass_current_exp%&7/&f%arcpass_required_exp%"
+  - "&7进度: %arcpass_progress_bar%"
+  - ""
+  - "&6赛季: &e%arcpass_season_name%"
+  - "&7剩余: &f%arcpass_season_time_remaining%"
+```
+
+### 聊天格式（EssentialsX Chat） {#聊天格式-essentialsx-chat}
+
+```yaml
+format: "[Lv.%arcpass_level%] {DISPLAYNAME}: {MESSAGE}"
+```
+
+### Tab 列表（TAB） {#tab-列表-tab}
+
+```yaml
+tablist:
+  header:
+    - "&6=== 通行证 ==="
+    - "&7等级: &e%arcpass_level% &7| 经验: &e%arcpass_exp%"
+```
+
+### 全息图（HolographicDisplays） {#全息图-holographicdisplays}
+
+```
+&6通行证排行榜
+&7#1 &e{top_player_1} &7- Lv.{top_level_1}
+&7#2 &e{top_player_2} &7- Lv.{top_level_2}
+&7#3 &e{top_player_3} &7- Lv.{top_level_3}
+&7...
+&7你的排名: &e%arcpass_rank%
+```
+
+## 进度条自定义 {#进度条自定义}
+
+默认进度条使用 10 格显示，格式为：
+
+```
+已完成部分: §a█
+未完成部分: §7█
+```
+
+如需自定义进度条样式，可以使用 `%arcpass_progress%` 配合其他插件的进度条功能。
+
+## 条件变量 {#条件变量}
+
+配合条件插件使用：
+
+```yaml
+# 示例：仅向拥有 premium 档位的玩家显示特定内容
+condition: "%arcpass_has_premium% == true"
+```
+
+## 缓存说明 {#缓存说明}
+
+为了性能考虑，部分变量会进行缓存：
+
+| 变量类型 | 缓存时间 |
+|----------|----------|
+| 玩家数据 | 实时 |
+| 排行榜排名 | 2 分钟 |
+| 赛季信息 | 1 分钟 |
+
+排行榜排名首次查询时会显示 `...`，加载完成后显示实际排名。
+
+## 故障排除 {#故障排除}
+
+### 变量显示为原文 {#变量显示为原文}
+
+1. 确认 PlaceholderAPI 已正确安装
+2. 检查服务器控制台是否有注册成功的日志
+3. 使用 `/papi parse me %arcpass_level%` 测试
+
+### 变量显示为空 {#变量显示为空}
+
+1. 确认玩家数据已加载（玩家需要在线）
+2. 对于赛季相关变量，确认有活动的赛季
+3. 检查变量名是否正确（区分大小写）
+
+### 排名显示为 ? {#排名显示为}
+
+排行榜数据正在加载，稍等片刻后刷新。

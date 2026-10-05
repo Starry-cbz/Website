@@ -1,0 +1,200 @@
+---
+title: "System Requirements"
+canonical: "https://www.kitemc.com/en/arcpass/setup/requirements"
+---
+
+<span id="system-requirements" />
+
+This page lists all requirements and dependencies for running ArcPass.
+
+## Minimum Requirements {#minimum-requirements}
+
+| Component | Minimum | Recommended |
+|-----------|---------|-------------|
+| Minecraft Version | 1.18 | 1.20+ |
+| Java Version | 17 | 21 |
+| Server Software | Spigot | Paper / Folia |
+| RAM | 2GB | 4GB+ |
+| Storage | 50MB | 100MB+ |
+
+## Server Compatibility {#server-compatibility}
+
+### Fully Supported {#fully-supported}
+
+| Server | Version Range | Notes |
+|--------|---------------|-------|
+| Paper | 1.18 - 1.21+ | Recommended, best performance |
+| Folia | 1.20 - 1.21+ | Recommended for large servers |
+| Purpur | 1.18 - 1.21+ | Paper-based |
+| Spigot | 1.18 - 1.21+ | Standard support |
+
+### Partial Support {#partial-support}
+
+| Server | Notes |
+|--------|-------|
+| Bukkit | Basic features work, some advanced features limited |
+| Modded (Forge/Fabric) | Not supported |
+
+### Not Supported {#not-supported}
+
+- CraftBukkit
+- Versions below 1.18
+- Bedrock servers
+
+## Java Version {#java-version}
+
+### Java 17 (Minimum) {#java-17-minimum}
+
+ArcPass is compiled with Java 17 features. Java 17+ is required.
+
+### Java 21 (Recommended) {#java-21-recommended}
+
+We recommend Java 21 LTS:
+
+- Better performance
+- Lower memory usage
+- Long-term support
+
+### Check Java Version {#check-java-version}
+
+```bash
+java -version
+```
+
+Expected output:
+
+```
+openjdk version "21.0.1" 2023-10-17
+OpenJDK Runtime Environment (build 21.0.1+12)
+OpenJDK 64-Bit Server VM (build 21.0.1+12, mixed mode, sharing)
+```
+
+## Plugin Dependencies {#plugin-dependencies}
+
+### Required {#required}
+
+None. ArcPass can run standalone.
+
+### Optional Dependencies {#optional-dependencies}
+
+These plugins enhance ArcPass functionality:
+
+#### Economy {#economy}
+
+| Plugin | Version | Purpose |
+|--------|---------|---------|
+| Vault | 1.7.3+ | Economy bridge |
+| CMI | 9.0+ | Direct economy support |
+
+Required for economy rewards and tier purchases.
+
+#### Permissions {#permissions}
+
+| Plugin | Version | Purpose |
+|--------|---------|---------|
+| LuckPerms | 5.4+ | Permission rewards, prefix/suffix |
+
+Required for permission and group rewards.
+
+#### Placeholders {#placeholders}
+
+| Plugin | Version | Purpose |
+|--------|---------|---------|
+| PlaceholderAPI | 2.11.0+ | Placeholder variables |
+
+Required for displaying ArcPass data in scoreboards, chat plugins, etc.
+
+#### Title Systems {#title-systems}
+
+| Plugin | Version | Purpose | Folia |
+|--------|---------|---------|-------|
+| DeluxeTags | 1.8+ | Title rewards | ❌ |
+| TAB | 4.0+ | Title rewards (alternative) | ✅ |
+
+<Tip>
+
+Use TAB instead of DeluxeTags if running Folia.
+
+</Tip>
+
+#### Quest Triggers {#quest-triggers}
+
+| Plugin | Version | Purpose |
+|--------|---------|---------|
+| MythicMobs | 5.0+ | Custom mob kill quests |
+| Jobs Reborn | 5.0+ | Job experience quests |
+
+#### Custom Items {#custom-items}
+
+| Plugin | Version | Purpose |
+|--------|---------|---------|
+| Oraxen | 1.150+ | Custom item rewards |
+| ItemsAdder | 3.5+ | Custom item rewards |
+
+## Database {#database}
+
+### SQLite (Default) {#sqlite-default}
+
+- No additional setup
+- Suitable for small servers
+- Data stored in `plugins/ArcPass/data.db`
+
+### MySQL {#mysql}
+
+- Recommended for medium/large servers
+- Supports multi-server data sharing
+- Requires MySQL 5.7+ or MariaDB 10.2+
+
+## Network Requirements {#network-requirements}
+
+### License Validation {#license-validation}
+
+- Connects to `license.kitemc.com`
+- Port: 443 (HTTPS)
+- Results cached after initial validation
+
+### Firewall Settings {#firewall-settings}
+
+Ensure server can access:
+
+```
+license.kitemc.com:443
+```
+
+## Performance Recommendations {#performance-recommendations}
+
+### Small Servers (< 50 players) {#small-servers-50-players}
+
+- Use SQLite database
+- Default configuration is fine
+
+### Medium Servers (50-200 players) {#medium-servers-50-200-players}
+
+- Use MySQL database
+- Increase cache sizes
+
+### Large Servers (200+ players) {#large-servers-200-players}
+
+- Use MySQL database
+- Consider Folia server
+- Optimize connection pool
+
+```yaml
+# database.yml
+mysql:
+  pool:
+    maximum-pool-size: 10
+    minimum-idle: 5
+```
+
+## Next Steps {#next-steps}
+
+After confirming requirements:
+<Columns cols={2}>
+  <Card title="Install Plugin" icon="download" href="/en/arcpass/setup/installation">
+  Download and install guide
+</Card>
+  <Card title="Activate License" icon="key" href="/en/arcpass/setup/license">
+  Configure license key
+</Card>
+</Columns>

@@ -1,0 +1,67 @@
+---
+title: "VerifyMC 历史下载"
+description: "获取 VerifyMC 已有发行文件与匹配的代理端插件。"
+mode: "wide"
+canonical: "https://www.kitemc.com/archive/verifymc/download"
+---
+
+import {
+  Downloads,
+  releaseSections,
+  selectKiteMarketAssets,
+  localizedReleaseBody,
+  safeWebLink,
+  selectSingleAsset,
+  downloadUrl,
+  normalizeReleases,
+} from "/snippets/Downloads.jsx";
+
+<Warning>
+  VerifyMC 已停止维护。本页仅供查阅与下载历史版本，不代表对当前 Minecraft 版本的兼容承诺。
+</Warning>
+
+<Columns cols={2}>
+  <Card title="GitHub Releases" icon="github" href="https://github.com/KiteMC/VerifyMC/releases">直接查看主插件和代理端扩展的历史文件。</Card>
+  <Card title="归档安装指南" icon="archive" href="/archive/verifymc/guide">查看已有配置和部署说明。</Card>
+</Columns>
+
+## 历史版本要求 {#版本要求}
+
+| 项目 | 原文档声明 |
+| --- | --- |
+| Minecraft | 1.13 起 |
+| Java | 17+ |
+| 服务端 | Paper / Spigot / Folia |
+| 可选代理端 | BungeeCord / Velocity |
+
+上述范围来自停止维护前的文档，不表示已验证后续服务端版本。
+
+## 历史版本 {#版本列表}
+
+<Downloads repo="VerifyMC" lang="zh" showProxy={true} />
+
+<Note>
+  主插件和 `verifymc-proxy` 均来自公开 GitHub Releases。列表无法读取时，请使用上方 GitHub 入口；不要混用不同版本的主插件与代理扩展。
+</Note>
+
+## 历史部署步骤 {#快速部署步骤}
+
+<Steps>
+  <Step title="获取匹配文件">
+    从 GitHub Releases 下载所需版本的 `VerifyMC-*.jar`。
+  </Step>
+  <Step title="安装后端插件">
+    将主插件放入后端服务器 `plugins/` 目录，正常重启服务器。
+  </Step>
+  <Step title="可选代理端扩展">
+    按需将同版本 `verifymc-proxy-*.jar` 放入 BungeeCord 或 Velocity。
+  </Step>
+  <Step title="参考归档配置">
+    阅读归档安装指南，配置数据库、邮件和问卷。先备份已有配置及数据。
+  </Step>
+</Steps>
+
+<Columns cols={2}>
+  <Card title="公开源码" icon="github" href="https://github.com/KiteMC/VerifyMC">查看已有实现与历史更新记录。</Card>
+  <Card title="归档文档" icon="archive" href="/archive/verifymc">返回 VerifyMC 历史文档。</Card>
+</Columns>

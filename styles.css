@@ -1,0 +1,75 @@
+:root {
+  --km-accent: #5672cd;
+  --km-text: #18243c;
+  --km-muted: #58667c;
+  --km-border: #e3e8f0;
+  --km-soft: #f5f7fc;
+}
+
+.dark {
+  --km-accent: #a5b8ff;
+  --km-text: #eef2ff;
+  --km-muted: #a7b1c5;
+  --km-border: #2c3445;
+  --km-soft: #161c2a;
+}
+
+.km-landing {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 32px 28px 0;
+  color: var(--km-text);
+}
+
+.km-hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 64px;
+  padding: 66px 0 64px;
+  border-bottom: 1px solid var(--km-border);
+}
+
+.km-hero-copy { max-width: 780px; }
+.km-hero h1 { margin: 0; font-size: clamp(38px, 5vw, 64px); line-height: 1.1; letter-spacing: -0.045em; font-weight: 700; }
+.km-eyebrow { margin: 0 0 16px; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; color: var(--km-accent); }
+.km-hero-subtitle { margin: 18px 0 0; font-size: clamp(22px, 3vw, 30px); line-height: 1.5; font-weight: 550; letter-spacing: -0.02em; }
+.km-hero-description { max-width: 660px; margin: 16px 0 0; font-size: 17px; line-height: 1.85; color: var(--km-muted); }
+.km-hero-icon { width: 160px; height: 160px; object-fit: contain; flex: 0 0 auto; }
+.km-actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 28px 0 0; }
+.km-button { display: inline-flex; align-items: center; justify-content: center; gap: 20px; padding: 11px 18px; border-radius: 9px; border: 1px solid var(--km-border); color: var(--km-text); text-decoration: none; font-size: 14px; font-weight: 600; line-height: 1.5; transition: border-color 150ms ease, background-color 150ms ease; }
+.km-button:hover { border-color: var(--km-accent); background-color: var(--km-soft); }
+.km-button-primary { background: #5672cd; border-color: #5672cd; color: #fff; }
+.km-button-primary:hover { background: #415dae; border-color: #415dae; }
+.km-button:focus-visible, .km-landing a:focus-visible { outline: 2px solid var(--km-accent); outline-offset: 4px; }
+.km-section { padding: 44px 0 0; }
+.km-section h2 { margin: 0 0 24px; font-size: 26px; line-height: 1.5; letter-spacing: -0.025em; font-weight: 650; }
+.km-section h3 { margin: 28px 0 16px; font-size: 20px; line-height: 1.5; font-weight: 600; }
+.km-section > p { margin: 16px 0; font-size: 16px; line-height: 1.9; color: var(--km-muted); }
+.km-section > p a { color: var(--km-accent); text-decoration: underline; text-underline-offset: 3px; }
+.km-product-name { display: flex; align-items: center; gap: 12px; margin: 0 0 16px; }
+.km-product-name img { width: 40px; height: 40px; margin: 0; }
+.km-product-name span { font-size: 20px; font-weight: 650; }
+.km-cover { display: block; width: 100%; border-radius: 16px; margin-top: 32px; }
+.km-gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.km-gallery figure, .km-screenshot { margin: 24px 0; }
+.km-gallery img { display: block; width: 100%; border: 1px solid var(--km-border); border-radius: 12px; }
+.km-gallery figcaption, .km-screenshot figcaption { margin: 12px 0 0; text-align: center; font-size: 14px; color: var(--km-muted); }
+.km-screenshot-frame { overflow: hidden; border: 1px dashed var(--km-border); border-radius: 12px; background: var(--km-soft); }
+.km-screenshot-image { display: block; width: 100%; height: auto; }
+.km-screenshot-pending { display: none; }
+.km-screenshot-placeholder { display: flex; min-height: 220px; padding: 28px; align-items: center; justify-content: center; flex-direction: column; gap: 12px; text-align: center; color: var(--km-muted); }
+.km-screenshot-placeholder strong { color: var(--km-text); font-size: 16px; }
+.km-screenshot-placeholder p { margin: 0; max-width: 500px; font-size: 14px; line-height: 1.75; }
+.km-landing-footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px; margin-top: 64px; padding: 30px 0; border-top: 1px solid var(--km-border); font-size: 13px; color: var(--km-muted); }
+.km-footer-brand { display: inline-flex; align-items: center; gap: 10px; color: var(--km-text); font-weight: 600; }
+.km-landing-footer nav { display: flex; flex-wrap: wrap; gap: 24px; }
+.km-landing-footer p { flex-basis: 100%; margin: 0; }
+
+@media (max-width: 640px) {
+  .km-landing { padding: 12px 20px 0; }
+  .km-hero { align-items: flex-start; flex-direction: column-reverse; gap: 24px; padding: 32px 0 40px; }
+  .km-hero-icon { width: 88px; height: 88px; }
+  .km-section { padding-top: 32px; }
+  .km-gallery { grid-template-columns: 1fr; gap: 0; }
+}

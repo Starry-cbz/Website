@@ -1,0 +1,161 @@
+---
+title: "PlaceholderAPI Variables"
+canonical: "https://www.kitemc.com/en/arcpass/placeholders"
+---
+
+<span id="placeholderapi-variables" />
+
+ArcPass provides extensive PlaceholderAPI variables for use in scoreboards, chat, holograms, and more.
+
+## Requirements {#requirements}
+
+- PlaceholderAPI 2.11.0+
+
+ArcPass automatically registers its expansion on startup.
+
+## Variable List {#variable-list}
+
+### Player Data {#player-data}
+
+| Variable | Description | Example |
+|----------|-------------|---------|
+| `%arcpass_level%` | Current level | `25` |
+| `%arcpass_exp%` | Total XP | `5000` |
+| `%arcpass_experience%` | Total XP (alias) | `5000` |
+| `%arcpass_total_exp%` | Total XP (alias) | `5000` |
+| `%arcpass_current_exp%` | Current level XP | `75` |
+| `%arcpass_required_exp%` | XP to next level | `150` |
+| `%arcpass_exp_to_level%` | XP to level (alias) | `150` |
+| `%arcpass_progress%` | Progress percentage | `50.0` |
+| `%arcpass_progress_bar%` | Progress bar (10 chars) | `§a█████§7█████` |
+
+### Tier Information {#tier-information}
+
+| Variable | Description | Example |
+|----------|-------------|---------|
+| `%arcpass_tiers%` | Owned tiers | `free, premium` |
+| `%arcpass_unlocked_tiers%` | Owned tiers (alias) | `free, premium` |
+| `%arcpass_tier_count%` | Number of tiers owned | `2` |
+| `%arcpass_has_premium%` | Has premium tier | `true` |
+| `%arcpass_has_tier_<tier>%` | Has specific tier | `true` / `false` |
+
+### Quest Information {#quest-information}
+
+| Variable | Description | Example |
+|----------|-------------|---------|
+| `%arcpass_quests_completed%` | Completed quests | `42` |
+| `%arcpass_quest_<quest_id>%` | Quest progress | `5/10` |
+
+### Reward Information {#reward-information}
+
+| Variable | Description | Example |
+|----------|-------------|---------|
+| `%arcpass_rewards_claimed%` | Claimed rewards | `38` |
+
+### Season Information {#season-information}
+
+| Variable | Description | Example |
+|----------|-------------|---------|
+| `%arcpass_season%` | Season name | `Season 1` |
+| `%arcpass_season_name%` | Season name (alias) | `Season 1` |
+| `%arcpass_season_number%` | Season number | `1` |
+| `%arcpass_season_status%` | Season status | `ACTIVE` |
+| `%arcpass_season_time_remaining%` | Time remaining | `7d 12h` |
+
+### Leaderboard {#leaderboard}
+
+| Variable | Description | Example |
+|----------|-------------|---------|
+| `%arcpass_rank%` | Level rank | `5` |
+| `%arcpass_rank_level%` | Level rank (alias) | `5` |
+| `%arcpass_rank_exp%` | XP rank | `3` |
+| `%arcpass_rank_experience%` | XP rank (alias) | `3` |
+| `%arcpass_rank_season%` | Season rank | `10` |
+
+## Usage Examples {#usage-examples}
+
+### Scoreboard (FeatherBoard) {#scoreboard-featherboard}
+
+```yaml
+lines:
+  - "&6Pass Level: &e%arcpass_level%"
+  - "&7XP: &f%arcpass_current_exp%&7/&f%arcpass_required_exp%"
+  - "&7Progress: %arcpass_progress_bar%"
+  - ""
+  - "&6Season: &e%arcpass_season_name%"
+  - "&7Remaining: &f%arcpass_season_time_remaining%"
+```
+
+### Chat Format (EssentialsX Chat) {#chat-format-essentialsx-chat}
+
+```yaml
+format: "[Lv.%arcpass_level%] {DISPLAYNAME}: {MESSAGE}"
+```
+
+### Tab List (TAB) {#tab-list-tab}
+
+```yaml
+tablist:
+  header:
+    - "&6=== Battle Pass ==="
+    - "&7Level: &e%arcpass_level% &7| XP: &e%arcpass_exp%"
+```
+
+### Hologram (HolographicDisplays) {#hologram-holographicdisplays}
+
+```
+&6Pass Leaderboard
+&7#1 &e{top_player_1} &7- Lv.{top_level_1}
+&7#2 &e{top_player_2} &7- Lv.{top_level_2}
+&7#3 &e{top_player_3} &7- Lv.{top_level_3}
+&7...
+&7Your Rank: &e%arcpass_rank%
+```
+
+## Progress Bar Customization {#progress-bar-customization}
+
+Default progress bar uses 10 characters:
+```
+Completed: §a█
+Remaining: §7█
+```
+
+Use `%arcpass_progress%` with other plugins for custom progress bars.
+
+## Conditional Variables {#conditional-variables}
+
+Use with condition plugins:
+
+```yaml
+condition: "%arcpass_has_premium% == true"
+```
+
+## Caching {#caching}
+
+For performance, some variables are cached:
+
+| Variable Type | Cache Duration |
+|---------------|----------------|
+| Player data | Real-time |
+| Leaderboard ranks | 2 minutes |
+| Season info | 1 minute |
+
+Leaderboard ranks show `...` while loading.
+
+## Troubleshooting {#troubleshooting}
+
+### Variable Shows Raw Text {#variable-shows-raw-text}
+
+1. Confirm PlaceholderAPI is installed
+2. Check console for registration success
+3. Test with `/papi parse me %arcpass_level%`
+
+### Variable Shows Empty {#variable-shows-empty}
+
+1. Confirm player is online
+2. For season variables, confirm active season exists
+3. Check variable name spelling (case-sensitive)
+
+### Rank Shows ? {#rank-shows}
+
+Leaderboard data is loading. Wait a moment and refresh.

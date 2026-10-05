@@ -1,0 +1,7176 @@
+{
+  "schema": 1,
+  "sourceCommit": "340aff85cba5eb76752439df02c884e030255b82",
+  "pages": [
+    {
+      "source": "docs/arcpass/commands/index.md",
+      "target": "/arcpass/commands",
+      "file": "arcpass/commands.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "命令与权限",
+          "id": "命令与权限"
+        },
+        {
+          "level": 2,
+          "line": 5,
+          "title": "命令别名",
+          "id": "命令别名"
+        },
+        {
+          "level": 2,
+          "line": 14,
+          "title": "玩家命令",
+          "id": "玩家命令"
+        },
+        {
+          "level": 3,
+          "line": 28,
+          "title": "命令详解",
+          "id": "命令详解"
+        },
+        {
+          "level": 4,
+          "line": 30,
+          "title": "/arcpass level",
+          "id": "arcpass-level"
+        },
+        {
+          "level": 4,
+          "line": 47,
+          "title": "/arcpass claim",
+          "id": "arcpass-claim"
+        },
+        {
+          "level": 4,
+          "line": 64,
+          "title": "/arcpass buy",
+          "id": "arcpass-buy"
+        },
+        {
+          "level": 4,
+          "line": 78,
+          "title": "/arcpass leaderboard",
+          "id": "arcpass-leaderboard"
+        },
+        {
+          "level": 2,
+          "line": 91,
+          "title": "管理员命令",
+          "id": "管理员命令"
+        },
+        {
+          "level": 3,
+          "line": 116,
+          "title": "管理命令详解",
+          "id": "管理命令详解"
+        },
+        {
+          "level": 4,
+          "line": 118,
+          "title": "/arcpass admin season",
+          "id": "arcpass-admin-season"
+        },
+        {
+          "level": 4,
+          "line": 137,
+          "title": "/arcpass admin give",
+          "id": "arcpass-admin-give"
+        },
+        {
+          "level": 4,
+          "line": 149,
+          "title": "/arcpass admin lookup",
+          "id": "arcpass-admin-lookup"
+        },
+        {
+          "level": 2,
+          "line": 169,
+          "title": "权限节点",
+          "id": "权限节点"
+        },
+        {
+          "level": 3,
+          "line": 171,
+          "title": "玩家权限",
+          "id": "玩家权限"
+        },
+        {
+          "level": 3,
+          "line": 182,
+          "title": "管理员权限",
+          "id": "管理员权限"
+        },
+        {
+          "level": 3,
+          "line": 189,
+          "title": "权限示例（LuckPerms）",
+          "id": "权限示例-luckperms"
+        },
+        {
+          "level": 2,
+          "line": 202,
+          "title": "Tab 补全",
+          "id": "tab-补全"
+        },
+        {
+          "level": 2,
+          "line": 211,
+          "title": "控制台命令",
+          "id": "控制台命令"
+        }
+      ]
+    },
+    {
+      "source": "docs/arcpass/config/gui.md",
+      "target": "/arcpass/config/gui",
+      "file": "arcpass/config/gui.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "GUI 配置",
+          "id": "gui-配置"
+        },
+        {
+          "level": 2,
+          "line": 5,
+          "title": "文件位置",
+          "id": "文件位置"
+        },
+        {
+          "level": 2,
+          "line": 16,
+          "title": "基本结构",
+          "id": "基本结构"
+        },
+        {
+          "level": 2,
+          "line": 47,
+          "title": "十六进制 RGB 色彩",
+          "id": "十六进制-rgb-色彩"
+        },
+        {
+          "level": 2,
+          "line": 58,
+          "title": "槽位编号",
+          "id": "槽位编号"
+        },
+        {
+          "level": 2,
+          "line": 81,
+          "title": "点击动作",
+          "id": "点击动作"
+        },
+        {
+          "level": 2,
+          "line": 121,
+          "title": "变量占位符",
+          "id": "变量占位符"
+        },
+        {
+          "level": 2,
+          "line": 139,
+          "title": "截图展示",
+          "id": "截图展示"
+        },
+        {
+          "level": 2,
+          "line": 160,
+          "title": "主菜单配置示例",
+          "id": "主菜单配置示例"
+        },
+        {
+          "level": 2,
+          "line": 278,
+          "title": "任务界面配置",
+          "id": "任务界面配置"
+        },
+        {
+          "level": 2,
+          "line": 422,
+          "title": "奖励界面配置",
+          "id": "奖励界面配置"
+        },
+        {
+          "level": 2,
+          "line": 552,
+          "title": "动态内容",
+          "id": "动态内容"
+        },
+        {
+          "level": 3,
+          "line": 554,
+          "title": "条件显示",
+          "id": "条件显示"
+        },
+        {
+          "level": 3,
+          "line": 578,
+          "title": "动态物品数量",
+          "id": "动态物品数量"
+        },
+        {
+          "level": 2,
+          "line": 590,
+          "title": "声音效果",
+          "id": "声音效果"
+        },
+        {
+          "level": 2,
+          "line": 606,
+          "title": "下一步",
+          "id": "下一步"
+        }
+      ]
+    },
+    {
+      "source": "docs/arcpass/config/index.md",
+      "target": "/arcpass/config",
+      "file": "arcpass/config.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "配置概述",
+          "id": "配置概述"
+        },
+        {
+          "level": 2,
+          "line": 5,
+          "title": "配置文件结构",
+          "id": "配置文件结构"
+        },
+        {
+          "level": 2,
+          "line": 30,
+          "title": "主配置文件",
+          "id": "主配置文件"
+        },
+        {
+          "level": 3,
+          "line": 32,
+          "title": "config.yml",
+          "id": "config-yml"
+        },
+        {
+          "level": 3,
+          "line": 93,
+          "title": "database.yml",
+          "id": "database-yml"
+        },
+        {
+          "level": 2,
+          "line": 144,
+          "title": "配置热重载",
+          "id": "配置热重载"
+        },
+        {
+          "level": 2,
+          "line": 159,
+          "title": "配置验证",
+          "id": "配置验证"
+        },
+        {
+          "level": 2,
+          "line": 167,
+          "title": "详细配置指南",
+          "id": "详细配置指南"
+        },
+        {
+          "level": 2,
+          "line": 177,
+          "title": "配置示例",
+          "id": "配置示例"
+        }
+      ]
+    },
+    {
+      "source": "docs/arcpass/config/passes.md",
+      "target": "/arcpass/config/passes",
+      "file": "arcpass/config/passes.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "通行证配置",
+          "id": "通行证配置"
+        },
+        {
+          "level": 2,
+          "line": 5,
+          "title": "文件位置",
+          "id": "文件位置"
+        },
+        {
+          "level": 2,
+          "line": 15,
+          "title": "基本结构",
+          "id": "基本结构"
+        },
+        {
+          "level": 2,
+          "line": 38,
+          "title": "档位配置",
+          "id": "档位配置"
+        },
+        {
+          "level": 2,
+          "line": 77,
+          "title": "等级奖励",
+          "id": "等级奖励"
+        },
+        {
+          "level": 2,
+          "line": 185,
+          "title": "经验获取",
+          "id": "经验获取"
+        },
+        {
+          "level": 3,
+          "line": 187,
+          "title": "任务经验",
+          "id": "任务经验"
+        },
+        {
+          "level": 3,
+          "line": 196,
+          "title": "手动给予",
+          "id": "手动给予"
+        },
+        {
+          "level": 3,
+          "line": 204,
+          "title": "API 给予",
+          "id": "api-给予"
+        },
+        {
+          "level": 2,
+          "line": 213,
+          "title": "高级配置",
+          "id": "高级配置"
+        },
+        {
+          "level": 3,
+          "line": 215,
+          "title": "经验公式",
+          "id": "经验公式"
+        },
+        {
+          "level": 3,
+          "line": 228,
+          "title": "等级奖励模板",
+          "id": "等级奖励模板"
+        },
+        {
+          "level": 3,
+          "line": 249,
+          "title": "条件档位",
+          "id": "条件档位"
+        },
+        {
+          "level": 2,
+          "line": 268,
+          "title": "示例：战斗通行证",
+          "id": "示例-战斗通行证"
+        },
+        {
+          "level": 2,
+          "line": 309,
+          "title": "下一步",
+          "id": "下一步"
+        }
+      ]
+    },
+    {
+      "source": "docs/arcpass/config/quests.md",
+      "target": "/arcpass/config/quests",
+      "file": "arcpass/config/quests.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "任务配置",
+          "id": "任务配置"
+        },
+        {
+          "level": 2,
+          "line": 5,
+          "title": "文件位置",
+          "id": "文件位置"
+        },
+        {
+          "level": 2,
+          "line": 21,
+          "title": "任务类型",
+          "id": "任务类型"
+        },
+        {
+          "level": 2,
+          "line": 31,
+          "title": "基本结构",
+          "id": "基本结构"
+        },
+        {
+          "level": 2,
+          "line": 83,
+          "title": "任务目标类型",
+          "id": "任务目标类型"
+        },
+        {
+          "level": 3,
+          "line": 85,
+          "title": "方块相关",
+          "id": "方块相关"
+        },
+        {
+          "level": 3,
+          "line": 100,
+          "title": "击杀相关",
+          "id": "击杀相关"
+        },
+        {
+          "level": 3,
+          "line": 119,
+          "title": "物品相关",
+          "id": "物品相关"
+        },
+        {
+          "level": 3,
+          "line": 139,
+          "title": "其他活动",
+          "id": "其他活动"
+        },
+        {
+          "level": 3,
+          "line": 152,
+          "title": "Jobs Reborn 集成",
+          "id": "jobs-reborn-集成"
+        },
+        {
+          "level": 3,
+          "line": 162,
+          "title": "自定义事件",
+          "id": "自定义事件"
+        },
+        {
+          "level": 2,
+          "line": 172,
+          "title": "任务条件",
+          "id": "任务条件"
+        },
+        {
+          "level": 2,
+          "line": 208,
+          "title": "多目标任务",
+          "id": "多目标任务"
+        },
+        {
+          "level": 2,
+          "line": 240,
+          "title": "进度显示",
+          "id": "进度显示"
+        },
+        {
+          "level": 2,
+          "line": 253,
+          "title": "奖励配置",
+          "id": "奖励配置"
+        },
+        {
+          "level": 2,
+          "line": 273,
+          "title": "示例：完整日常任务",
+          "id": "示例-完整日常任务"
+        },
+        {
+          "level": 2,
+          "line": 319,
+          "title": "下一步",
+          "id": "下一步"
+        }
+      ]
+    },
+    {
+      "source": "docs/arcpass/config/rewards.md",
+      "target": "/arcpass/config/rewards",
+      "file": "arcpass/config/rewards.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "奖励配置",
+          "id": "奖励配置"
+        },
+        {
+          "level": 2,
+          "line": 5,
+          "title": "文件位置",
+          "id": "文件位置"
+        },
+        {
+          "level": 2,
+          "line": 16,
+          "title": "奖励类型",
+          "id": "奖励类型"
+        },
+        {
+          "level": 2,
+          "line": 28,
+          "title": "基本结构",
+          "id": "基本结构"
+        },
+        {
+          "level": 2,
+          "line": 61,
+          "title": "物品奖励",
+          "id": "物品奖励"
+        },
+        {
+          "level": 3,
+          "line": 63,
+          "title": "原版物品",
+          "id": "原版物品"
+        },
+        {
+          "level": 3,
+          "line": 74,
+          "title": "Oraxen 物品",
+          "id": "oraxen-物品"
+        },
+        {
+          "level": 3,
+          "line": 85,
+          "title": "ItemsAdder 物品",
+          "id": "itemsadder-物品"
+        },
+        {
+          "level": 3,
+          "line": 96,
+          "title": "自定义 NBT 物品",
+          "id": "自定义-nbt-物品"
+        },
+        {
+          "level": 2,
+          "line": 108,
+          "title": "自定义图标",
+          "id": "自定义图标"
+        },
+        {
+          "level": 3,
+          "line": 112,
+          "title": "CustomModelData",
+          "id": "custommodeldata"
+        },
+        {
+          "level": 3,
+          "line": 124,
+          "title": "ItemsAdder 图标",
+          "id": "itemsadder-图标"
+        },
+        {
+          "level": 3,
+          "line": 135,
+          "title": "Oraxen 图标",
+          "id": "oraxen-图标"
+        },
+        {
+          "level": 3,
+          "line": 150,
+          "title": "捕获任意物品作为图标",
+          "id": "捕获任意物品作为图标"
+        },
+        {
+          "level": 2,
+          "line": 160,
+          "title": "物品预览槽位",
+          "id": "物品预览槽位"
+        },
+        {
+          "level": 2,
+          "line": 174,
+          "title": "经济奖励",
+          "id": "经济奖励"
+        },
+        {
+          "level": 2,
+          "line": 195,
+          "title": "命令奖励",
+          "id": "命令奖励"
+        },
+        {
+          "level": 2,
+          "line": 216,
+          "title": "权限奖励",
+          "id": "权限奖励"
+        },
+        {
+          "level": 2,
+          "line": 249,
+          "title": "称号奖励",
+          "id": "称号奖励"
+        },
+        {
+          "level": 3,
+          "line": 251,
+          "title": "DeluxeTags 称号",
+          "id": "deluxetags-称号"
+        },
+        {
+          "level": 3,
+          "line": 267,
+          "title": "TAB 称号（Folia 兼容）",
+          "id": "tab-称号-folia-兼容"
+        },
+        {
+          "level": 2,
+          "line": 280,
+          "title": "装饰品奖励",
+          "id": "装饰品奖励"
+        },
+        {
+          "level": 2,
+          "line": 293,
+          "title": "经验奖励",
+          "id": "经验奖励"
+        },
+        {
+          "level": 2,
+          "line": 309,
+          "title": "条件奖励",
+          "id": "条件奖励"
+        },
+        {
+          "level": 2,
+          "line": 332,
+          "title": "奖励组",
+          "id": "奖励组"
+        },
+        {
+          "level": 2,
+          "line": 350,
+          "title": "完整示例",
+          "id": "完整示例"
+        },
+        {
+          "level": 2,
+          "line": 389,
+          "title": "下一步",
+          "id": "下一步"
+        }
+      ]
+    },
+    {
+      "source": "docs/arcpass/config/seasons.md",
+      "target": "/arcpass/config/seasons",
+      "file": "arcpass/config/seasons.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "赛季配置",
+          "id": "赛季配置"
+        },
+        {
+          "level": 2,
+          "line": 5,
+          "title": "赛季概念",
+          "id": "赛季概念"
+        },
+        {
+          "level": 2,
+          "line": 12,
+          "title": "赛季管理",
+          "id": "赛季管理"
+        },
+        {
+          "level": 3,
+          "line": 14,
+          "title": "开启赛季",
+          "id": "开启赛季"
+        },
+        {
+          "level": 3,
+          "line": 29,
+          "title": "结束赛季",
+          "id": "结束赛季"
+        },
+        {
+          "level": 3,
+          "line": 35,
+          "title": "查看赛季信息",
+          "id": "查看赛季信息"
+        },
+        {
+          "level": 2,
+          "line": 41,
+          "title": "赛季配置",
+          "id": "赛季配置-1"
+        },
+        {
+          "level": 2,
+          "line": 70,
+          "title": "赛季特殊任务",
+          "id": "赛季特殊任务"
+        },
+        {
+          "level": 2,
+          "line": 105,
+          "title": "赛季奖励",
+          "id": "赛季奖励"
+        },
+        {
+          "level": 3,
+          "line": 107,
+          "title": "赛季结束奖励",
+          "id": "赛季结束奖励"
+        },
+        {
+          "level": 3,
+          "line": 127,
+          "title": "排行榜奖励",
+          "id": "排行榜奖励"
+        },
+        {
+          "level": 2,
+          "line": 144,
+          "title": "赛季数据",
+          "id": "赛季数据"
+        },
+        {
+          "level": 3,
+          "line": 146,
+          "title": "数据存储",
+          "id": "数据存储"
+        },
+        {
+          "level": 3,
+          "line": 154,
+          "title": "数据迁移",
+          "id": "数据迁移"
+        },
+        {
+          "level": 2,
+          "line": 167,
+          "title": "赛季通知",
+          "id": "赛季通知"
+        },
+        {
+          "level": 3,
+          "line": 169,
+          "title": "赛季开始通知",
+          "id": "赛季开始通知"
+        },
+        {
+          "level": 3,
+          "line": 184,
+          "title": "赛季结束通知",
+          "id": "赛季结束通知"
+        },
+        {
+          "level": 2,
+          "line": 203,
+          "title": "无限期赛季",
+          "id": "无限期赛季"
+        },
+        {
+          "level": 2,
+          "line": 215,
+          "title": "API 集成",
+          "id": "api-集成"
+        },
+        {
+          "level": 3,
+          "line": 217,
+          "title": "赛季事件",
+          "id": "赛季事件"
+        },
+        {
+          "level": 3,
+          "line": 233,
+          "title": "赛季数据查询",
+          "id": "赛季数据查询"
+        },
+        {
+          "level": 2,
+          "line": 244,
+          "title": "示例：90 天赛季配置",
+          "id": "示例-90-天赛季配置"
+        },
+        {
+          "level": 2,
+          "line": 280,
+          "title": "下一步",
+          "id": "下一步"
+        }
+      ]
+    },
+    {
+      "source": "docs/arcpass/developer/events.md",
+      "target": "/arcpass/developer/events",
+      "file": "arcpass/developer/events.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "事件系统",
+          "id": "事件系统"
+        },
+        {
+          "level": 2,
+          "line": 5,
+          "title": "事件列表",
+          "id": "事件列表"
+        },
+        {
+          "level": 2,
+          "line": 15,
+          "title": "注册监听器",
+          "id": "注册监听器"
+        },
+        {
+          "level": 2,
+          "line": 45,
+          "title": "PlayerLevelUpEvent",
+          "id": "playerlevelupevent"
+        },
+        {
+          "level": 3,
+          "line": 74,
+          "title": "事件属性",
+          "id": "事件属性"
+        },
+        {
+          "level": 2,
+          "line": 83,
+          "title": "QuestCompleteEvent",
+          "id": "questcompleteevent"
+        },
+        {
+          "level": 3,
+          "line": 115,
+          "title": "事件属性",
+          "id": "事件属性-1"
+        },
+        {
+          "level": 2,
+          "line": 126,
+          "title": "RewardClaimEvent",
+          "id": "rewardclaimevent"
+        },
+        {
+          "level": 3,
+          "line": 159,
+          "title": "事件属性",
+          "id": "事件属性-2"
+        },
+        {
+          "level": 2,
+          "line": 170,
+          "title": "SeasonStartEvent",
+          "id": "seasonstartevent"
+        },
+        {
+          "level": 3,
+          "line": 198,
+          "title": "事件属性",
+          "id": "事件属性-3"
+        },
+        {
+          "level": 2,
+          "line": 204,
+          "title": "SeasonEndEvent",
+          "id": "seasonendevent"
+        },
+        {
+          "level": 3,
+          "line": 230,
+          "title": "事件属性",
+          "id": "事件属性-4"
+        },
+        {
+          "level": 2,
+          "line": 236,
+          "title": "事件优先级",
+          "id": "事件优先级"
+        },
+        {
+          "level": 2,
+          "line": 253,
+          "title": "最佳实践",
+          "id": "最佳实践"
+        },
+        {
+          "level": 3,
+          "line": 255,
+          "title": "1. 检查玩家在线状态",
+          "id": "_1-检查玩家在线状态"
+        },
+        {
+          "level": 3,
+          "line": 268,
+          "title": "2. 避免阻塞主线程",
+          "id": "_2-避免阻塞主线程"
+        },
+        {
+          "level": 3,
+          "line": 285,
+          "title": "3. 正确处理取消事件",
+          "id": "_3-正确处理取消事件"
+        },
+        {
+          "level": 2,
+          "line": 297,
+          "title": "下一步",
+          "id": "下一步"
+        }
+      ]
+    },
+    {
+      "source": "docs/arcpass/developer/examples.md",
+      "target": "/arcpass/developer/examples",
+      "file": "arcpass/developer/examples.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "代码示例",
+          "id": "代码示例"
+        },
+        {
+          "level": 2,
+          "line": 5,
+          "title": "经验奖励插件",
+          "id": "经验奖励插件"
+        },
+        {
+          "level": 2,
+          "line": 86,
+          "title": "自定义任务触发器",
+          "id": "自定义任务触发器"
+        },
+        {
+          "level": 2,
+          "line": 185,
+          "title": "等级里程碑奖励",
+          "id": "等级里程碑奖励"
+        },
+        {
+          "level": 2,
+          "line": 262,
+          "title": "双倍经验活动",
+          "id": "双倍经验活动"
+        },
+        {
+          "level": 2,
+          "line": 368,
+          "title": "排行榜 NPC",
+          "id": "排行榜-npc"
+        },
+        {
+          "level": 2,
+          "line": 416,
+          "title": "最佳实践总结",
+          "id": "最佳实践总结"
+        }
+      ]
+    },
+    {
+      "source": "docs/arcpass/developer/getting-started.md",
+      "target": "/arcpass/developer/getting-started",
+      "file": "arcpass/developer/getting-started.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "API 入门",
+          "id": "api-入门"
+        },
+        {
+          "level": 2,
+          "line": 5,
+          "title": "添加依赖",
+          "id": "添加依赖"
+        },
+        {
+          "level": 3,
+          "line": 7,
+          "title": "Maven",
+          "id": "maven"
+        },
+        {
+          "level": 3,
+          "line": 30,
+          "title": "Gradle (Kotlin DSL)",
+          "id": "gradle-kotlin-dsl"
+        },
+        {
+          "level": 3,
+          "line": 42,
+          "title": "Gradle (Groovy)",
+          "id": "gradle-groovy"
+        },
+        {
+          "level": 2,
+          "line": 54,
+          "title": "配置 plugin.yml",
+          "id": "配置-plugin-yml"
+        },
+        {
+          "level": 2,
+          "line": 66,
+          "title": "获取 API 实例",
+          "id": "获取-api-实例"
+        },
+        {
+          "level": 3,
+          "line": 68,
+          "title": "检查 ArcPass 是否可用",
+          "id": "检查-arcpass-是否可用"
+        },
+        {
+          "level": 3,
+          "line": 100,
+          "title": "延迟获取（推荐）",
+          "id": "延迟获取-推荐"
+        },
+        {
+          "level": 2,
+          "line": 122,
+          "title": "基本操作",
+          "id": "基本操作"
+        },
+        {
+          "level": 3,
+          "line": 124,
+          "title": "获取玩家数据",
+          "id": "获取玩家数据"
+        },
+        {
+          "level": 3,
+          "line": 155,
+          "title": "使用缓存数据",
+          "id": "使用缓存数据"
+        },
+        {
+          "level": 3,
+          "line": 172,
+          "title": "给予经验",
+          "id": "给予经验"
+        },
+        {
+          "level": 3,
+          "line": 188,
+          "title": "触发自定义任务事件",
+          "id": "触发自定义任务事件"
+        },
+        {
+          "level": 3,
+          "line": 216,
+          "title": "查询通行证信息",
+          "id": "查询通行证信息"
+        },
+        {
+          "level": 3,
+          "line": 235,
+          "title": "查询赛季信息",
+          "id": "查询赛季信息"
+        },
+        {
+          "level": 2,
+          "line": 261,
+          "title": "错误处理",
+          "id": "错误处理"
+        },
+        {
+          "level": 3,
+          "line": 263,
+          "title": "处理 CompletableFuture 异常",
+          "id": "处理-completablefuture-异常"
+        },
+        {
+          "level": 3,
+          "line": 285,
+          "title": "超时处理",
+          "id": "超时处理"
+        },
+        {
+          "level": 2,
+          "line": 303,
+          "title": "下一步",
+          "id": "下一步"
+        }
+      ]
+    },
+    {
+      "source": "docs/arcpass/developer/index.md",
+      "target": "/arcpass/developer",
+      "file": "arcpass/developer.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "开发者 API",
+          "id": "开发者-api"
+        },
+        {
+          "level": 2,
+          "line": 9,
+          "title": "API 概述",
+          "id": "api-概述"
+        },
+        {
+          "level": 3,
+          "line": 13,
+          "title": "功能",
+          "id": "功能"
+        },
+        {
+          "level": 3,
+          "line": 21,
+          "title": "文档目录",
+          "id": "文档目录"
+        },
+        {
+          "level": 2,
+          "line": 29,
+          "title": "快速开始",
+          "id": "快速开始"
+        },
+        {
+          "level": 3,
+          "line": 31,
+          "title": "添加依赖",
+          "id": "添加依赖"
+        },
+        {
+          "level": 3,
+          "line": 63,
+          "title": "获取 API 实例",
+          "id": "获取-api-实例"
+        },
+        {
+          "level": 3,
+          "line": 73,
+          "title": "基本示例",
+          "id": "基本示例"
+        },
+        {
+          "level": 2,
+          "line": 93,
+          "title": "API 接口",
+          "id": "api-接口"
+        },
+        {
+          "level": 3,
+          "line": 95,
+          "title": "ArcPassAPI",
+          "id": "arcpassapi"
+        },
+        {
+          "level": 2,
+          "line": 128,
+          "title": "数据模型",
+          "id": "数据模型"
+        },
+        {
+          "level": 3,
+          "line": 130,
+          "title": "PlayerData",
+          "id": "playerdata"
+        },
+        {
+          "level": 3,
+          "line": 150,
+          "title": "Pass",
+          "id": "pass"
+        },
+        {
+          "level": 3,
+          "line": 167,
+          "title": "Quest",
+          "id": "quest"
+        },
+        {
+          "level": 3,
+          "line": 183,
+          "title": "Season",
+          "id": "season"
+        },
+        {
+          "level": 2,
+          "line": 200,
+          "title": "异步操作",
+          "id": "异步操作"
+        },
+        {
+          "level": 2,
+          "line": 225,
+          "title": "线程安全",
+          "id": "线程安全"
+        },
+        {
+          "level": 2,
+          "line": 231,
+          "title": "下一步",
+          "id": "下一步"
+        }
+      ]
+    },
+    {
+      "source": "docs/arcpass/download.md",
+      "target": "/arcpass/download",
+      "file": "arcpass/download.mdx",
+      "anchors": []
+    },
+    {
+      "source": "docs/arcpass/faq/index.md",
+      "target": "/arcpass/faq",
+      "file": "arcpass/faq.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "常见问题",
+          "id": "常见问题"
+        },
+        {
+          "level": 2,
+          "line": 5,
+          "title": "安装问题",
+          "id": "安装问题"
+        },
+        {
+          "level": 3,
+          "line": 7,
+          "title": "插件无法加载",
+          "id": "插件无法加载"
+        },
+        {
+          "level": 3,
+          "line": 18,
+          "title": "配置文件未生成",
+          "id": "配置文件未生成"
+        },
+        {
+          "level": 3,
+          "line": 28,
+          "title": "与其他插件冲突",
+          "id": "与其他插件冲突"
+        },
+        {
+          "level": 2,
+          "line": 39,
+          "title": "许可证问题",
+          "id": "许可证问题"
+        },
+        {
+          "level": 3,
+          "line": 41,
+          "title": "许可证验证失败",
+          "id": "许可证验证失败"
+        },
+        {
+          "level": 3,
+          "line": 63,
+          "title": "更换服务器后无法使用",
+          "id": "更换服务器后无法使用"
+        },
+        {
+          "level": 3,
+          "line": 74,
+          "title": "许可证绑定失败",
+          "id": "许可证绑定失败"
+        },
+        {
+          "level": 2,
+          "line": 84,
+          "title": "功能问题",
+          "id": "功能问题"
+        },
+        {
+          "level": 3,
+          "line": 86,
+          "title": "经验不增加",
+          "id": "经验不增加"
+        },
+        {
+          "level": 3,
+          "line": 100,
+          "title": "奖励无法领取",
+          "id": "奖励无法领取"
+        },
+        {
+          "level": 3,
+          "line": 114,
+          "title": "GUI 打不开",
+          "id": "gui-打不开"
+        },
+        {
+          "level": 3,
+          "line": 128,
+          "title": "任务进度不更新",
+          "id": "任务进度不更新"
+        },
+        {
+          "level": 2,
+          "line": 146,
+          "title": "兼容性问题",
+          "id": "兼容性问题"
+        },
+        {
+          "level": 3,
+          "line": 148,
+          "title": "Folia 服务端问题",
+          "id": "folia-服务端问题"
+        },
+        {
+          "level": 3,
+          "line": 161,
+          "title": "PlaceholderAPI 变量不显示",
+          "id": "placeholderapi-变量不显示"
+        },
+        {
+          "level": 3,
+          "line": 176,
+          "title": "经济插件不工作",
+          "id": "经济插件不工作"
+        },
+        {
+          "level": 3,
+          "line": 190,
+          "title": "MythicMobs/Jobs 任务不触发",
+          "id": "mythicmobs-jobs-任务不触发"
+        },
+        {
+          "level": 2,
+          "line": 204,
+          "title": "性能问题",
+          "id": "性能问题"
+        },
+        {
+          "level": 3,
+          "line": 206,
+          "title": "服务器卡顿",
+          "id": "服务器卡顿"
+        },
+        {
+          "level": 3,
+          "line": 228,
+          "title": "内存占用高",
+          "id": "内存占用高"
+        },
+        {
+          "level": 2,
+          "line": 236,
+          "title": "配置问题",
+          "id": "配置问题"
+        },
+        {
+          "level": 3,
+          "line": 238,
+          "title": "YAML 语法错误",
+          "id": "yaml-语法错误"
+        },
+        {
+          "level": 3,
+          "line": 253,
+          "title": "中文乱码",
+          "id": "中文乱码"
+        },
+        {
+          "level": 2,
+          "line": 261,
+          "title": "获取帮助",
+          "id": "获取帮助"
+        }
+      ]
+    },
+    {
+      "source": "docs/arcpass/guide/index.md",
+      "target": "/arcpass/guide",
+      "file": "arcpass/guide.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "快速入门",
+          "id": "快速入门"
+        },
+        {
+          "level": 2,
+          "line": 5,
+          "title": "前置要求",
+          "id": "前置要求"
+        },
+        {
+          "level": 3,
+          "line": 15,
+          "title": "可选依赖",
+          "id": "可选依赖"
+        },
+        {
+          "level": 2,
+          "line": 23,
+          "title": "步骤 1：安装插件",
+          "id": "步骤-1-安装插件"
+        },
+        {
+          "level": 2,
+          "line": 43,
+          "title": "步骤 2：激活许可证",
+          "id": "步骤-2-激活许可证"
+        },
+        {
+          "level": 2,
+          "line": 61,
+          "title": "步骤 3：基本配置",
+          "id": "步骤-3-基本配置"
+        },
+        {
+          "level": 3,
+          "line": 63,
+          "title": "3.1 语言设置",
+          "id": "_3-1-语言设置"
+        },
+        {
+          "level": 3,
+          "line": 75,
+          "title": "3.2 数据库配置",
+          "id": "_3-2-数据库配置"
+        },
+        {
+          "level": 2,
+          "line": 90,
+          "title": "步骤 4：开启赛季",
+          "id": "步骤-4-开启赛季"
+        },
+        {
+          "level": 3,
+          "line": 94,
+          "title": "方式一：使用命令",
+          "id": "方式一-使用命令"
+        },
+        {
+          "level": 3,
+          "line": 100,
+          "title": "方式二：使用管理界面",
+          "id": "方式二-使用管理界面"
+        },
+        {
+          "level": 2,
+          "line": 112,
+          "title": "步骤 5：测试功能",
+          "id": "步骤-5-测试功能"
+        },
+        {
+          "level": 2,
+          "line": 128,
+          "title": "下一步",
+          "id": "下一步"
+        },
+        {
+          "level": 2,
+          "line": 159,
+          "title": "遇到问题？",
+          "id": "遇到问题"
+        }
+      ]
+    },
+    {
+      "source": "docs/arcpass/index.md",
+      "target": "/arcpass",
+      "file": "arcpass.mdx",
+      "anchors": [
+        {
+          "level": 3,
+          "line": 22,
+          "title": "功能演示",
+          "id": "功能演示"
+        },
+        {
+          "level": 3,
+          "line": 43,
+          "title": "截图展示",
+          "id": "截图展示"
+        },
+        {
+          "level": 2,
+          "line": 68,
+          "title": "为什么选择 ArcPass？",
+          "id": "为什么选择-arcpass"
+        },
+        {
+          "level": 3,
+          "line": 72,
+          "title": "核心优势",
+          "id": "核心优势"
+        },
+        {
+          "level": 3,
+          "line": 97,
+          "title": "快速链接",
+          "id": "快速链接"
+        },
+        {
+          "level": 3,
+          "line": 138,
+          "title": "获取 ArcPass",
+          "id": "获取-arcpass"
+        }
+      ]
+    },
+    {
+      "source": "docs/arcpass/integrations/index.md",
+      "target": "/arcpass/integrations",
+      "file": "arcpass/integrations.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "第三方插件集成",
+          "id": "第三方插件集成"
+        },
+        {
+          "level": 2,
+          "line": 5,
+          "title": "集成概览",
+          "id": "集成概览"
+        },
+        {
+          "level": 2,
+          "line": 26,
+          "title": "经济系统",
+          "id": "经济系统"
+        },
+        {
+          "level": 3,
+          "line": 28,
+          "title": "Vault",
+          "id": "vault"
+        },
+        {
+          "level": 3,
+          "line": 52,
+          "title": "CMI",
+          "id": "cmi"
+        },
+        {
+          "level": 2,
+          "line": 62,
+          "title": "点卷系统",
+          "id": "点卷系统"
+        },
+        {
+          "level": 3,
+          "line": 66,
+          "title": "PlayerPoints",
+          "id": "playerpoints"
+        },
+        {
+          "level": 3,
+          "line": 78,
+          "title": "CoinsEngine",
+          "id": "coinsengine"
+        },
+        {
+          "level": 3,
+          "line": 86,
+          "title": "TokenManager",
+          "id": "tokenmanager"
+        },
+        {
+          "level": 3,
+          "line": 94,
+          "title": "点卷优先级",
+          "id": "点卷优先级"
+        },
+        {
+          "level": 3,
+          "line": 102,
+          "title": "使用点卷购买档位",
+          "id": "使用点卷购买档位"
+        },
+        {
+          "level": 2,
+          "line": 116,
+          "title": "权限系统",
+          "id": "权限系统"
+        },
+        {
+          "level": 3,
+          "line": 118,
+          "title": "LuckPerms",
+          "id": "luckperms"
+        },
+        {
+          "level": 2,
+          "line": 159,
+          "title": "称号系统",
+          "id": "称号系统"
+        },
+        {
+          "level": 3,
+          "line": 161,
+          "title": "DeluxeTags",
+          "id": "deluxetags"
+        },
+        {
+          "level": 3,
+          "line": 188,
+          "title": "TAB",
+          "id": "tab"
+        },
+        {
+          "level": 3,
+          "line": 208,
+          "title": "NametagEdit",
+          "id": "nametagedit"
+        },
+        {
+          "level": 3,
+          "line": 218,
+          "title": "PlayerTitle",
+          "id": "playertitle"
+        },
+        {
+          "level": 3,
+          "line": 257,
+          "title": "称号优先级",
+          "id": "称号优先级"
+        },
+        {
+          "level": 2,
+          "line": 267,
+          "title": "装饰系统",
+          "id": "装饰系统"
+        },
+        {
+          "level": 3,
+          "line": 269,
+          "title": "PlayerParticles",
+          "id": "playerparticles"
+        },
+        {
+          "level": 2,
+          "line": 306,
+          "title": "任务触发器",
+          "id": "任务触发器"
+        },
+        {
+          "level": 3,
+          "line": 308,
+          "title": "MythicMobs",
+          "id": "mythicmobs"
+        },
+        {
+          "level": 3,
+          "line": 338,
+          "title": "Jobs Reborn",
+          "id": "jobs-reborn"
+        },
+        {
+          "level": 2,
+          "line": 361,
+          "title": "自定义物品",
+          "id": "自定义物品"
+        },
+        {
+          "level": 3,
+          "line": 363,
+          "title": "Oraxen",
+          "id": "oraxen"
+        },
+        {
+          "level": 3,
+          "line": 388,
+          "title": "ItemsAdder",
+          "id": "itemsadder"
+        },
+        {
+          "level": 2,
+          "line": 413,
+          "title": "PlaceholderAPI",
+          "id": "placeholderapi"
+        },
+        {
+          "level": 2,
+          "line": 423,
+          "title": "检测集成状态",
+          "id": "检测集成状态"
+        },
+        {
+          "level": 2,
+          "line": 441,
+          "title": "故障排除",
+          "id": "故障排除"
+        },
+        {
+          "level": 3,
+          "line": 443,
+          "title": "经济奖励不生效",
+          "id": "经济奖励不生效"
+        },
+        {
+          "level": 3,
+          "line": 449,
+          "title": "称号奖励不生效",
+          "id": "称号奖励不生效"
+        },
+        {
+          "level": 3,
+          "line": 456,
+          "title": "装饰/粒子奖励不生效",
+          "id": "装饰-粒子奖励不生效"
+        },
+        {
+          "level": 3,
+          "line": 463,
+          "title": "MythicMobs 任务不触发",
+          "id": "mythicmobs-任务不触发"
+        },
+        {
+          "level": 3,
+          "line": 469,
+          "title": "自定义物品不显示",
+          "id": "自定义物品不显示"
+        }
+      ]
+    },
+    {
+      "source": "docs/arcpass/placeholders/index.md",
+      "target": "/arcpass/placeholders",
+      "file": "arcpass/placeholders.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "PlaceholderAPI 变量",
+          "id": "placeholderapi-变量"
+        },
+        {
+          "level": 2,
+          "line": 5,
+          "title": "前置要求",
+          "id": "前置要求"
+        },
+        {
+          "level": 2,
+          "line": 11,
+          "title": "变量列表",
+          "id": "变量列表"
+        },
+        {
+          "level": 3,
+          "line": 13,
+          "title": "玩家数据",
+          "id": "玩家数据"
+        },
+        {
+          "level": 3,
+          "line": 27,
+          "title": "档位信息",
+          "id": "档位信息"
+        },
+        {
+          "level": 3,
+          "line": 37,
+          "title": "任务信息",
+          "id": "任务信息"
+        },
+        {
+          "level": 3,
+          "line": 44,
+          "title": "奖励信息",
+          "id": "奖励信息"
+        },
+        {
+          "level": 3,
+          "line": 50,
+          "title": "赛季信息",
+          "id": "赛季信息"
+        },
+        {
+          "level": 3,
+          "line": 60,
+          "title": "排行榜",
+          "id": "排行榜"
+        },
+        {
+          "level": 2,
+          "line": 70,
+          "title": "使用示例",
+          "id": "使用示例"
+        },
+        {
+          "level": 3,
+          "line": 72,
+          "title": "计分板（FeatherBoard）",
+          "id": "计分板-featherboard"
+        },
+        {
+          "level": 3,
+          "line": 84,
+          "title": "聊天格式（EssentialsX Chat）",
+          "id": "聊天格式-essentialsx-chat"
+        },
+        {
+          "level": 3,
+          "line": 90,
+          "title": "Tab 列表（TAB）",
+          "id": "tab-列表-tab"
+        },
+        {
+          "level": 3,
+          "line": 99,
+          "title": "全息图（HolographicDisplays）",
+          "id": "全息图-holographicdisplays"
+        },
+        {
+          "level": 2,
+          "line": 110,
+          "title": "进度条自定义",
+          "id": "进度条自定义"
+        },
+        {
+          "level": 2,
+          "line": 121,
+          "title": "条件变量",
+          "id": "条件变量"
+        },
+        {
+          "level": 2,
+          "line": 130,
+          "title": "缓存说明",
+          "id": "缓存说明"
+        },
+        {
+          "level": 2,
+          "line": 142,
+          "title": "故障排除",
+          "id": "故障排除"
+        },
+        {
+          "level": 3,
+          "line": 144,
+          "title": "变量显示为原文",
+          "id": "变量显示为原文"
+        },
+        {
+          "level": 3,
+          "line": 150,
+          "title": "变量显示为空",
+          "id": "变量显示为空"
+        },
+        {
+          "level": 3,
+          "line": 156,
+          "title": "排名显示为 ?",
+          "id": "排名显示为"
+        }
+      ]
+    },
+    {
+      "source": "docs/arcpass/setup/installation.md",
+      "target": "/arcpass/setup/installation",
+      "file": "arcpass/setup/installation.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "安装指南",
+          "id": "安装指南"
+        },
+        {
+          "level": 2,
+          "line": 5,
+          "title": "支持的服务端",
+          "id": "支持的服务端"
+        },
+        {
+          "level": 2,
+          "line": 19,
+          "title": "安装步骤",
+          "id": "安装步骤"
+        },
+        {
+          "level": 3,
+          "line": 21,
+          "title": "1. 下载插件",
+          "id": "_1-下载插件"
+        },
+        {
+          "level": 3,
+          "line": 30,
+          "title": "2. 放置文件",
+          "id": "_2-放置文件"
+        },
+        {
+          "level": 3,
+          "line": 43,
+          "title": "3. 启动服务器",
+          "id": "_3-启动服务器"
+        },
+        {
+          "level": 3,
+          "line": 52,
+          "title": "4. 查看启动日志",
+          "id": "_4-查看启动日志"
+        },
+        {
+          "level": 2,
+          "line": 65,
+          "title": "生成的文件结构",
+          "id": "生成的文件结构"
+        },
+        {
+          "level": 2,
+          "line": 89,
+          "title": "Folia 服务端特殊说明",
+          "id": "folia-服务端特殊说明"
+        },
+        {
+          "level": 2,
+          "line": 99,
+          "title": "故障排除",
+          "id": "故障排除"
+        },
+        {
+          "level": 3,
+          "line": 101,
+          "title": "插件未加载",
+          "id": "插件未加载"
+        },
+        {
+          "level": 3,
+          "line": 109,
+          "title": "配置文件未生成",
+          "id": "配置文件未生成"
+        },
+        {
+          "level": 3,
+          "line": 115,
+          "title": "依赖插件问题",
+          "id": "依赖插件问题"
+        },
+        {
+          "level": 2,
+          "line": 125,
+          "title": "下一步",
+          "id": "下一步"
+        }
+      ]
+    },
+    {
+      "source": "docs/arcpass/setup/license.md",
+      "target": "/arcpass/setup/license",
+      "file": "arcpass/setup/license.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "许可证激活",
+          "id": "许可证激活"
+        },
+        {
+          "level": 2,
+          "line": 5,
+          "title": "购买许可证",
+          "id": "购买许可证"
+        },
+        {
+          "level": 3,
+          "line": 7,
+          "title": "可用版本",
+          "id": "可用版本"
+        },
+        {
+          "level": 3,
+          "line": 22,
+          "title": "购买渠道",
+          "id": "购买渠道"
+        },
+        {
+          "level": 2,
+          "line": 43,
+          "title": "激活步骤",
+          "id": "激活步骤"
+        },
+        {
+          "level": 3,
+          "line": 45,
+          "title": "1. 编辑配置文件",
+          "id": "_1-编辑配置文件"
+        },
+        {
+          "level": 3,
+          "line": 66,
+          "title": "2. 填写密钥",
+          "id": "_2-填写密钥"
+        },
+        {
+          "level": 3,
+          "line": 74,
+          "title": "3. 重载配置",
+          "id": "_3-重载配置"
+        },
+        {
+          "level": 3,
+          "line": 82,
+          "title": "4. 验证激活",
+          "id": "_4-验证激活"
+        },
+        {
+          "level": 2,
+          "line": 93,
+          "title": "许可证绑定",
+          "id": "许可证绑定"
+        },
+        {
+          "level": 3,
+          "line": 95,
+          "title": "绑定机制",
+          "id": "绑定机制"
+        },
+        {
+          "level": 3,
+          "line": 105,
+          "title": "查看绑定状态",
+          "id": "查看绑定状态"
+        },
+        {
+          "level": 3,
+          "line": 111,
+          "title": "解绑/换绑",
+          "id": "解绑-换绑"
+        },
+        {
+          "level": 2,
+          "line": 127,
+          "title": "许可证状态",
+          "id": "许可证状态"
+        },
+        {
+          "level": 3,
+          "line": 129,
+          "title": "状态说明",
+          "id": "状态说明"
+        },
+        {
+          "level": 3,
+          "line": 140,
+          "title": "离线模式",
+          "id": "离线模式"
+        },
+        {
+          "level": 2,
+          "line": 149,
+          "title": "常见问题",
+          "id": "常见问题"
+        },
+        {
+          "level": 3,
+          "line": 151,
+          "title": "许可证验证失败",
+          "id": "许可证验证失败"
+        },
+        {
+          "level": 3,
+          "line": 157,
+          "title": "绑定数量已满",
+          "id": "绑定数量已满"
+        },
+        {
+          "level": 3,
+          "line": 163,
+          "title": "更换服务器",
+          "id": "更换服务器"
+        },
+        {
+          "level": 2,
+          "line": 170,
+          "title": "技术支持",
+          "id": "技术支持"
+        }
+      ]
+    },
+    {
+      "source": "docs/arcpass/setup/requirements.md",
+      "target": "/arcpass/setup/requirements",
+      "file": "arcpass/setup/requirements.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "系统要求",
+          "id": "系统要求"
+        },
+        {
+          "level": 2,
+          "line": 5,
+          "title": "最低要求",
+          "id": "最低要求"
+        },
+        {
+          "level": 2,
+          "line": 15,
+          "title": "服务端兼容性",
+          "id": "服务端兼容性"
+        },
+        {
+          "level": 3,
+          "line": 17,
+          "title": "完全支持",
+          "id": "完全支持"
+        },
+        {
+          "level": 3,
+          "line": 26,
+          "title": "部分支持",
+          "id": "部分支持"
+        },
+        {
+          "level": 3,
+          "line": 33,
+          "title": "不支持",
+          "id": "不支持"
+        },
+        {
+          "level": 2,
+          "line": 39,
+          "title": "Java 版本",
+          "id": "java-版本"
+        },
+        {
+          "level": 3,
+          "line": 41,
+          "title": "Java 17 (最低要求)",
+          "id": "java-17-最低要求"
+        },
+        {
+          "level": 3,
+          "line": 45,
+          "title": "Java 21 (推荐)",
+          "id": "java-21-推荐"
+        },
+        {
+          "level": 3,
+          "line": 53,
+          "title": "检查 Java 版本",
+          "id": "检查-java-版本"
+        },
+        {
+          "level": 2,
+          "line": 67,
+          "title": "依赖插件",
+          "id": "依赖插件"
+        },
+        {
+          "level": 3,
+          "line": 69,
+          "title": "必需依赖",
+          "id": "必需依赖"
+        },
+        {
+          "level": 3,
+          "line": 73,
+          "title": "可选依赖",
+          "id": "可选依赖"
+        },
+        {
+          "level": 4,
+          "line": 77,
+          "title": "经济系统",
+          "id": "经济系统"
+        },
+        {
+          "level": 4,
+          "line": 86,
+          "title": "权限系统",
+          "id": "权限系统"
+        },
+        {
+          "level": 4,
+          "line": 94,
+          "title": "变量系统",
+          "id": "变量系统"
+        },
+        {
+          "level": 4,
+          "line": 102,
+          "title": "称号系统",
+          "id": "称号系统"
+        },
+        {
+          "level": 4,
+          "line": 113,
+          "title": "任务触发器",
+          "id": "任务触发器"
+        },
+        {
+          "level": 4,
+          "line": 120,
+          "title": "自定义物品",
+          "id": "自定义物品"
+        },
+        {
+          "level": 2,
+          "line": 127,
+          "title": "数据库",
+          "id": "数据库"
+        },
+        {
+          "level": 3,
+          "line": 129,
+          "title": "SQLite (默认)",
+          "id": "sqlite-默认"
+        },
+        {
+          "level": 3,
+          "line": 135,
+          "title": "MySQL",
+          "id": "mysql"
+        },
+        {
+          "level": 2,
+          "line": 141,
+          "title": "网络要求",
+          "id": "网络要求"
+        },
+        {
+          "level": 3,
+          "line": 143,
+          "title": "许可证验证",
+          "id": "许可证验证"
+        },
+        {
+          "level": 3,
+          "line": 149,
+          "title": "防火墙设置",
+          "id": "防火墙设置"
+        },
+        {
+          "level": 2,
+          "line": 157,
+          "title": "性能建议",
+          "id": "性能建议"
+        },
+        {
+          "level": 3,
+          "line": 159,
+          "title": "小型服务器 (< 50 玩家)",
+          "id": "小型服务器-50-玩家"
+        },
+        {
+          "level": 3,
+          "line": 164,
+          "title": "中型服务器 (50-200 玩家)",
+          "id": "中型服务器-50-200-玩家"
+        },
+        {
+          "level": 3,
+          "line": 169,
+          "title": "大型服务器 (200+ 玩家)",
+          "id": "大型服务器-200-玩家"
+        },
+        {
+          "level": 2,
+          "line": 183,
+          "title": "下一步",
+          "id": "下一步"
+        }
+      ]
+    },
+    {
+      "source": "docs/kitemarket/api.md",
+      "target": "/kitemarket/api",
+      "file": "kitemarket/api.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 2,
+          "title": "市场 API 入门",
+          "id": "市场-api-入门"
+        },
+        {
+          "level": 2,
+          "line": 6,
+          "title": "引用 SDK",
+          "id": "引用-sdk"
+        },
+        {
+          "level": 3,
+          "line": 10,
+          "title": "GitHub Packages",
+          "id": "github-packages"
+        },
+        {
+          "level": 3,
+          "line": 92,
+          "title": "Release 下载备用",
+          "id": "release-下载备用"
+        },
+        {
+          "level": 2,
+          "line": 100,
+          "title": "等待服务，再异步查询",
+          "id": "等待服务-再异步查询"
+        },
+        {
+          "level": 2,
+          "line": 125,
+          "title": "查询与结果",
+          "id": "查询与结果"
+        },
+        {
+          "level": 2,
+          "line": 149,
+          "title": "成交后通知",
+          "id": "成交后通知"
+        },
+        {
+          "level": 2,
+          "line": 170,
+          "title": "需要扩展玩家界面？",
+          "id": "需要扩展玩家界面"
+        }
+      ]
+    },
+    {
+      "source": "docs/kitemarket/commands.md",
+      "target": "/kitemarket/commands",
+      "file": "kitemarket/commands.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "命令与权限",
+          "id": "命令与权限"
+        },
+        {
+          "level": 2,
+          "line": 9,
+          "title": "玩家命令",
+          "id": "玩家命令"
+        },
+        {
+          "level": 2,
+          "line": 42,
+          "title": "条件编辑输入",
+          "id": "条件编辑输入"
+        },
+        {
+          "level": 2,
+          "line": 58,
+          "title": "管理员命令",
+          "id": "管理员命令"
+        },
+        {
+          "level": 2,
+          "line": 93,
+          "title": "控制台与重载",
+          "id": "控制台与重载"
+        }
+      ]
+    },
+    {
+      "source": "docs/kitemarket/compatibility.md",
+      "target": "/kitemarket/compatibility",
+      "file": "kitemarket/compatibility.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "版本与认证状态",
+          "id": "版本与认证状态"
+        },
+        {
+          "level": 2,
+          "line": 26,
+          "title": "IA 已验证环境",
+          "id": "ia-已验证环境"
+        },
+        {
+          "level": 2,
+          "line": 45,
+          "title": "认证记录需要包含什么",
+          "id": "认证记录需要包含什么"
+        },
+        {
+          "level": 2,
+          "line": 51,
+          "title": "分发范围与历史证据",
+          "id": "分发范围与历史证据"
+        }
+      ]
+    },
+    {
+      "source": "docs/kitemarket/dlc.md",
+      "target": "/kitemarket/dlc",
+      "file": "kitemarket/dlc.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "ItemsAdder 接入",
+          "id": "itemsadder-接入"
+        },
+        {
+          "level": 2,
+          "line": 9,
+          "title": "安装自己的主题",
+          "id": "安装自己的主题"
+        },
+        {
+          "level": 2,
+          "line": 34,
+          "title": "使用与回退",
+          "id": "使用与回退"
+        },
+        {
+          "level": 2,
+          "line": 47,
+          "title": "开发自己的界面",
+          "id": "开发自己的界面"
+        }
+      ]
+    },
+    {
+      "source": "docs/kitemarket/download.md",
+      "target": "/kitemarket/download",
+      "file": "kitemarket/download.mdx",
+      "anchors": [
+        {
+          "level": 2,
+          "line": 17,
+          "title": "版本列表",
+          "id": "版本列表"
+        },
+        {
+          "level": 2,
+          "line": 23,
+          "title": "服主：按服务器选择一份运行包",
+          "id": "服主-按服务器选择一份运行包"
+        },
+        {
+          "level": 2,
+          "line": 35,
+          "title": "开发者：SDK、源码与示例",
+          "id": "开发者-sdk、源码与示例"
+        },
+        {
+          "level": 2,
+          "line": 47,
+          "title": "配置与校验",
+          "id": "配置与校验"
+        }
+      ]
+    },
+    {
+      "source": "docs/kitemarket/guide.md",
+      "target": "/kitemarket/guide",
+      "file": "kitemarket/guide.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "安装与配置",
+          "id": "安装与配置"
+        },
+        {
+          "level": 2,
+          "line": 5,
+          "title": "1. 准备环境",
+          "id": "_1-准备环境"
+        },
+        {
+          "level": 2,
+          "line": 11,
+          "title": "2. 配置网络与数据库",
+          "id": "_2-配置网络与数据库"
+        },
+        {
+          "level": 2,
+          "line": 45,
+          "title": "3. 配置币种",
+          "id": "_3-配置币种"
+        },
+        {
+          "level": 2,
+          "line": 77,
+          "title": "4. 配置网络授权",
+          "id": "_4-配置网络授权"
+        },
+        {
+          "level": 2,
+          "line": 94,
+          "title": "5. 重启与部署检查",
+          "id": "_5-重启与部署检查"
+        },
+        {
+          "level": 2,
+          "line": 100,
+          "title": "6. 界面配置",
+          "id": "_6-界面配置"
+        },
+        {
+          "level": 3,
+          "line": 160,
+          "title": "原版 GUI 个性化",
+          "id": "原版-gui-个性化"
+        },
+        {
+          "level": 2,
+          "line": 235,
+          "title": "7. bStats 基础统计",
+          "id": "_7-bstats-基础统计"
+        },
+        {
+          "level": 2,
+          "line": 250,
+          "title": "8. 运行包、配置与 SDK",
+          "id": "_8-运行包、配置与-sdk"
+        }
+      ]
+    },
+    {
+      "source": "docs/kitemarket/index.md",
+      "target": "/kitemarket",
+      "file": "kitemarket.mdx",
+      "anchors": [
+        {
+          "level": 2,
+          "line": 11,
+          "title": "看清交易，再放心确认",
+          "id": "看清交易-再放心确认"
+        },
+        {
+          "level": 2,
+          "line": 19,
+          "title": "原版就能用，外观由你决定",
+          "id": "原版就能用-外观由你决定"
+        },
+        {
+          "level": 2,
+          "line": 29,
+          "title": "¥68 / USD 9.99，买断完整功能",
+          "id": "¥68-usd-9-99-买断完整功能"
+        },
+        {
+          "level": 2,
+          "line": 35,
+          "title": "共享账本，明确边界",
+          "id": "共享账本-明确边界"
+        },
+        {
+          "level": 2,
+          "line": 45,
+          "title": "从这里开始",
+          "id": "从这里开始"
+        }
+      ]
+    },
+    {
+      "source": "docs/kitemarket/license.md",
+      "target": "/kitemarket/license",
+      "file": "kitemarket/license.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "网络授权",
+          "id": "网络授权"
+        },
+        {
+          "level": 2,
+          "line": 18,
+          "title": "刷新、离线与到期",
+          "id": "刷新、离线与到期"
+        },
+        {
+          "level": 2,
+          "line": 32,
+          "title": "同网同许可证重新激活",
+          "id": "同网同许可证重新激活"
+        },
+        {
+          "level": 2,
+          "line": 40,
+          "title": "网络身份与迁移",
+          "id": "网络身份与迁移"
+        },
+        {
+          "level": 2,
+          "line": 50,
+          "title": "界面与第三方主题",
+          "id": "界面与第三方主题"
+        }
+      ]
+    },
+    {
+      "source": "docs/kitemarket/operations.md",
+      "target": "/kitemarket/operations",
+      "file": "kitemarket/operations.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "故障处理与安全迁移",
+          "id": "故障处理与安全迁移"
+        },
+        {
+          "level": 2,
+          "line": 5,
+          "title": "常见状态",
+          "id": "常见状态"
+        },
+        {
+          "level": 2,
+          "line": 29,
+          "title": "核对 UNKNOWN",
+          "id": "核对-unknown"
+        },
+        {
+          "level": 2,
+          "line": 42,
+          "title": "备份与迁移",
+          "id": "备份与迁移"
+        },
+        {
+          "level": 2,
+          "line": 58,
+          "title": "升级已有市场到协议 4",
+          "id": "升级已有市场到协议-4"
+        },
+        {
+          "level": 3,
+          "line": 73,
+          "title": "原始快照与属性比较",
+          "id": "原始快照与属性比较"
+        },
+        {
+          "level": 3,
+          "line": 81,
+          "title": "支持名单收紧与已有资产",
+          "id": "支持名单收紧与已有资产"
+        },
+        {
+          "level": 2,
+          "line": 87,
+          "title": "最小验证清单",
+          "id": "最小验证清单"
+        },
+        {
+          "level": 2,
+          "line": 93,
+          "title": "开发者只读接口",
+          "id": "开发者只读接口"
+        }
+      ]
+    },
+    {
+      "source": "docs/kitemarket/trading.md",
+      "target": "/kitemarket/trading",
+      "file": "kitemarket/trading.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "交易与物品条件",
+          "id": "交易与物品条件"
+        },
+        {
+          "level": 3,
+          "line": 9,
+          "title": "发布数量与最大值",
+          "id": "发布数量与最大值"
+        },
+        {
+          "level": 2,
+          "line": 21,
+          "title": "高级收购",
+          "id": "高级收购"
+        },
+        {
+          "level": 3,
+          "line": 41,
+          "title": "条件编辑",
+          "id": "条件编辑"
+        },
+        {
+          "level": 3,
+          "line": 53,
+          "title": "供货预览",
+          "id": "供货预览"
+        },
+        {
+          "level": 2,
+          "line": 65,
+          "title": "精确样品与自定义物品",
+          "id": "精确样品与自定义物品"
+        },
+        {
+          "level": 2,
+          "line": 75,
+          "title": "一口价",
+          "id": "一口价"
+        },
+        {
+          "level": 2,
+          "line": 87,
+          "title": "公开竞拍",
+          "id": "公开竞拍"
+        },
+        {
+          "level": 2,
+          "line": 101,
+          "title": "托管与领取",
+          "id": "托管与领取"
+        },
+        {
+          "level": 2,
+          "line": 105,
+          "title": "搜索与交易收据",
+          "id": "搜索与交易收据"
+        }
+      ]
+    },
+    {
+      "source": "docs/kitemarket/ui-development.md",
+      "target": "/kitemarket/ui-development",
+      "file": "kitemarket/ui-development.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "界面、主题与第三方开发",
+          "id": "界面、主题与第三方开发"
+        },
+        {
+          "level": 2,
+          "line": 9,
+          "title": "快速开始",
+          "id": "快速开始"
+        },
+        {
+          "level": 3,
+          "line": 18,
+          "title": "Java 示例：GitHub Packages",
+          "id": "java-示例-github-packages"
+        },
+        {
+          "level": 2,
+          "line": 50,
+          "title": "玩家选择与服务器默认值",
+          "id": "玩家选择与服务器默认值"
+        },
+        {
+          "level": 2,
+          "line": 74,
+          "title": "自有主题描述",
+          "id": "自有主题描述"
+        },
+        {
+          "level": 2,
+          "line": 107,
+          "title": "安装资源与实现提供者",
+          "id": "安装资源与实现提供者"
+        },
+        {
+          "level": 3,
+          "line": 130,
+          "title": "自定义 IA 功能图标",
+          "id": "自定义-ia-功能图标"
+        },
+        {
+          "level": 2,
+          "line": 148,
+          "title": "页面、动作与生命周期",
+          "id": "页面、动作与生命周期"
+        },
+        {
+          "level": 2,
+          "line": 205,
+          "title": "错误定位",
+          "id": "错误定位"
+        },
+        {
+          "level": 2,
+          "line": 218,
+          "title": "安装与使用范围",
+          "id": "安装与使用范围"
+        }
+      ]
+    },
+    {
+      "source": "docs/kitemarket/wallet.md",
+      "target": "/kitemarket/wallet",
+      "file": "kitemarket/wallet.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "共享钱包与充提",
+          "id": "共享钱包与充提"
+        },
+        {
+          "level": 2,
+          "line": 18,
+          "title": "金额输入与真实上限",
+          "id": "金额输入与真实上限"
+        },
+        {
+          "level": 2,
+          "line": 31,
+          "title": "网关节点",
+          "id": "网关节点"
+        },
+        {
+          "level": 2,
+          "line": 37,
+          "title": "启用适配器",
+          "id": "启用适配器"
+        },
+        {
+          "level": 2,
+          "line": 43,
+          "title": "失败与 UNKNOWN",
+          "id": "失败与-unknown"
+        }
+      ]
+    },
+    {
+      "source": "docs/verifymc/command/index.md",
+      "target": "/archive/verifymc/command",
+      "file": "archive/verifymc/command.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "插件指令",
+          "id": "插件指令"
+        },
+        {
+          "level": 2,
+          "line": 3,
+          "title": "主指令",
+          "id": "主指令"
+        },
+        {
+          "level": 2,
+          "line": 9,
+          "title": "子命令列表",
+          "id": "子命令列表"
+        },
+        {
+          "level": 2,
+          "line": 25,
+          "title": "指令详细说明",
+          "id": "指令详细说明"
+        },
+        {
+          "level": 3,
+          "line": 27,
+          "title": "/vmc reload",
+          "id": "vmc-reload"
+        },
+        {
+          "level": 3,
+          "line": 32,
+          "title": "/vmc approve",
+          "id": "vmc-approve-用户名"
+        },
+        {
+          "level": 3,
+          "line": 39,
+          "title": "/vmc reject  [原因]",
+          "id": "vmc-reject-用户名-原因"
+        },
+        {
+          "level": 3,
+          "line": 46,
+          "title": "/vmc delete",
+          "id": "vmc-delete-用户名"
+        },
+        {
+          "level": 3,
+          "line": 52,
+          "title": "/vmc ban  [原因]",
+          "id": "vmc-ban-用户名-原因"
+        },
+        {
+          "level": 3,
+          "line": 58,
+          "title": "/vmc unban",
+          "id": "vmc-unban-用户名"
+        },
+        {
+          "level": 3,
+          "line": 64,
+          "title": "/vmc list [状态]",
+          "id": "vmc-list-状态"
+        },
+        {
+          "level": 3,
+          "line": 71,
+          "title": "/vmc info",
+          "id": "vmc-info-用户名"
+        },
+        {
+          "level": 3,
+          "line": 77,
+          "title": "/vmc version",
+          "id": "vmc-version"
+        },
+        {
+          "level": 2,
+          "line": 82,
+          "title": "权限说明",
+          "id": "权限说明"
+        }
+      ]
+    },
+    {
+      "source": "docs/verifymc/download.md",
+      "target": "/archive/verifymc/download",
+      "file": "archive/verifymc/download.mdx",
+      "anchors": []
+    },
+    {
+      "source": "docs/verifymc/file/config.md",
+      "target": "/archive/verifymc/file/config",
+      "file": "archive/verifymc/file/config.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "配置文件",
+          "id": "配置文件"
+        },
+        {
+          "level": 2,
+          "line": 9,
+          "title": "全局设置",
+          "id": "全局设置"
+        },
+        {
+          "level": 2,
+          "line": 19,
+          "title": "网页服务器",
+          "id": "网页服务器"
+        },
+        {
+          "level": 2,
+          "line": 29,
+          "title": "验证与白名单",
+          "id": "验证与白名单"
+        },
+        {
+          "level": 2,
+          "line": 52,
+          "title": "注册",
+          "id": "注册"
+        },
+        {
+          "level": 2,
+          "line": 61,
+          "title": "用户与安全",
+          "id": "用户与安全"
+        },
+        {
+          "level": 2,
+          "line": 74,
+          "title": "用户通知",
+          "id": "用户通知"
+        },
+        {
+          "level": 2,
+          "line": 87,
+          "title": "前端 (UI)",
+          "id": "前端-ui"
+        },
+        {
+          "level": 2,
+          "line": 101,
+          "title": "邮箱 (SMTP)",
+          "id": "邮箱-smtp"
+        },
+        {
+          "level": 3,
+          "line": 116,
+          "title": "常见 SMTP 配置",
+          "id": "常见-smtp-配置"
+        },
+        {
+          "level": 2,
+          "line": 125,
+          "title": "自动更新资源",
+          "id": "自动更新资源"
+        },
+        {
+          "level": 2,
+          "line": 132,
+          "title": "邮箱注册限制",
+          "id": "邮箱注册限制"
+        },
+        {
+          "level": 2,
+          "line": 154,
+          "title": "存储与 MySQL",
+          "id": "存储与-mysql"
+        },
+        {
+          "level": 2,
+          "line": 169,
+          "title": "AuthMe 集成配置",
+          "id": "authme-集成配置"
+        },
+        {
+          "level": 2,
+          "line": 211,
+          "title": "图形验证码配置",
+          "id": "图形验证码配置"
+        },
+        {
+          "level": 2,
+          "line": 227,
+          "title": "基岩版玩家支持",
+          "id": "基岩版玩家支持"
+        },
+        {
+          "level": 2,
+          "line": 242,
+          "title": "问卷调查配置",
+          "id": "问卷调查配置"
+        },
+        {
+          "level": 2,
+          "line": 265,
+          "title": "LLM 问答评分",
+          "id": "llm-问答评分"
+        },
+        {
+          "level": 2,
+          "line": 326,
+          "title": "Discord 集成（OAuth2）",
+          "id": "discord-集成-oauth2"
+        },
+        {
+          "level": 2,
+          "line": 352,
+          "title": "完整配置示例",
+          "id": "完整配置示例"
+        }
+      ]
+    },
+    {
+      "source": "docs/verifymc/file/directory.md",
+      "target": "/archive/verifymc/file/directory",
+      "file": "archive/verifymc/file/directory.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "插件目录结构",
+          "id": "插件目录结构"
+        },
+        {
+          "level": 2,
+          "line": 7,
+          "title": "目录总览",
+          "id": "目录总览"
+        },
+        {
+          "level": 2,
+          "line": 55,
+          "title": "详细说明",
+          "id": "详细说明"
+        },
+        {
+          "level": 3,
+          "line": 57,
+          "title": "配置文件",
+          "id": "配置文件"
+        },
+        {
+          "level": 3,
+          "line": 66,
+          "title": "邮件模板 (email/)",
+          "id": "邮件模板-email"
+        },
+        {
+          "level": 3,
+          "line": 80,
+          "title": "前端资源 (static/)",
+          "id": "前端资源-static"
+        },
+        {
+          "level": 3,
+          "line": 93,
+          "title": "国际化 (i18n/)",
+          "id": "国际化-i18n"
+        },
+        {
+          "level": 3,
+          "line": 103,
+          "title": "数据存储 (data/)",
+          "id": "数据存储-data"
+        },
+        {
+          "level": 3,
+          "line": 116,
+          "title": "备份 (backup/)",
+          "id": "备份-backup"
+        },
+        {
+          "level": 2,
+          "line": 122,
+          "title": "首次启动",
+          "id": "首次启动"
+        },
+        {
+          "level": 2,
+          "line": 133,
+          "title": "相关链接",
+          "id": "相关链接"
+        }
+      ]
+    },
+    {
+      "source": "docs/verifymc/front/api.md",
+      "target": "/archive/verifymc/front/api",
+      "file": "archive/verifymc/front/api.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "后端 API",
+          "id": "后端-api"
+        },
+        {
+          "level": 2,
+          "line": 3,
+          "title": "API 参考文档",
+          "id": "api-参考文档"
+        },
+        {
+          "level": 2,
+          "line": 7,
+          "title": "配置",
+          "id": "配置"
+        },
+        {
+          "level": 3,
+          "line": 9,
+          "title": "获取配置",
+          "id": "获取配置"
+        },
+        {
+          "level": 2,
+          "line": 14,
+          "title": "图形验证码",
+          "id": "图形验证码"
+        },
+        {
+          "level": 3,
+          "line": 16,
+          "title": "生成验证码",
+          "id": "生成验证码"
+        },
+        {
+          "level": 2,
+          "line": 21,
+          "title": "邮箱验证",
+          "id": "邮箱验证"
+        },
+        {
+          "level": 3,
+          "line": 23,
+          "title": "发送验证码",
+          "id": "发送验证码"
+        },
+        {
+          "level": 2,
+          "line": 37,
+          "title": "问卷",
+          "id": "问卷"
+        },
+        {
+          "level": 3,
+          "line": 39,
+          "title": "获取问卷配置",
+          "id": "获取问卷配置"
+        },
+        {
+          "level": 3,
+          "line": 44,
+          "title": "提交问卷",
+          "id": "提交问卷"
+        },
+        {
+          "level": 2,
+          "line": 49,
+          "title": "注册",
+          "id": "注册"
+        },
+        {
+          "level": 3,
+          "line": 51,
+          "title": "用户注册",
+          "id": "用户注册"
+        },
+        {
+          "level": 3,
+          "line": 68,
+          "title": "查询审核状态",
+          "id": "查询审核状态"
+        },
+        {
+          "level": 2,
+          "line": 73,
+          "title": "用户",
+          "id": "用户"
+        },
+        {
+          "level": 3,
+          "line": 75,
+          "title": "获取用户状态",
+          "id": "获取用户状态"
+        },
+        {
+          "level": 2,
+          "line": 80,
+          "title": "认证",
+          "id": "认证"
+        },
+        {
+          "level": 3,
+          "line": 82,
+          "title": "用户登录",
+          "id": "用户登录"
+        },
+        {
+          "level": 3,
+          "line": 87,
+          "title": "管理员登录",
+          "id": "管理员登录"
+        },
+        {
+          "level": 2,
+          "line": 102,
+          "title": "管理员端点",
+          "id": "管理员端点"
+        },
+        {
+          "level": 3,
+          "line": 104,
+          "title": "验证管理员令牌",
+          "id": "验证管理员令牌"
+        },
+        {
+          "level": 3,
+          "line": 109,
+          "title": "获取用户列表",
+          "id": "获取用户列表"
+        },
+        {
+          "level": 3,
+          "line": 115,
+          "title": "通过用户",
+          "id": "通过用户"
+        },
+        {
+          "level": 3,
+          "line": 120,
+          "title": "拒绝用户",
+          "id": "拒绝用户"
+        },
+        {
+          "level": 3,
+          "line": 125,
+          "title": "删除用户",
+          "id": "删除用户"
+        },
+        {
+          "level": 3,
+          "line": 130,
+          "title": "封禁用户",
+          "id": "封禁用户"
+        },
+        {
+          "level": 3,
+          "line": 135,
+          "title": "解封用户",
+          "id": "解封用户"
+        },
+        {
+          "level": 3,
+          "line": 140,
+          "title": "修改用户密码",
+          "id": "修改用户密码"
+        },
+        {
+          "level": 3,
+          "line": 145,
+          "title": "获取审核日志",
+          "id": "获取审核日志"
+        },
+        {
+          "level": 3,
+          "line": 150,
+          "title": "同步 AuthMe 数据",
+          "id": "同步-authme-数据"
+        },
+        {
+          "level": 2,
+          "line": 155,
+          "title": "Discord 集成",
+          "id": "discord-集成"
+        },
+        {
+          "level": 3,
+          "line": 157,
+          "title": "Discord 授权",
+          "id": "discord-授权"
+        },
+        {
+          "level": 3,
+          "line": 162,
+          "title": "Discord 回调",
+          "id": "discord-回调"
+        },
+        {
+          "level": 3,
+          "line": 167,
+          "title": "Discord 状态",
+          "id": "discord-状态"
+        },
+        {
+          "level": 3,
+          "line": 172,
+          "title": "Discord 解绑",
+          "id": "discord-解绑"
+        },
+        {
+          "level": 2,
+          "line": 177,
+          "title": "版本",
+          "id": "版本"
+        },
+        {
+          "level": 3,
+          "line": 179,
+          "title": "获取版本",
+          "id": "获取版本"
+        }
+      ]
+    },
+    {
+      "source": "docs/verifymc/guide/default.md",
+      "target": "/archive/verifymc/guide/default",
+      "file": "archive/verifymc/guide/default.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "Default 主题（已弃用）",
+          "id": "default-主题-已弃用"
+        }
+      ]
+    },
+    {
+      "source": "docs/verifymc/guide/index.md",
+      "target": "/archive/verifymc/guide",
+      "file": "archive/verifymc/guide.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "VerifyMC",
+          "id": "verifymc"
+        },
+        {
+          "level": 2,
+          "line": 3,
+          "title": "项目简介",
+          "id": "项目简介"
+        },
+        {
+          "level": 2,
+          "line": 9,
+          "title": "主要功能",
+          "id": "主要功能"
+        },
+        {
+          "level": 2,
+          "line": 23,
+          "title": "技术栈",
+          "id": "技术栈"
+        },
+        {
+          "level": 2,
+          "line": 32,
+          "title": "bStats",
+          "id": "bstats"
+        },
+        {
+          "level": 2,
+          "line": 38,
+          "title": "安装与配置",
+          "id": "安装与配置"
+        },
+        {
+          "level": 3,
+          "line": 45,
+          "title": "管理员登录",
+          "id": "管理员登录"
+        },
+        {
+          "level": 3,
+          "line": 55,
+          "title": "语言设置",
+          "id": "语言设置"
+        },
+        {
+          "level": 2,
+          "line": 186,
+          "title": "官方社区",
+          "id": "官方社区"
+        }
+      ]
+    },
+    {
+      "source": "docs/verifymc/index.md",
+      "target": "/archive/verifymc",
+      "file": "archive/verifymc.mdx",
+      "anchors": []
+    },
+    {
+      "source": "docs/verifymc/question/index.md",
+      "target": "/archive/verifymc/question",
+      "file": "archive/verifymc/question.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "常见问题",
+          "id": "常见问题"
+        },
+        {
+          "level": 2,
+          "line": 3,
+          "title": "网页界面与访问",
+          "id": "网页界面与访问"
+        },
+        {
+          "level": 3,
+          "line": 5,
+          "title": "如何访问 VerifyMC 主页？",
+          "id": "如何访问-verifymc-主页"
+        },
+        {
+          "level": 3,
+          "line": 20,
+          "title": "管理面板无法加载",
+          "id": "管理面板无法加载"
+        },
+        {
+          "level": 3,
+          "line": 26,
+          "title": "管理员如何登录？",
+          "id": "管理员如何登录"
+        },
+        {
+          "level": 2,
+          "line": 37,
+          "title": "Discord 集成",
+          "id": "discord-集成"
+        },
+        {
+          "level": 3,
+          "line": 39,
+          "title": "如何配置 Discord 服务器绑定？",
+          "id": "如何配置-discord-服务器绑定"
+        },
+        {
+          "level": 2,
+          "line": 60,
+          "title": "邮箱配置（SMTP）",
+          "id": "邮箱配置-smtp"
+        },
+        {
+          "level": 3,
+          "line": 62,
+          "title": "如何配置 SMTP 邮箱验证？",
+          "id": "如何配置-smtp-邮箱验证"
+        },
+        {
+          "level": 3,
+          "line": 83,
+          "title": "没有邮箱服务器怎么办？",
+          "id": "没有邮箱服务器怎么办"
+        },
+        {
+          "level": 3,
+          "line": 99,
+          "title": "玩家无法注册 / 邮件发送失败",
+          "id": "玩家无法注册-邮件发送失败"
+        },
+        {
+          "level": 2,
+          "line": 108,
+          "title": "代理插件配置",
+          "id": "代理插件配置"
+        },
+        {
+          "level": 3,
+          "line": 110,
+          "title": "如何配置 VerifyMC-Proxy 代理插件？",
+          "id": "如何配置-verifymc-proxy-代理插件"
+        },
+        {
+          "level": 3,
+          "line": 134,
+          "title": "支持哪些代理平台？",
+          "id": "支持哪些代理平台"
+        },
+        {
+          "level": 2,
+          "line": 141,
+          "title": "安装与兼容性",
+          "id": "安装与兼容性"
+        },
+        {
+          "level": 3,
+          "line": 143,
+          "title": "支持哪些 Minecraft 版本？",
+          "id": "支持哪些-minecraft-版本"
+        },
+        {
+          "level": 3,
+          "line": 146,
+          "title": "VerifyMC 支持 Geyser/Floodgate（基岩版）吗？",
+          "id": "verifymc-支持-geyser-floodgate-基岩版-吗"
+        },
+        {
+          "level": 2,
+          "line": 157,
+          "title": "插件更新",
+          "id": "插件更新"
+        },
+        {
+          "level": 3,
+          "line": 159,
+          "title": "如何更新插件？",
+          "id": "如何更新插件"
+        },
+        {
+          "level": 3,
+          "line": 166,
+          "title": "更新后数据会保留吗？",
+          "id": "更新后数据会保留吗"
+        },
+        {
+          "level": 2,
+          "line": 171,
+          "title": "故障排查",
+          "id": "故障排查"
+        },
+        {
+          "level": 3,
+          "line": 173,
+          "title": "Velocity 上出现 \"No injectable constructor\" 错误",
+          "id": "velocity-上出现-no-injectable-constructor-错误"
+        },
+        {
+          "level": 3,
+          "line": 176,
+          "title": "版本号显示不正确",
+          "id": "版本号显示不正确"
+        }
+      ]
+    },
+    {
+      "source": "en/docs/arcpass/commands/index.md",
+      "target": "/en/arcpass/commands",
+      "file": "en/arcpass/commands.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "Commands & Permissions",
+          "id": "commands-permissions"
+        },
+        {
+          "level": 2,
+          "line": 5,
+          "title": "Command Aliases",
+          "id": "command-aliases"
+        },
+        {
+          "level": 2,
+          "line": 13,
+          "title": "Player Commands",
+          "id": "player-commands"
+        },
+        {
+          "level": 3,
+          "line": 27,
+          "title": "Command Details",
+          "id": "command-details"
+        },
+        {
+          "level": 4,
+          "line": 29,
+          "title": "/arcpass level",
+          "id": "arcpass-level"
+        },
+        {
+          "level": 4,
+          "line": 46,
+          "title": "/arcpass claim",
+          "id": "arcpass-claim"
+        },
+        {
+          "level": 4,
+          "line": 63,
+          "title": "/arcpass buy",
+          "id": "arcpass-buy"
+        },
+        {
+          "level": 4,
+          "line": 77,
+          "title": "/arcpass leaderboard",
+          "id": "arcpass-leaderboard"
+        },
+        {
+          "level": 2,
+          "line": 90,
+          "title": "Admin Commands",
+          "id": "admin-commands"
+        },
+        {
+          "level": 3,
+          "line": 115,
+          "title": "Admin Command Details",
+          "id": "admin-command-details"
+        },
+        {
+          "level": 4,
+          "line": 117,
+          "title": "/arcpass admin season",
+          "id": "arcpass-admin-season"
+        },
+        {
+          "level": 4,
+          "line": 136,
+          "title": "/arcpass admin give",
+          "id": "arcpass-admin-give"
+        },
+        {
+          "level": 4,
+          "line": 148,
+          "title": "/arcpass admin lookup",
+          "id": "arcpass-admin-lookup"
+        },
+        {
+          "level": 2,
+          "line": 168,
+          "title": "Permission Nodes",
+          "id": "permission-nodes"
+        },
+        {
+          "level": 3,
+          "line": 170,
+          "title": "Player Permissions",
+          "id": "player-permissions"
+        },
+        {
+          "level": 3,
+          "line": 181,
+          "title": "Admin Permissions",
+          "id": "admin-permissions"
+        },
+        {
+          "level": 3,
+          "line": 188,
+          "title": "LuckPerms Examples",
+          "id": "luckperms-examples"
+        },
+        {
+          "level": 2,
+          "line": 201,
+          "title": "Tab Completion",
+          "id": "tab-completion"
+        },
+        {
+          "level": 2,
+          "line": 209,
+          "title": "Console Commands",
+          "id": "console-commands"
+        }
+      ]
+    },
+    {
+      "source": "en/docs/arcpass/config/gui.md",
+      "target": "/en/arcpass/config/gui",
+      "file": "en/arcpass/config/gui.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "GUI Configuration",
+          "id": "gui-configuration"
+        },
+        {
+          "level": 2,
+          "line": 5,
+          "title": "File Location",
+          "id": "file-location"
+        },
+        {
+          "level": 2,
+          "line": 16,
+          "title": "Basic Structure",
+          "id": "basic-structure"
+        },
+        {
+          "level": 2,
+          "line": 47,
+          "title": "Hex RGB Colors",
+          "id": "hex-rgb-colors"
+        },
+        {
+          "level": 2,
+          "line": 58,
+          "title": "Slot Numbers",
+          "id": "slot-numbers"
+        },
+        {
+          "level": 2,
+          "line": 81,
+          "title": "Click Actions",
+          "id": "click-actions"
+        },
+        {
+          "level": 2,
+          "line": 121,
+          "title": "Placeholders",
+          "id": "placeholders"
+        },
+        {
+          "level": 2,
+          "line": 137,
+          "title": "Screenshots",
+          "id": "screenshots"
+        },
+        {
+          "level": 2,
+          "line": 158,
+          "title": "Main Menu Example",
+          "id": "main-menu-example"
+        },
+        {
+          "level": 2,
+          "line": 276,
+          "title": "Dynamic Content",
+          "id": "dynamic-content"
+        },
+        {
+          "level": 3,
+          "line": 278,
+          "title": "Conditional Display",
+          "id": "conditional-display"
+        },
+        {
+          "level": 3,
+          "line": 300,
+          "title": "Dynamic Item Amount",
+          "id": "dynamic-item-amount"
+        },
+        {
+          "level": 2,
+          "line": 311,
+          "title": "Sound Effects",
+          "id": "sound-effects"
+        },
+        {
+          "level": 2,
+          "line": 322,
+          "title": "Next Steps",
+          "id": "next-steps"
+        }
+      ]
+    },
+    {
+      "source": "en/docs/arcpass/config/index.md",
+      "target": "/en/arcpass/config",
+      "file": "en/arcpass/config.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "Configuration Overview",
+          "id": "configuration-overview"
+        },
+        {
+          "level": 2,
+          "line": 5,
+          "title": "File Structure",
+          "id": "file-structure"
+        },
+        {
+          "level": 2,
+          "line": 30,
+          "title": "Main Configuration Files",
+          "id": "main-configuration-files"
+        },
+        {
+          "level": 3,
+          "line": 32,
+          "title": "config.yml",
+          "id": "config-yml"
+        },
+        {
+          "level": 3,
+          "line": 93,
+          "title": "database.yml",
+          "id": "database-yml"
+        },
+        {
+          "level": 2,
+          "line": 144,
+          "title": "Hot Reload",
+          "id": "hot-reload"
+        },
+        {
+          "level": 2,
+          "line": 159,
+          "title": "Configuration Validation",
+          "id": "configuration-validation"
+        },
+        {
+          "level": 2,
+          "line": 167,
+          "title": "Detailed Guides",
+          "id": "detailed-guides"
+        },
+        {
+          "level": 2,
+          "line": 177,
+          "title": "Example Configurations",
+          "id": "example-configurations"
+        }
+      ]
+    },
+    {
+      "source": "en/docs/arcpass/config/passes.md",
+      "target": "/en/arcpass/config/passes",
+      "file": "en/arcpass/config/passes.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "Pass Configuration",
+          "id": "pass-configuration"
+        },
+        {
+          "level": 2,
+          "line": 5,
+          "title": "File Location",
+          "id": "file-location"
+        },
+        {
+          "level": 2,
+          "line": 15,
+          "title": "Basic Structure",
+          "id": "basic-structure"
+        },
+        {
+          "level": 2,
+          "line": 38,
+          "title": "Tier Configuration",
+          "id": "tier-configuration"
+        },
+        {
+          "level": 2,
+          "line": 77,
+          "title": "Level Rewards",
+          "id": "level-rewards"
+        },
+        {
+          "level": 2,
+          "line": 185,
+          "title": "Experience Sources",
+          "id": "experience-sources"
+        },
+        {
+          "level": 3,
+          "line": 187,
+          "title": "Quest Experience",
+          "id": "quest-experience"
+        },
+        {
+          "level": 3,
+          "line": 195,
+          "title": "Manual Award",
+          "id": "manual-award"
+        },
+        {
+          "level": 3,
+          "line": 203,
+          "title": "Via API",
+          "id": "via-api"
+        },
+        {
+          "level": 2,
+          "line": 210,
+          "title": "Advanced Configuration",
+          "id": "advanced-configuration"
+        },
+        {
+          "level": 3,
+          "line": 212,
+          "title": "Experience Formula",
+          "id": "experience-formula"
+        },
+        {
+          "level": 3,
+          "line": 222,
+          "title": "Level Templates",
+          "id": "level-templates"
+        },
+        {
+          "level": 3,
+          "line": 234,
+          "title": "Conditional Tiers",
+          "id": "conditional-tiers"
+        },
+        {
+          "level": 2,
+          "line": 247,
+          "title": "Example: Combat Pass",
+          "id": "example-combat-pass"
+        },
+        {
+          "level": 2,
+          "line": 286,
+          "title": "Next Steps",
+          "id": "next-steps"
+        }
+      ]
+    },
+    {
+      "source": "en/docs/arcpass/config/quests.md",
+      "target": "/en/arcpass/config/quests",
+      "file": "en/arcpass/config/quests.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "Quest Configuration",
+          "id": "quest-configuration"
+        },
+        {
+          "level": 2,
+          "line": 5,
+          "title": "File Location",
+          "id": "file-location"
+        },
+        {
+          "level": 2,
+          "line": 21,
+          "title": "Quest Types",
+          "id": "quest-types"
+        },
+        {
+          "level": 2,
+          "line": 31,
+          "title": "Basic Structure",
+          "id": "basic-structure"
+        },
+        {
+          "level": 2,
+          "line": 83,
+          "title": "Objective Types",
+          "id": "objective-types"
+        },
+        {
+          "level": 3,
+          "line": 85,
+          "title": "Block Related",
+          "id": "block-related"
+        },
+        {
+          "level": 3,
+          "line": 98,
+          "title": "Kill Related",
+          "id": "kill-related"
+        },
+        {
+          "level": 3,
+          "line": 114,
+          "title": "Item Related",
+          "id": "item-related"
+        },
+        {
+          "level": 3,
+          "line": 131,
+          "title": "Other Activities",
+          "id": "other-activities"
+        },
+        {
+          "level": 3,
+          "line": 142,
+          "title": "Jobs Reborn",
+          "id": "jobs-reborn"
+        },
+        {
+          "level": 3,
+          "line": 151,
+          "title": "Custom Events",
+          "id": "custom-events"
+        },
+        {
+          "level": 2,
+          "line": 160,
+          "title": "Quest Conditions",
+          "id": "quest-conditions"
+        },
+        {
+          "level": 2,
+          "line": 183,
+          "title": "Multi-Objective Quests",
+          "id": "multi-objective-quests"
+        },
+        {
+          "level": 2,
+          "line": 211,
+          "title": "Progress Display",
+          "id": "progress-display"
+        },
+        {
+          "level": 2,
+          "line": 221,
+          "title": "Quest Rewards",
+          "id": "quest-rewards"
+        },
+        {
+          "level": 2,
+          "line": 237,
+          "title": "Example: Daily Combat Quests",
+          "id": "example-daily-combat-quests"
+        },
+        {
+          "level": 2,
+          "line": 269,
+          "title": "Next Steps",
+          "id": "next-steps"
+        }
+      ]
+    },
+    {
+      "source": "en/docs/arcpass/config/rewards.md",
+      "target": "/en/arcpass/config/rewards",
+      "file": "en/arcpass/config/rewards.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "Reward Configuration",
+          "id": "reward-configuration"
+        },
+        {
+          "level": 2,
+          "line": 5,
+          "title": "File Location",
+          "id": "file-location"
+        },
+        {
+          "level": 2,
+          "line": 16,
+          "title": "Reward Types",
+          "id": "reward-types"
+        },
+        {
+          "level": 2,
+          "line": 28,
+          "title": "Basic Structure",
+          "id": "basic-structure"
+        },
+        {
+          "level": 2,
+          "line": 61,
+          "title": "Item Rewards",
+          "id": "item-rewards"
+        },
+        {
+          "level": 3,
+          "line": 63,
+          "title": "Vanilla Items",
+          "id": "vanilla-items"
+        },
+        {
+          "level": 3,
+          "line": 74,
+          "title": "Oraxen Items",
+          "id": "oraxen-items"
+        },
+        {
+          "level": 3,
+          "line": 85,
+          "title": "ItemsAdder Items",
+          "id": "itemsadder-items"
+        },
+        {
+          "level": 2,
+          "line": 96,
+          "title": "Custom Icons",
+          "id": "custom-icons"
+        },
+        {
+          "level": 3,
+          "line": 100,
+          "title": "CustomModelData",
+          "id": "custommodeldata"
+        },
+        {
+          "level": 3,
+          "line": 112,
+          "title": "ItemsAdder Icon",
+          "id": "itemsadder-icon"
+        },
+        {
+          "level": 3,
+          "line": 123,
+          "title": "Oraxen Icon",
+          "id": "oraxen-icon"
+        },
+        {
+          "level": 3,
+          "line": 138,
+          "title": "Capture Any Item as an Icon",
+          "id": "capture-any-item-as-an-icon"
+        },
+        {
+          "level": 2,
+          "line": 148,
+          "title": "Item Preview Slot",
+          "id": "item-preview-slot"
+        },
+        {
+          "level": 2,
+          "line": 162,
+          "title": "Economy Rewards",
+          "id": "economy-rewards"
+        },
+        {
+          "level": 2,
+          "line": 181,
+          "title": "Command Rewards",
+          "id": "command-rewards"
+        },
+        {
+          "level": 2,
+          "line": 200,
+          "title": "Permission Rewards",
+          "id": "permission-rewards"
+        },
+        {
+          "level": 2,
+          "line": 228,
+          "title": "Title Rewards",
+          "id": "title-rewards"
+        },
+        {
+          "level": 3,
+          "line": 230,
+          "title": "DeluxeTags",
+          "id": "deluxetags"
+        },
+        {
+          "level": 3,
+          "line": 246,
+          "title": "TAB (Folia Compatible)",
+          "id": "tab-folia-compatible"
+        },
+        {
+          "level": 2,
+          "line": 259,
+          "title": "Experience Rewards",
+          "id": "experience-rewards"
+        },
+        {
+          "level": 2,
+          "line": 269,
+          "title": "Conditional Rewards",
+          "id": "conditional-rewards"
+        },
+        {
+          "level": 2,
+          "line": 286,
+          "title": "Reward Groups",
+          "id": "reward-groups"
+        },
+        {
+          "level": 2,
+          "line": 302,
+          "title": "Next Steps",
+          "id": "next-steps"
+        }
+      ]
+    },
+    {
+      "source": "en/docs/arcpass/config/seasons.md",
+      "target": "/en/arcpass/config/seasons",
+      "file": "en/arcpass/config/seasons.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "Season Configuration",
+          "id": "season-configuration"
+        },
+        {
+          "level": 2,
+          "line": 5,
+          "title": "Season Concepts",
+          "id": "season-concepts"
+        },
+        {
+          "level": 2,
+          "line": 12,
+          "title": "Season Management",
+          "id": "season-management"
+        },
+        {
+          "level": 3,
+          "line": 14,
+          "title": "Starting a Season",
+          "id": "starting-a-season"
+        },
+        {
+          "level": 3,
+          "line": 29,
+          "title": "Ending a Season",
+          "id": "ending-a-season"
+        },
+        {
+          "level": 3,
+          "line": 35,
+          "title": "View Season Info",
+          "id": "view-season-info"
+        },
+        {
+          "level": 2,
+          "line": 41,
+          "title": "Season Configuration",
+          "id": "season-configuration-1"
+        },
+        {
+          "level": 2,
+          "line": 60,
+          "title": "Seasonal Quests",
+          "id": "seasonal-quests"
+        },
+        {
+          "level": 2,
+          "line": 90,
+          "title": "Season Rewards",
+          "id": "season-rewards"
+        },
+        {
+          "level": 3,
+          "line": 92,
+          "title": "End-of-Season Rewards",
+          "id": "end-of-season-rewards"
+        },
+        {
+          "level": 3,
+          "line": 106,
+          "title": "Leaderboard Rewards",
+          "id": "leaderboard-rewards"
+        },
+        {
+          "level": 2,
+          "line": 120,
+          "title": "Season Data",
+          "id": "season-data"
+        },
+        {
+          "level": 3,
+          "line": 122,
+          "title": "Data Storage",
+          "id": "data-storage"
+        },
+        {
+          "level": 3,
+          "line": 130,
+          "title": "Data Migration",
+          "id": "data-migration"
+        },
+        {
+          "level": 2,
+          "line": 139,
+          "title": "Season Notifications",
+          "id": "season-notifications"
+        },
+        {
+          "level": 3,
+          "line": 141,
+          "title": "Start Notification",
+          "id": "start-notification"
+        },
+        {
+          "level": 3,
+          "line": 154,
+          "title": "End Notification",
+          "id": "end-notification"
+        },
+        {
+          "level": 2,
+          "line": 172,
+          "title": "Permanent Season",
+          "id": "permanent-season"
+        },
+        {
+          "level": 2,
+          "line": 182,
+          "title": "API Integration",
+          "id": "api-integration"
+        },
+        {
+          "level": 3,
+          "line": 184,
+          "title": "Season Events",
+          "id": "season-events"
+        },
+        {
+          "level": 2,
+          "line": 200,
+          "title": "Example: 90-Day Season",
+          "id": "example-90-day-season"
+        },
+        {
+          "level": 2,
+          "line": 227,
+          "title": "Next Steps",
+          "id": "next-steps"
+        }
+      ]
+    },
+    {
+      "source": "en/docs/arcpass/developer/events.md",
+      "target": "/en/arcpass/developer/events",
+      "file": "en/arcpass/developer/events.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "Event System",
+          "id": "event-system"
+        },
+        {
+          "level": 2,
+          "line": 5,
+          "title": "Event List",
+          "id": "event-list"
+        },
+        {
+          "level": 2,
+          "line": 15,
+          "title": "Register Listener",
+          "id": "register-listener"
+        },
+        {
+          "level": 2,
+          "line": 45,
+          "title": "PlayerLevelUpEvent",
+          "id": "playerlevelupevent"
+        },
+        {
+          "level": 3,
+          "line": 68,
+          "title": "Properties",
+          "id": "properties"
+        },
+        {
+          "level": 2,
+          "line": 77,
+          "title": "QuestCompleteEvent",
+          "id": "questcompleteevent"
+        },
+        {
+          "level": 3,
+          "line": 108,
+          "title": "Properties",
+          "id": "properties-1"
+        },
+        {
+          "level": 2,
+          "line": 119,
+          "title": "RewardClaimEvent",
+          "id": "rewardclaimevent"
+        },
+        {
+          "level": 3,
+          "line": 149,
+          "title": "Properties",
+          "id": "properties-2"
+        },
+        {
+          "level": 2,
+          "line": 160,
+          "title": "SeasonStartEvent",
+          "id": "seasonstartevent"
+        },
+        {
+          "level": 3,
+          "line": 183,
+          "title": "Properties",
+          "id": "properties-3"
+        },
+        {
+          "level": 2,
+          "line": 189,
+          "title": "SeasonEndEvent",
+          "id": "seasonendevent"
+        },
+        {
+          "level": 3,
+          "line": 209,
+          "title": "Properties",
+          "id": "properties-4"
+        },
+        {
+          "level": 2,
+          "line": 215,
+          "title": "Event Priority",
+          "id": "event-priority"
+        },
+        {
+          "level": 2,
+          "line": 232,
+          "title": "Best Practices",
+          "id": "best-practices"
+        },
+        {
+          "level": 3,
+          "line": 234,
+          "title": "1. Check Player Online Status",
+          "id": "_1-check-player-online-status"
+        },
+        {
+          "level": 3,
+          "line": 247,
+          "title": "2. Avoid Blocking Main Thread",
+          "id": "_2-avoid-blocking-main-thread"
+        },
+        {
+          "level": 3,
+          "line": 262,
+          "title": "3. Handle Cancellation Properly",
+          "id": "_3-handle-cancellation-properly"
+        },
+        {
+          "level": 2,
+          "line": 273,
+          "title": "Next Steps",
+          "id": "next-steps"
+        }
+      ]
+    },
+    {
+      "source": "en/docs/arcpass/developer/examples.md",
+      "target": "/en/arcpass/developer/examples",
+      "file": "en/arcpass/developer/examples.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "Code Examples",
+          "id": "code-examples"
+        },
+        {
+          "level": 2,
+          "line": 5,
+          "title": "Mob Kill XP Addon",
+          "id": "mob-kill-xp-addon"
+        },
+        {
+          "level": 2,
+          "line": 80,
+          "title": "Custom Quest Trigger",
+          "id": "custom-quest-trigger"
+        },
+        {
+          "level": 2,
+          "line": 159,
+          "title": "Level Milestone Rewards",
+          "id": "level-milestone-rewards"
+        },
+        {
+          "level": 2,
+          "line": 232,
+          "title": "Double XP Event",
+          "id": "double-xp-event"
+        },
+        {
+          "level": 2,
+          "line": 336,
+          "title": "Best Practices Summary",
+          "id": "best-practices-summary"
+        }
+      ]
+    },
+    {
+      "source": "en/docs/arcpass/developer/getting-started.md",
+      "target": "/en/arcpass/developer/getting-started",
+      "file": "en/arcpass/developer/getting-started.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "API Getting Started",
+          "id": "api-getting-started"
+        },
+        {
+          "level": 2,
+          "line": 5,
+          "title": "Add Dependency",
+          "id": "add-dependency"
+        },
+        {
+          "level": 3,
+          "line": 7,
+          "title": "Maven",
+          "id": "maven"
+        },
+        {
+          "level": 3,
+          "line": 27,
+          "title": "Gradle (Kotlin DSL)",
+          "id": "gradle-kotlin-dsl"
+        },
+        {
+          "level": 3,
+          "line": 39,
+          "title": "Gradle (Groovy)",
+          "id": "gradle-groovy"
+        },
+        {
+          "level": 2,
+          "line": 51,
+          "title": "Configure plugin.yml",
+          "id": "configure-plugin-yml"
+        },
+        {
+          "level": 2,
+          "line": 63,
+          "title": "Get API Instance",
+          "id": "get-api-instance"
+        },
+        {
+          "level": 3,
+          "line": 65,
+          "title": "Check Availability",
+          "id": "check-availability"
+        },
+        {
+          "level": 3,
+          "line": 96,
+          "title": "Delayed Access (Recommended)",
+          "id": "delayed-access-recommended"
+        },
+        {
+          "level": 2,
+          "line": 114,
+          "title": "Basic Operations",
+          "id": "basic-operations"
+        },
+        {
+          "level": 3,
+          "line": 116,
+          "title": "Get Player Data",
+          "id": "get-player-data"
+        },
+        {
+          "level": 3,
+          "line": 145,
+          "title": "Use Cached Data",
+          "id": "use-cached-data"
+        },
+        {
+          "level": 3,
+          "line": 160,
+          "title": "Give Experience",
+          "id": "give-experience"
+        },
+        {
+          "level": 3,
+          "line": 176,
+          "title": "Trigger Custom Quest Event",
+          "id": "trigger-custom-quest-event"
+        },
+        {
+          "level": 3,
+          "line": 202,
+          "title": "Query Pass Info",
+          "id": "query-pass-info"
+        },
+        {
+          "level": 3,
+          "line": 220,
+          "title": "Query Season Info",
+          "id": "query-season-info"
+        },
+        {
+          "level": 2,
+          "line": 246,
+          "title": "Error Handling",
+          "id": "error-handling"
+        },
+        {
+          "level": 3,
+          "line": 248,
+          "title": "Handle CompletableFuture Exceptions",
+          "id": "handle-completablefuture-exceptions"
+        },
+        {
+          "level": 3,
+          "line": 268,
+          "title": "Timeout Handling",
+          "id": "timeout-handling"
+        },
+        {
+          "level": 2,
+          "line": 286,
+          "title": "Next Steps",
+          "id": "next-steps"
+        }
+      ]
+    },
+    {
+      "source": "en/docs/arcpass/developer/index.md",
+      "target": "/en/arcpass/developer",
+      "file": "en/arcpass/developer.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "Developer API",
+          "id": "developer-api"
+        },
+        {
+          "level": 2,
+          "line": 9,
+          "title": "API Overview",
+          "id": "api-overview"
+        },
+        {
+          "level": 3,
+          "line": 13,
+          "title": "Features",
+          "id": "features"
+        },
+        {
+          "level": 3,
+          "line": 21,
+          "title": "Documentation",
+          "id": "documentation"
+        },
+        {
+          "level": 2,
+          "line": 29,
+          "title": "Quick Start",
+          "id": "quick-start"
+        },
+        {
+          "level": 3,
+          "line": 31,
+          "title": "Add Dependency",
+          "id": "add-dependency"
+        },
+        {
+          "level": 3,
+          "line": 63,
+          "title": "Get API Instance",
+          "id": "get-api-instance"
+        },
+        {
+          "level": 3,
+          "line": 72,
+          "title": "Basic Example",
+          "id": "basic-example"
+        },
+        {
+          "level": 2,
+          "line": 92,
+          "title": "API Interface",
+          "id": "api-interface"
+        },
+        {
+          "level": 3,
+          "line": 94,
+          "title": "ArcPassAPI",
+          "id": "arcpassapi"
+        },
+        {
+          "level": 2,
+          "line": 127,
+          "title": "Data Models",
+          "id": "data-models"
+        },
+        {
+          "level": 3,
+          "line": 129,
+          "title": "PlayerData",
+          "id": "playerdata"
+        },
+        {
+          "level": 3,
+          "line": 147,
+          "title": "Pass",
+          "id": "pass"
+        },
+        {
+          "level": 3,
+          "line": 162,
+          "title": "Quest",
+          "id": "quest"
+        },
+        {
+          "level": 3,
+          "line": 176,
+          "title": "Season",
+          "id": "season"
+        },
+        {
+          "level": 2,
+          "line": 191,
+          "title": "Async Operations",
+          "id": "async-operations"
+        },
+        {
+          "level": 2,
+          "line": 214,
+          "title": "Thread Safety",
+          "id": "thread-safety"
+        },
+        {
+          "level": 2,
+          "line": 220,
+          "title": "Next Steps",
+          "id": "next-steps"
+        }
+      ]
+    },
+    {
+      "source": "en/docs/arcpass/download.md",
+      "target": "/en/arcpass/download",
+      "file": "en/arcpass/download.mdx",
+      "anchors": []
+    },
+    {
+      "source": "en/docs/arcpass/faq/index.md",
+      "target": "/en/arcpass/faq",
+      "file": "en/arcpass/faq.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "FAQ",
+          "id": "faq"
+        },
+        {
+          "level": 2,
+          "line": 5,
+          "title": "Installation Issues",
+          "id": "installation-issues"
+        },
+        {
+          "level": 3,
+          "line": 7,
+          "title": "Plugin Not Loading",
+          "id": "plugin-not-loading"
+        },
+        {
+          "level": 3,
+          "line": 18,
+          "title": "Config Files Not Generated",
+          "id": "config-files-not-generated"
+        },
+        {
+          "level": 3,
+          "line": 28,
+          "title": "Plugin Conflicts",
+          "id": "plugin-conflicts"
+        },
+        {
+          "level": 2,
+          "line": 39,
+          "title": "License Issues",
+          "id": "license-issues"
+        },
+        {
+          "level": 3,
+          "line": 41,
+          "title": "Validation Failed",
+          "id": "validation-failed"
+        },
+        {
+          "level": 3,
+          "line": 63,
+          "title": "Can't Use After Server Migration",
+          "id": "can-t-use-after-server-migration"
+        },
+        {
+          "level": 3,
+          "line": 74,
+          "title": "Binding Failed",
+          "id": "binding-failed"
+        },
+        {
+          "level": 2,
+          "line": 84,
+          "title": "Feature Issues",
+          "id": "feature-issues"
+        },
+        {
+          "level": 3,
+          "line": 86,
+          "title": "Experience Not Increasing",
+          "id": "experience-not-increasing"
+        },
+        {
+          "level": 3,
+          "line": 100,
+          "title": "Can't Claim Rewards",
+          "id": "can-t-claim-rewards"
+        },
+        {
+          "level": 3,
+          "line": 114,
+          "title": "GUI Won't Open",
+          "id": "gui-won-t-open"
+        },
+        {
+          "level": 3,
+          "line": 128,
+          "title": "Quest Progress Not Updating",
+          "id": "quest-progress-not-updating"
+        },
+        {
+          "level": 2,
+          "line": 146,
+          "title": "Compatibility Issues",
+          "id": "compatibility-issues"
+        },
+        {
+          "level": 3,
+          "line": 148,
+          "title": "Folia Server Issues",
+          "id": "folia-server-issues"
+        },
+        {
+          "level": 3,
+          "line": 161,
+          "title": "PlaceholderAPI Variables Not Showing",
+          "id": "placeholderapi-variables-not-showing"
+        },
+        {
+          "level": 3,
+          "line": 176,
+          "title": "Economy Plugin Not Working",
+          "id": "economy-plugin-not-working"
+        },
+        {
+          "level": 3,
+          "line": 186,
+          "title": "MythicMobs/Jobs Quest Not Triggering",
+          "id": "mythicmobs-jobs-quest-not-triggering"
+        },
+        {
+          "level": 2,
+          "line": 200,
+          "title": "Performance Issues",
+          "id": "performance-issues"
+        },
+        {
+          "level": 3,
+          "line": 202,
+          "title": "Server Lag",
+          "id": "server-lag"
+        },
+        {
+          "level": 3,
+          "line": 224,
+          "title": "High Memory Usage",
+          "id": "high-memory-usage"
+        },
+        {
+          "level": 2,
+          "line": 232,
+          "title": "Configuration Issues",
+          "id": "configuration-issues"
+        },
+        {
+          "level": 3,
+          "line": 234,
+          "title": "YAML Syntax Errors",
+          "id": "yaml-syntax-errors"
+        },
+        {
+          "level": 3,
+          "line": 249,
+          "title": "Garbled Chinese/Unicode",
+          "id": "garbled-chinese-unicode"
+        },
+        {
+          "level": 2,
+          "line": 257,
+          "title": "Getting Help",
+          "id": "getting-help"
+        }
+      ]
+    },
+    {
+      "source": "en/docs/arcpass/guide/index.md",
+      "target": "/en/arcpass/guide",
+      "file": "en/arcpass/guide.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "Getting Started",
+          "id": "getting-started"
+        },
+        {
+          "level": 2,
+          "line": 5,
+          "title": "Prerequisites",
+          "id": "prerequisites"
+        },
+        {
+          "level": 3,
+          "line": 15,
+          "title": "Optional Dependencies",
+          "id": "optional-dependencies"
+        },
+        {
+          "level": 2,
+          "line": 23,
+          "title": "Step 1: Install the Plugin",
+          "id": "step-1-install-the-plugin"
+        },
+        {
+          "level": 2,
+          "line": 43,
+          "title": "Step 2: Activate License",
+          "id": "step-2-activate-license"
+        },
+        {
+          "level": 2,
+          "line": 61,
+          "title": "Step 3: Basic Configuration",
+          "id": "step-3-basic-configuration"
+        },
+        {
+          "level": 3,
+          "line": 63,
+          "title": "3.1 Language Setting",
+          "id": "_3-1-language-setting"
+        },
+        {
+          "level": 3,
+          "line": 75,
+          "title": "3.2 Database Configuration",
+          "id": "_3-2-database-configuration"
+        },
+        {
+          "level": 2,
+          "line": 90,
+          "title": "Step 4: Start a Season",
+          "id": "step-4-start-a-season"
+        },
+        {
+          "level": 3,
+          "line": 94,
+          "title": "Option 1: Using Commands",
+          "id": "option-1-using-commands"
+        },
+        {
+          "level": 3,
+          "line": 100,
+          "title": "Option 2: Using Admin GUI",
+          "id": "option-2-using-admin-gui"
+        },
+        {
+          "level": 2,
+          "line": 112,
+          "title": "Step 5: Test Features",
+          "id": "step-5-test-features"
+        },
+        {
+          "level": 2,
+          "line": 128,
+          "title": "Next Steps",
+          "id": "next-steps"
+        },
+        {
+          "level": 2,
+          "line": 159,
+          "title": "Need Help?",
+          "id": "need-help"
+        }
+      ]
+    },
+    {
+      "source": "en/docs/arcpass/index.md",
+      "target": "/en/arcpass",
+      "file": "en/arcpass.mdx",
+      "anchors": [
+        {
+          "level": 3,
+          "line": 22,
+          "title": "Feature Demos",
+          "id": "feature-demos"
+        },
+        {
+          "level": 3,
+          "line": 43,
+          "title": "Screenshots",
+          "id": "screenshots"
+        },
+        {
+          "level": 2,
+          "line": 68,
+          "title": "Why Choose ArcPass?",
+          "id": "why-choose-arcpass"
+        },
+        {
+          "level": 3,
+          "line": 72,
+          "title": "Core Advantages",
+          "id": "core-advantages"
+        },
+        {
+          "level": 3,
+          "line": 97,
+          "title": "Quick Links",
+          "id": "quick-links"
+        },
+        {
+          "level": 3,
+          "line": 138,
+          "title": "Get ArcPass",
+          "id": "get-arcpass"
+        }
+      ]
+    },
+    {
+      "source": "en/docs/arcpass/integrations/index.md",
+      "target": "/en/arcpass/integrations",
+      "file": "en/arcpass/integrations.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "Third-Party Integrations",
+          "id": "third-party-integrations"
+        },
+        {
+          "level": 2,
+          "line": 5,
+          "title": "Integration Overview",
+          "id": "integration-overview"
+        },
+        {
+          "level": 2,
+          "line": 26,
+          "title": "Economy System",
+          "id": "economy-system"
+        },
+        {
+          "level": 3,
+          "line": 28,
+          "title": "Vault",
+          "id": "vault"
+        },
+        {
+          "level": 3,
+          "line": 51,
+          "title": "CMI",
+          "id": "cmi"
+        },
+        {
+          "level": 2,
+          "line": 61,
+          "title": "Points System",
+          "id": "points-system"
+        },
+        {
+          "level": 3,
+          "line": 65,
+          "title": "PlayerPoints",
+          "id": "playerpoints"
+        },
+        {
+          "level": 3,
+          "line": 77,
+          "title": "CoinsEngine",
+          "id": "coinsengine"
+        },
+        {
+          "level": 3,
+          "line": 85,
+          "title": "TokenManager",
+          "id": "tokenmanager"
+        },
+        {
+          "level": 3,
+          "line": 93,
+          "title": "Points Priority",
+          "id": "points-priority"
+        },
+        {
+          "level": 3,
+          "line": 101,
+          "title": "Using Points for Tier Purchases",
+          "id": "using-points-for-tier-purchases"
+        },
+        {
+          "level": 2,
+          "line": 115,
+          "title": "Permission System",
+          "id": "permission-system"
+        },
+        {
+          "level": 3,
+          "line": 117,
+          "title": "LuckPerms",
+          "id": "luckperms"
+        },
+        {
+          "level": 2,
+          "line": 158,
+          "title": "Title System",
+          "id": "title-system"
+        },
+        {
+          "level": 3,
+          "line": 160,
+          "title": "DeluxeTags",
+          "id": "deluxetags"
+        },
+        {
+          "level": 3,
+          "line": 186,
+          "title": "TAB",
+          "id": "tab"
+        },
+        {
+          "level": 3,
+          "line": 206,
+          "title": "NametagEdit",
+          "id": "nametagedit"
+        },
+        {
+          "level": 3,
+          "line": 216,
+          "title": "PlayerTitle",
+          "id": "playertitle"
+        },
+        {
+          "level": 3,
+          "line": 255,
+          "title": "Title Priority",
+          "id": "title-priority"
+        },
+        {
+          "level": 2,
+          "line": 265,
+          "title": "Cosmetic System",
+          "id": "cosmetic-system"
+        },
+        {
+          "level": 3,
+          "line": 267,
+          "title": "PlayerParticles",
+          "id": "playerparticles"
+        },
+        {
+          "level": 2,
+          "line": 304,
+          "title": "Quest Triggers",
+          "id": "quest-triggers"
+        },
+        {
+          "level": 3,
+          "line": 306,
+          "title": "MythicMobs",
+          "id": "mythicmobs"
+        },
+        {
+          "level": 3,
+          "line": 326,
+          "title": "Jobs Reborn",
+          "id": "jobs-reborn"
+        },
+        {
+          "level": 2,
+          "line": 346,
+          "title": "Custom Items",
+          "id": "custom-items"
+        },
+        {
+          "level": 3,
+          "line": 348,
+          "title": "Oraxen",
+          "id": "oraxen"
+        },
+        {
+          "level": 3,
+          "line": 372,
+          "title": "ItemsAdder",
+          "id": "itemsadder"
+        },
+        {
+          "level": 2,
+          "line": 396,
+          "title": "PlaceholderAPI",
+          "id": "placeholderapi"
+        },
+        {
+          "level": 2,
+          "line": 406,
+          "title": "Check Integration Status",
+          "id": "check-integration-status"
+        },
+        {
+          "level": 2,
+          "line": 424,
+          "title": "Troubleshooting",
+          "id": "troubleshooting"
+        },
+        {
+          "level": 3,
+          "line": 426,
+          "title": "Economy Rewards Not Working",
+          "id": "economy-rewards-not-working"
+        },
+        {
+          "level": 3,
+          "line": 432,
+          "title": "Title Rewards Not Working",
+          "id": "title-rewards-not-working"
+        },
+        {
+          "level": 3,
+          "line": 439,
+          "title": "Cosmetic/Particle Rewards Not Working",
+          "id": "cosmetic-particle-rewards-not-working"
+        },
+        {
+          "level": 3,
+          "line": 446,
+          "title": "MythicMobs Quest Not Triggering",
+          "id": "mythicmobs-quest-not-triggering"
+        },
+        {
+          "level": 3,
+          "line": 452,
+          "title": "Custom Items Not Showing",
+          "id": "custom-items-not-showing"
+        }
+      ]
+    },
+    {
+      "source": "en/docs/arcpass/placeholders/index.md",
+      "target": "/en/arcpass/placeholders",
+      "file": "en/arcpass/placeholders.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "PlaceholderAPI Variables",
+          "id": "placeholderapi-variables"
+        },
+        {
+          "level": 2,
+          "line": 5,
+          "title": "Requirements",
+          "id": "requirements"
+        },
+        {
+          "level": 2,
+          "line": 11,
+          "title": "Variable List",
+          "id": "variable-list"
+        },
+        {
+          "level": 3,
+          "line": 13,
+          "title": "Player Data",
+          "id": "player-data"
+        },
+        {
+          "level": 3,
+          "line": 27,
+          "title": "Tier Information",
+          "id": "tier-information"
+        },
+        {
+          "level": 3,
+          "line": 37,
+          "title": "Quest Information",
+          "id": "quest-information"
+        },
+        {
+          "level": 3,
+          "line": 44,
+          "title": "Reward Information",
+          "id": "reward-information"
+        },
+        {
+          "level": 3,
+          "line": 50,
+          "title": "Season Information",
+          "id": "season-information"
+        },
+        {
+          "level": 3,
+          "line": 60,
+          "title": "Leaderboard",
+          "id": "leaderboard"
+        },
+        {
+          "level": 2,
+          "line": 70,
+          "title": "Usage Examples",
+          "id": "usage-examples"
+        },
+        {
+          "level": 3,
+          "line": 72,
+          "title": "Scoreboard (FeatherBoard)",
+          "id": "scoreboard-featherboard"
+        },
+        {
+          "level": 3,
+          "line": 84,
+          "title": "Chat Format (EssentialsX Chat)",
+          "id": "chat-format-essentialsx-chat"
+        },
+        {
+          "level": 3,
+          "line": 90,
+          "title": "Tab List (TAB)",
+          "id": "tab-list-tab"
+        },
+        {
+          "level": 3,
+          "line": 99,
+          "title": "Hologram (HolographicDisplays)",
+          "id": "hologram-holographicdisplays"
+        },
+        {
+          "level": 2,
+          "line": 110,
+          "title": "Progress Bar Customization",
+          "id": "progress-bar-customization"
+        },
+        {
+          "level": 2,
+          "line": 120,
+          "title": "Conditional Variables",
+          "id": "conditional-variables"
+        },
+        {
+          "level": 2,
+          "line": 128,
+          "title": "Caching",
+          "id": "caching"
+        },
+        {
+          "level": 2,
+          "line": 140,
+          "title": "Troubleshooting",
+          "id": "troubleshooting"
+        },
+        {
+          "level": 3,
+          "line": 142,
+          "title": "Variable Shows Raw Text",
+          "id": "variable-shows-raw-text"
+        },
+        {
+          "level": 3,
+          "line": 148,
+          "title": "Variable Shows Empty",
+          "id": "variable-shows-empty"
+        },
+        {
+          "level": 3,
+          "line": 154,
+          "title": "Rank Shows ?",
+          "id": "rank-shows"
+        }
+      ]
+    },
+    {
+      "source": "en/docs/arcpass/setup/installation.md",
+      "target": "/en/arcpass/setup/installation",
+      "file": "en/arcpass/setup/installation.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "Installation Guide",
+          "id": "installation-guide"
+        },
+        {
+          "level": 2,
+          "line": 5,
+          "title": "Supported Servers",
+          "id": "supported-servers"
+        },
+        {
+          "level": 2,
+          "line": 19,
+          "title": "Installation Steps",
+          "id": "installation-steps"
+        },
+        {
+          "level": 3,
+          "line": 21,
+          "title": "1. Download the Plugin",
+          "id": "_1-download-the-plugin"
+        },
+        {
+          "level": 3,
+          "line": 29,
+          "title": "2. Place the File",
+          "id": "_2-place-the-file"
+        },
+        {
+          "level": 3,
+          "line": 42,
+          "title": "3. Start the Server",
+          "id": "_3-start-the-server"
+        },
+        {
+          "level": 3,
+          "line": 51,
+          "title": "4. Check Startup Logs",
+          "id": "_4-check-startup-logs"
+        },
+        {
+          "level": 2,
+          "line": 64,
+          "title": "Generated File Structure",
+          "id": "generated-file-structure"
+        },
+        {
+          "level": 2,
+          "line": 88,
+          "title": "Folia Server Notes",
+          "id": "folia-server-notes"
+        },
+        {
+          "level": 2,
+          "line": 98,
+          "title": "Troubleshooting",
+          "id": "troubleshooting"
+        },
+        {
+          "level": 3,
+          "line": 100,
+          "title": "Plugin Not Loading",
+          "id": "plugin-not-loading"
+        },
+        {
+          "level": 3,
+          "line": 108,
+          "title": "Config Files Not Generated",
+          "id": "config-files-not-generated"
+        },
+        {
+          "level": 3,
+          "line": 114,
+          "title": "Dependency Plugin Issues",
+          "id": "dependency-plugin-issues"
+        },
+        {
+          "level": 2,
+          "line": 124,
+          "title": "Next Steps",
+          "id": "next-steps"
+        }
+      ]
+    },
+    {
+      "source": "en/docs/arcpass/setup/license.md",
+      "target": "/en/arcpass/setup/license",
+      "file": "en/arcpass/setup/license.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "License Activation",
+          "id": "license-activation"
+        },
+        {
+          "level": 2,
+          "line": 5,
+          "title": "Purchase a License",
+          "id": "purchase-a-license"
+        },
+        {
+          "level": 3,
+          "line": 7,
+          "title": "Available Plans",
+          "id": "available-plans"
+        },
+        {
+          "level": 3,
+          "line": 22,
+          "title": "Purchase Options",
+          "id": "purchase-options"
+        },
+        {
+          "level": 2,
+          "line": 43,
+          "title": "Activation Steps",
+          "id": "activation-steps"
+        },
+        {
+          "level": 3,
+          "line": 45,
+          "title": "1. Edit Configuration",
+          "id": "_1-edit-configuration"
+        },
+        {
+          "level": 3,
+          "line": 66,
+          "title": "2. Enter Your Key",
+          "id": "_2-enter-your-key"
+        },
+        {
+          "level": 3,
+          "line": 74,
+          "title": "3. Reload Configuration",
+          "id": "_3-reload-configuration"
+        },
+        {
+          "level": 3,
+          "line": 82,
+          "title": "4. Verify Activation",
+          "id": "_4-verify-activation"
+        },
+        {
+          "level": 2,
+          "line": 93,
+          "title": "License Binding",
+          "id": "license-binding"
+        },
+        {
+          "level": 3,
+          "line": 95,
+          "title": "Binding Mechanism",
+          "id": "binding-mechanism"
+        },
+        {
+          "level": 3,
+          "line": 105,
+          "title": "Check Binding Status",
+          "id": "check-binding-status"
+        },
+        {
+          "level": 3,
+          "line": 111,
+          "title": "Unbind/Transfer",
+          "id": "unbind-transfer"
+        },
+        {
+          "level": 2,
+          "line": 127,
+          "title": "License Status",
+          "id": "license-status"
+        },
+        {
+          "level": 3,
+          "line": 129,
+          "title": "Status Codes",
+          "id": "status-codes"
+        },
+        {
+          "level": 3,
+          "line": 140,
+          "title": "Offline Mode",
+          "id": "offline-mode"
+        },
+        {
+          "level": 2,
+          "line": 149,
+          "title": "Common Issues",
+          "id": "common-issues"
+        },
+        {
+          "level": 3,
+          "line": 151,
+          "title": "Validation Failed",
+          "id": "validation-failed"
+        },
+        {
+          "level": 3,
+          "line": 157,
+          "title": "Binding Limit Reached",
+          "id": "binding-limit-reached"
+        },
+        {
+          "level": 3,
+          "line": 163,
+          "title": "Server Migration",
+          "id": "server-migration"
+        },
+        {
+          "level": 2,
+          "line": 170,
+          "title": "Support",
+          "id": "support"
+        }
+      ]
+    },
+    {
+      "source": "en/docs/arcpass/setup/requirements.md",
+      "target": "/en/arcpass/setup/requirements",
+      "file": "en/arcpass/setup/requirements.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "System Requirements",
+          "id": "system-requirements"
+        },
+        {
+          "level": 2,
+          "line": 5,
+          "title": "Minimum Requirements",
+          "id": "minimum-requirements"
+        },
+        {
+          "level": 2,
+          "line": 15,
+          "title": "Server Compatibility",
+          "id": "server-compatibility"
+        },
+        {
+          "level": 3,
+          "line": 17,
+          "title": "Fully Supported",
+          "id": "fully-supported"
+        },
+        {
+          "level": 3,
+          "line": 26,
+          "title": "Partial Support",
+          "id": "partial-support"
+        },
+        {
+          "level": 3,
+          "line": 33,
+          "title": "Not Supported",
+          "id": "not-supported"
+        },
+        {
+          "level": 2,
+          "line": 39,
+          "title": "Java Version",
+          "id": "java-version"
+        },
+        {
+          "level": 3,
+          "line": 41,
+          "title": "Java 17 (Minimum)",
+          "id": "java-17-minimum"
+        },
+        {
+          "level": 3,
+          "line": 45,
+          "title": "Java 21 (Recommended)",
+          "id": "java-21-recommended"
+        },
+        {
+          "level": 3,
+          "line": 53,
+          "title": "Check Java Version",
+          "id": "check-java-version"
+        },
+        {
+          "level": 2,
+          "line": 67,
+          "title": "Plugin Dependencies",
+          "id": "plugin-dependencies"
+        },
+        {
+          "level": 3,
+          "line": 69,
+          "title": "Required",
+          "id": "required"
+        },
+        {
+          "level": 3,
+          "line": 73,
+          "title": "Optional Dependencies",
+          "id": "optional-dependencies"
+        },
+        {
+          "level": 4,
+          "line": 77,
+          "title": "Economy",
+          "id": "economy"
+        },
+        {
+          "level": 4,
+          "line": 86,
+          "title": "Permissions",
+          "id": "permissions"
+        },
+        {
+          "level": 4,
+          "line": 94,
+          "title": "Placeholders",
+          "id": "placeholders"
+        },
+        {
+          "level": 4,
+          "line": 102,
+          "title": "Title Systems",
+          "id": "title-systems"
+        },
+        {
+          "level": 4,
+          "line": 113,
+          "title": "Quest Triggers",
+          "id": "quest-triggers"
+        },
+        {
+          "level": 4,
+          "line": 120,
+          "title": "Custom Items",
+          "id": "custom-items"
+        },
+        {
+          "level": 2,
+          "line": 127,
+          "title": "Database",
+          "id": "database"
+        },
+        {
+          "level": 3,
+          "line": 129,
+          "title": "SQLite (Default)",
+          "id": "sqlite-default"
+        },
+        {
+          "level": 3,
+          "line": 135,
+          "title": "MySQL",
+          "id": "mysql"
+        },
+        {
+          "level": 2,
+          "line": 141,
+          "title": "Network Requirements",
+          "id": "network-requirements"
+        },
+        {
+          "level": 3,
+          "line": 143,
+          "title": "License Validation",
+          "id": "license-validation"
+        },
+        {
+          "level": 3,
+          "line": 149,
+          "title": "Firewall Settings",
+          "id": "firewall-settings"
+        },
+        {
+          "level": 2,
+          "line": 157,
+          "title": "Performance Recommendations",
+          "id": "performance-recommendations"
+        },
+        {
+          "level": 3,
+          "line": 159,
+          "title": "Small Servers (< 50 players)",
+          "id": "small-servers-50-players"
+        },
+        {
+          "level": 3,
+          "line": 164,
+          "title": "Medium Servers (50-200 players)",
+          "id": "medium-servers-50-200-players"
+        },
+        {
+          "level": 3,
+          "line": 169,
+          "title": "Large Servers (200+ players)",
+          "id": "large-servers-200-players"
+        },
+        {
+          "level": 2,
+          "line": 183,
+          "title": "Next Steps",
+          "id": "next-steps"
+        }
+      ]
+    },
+    {
+      "source": "en/docs/kitemarket/api.md",
+      "target": "/en/kitemarket/api",
+      "file": "en/kitemarket/api.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 2,
+          "title": "Market API quick start",
+          "id": "market-api-quick-start"
+        },
+        {
+          "level": 2,
+          "line": 6,
+          "title": "Reference the SDK",
+          "id": "reference-the-sdk"
+        },
+        {
+          "level": 3,
+          "line": 10,
+          "title": "GitHub Packages",
+          "id": "github-packages"
+        },
+        {
+          "level": 3,
+          "line": 92,
+          "title": "Release-download fallback",
+          "id": "release-download-fallback"
+        },
+        {
+          "level": 2,
+          "line": 100,
+          "title": "Wait for registration, then query asynchronously",
+          "id": "wait-for-registration-then-query-asynchronously"
+        },
+        {
+          "level": 2,
+          "line": 125,
+          "title": "Queries and results",
+          "id": "queries-and-results"
+        },
+        {
+          "level": 2,
+          "line": 149,
+          "title": "Post-commit notifications",
+          "id": "post-commit-notifications"
+        },
+        {
+          "level": 2,
+          "line": 170,
+          "title": "Extending the player interface?",
+          "id": "extending-the-player-interface"
+        }
+      ]
+    },
+    {
+      "source": "en/docs/kitemarket/commands.md",
+      "target": "/en/kitemarket/commands",
+      "file": "en/kitemarket/commands.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "Commands and permissions",
+          "id": "commands-and-permissions"
+        },
+        {
+          "level": 2,
+          "line": 9,
+          "title": "Player commands",
+          "id": "player-commands"
+        },
+        {
+          "level": 2,
+          "line": 42,
+          "title": "Condition input",
+          "id": "condition-input"
+        },
+        {
+          "level": 2,
+          "line": 58,
+          "title": "Administrative commands",
+          "id": "administrative-commands"
+        },
+        {
+          "level": 2,
+          "line": 93,
+          "title": "Console and reload",
+          "id": "console-and-reload"
+        }
+      ]
+    },
+    {
+      "source": "en/docs/kitemarket/compatibility.md",
+      "target": "/en/kitemarket/compatibility",
+      "file": "en/kitemarket/compatibility.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "Versions and certification",
+          "id": "versions-and-certification"
+        },
+        {
+          "level": 2,
+          "line": 26,
+          "title": "Pinned IA environment",
+          "id": "pinned-ia-environment"
+        },
+        {
+          "level": 2,
+          "line": 45,
+          "title": "What a certification record contains",
+          "id": "what-a-certification-record-contains"
+        },
+        {
+          "level": 2,
+          "line": 51,
+          "title": "Distribution ranges and historical evidence",
+          "id": "distribution-ranges-and-historical-evidence"
+        }
+      ]
+    },
+    {
+      "source": "en/docs/kitemarket/dlc.md",
+      "target": "/en/kitemarket/dlc",
+      "file": "en/kitemarket/dlc.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "ItemsAdder integration",
+          "id": "itemsadder-integration"
+        },
+        {
+          "level": 2,
+          "line": 9,
+          "title": "Install your own theme",
+          "id": "install-your-own-theme"
+        },
+        {
+          "level": 2,
+          "line": 34,
+          "title": "Use and fallback",
+          "id": "use-and-fallback"
+        },
+        {
+          "level": 2,
+          "line": 47,
+          "title": "Develop your own interface",
+          "id": "develop-your-own-interface"
+        }
+      ]
+    },
+    {
+      "source": "en/docs/kitemarket/download.md",
+      "target": "/en/kitemarket/download",
+      "file": "en/kitemarket/download.mdx",
+      "anchors": [
+        {
+          "level": 2,
+          "line": 17,
+          "title": "Available versions",
+          "id": "available-versions"
+        },
+        {
+          "level": 2,
+          "line": 23,
+          "title": "Server owners: choose exactly one runtime",
+          "id": "server-owners-choose-exactly-one-runtime"
+        },
+        {
+          "level": 2,
+          "line": 35,
+          "title": "Developers: SDKs, sources and examples",
+          "id": "developers-sdks-sources-and-examples"
+        },
+        {
+          "level": 2,
+          "line": 47,
+          "title": "Configuration and integrity",
+          "id": "configuration-and-integrity"
+        }
+      ]
+    },
+    {
+      "source": "en/docs/kitemarket/guide.md",
+      "target": "/en/kitemarket/guide",
+      "file": "en/kitemarket/guide.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "Installation and configuration",
+          "id": "installation-and-configuration"
+        },
+        {
+          "level": 2,
+          "line": 5,
+          "title": "1. Prepare the environment",
+          "id": "_1-prepare-the-environment"
+        },
+        {
+          "level": 2,
+          "line": 11,
+          "title": "2. Network and database",
+          "id": "_2-network-and-database"
+        },
+        {
+          "level": 2,
+          "line": 45,
+          "title": "3. Currencies",
+          "id": "_3-currencies"
+        },
+        {
+          "level": 2,
+          "line": 77,
+          "title": "4. Network license",
+          "id": "_4-network-license"
+        },
+        {
+          "level": 2,
+          "line": 94,
+          "title": "5. Restart and check the deployment",
+          "id": "_5-restart-and-check-the-deployment"
+        },
+        {
+          "level": 2,
+          "line": 100,
+          "title": "6. Menu configuration",
+          "id": "_6-menu-configuration"
+        },
+        {
+          "level": 3,
+          "line": 160,
+          "title": "Customize the vanilla GUI",
+          "id": "customize-the-vanilla-gui"
+        },
+        {
+          "level": 2,
+          "line": 235,
+          "title": "7. bStats basic metrics",
+          "id": "_7-bstats-basic-metrics"
+        },
+        {
+          "level": 2,
+          "line": 250,
+          "title": "8. Runtime, configuration and SDKs",
+          "id": "_8-runtime-configuration-and-sdks"
+        }
+      ]
+    },
+    {
+      "source": "en/docs/kitemarket/index.md",
+      "target": "/en/kitemarket",
+      "file": "en/kitemarket.mdx",
+      "anchors": [
+        {
+          "level": 2,
+          "line": 11,
+          "title": "Understand the trade before confirming",
+          "id": "understand-the-trade-before-confirming"
+        },
+        {
+          "level": 2,
+          "line": 19,
+          "title": "Ready for vanilla clients, made for your own design",
+          "id": "ready-for-vanilla-clients-made-for-your-own-design"
+        },
+        {
+          "level": 2,
+          "line": 29,
+          "title": "CNY 68 / USD 9.99 for the complete product",
+          "id": "cny-68-usd-9-99-for-the-complete-product"
+        },
+        {
+          "level": 2,
+          "line": 35,
+          "title": "Shared accounting, clear boundaries",
+          "id": "shared-accounting-clear-boundaries"
+        },
+        {
+          "level": 2,
+          "line": 45,
+          "title": "Get started",
+          "id": "get-started"
+        }
+      ]
+    },
+    {
+      "source": "en/docs/kitemarket/license.md",
+      "target": "/en/kitemarket/license",
+      "file": "en/kitemarket/license.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "Network license",
+          "id": "network-license"
+        },
+        {
+          "level": 2,
+          "line": 18,
+          "title": "Refresh, offline grace, and expiry",
+          "id": "refresh-offline-grace-and-expiry"
+        },
+        {
+          "level": 2,
+          "line": 32,
+          "title": "Reactivating the same network and license",
+          "id": "reactivating-the-same-network-and-license"
+        },
+        {
+          "level": 2,
+          "line": 40,
+          "title": "Identity and migration",
+          "id": "identity-and-migration"
+        },
+        {
+          "level": 2,
+          "line": 50,
+          "title": "Interfaces and third-party themes",
+          "id": "interfaces-and-third-party-themes"
+        }
+      ]
+    },
+    {
+      "source": "en/docs/kitemarket/operations.md",
+      "target": "/en/kitemarket/operations",
+      "file": "en/kitemarket/operations.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "Recovery and safe migration",
+          "id": "recovery-and-safe-migration"
+        },
+        {
+          "level": 2,
+          "line": 5,
+          "title": "Common states",
+          "id": "common-states"
+        },
+        {
+          "level": 2,
+          "line": 29,
+          "title": "Reconciling UNKNOWN",
+          "id": "reconciling-unknown"
+        },
+        {
+          "level": 2,
+          "line": 42,
+          "title": "Backup and migration",
+          "id": "backup-and-migration"
+        },
+        {
+          "level": 2,
+          "line": 58,
+          "title": "Upgrading an existing market to protocol 4",
+          "id": "upgrading-an-existing-market-to-protocol-4"
+        },
+        {
+          "level": 3,
+          "line": 73,
+          "title": "Original snapshots and attribute comparison",
+          "id": "original-snapshots-and-attribute-comparison"
+        },
+        {
+          "level": 3,
+          "line": 81,
+          "title": "Narrower admission and existing assets",
+          "id": "narrower-admission-and-existing-assets"
+        },
+        {
+          "level": 2,
+          "line": 87,
+          "title": "Minimum validation",
+          "id": "minimum-validation"
+        },
+        {
+          "level": 2,
+          "line": 93,
+          "title": "Read-only developer API",
+          "id": "read-only-developer-api"
+        }
+      ]
+    },
+    {
+      "source": "en/docs/kitemarket/trading.md",
+      "target": "/en/kitemarket/trading",
+      "file": "en/kitemarket/trading.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "Trading and item conditions",
+          "id": "trading-and-item-conditions"
+        },
+        {
+          "level": 3,
+          "line": 9,
+          "title": "Listing quantities and maximum values",
+          "id": "listing-quantities-and-maximum-values"
+        },
+        {
+          "level": 2,
+          "line": 21,
+          "title": "Advanced buy orders",
+          "id": "advanced-buy-orders"
+        },
+        {
+          "level": 3,
+          "line": 41,
+          "title": "Editing conditions",
+          "id": "editing-conditions"
+        },
+        {
+          "level": 3,
+          "line": 53,
+          "title": "Fulfillment preview",
+          "id": "fulfillment-preview"
+        },
+        {
+          "level": 2,
+          "line": 65,
+          "title": "Exact samples and custom items",
+          "id": "exact-samples-and-custom-items"
+        },
+        {
+          "level": 2,
+          "line": 75,
+          "title": "Fixed-price sales",
+          "id": "fixed-price-sales"
+        },
+        {
+          "level": 2,
+          "line": 87,
+          "title": "Public auctions",
+          "id": "public-auctions"
+        },
+        {
+          "level": 2,
+          "line": 101,
+          "title": "Escrow and claims",
+          "id": "escrow-and-claims"
+        },
+        {
+          "level": 2,
+          "line": 105,
+          "title": "Search and transaction receipts",
+          "id": "search-and-transaction-receipts"
+        }
+      ]
+    },
+    {
+      "source": "en/docs/kitemarket/ui-development.md",
+      "target": "/en/kitemarket/ui-development",
+      "file": "en/kitemarket/ui-development.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "Interfaces, themes, and third-party development",
+          "id": "interfaces-themes-and-third-party-development"
+        },
+        {
+          "level": 2,
+          "line": 9,
+          "title": "Quick start",
+          "id": "quick-start"
+        },
+        {
+          "level": 3,
+          "line": 18,
+          "title": "Java example: GitHub Packages",
+          "id": "java-example-github-packages"
+        },
+        {
+          "level": 2,
+          "line": 50,
+          "title": "Player selection and server defaults",
+          "id": "player-selection-and-server-defaults"
+        },
+        {
+          "level": 2,
+          "line": 74,
+          "title": "Own theme declarations",
+          "id": "own-theme-declarations"
+        },
+        {
+          "level": 2,
+          "line": 107,
+          "title": "Resources and provider implementations",
+          "id": "resources-and-provider-implementations"
+        },
+        {
+          "level": 3,
+          "line": 130,
+          "title": "Custom IA functional icons",
+          "id": "custom-ia-functional-icons"
+        },
+        {
+          "level": 2,
+          "line": 148,
+          "title": "Pages, actions and lifecycle",
+          "id": "pages-actions-and-lifecycle"
+        },
+        {
+          "level": 2,
+          "line": 205,
+          "title": "Troubleshooting",
+          "id": "troubleshooting"
+        },
+        {
+          "level": 2,
+          "line": 218,
+          "title": "Installation and scope",
+          "id": "installation-and-scope"
+        }
+      ]
+    },
+    {
+      "source": "en/docs/kitemarket/wallet.md",
+      "target": "/en/kitemarket/wallet",
+      "file": "en/kitemarket/wallet.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "Shared wallet and transfers",
+          "id": "shared-wallet-and-transfers"
+        },
+        {
+          "level": 2,
+          "line": 18,
+          "title": "Amount input and actual limits",
+          "id": "amount-input-and-actual-limits"
+        },
+        {
+          "level": 2,
+          "line": 31,
+          "title": "Gateway node",
+          "id": "gateway-node"
+        },
+        {
+          "level": 2,
+          "line": 37,
+          "title": "Enabling an adapter",
+          "id": "enabling-an-adapter"
+        },
+        {
+          "level": 2,
+          "line": 43,
+          "title": "Failure and UNKNOWN",
+          "id": "failure-and-unknown"
+        }
+      ]
+    },
+    {
+      "source": "en/docs/verifymc/command/index.md",
+      "target": "/en/archive/verifymc/command",
+      "file": "en/archive/verifymc/command.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "Plugin Commands",
+          "id": "plugin-commands"
+        },
+        {
+          "level": 2,
+          "line": 3,
+          "title": "Main Command",
+          "id": "main-command"
+        },
+        {
+          "level": 2,
+          "line": 9,
+          "title": "Subcommand List",
+          "id": "subcommand-list"
+        },
+        {
+          "level": 2,
+          "line": 25,
+          "title": "Command Details",
+          "id": "command-details"
+        },
+        {
+          "level": 3,
+          "line": 27,
+          "title": "/vmc reload",
+          "id": "vmc-reload"
+        },
+        {
+          "level": 3,
+          "line": 32,
+          "title": "/vmc approve",
+          "id": "vmc-approve-username"
+        },
+        {
+          "level": 3,
+          "line": 39,
+          "title": "/vmc reject  [reason]",
+          "id": "vmc-reject-username-reason"
+        },
+        {
+          "level": 3,
+          "line": 46,
+          "title": "/vmc delete",
+          "id": "vmc-delete-username"
+        },
+        {
+          "level": 3,
+          "line": 52,
+          "title": "/vmc ban  [reason]",
+          "id": "vmc-ban-username-reason"
+        },
+        {
+          "level": 3,
+          "line": 58,
+          "title": "/vmc unban",
+          "id": "vmc-unban-username"
+        },
+        {
+          "level": 3,
+          "line": 64,
+          "title": "/vmc list [status]",
+          "id": "vmc-list-status"
+        },
+        {
+          "level": 3,
+          "line": 71,
+          "title": "/vmc info",
+          "id": "vmc-info-username"
+        },
+        {
+          "level": 3,
+          "line": 77,
+          "title": "/vmc version",
+          "id": "vmc-version"
+        },
+        {
+          "level": 2,
+          "line": 82,
+          "title": "Permission Notes",
+          "id": "permission-notes"
+        }
+      ]
+    },
+    {
+      "source": "en/docs/verifymc/download.md",
+      "target": "/en/archive/verifymc/download",
+      "file": "en/archive/verifymc/download.mdx",
+      "anchors": []
+    },
+    {
+      "source": "en/docs/verifymc/file/config.md",
+      "target": "/en/archive/verifymc/file/config",
+      "file": "en/archive/verifymc/file/config.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "Configuration File",
+          "id": "configuration-file"
+        },
+        {
+          "level": 2,
+          "line": 10,
+          "title": "General Settings",
+          "id": "general-settings"
+        },
+        {
+          "level": 2,
+          "line": 20,
+          "title": "Web Server",
+          "id": "web-server"
+        },
+        {
+          "level": 2,
+          "line": 30,
+          "title": "Verification & Whitelist",
+          "id": "verification-whitelist"
+        },
+        {
+          "level": 2,
+          "line": 53,
+          "title": "Registration",
+          "id": "registration"
+        },
+        {
+          "level": 2,
+          "line": 62,
+          "title": "User & Security",
+          "id": "user-security"
+        },
+        {
+          "level": 2,
+          "line": 75,
+          "title": "User Notification",
+          "id": "user-notification"
+        },
+        {
+          "level": 2,
+          "line": 88,
+          "title": "Frontend (UI)",
+          "id": "frontend-ui"
+        },
+        {
+          "level": 2,
+          "line": 102,
+          "title": "Email (SMTP)",
+          "id": "email-smtp"
+        },
+        {
+          "level": 3,
+          "line": 117,
+          "title": "Common SMTP Configurations",
+          "id": "common-smtp-configurations"
+        },
+        {
+          "level": 2,
+          "line": 126,
+          "title": "Auto Update Resources",
+          "id": "auto-update-resources"
+        },
+        {
+          "level": 2,
+          "line": 133,
+          "title": "Email Registration Restrictions",
+          "id": "email-registration-restrictions"
+        },
+        {
+          "level": 2,
+          "line": 155,
+          "title": "Storage & MySQL",
+          "id": "storage-mysql"
+        },
+        {
+          "level": 2,
+          "line": 170,
+          "title": "AuthMe Integration",
+          "id": "authme-integration"
+        },
+        {
+          "level": 2,
+          "line": 212,
+          "title": "Captcha Configuration",
+          "id": "captcha-configuration"
+        },
+        {
+          "level": 2,
+          "line": 228,
+          "title": "Bedrock Player Support",
+          "id": "bedrock-player-support"
+        },
+        {
+          "level": 2,
+          "line": 243,
+          "title": "Questionnaire Configuration",
+          "id": "questionnaire-configuration"
+        },
+        {
+          "level": 2,
+          "line": 266,
+          "title": "LLM Essay Scoring",
+          "id": "llm-essay-scoring"
+        },
+        {
+          "level": 2,
+          "line": 327,
+          "title": "Discord Integration (OAuth2)",
+          "id": "discord-integration-oauth2"
+        },
+        {
+          "level": 2,
+          "line": 353,
+          "title": "Full Configuration Example",
+          "id": "full-configuration-example"
+        }
+      ]
+    },
+    {
+      "source": "en/docs/verifymc/file/directory.md",
+      "target": "/en/archive/verifymc/file/directory",
+      "file": "en/archive/verifymc/file/directory.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "Plugin Directory Structure",
+          "id": "plugin-directory-structure"
+        },
+        {
+          "level": 2,
+          "line": 7,
+          "title": "Directory Overview",
+          "id": "directory-overview"
+        },
+        {
+          "level": 2,
+          "line": 55,
+          "title": "Detailed Description",
+          "id": "detailed-description"
+        },
+        {
+          "level": 3,
+          "line": 57,
+          "title": "Configuration Files",
+          "id": "configuration-files"
+        },
+        {
+          "level": 3,
+          "line": 66,
+          "title": "Email Templates (email/)",
+          "id": "email-templates-email"
+        },
+        {
+          "level": 3,
+          "line": 80,
+          "title": "Frontend Resources (static/)",
+          "id": "frontend-resources-static"
+        },
+        {
+          "level": 3,
+          "line": 93,
+          "title": "Internationalization (i18n/)",
+          "id": "internationalization-i18n"
+        },
+        {
+          "level": 3,
+          "line": 103,
+          "title": "Data Storage (data/)",
+          "id": "data-storage-data"
+        },
+        {
+          "level": 3,
+          "line": 116,
+          "title": "Backups (backup/)",
+          "id": "backups-backup"
+        },
+        {
+          "level": 2,
+          "line": 122,
+          "title": "First Launch",
+          "id": "first-launch"
+        },
+        {
+          "level": 2,
+          "line": 133,
+          "title": "Related Links",
+          "id": "related-links"
+        }
+      ]
+    },
+    {
+      "source": "en/docs/verifymc/front/api.md",
+      "target": "/en/archive/verifymc/front/api",
+      "file": "en/archive/verifymc/front/api.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "Backend API",
+          "id": "backend-api"
+        },
+        {
+          "level": 2,
+          "line": 3,
+          "title": "API Reference Documentation",
+          "id": "api-reference-documentation"
+        },
+        {
+          "level": 2,
+          "line": 7,
+          "title": "Configuration",
+          "id": "configuration"
+        },
+        {
+          "level": 3,
+          "line": 9,
+          "title": "Get Config",
+          "id": "get-config"
+        },
+        {
+          "level": 2,
+          "line": 14,
+          "title": "Captcha",
+          "id": "captcha"
+        },
+        {
+          "level": 3,
+          "line": 16,
+          "title": "Generate Captcha",
+          "id": "generate-captcha"
+        },
+        {
+          "level": 2,
+          "line": 21,
+          "title": "Email Verification",
+          "id": "email-verification"
+        },
+        {
+          "level": 3,
+          "line": 23,
+          "title": "Send Verification Code",
+          "id": "send-verification-code"
+        },
+        {
+          "level": 2,
+          "line": 37,
+          "title": "Questionnaire",
+          "id": "questionnaire"
+        },
+        {
+          "level": 3,
+          "line": 39,
+          "title": "Get Questionnaire Config",
+          "id": "get-questionnaire-config"
+        },
+        {
+          "level": 3,
+          "line": 44,
+          "title": "Submit Questionnaire",
+          "id": "submit-questionnaire"
+        },
+        {
+          "level": 2,
+          "line": 49,
+          "title": "Registration",
+          "id": "registration"
+        },
+        {
+          "level": 3,
+          "line": 51,
+          "title": "Register",
+          "id": "register"
+        },
+        {
+          "level": 3,
+          "line": 68,
+          "title": "Check Review Status",
+          "id": "check-review-status"
+        },
+        {
+          "level": 2,
+          "line": 73,
+          "title": "User",
+          "id": "user"
+        },
+        {
+          "level": 3,
+          "line": 75,
+          "title": "Get User Status",
+          "id": "get-user-status"
+        },
+        {
+          "level": 2,
+          "line": 80,
+          "title": "Authentication",
+          "id": "authentication"
+        },
+        {
+          "level": 3,
+          "line": 82,
+          "title": "User Login",
+          "id": "user-login"
+        },
+        {
+          "level": 3,
+          "line": 87,
+          "title": "Admin Login",
+          "id": "admin-login"
+        },
+        {
+          "level": 2,
+          "line": 102,
+          "title": "Admin Endpoints",
+          "id": "admin-endpoints"
+        },
+        {
+          "level": 3,
+          "line": 104,
+          "title": "Verify Admin Token",
+          "id": "verify-admin-token"
+        },
+        {
+          "level": 3,
+          "line": 109,
+          "title": "Get User List",
+          "id": "get-user-list"
+        },
+        {
+          "level": 3,
+          "line": 115,
+          "title": "Approve User",
+          "id": "approve-user"
+        },
+        {
+          "level": 3,
+          "line": 120,
+          "title": "Reject User",
+          "id": "reject-user"
+        },
+        {
+          "level": 3,
+          "line": 125,
+          "title": "Delete User",
+          "id": "delete-user"
+        },
+        {
+          "level": 3,
+          "line": 130,
+          "title": "Ban User",
+          "id": "ban-user"
+        },
+        {
+          "level": 3,
+          "line": 135,
+          "title": "Unban User",
+          "id": "unban-user"
+        },
+        {
+          "level": 3,
+          "line": 140,
+          "title": "Change User Password",
+          "id": "change-user-password"
+        },
+        {
+          "level": 3,
+          "line": 145,
+          "title": "Get Audit Logs",
+          "id": "get-audit-logs"
+        },
+        {
+          "level": 3,
+          "line": 150,
+          "title": "Sync AuthMe Data",
+          "id": "sync-authme-data"
+        },
+        {
+          "level": 2,
+          "line": 155,
+          "title": "Discord Integration",
+          "id": "discord-integration"
+        },
+        {
+          "level": 3,
+          "line": 157,
+          "title": "Discord Auth",
+          "id": "discord-auth"
+        },
+        {
+          "level": 3,
+          "line": 162,
+          "title": "Discord Callback",
+          "id": "discord-callback"
+        },
+        {
+          "level": 3,
+          "line": 167,
+          "title": "Discord Status",
+          "id": "discord-status"
+        },
+        {
+          "level": 3,
+          "line": 172,
+          "title": "Discord Unlink",
+          "id": "discord-unlink"
+        },
+        {
+          "level": 2,
+          "line": 177,
+          "title": "Version",
+          "id": "version"
+        },
+        {
+          "level": 3,
+          "line": 179,
+          "title": "Get Version",
+          "id": "get-version"
+        }
+      ]
+    },
+    {
+      "source": "en/docs/verifymc/guide/default.md",
+      "target": "/en/archive/verifymc/guide/default",
+      "file": "en/archive/verifymc/guide/default.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "Default Theme (Deprecated)",
+          "id": "default-theme-deprecated"
+        }
+      ]
+    },
+    {
+      "source": "en/docs/verifymc/guide/index.md",
+      "target": "/en/archive/verifymc/guide",
+      "file": "en/archive/verifymc/guide.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "VerifyMC",
+          "id": "verifymc"
+        },
+        {
+          "level": 2,
+          "line": 3,
+          "title": "Introduction",
+          "id": "introduction"
+        },
+        {
+          "level": 2,
+          "line": 9,
+          "title": "Key Features",
+          "id": "key-features"
+        },
+        {
+          "level": 2,
+          "line": 23,
+          "title": "Tech Stack",
+          "id": "tech-stack"
+        },
+        {
+          "level": 2,
+          "line": 32,
+          "title": "Installation & Configuration",
+          "id": "installation-configuration"
+        },
+        {
+          "level": 3,
+          "line": 39,
+          "title": "Administrator Login",
+          "id": "administrator-login"
+        },
+        {
+          "level": 3,
+          "line": 49,
+          "title": "Language",
+          "id": "language"
+        },
+        {
+          "level": 2,
+          "line": 181,
+          "title": "Official Community",
+          "id": "official-community"
+        }
+      ]
+    },
+    {
+      "source": "en/docs/verifymc/index.md",
+      "target": "/en/archive/verifymc",
+      "file": "en/archive/verifymc.mdx",
+      "anchors": []
+    },
+    {
+      "source": "en/docs/verifymc/question/index.md",
+      "target": "/en/archive/verifymc/question",
+      "file": "en/archive/verifymc/question.mdx",
+      "anchors": [
+        {
+          "level": 1,
+          "line": 1,
+          "title": "Frequently Asked Questions",
+          "id": "frequently-asked-questions"
+        },
+        {
+          "level": 2,
+          "line": 3,
+          "title": "Web Interface & Access",
+          "id": "web-interface-access"
+        },
+        {
+          "level": 3,
+          "line": 5,
+          "title": "How do I access the VerifyMC homepage?",
+          "id": "how-do-i-access-the-verifymc-homepage"
+        },
+        {
+          "level": 3,
+          "line": 20,
+          "title": "The admin panel won't load",
+          "id": "the-admin-panel-won-t-load"
+        },
+        {
+          "level": 3,
+          "line": 26,
+          "title": "How does an administrator sign in?",
+          "id": "how-does-an-administrator-sign-in"
+        },
+        {
+          "level": 2,
+          "line": 37,
+          "title": "Discord Integration",
+          "id": "discord-integration"
+        },
+        {
+          "level": 3,
+          "line": 39,
+          "title": "How do I configure Discord server binding?",
+          "id": "how-do-i-configure-discord-server-binding"
+        },
+        {
+          "level": 2,
+          "line": 60,
+          "title": "Email Configuration (SMTP)",
+          "id": "email-configuration-smtp"
+        },
+        {
+          "level": 3,
+          "line": 62,
+          "title": "How do I configure SMTP for email verification?",
+          "id": "how-do-i-configure-smtp-for-email-verification"
+        },
+        {
+          "level": 3,
+          "line": 83,
+          "title": "I don't have an email server, what can I do?",
+          "id": "i-don-t-have-an-email-server-what-can-i-do"
+        },
+        {
+          "level": 3,
+          "line": 99,
+          "title": "Players can't register / Email not sending",
+          "id": "players-can-t-register-email-not-sending"
+        },
+        {
+          "level": 2,
+          "line": 108,
+          "title": "Proxy Plugin Configuration",
+          "id": "proxy-plugin-configuration"
+        },
+        {
+          "level": 3,
+          "line": 110,
+          "title": "How do I configure the VerifyMC-Proxy plugin?",
+          "id": "how-do-i-configure-the-verifymc-proxy-plugin"
+        },
+        {
+          "level": 3,
+          "line": 134,
+          "title": "Which proxy platforms are supported?",
+          "id": "which-proxy-platforms-are-supported"
+        },
+        {
+          "level": 2,
+          "line": 141,
+          "title": "Installation & Compatibility",
+          "id": "installation-compatibility"
+        },
+        {
+          "level": 3,
+          "line": 143,
+          "title": "Which Minecraft versions are supported?",
+          "id": "which-minecraft-versions-are-supported"
+        },
+        {
+          "level": 3,
+          "line": 146,
+          "title": "Does VerifyMC work with Geyser/Floodgate (Bedrock Edition)?",
+          "id": "does-verifymc-work-with-geyser-floodgate-bedrock-edition"
+        },
+        {
+          "level": 2,
+          "line": 157,
+          "title": "Plugin Updates",
+          "id": "plugin-updates"
+        },
+        {
+          "level": 3,
+          "line": 159,
+          "title": "How do I update the plugin?",
+          "id": "how-do-i-update-the-plugin"
+        },
+        {
+          "level": 3,
+          "line": 166,
+          "title": "Will my data be preserved after updating?",
+          "id": "will-my-data-be-preserved-after-updating"
+        },
+        {
+          "level": 2,
+          "line": 171,
+          "title": "Troubleshooting",
+          "id": "troubleshooting"
+        },
+        {
+          "level": 3,
+          "line": 173,
+          "title": "\"No injectable constructor\" error on Velocity",
+          "id": "no-injectable-constructor-error-on-velocity"
+        },
+        {
+          "level": 3,
+          "line": 176,
+          "title": "Version number showing incorrectly",
+          "id": "version-number-showing-incorrectly"
+        }
+      ]
+    },
+    {
+      "source": "en/index.md",
+      "target": "/en",
+      "file": "en.mdx",
+      "anchors": [
+        {
+          "level": 2,
+          "line": 2,
+          "title": "Our Projects",
+          "id": "our-projects"
+        },
+        {
+          "level": 2,
+          "line": 28,
+          "title": "Friend Links",
+          "id": "friend-links"
+        }
+      ]
+    },
+    {
+      "source": "index.md",
+      "target": "/",
+      "file": "index.mdx",
+      "anchors": [
+        {
+          "level": 2,
+          "line": 2,
+          "title": "我们的项目",
+          "id": "我们的项目"
+        },
+        {
+          "level": 2,
+          "line": 28,
+          "title": "友情链接",
+          "id": "友情链接"
+        }
+      ]
+    }
+  ]
+}

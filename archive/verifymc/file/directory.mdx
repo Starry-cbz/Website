@@ -1,0 +1,157 @@
+---
+title: "插件目录结构"
+canonical: "https://www.kitemc.com/archive/verifymc/file/directory"
+---
+
+<Warning>
+VerifyMC 已停止维护。本页保留供已有用户查阅历史配置与使用方法，不表示当前仍在维护或已验证新版本兼容性。
+</Warning>
+
+<span id="插件目录结构" />
+
+本页面详细介绍 VerifyMC 插件的目录结构及各文件的用途。
+
+---
+
+## 目录总览 {#目录总览}
+
+```
+/plugins/VerifyMC/
+├── config.yml                 # 主配置文件
+├── config_help_en.yml         # 英文配置帮助文档
+├── config_help_zh.yml         # 中文配置帮助文档
+├── questionnaire.yml          # 问卷调查配置（可选）
+│
+├── email/                     # 邮件模板目录
+│   ├── verify_code_en.html    # 英文验证码邮件模板
+│   ├── verify_code_zh.html    # 中文验证码邮件模板
+│   ├── review_approved_en.html  # 英文审核通过邮件
+│   ├── review_approved_zh.html  # 中文审核通过邮件
+│   ├── review_rejected_en.html  # 英文审核拒绝邮件
+│   └── review_rejected_zh.html  # 中文审核拒绝邮件
+│
+├── static/                    # 前端静态资源目录
+│   └── glassx/                # GlassX 主题（默认主题）
+│       ├── index.html         # 主页面入口
+│       ├── css/               # 样式文件
+│       │   ├── index-*.css
+│       │   ├── Login-*.css
+│       │   ├── Register-*.css
+│       │   └── ...
+│       └── js/                # JavaScript 文件
+│           ├── index-*.js
+│           ├── api-*.js
+│           ├── vendor-*.js
+│           └── ...
+│
+├── i18n/                      # 国际化语言文件
+│   ├── messages_en.properties        # 英文消息
+│   ├── messages_en.properties.backup # 英文消息备份
+│   ├── messages_zh.properties        # 中文消息
+│   └── messages_zh.properties.backup # 中文消息备份
+│
+├── data/                      # 数据存储目录
+│   ├── users.json             # 用户数据
+│   └── audits.json            # 审核记录
+│
+└── backup/                    # 备份目录
+    └── [时间戳]/              # 按时间戳分类的备份
+        └── [备份文件]
+```
+
+---
+
+## 详细说明 {#详细说明}
+
+### 配置文件 {#配置文件}
+
+| 文件 | 说明 |
+|------|------|
+| `config.yml` | 插件的主配置文件，包含所有可配置选项 |
+| `config_help_en.yml` | 英文版配置帮助文档，包含每个配置项的详细说明 |
+| `config_help_zh.yml` | 中文版配置帮助文档，包含每个配置项的详细说明 |
+| `questionnaire.yml` | 问卷调查配置文件，用于自定义注册时的额外问题 |
+
+### 邮件模板 (`email/`) {#邮件模板-email}
+
+插件使用 HTML 模板发送邮件，支持自定义样式和内容。
+
+| 文件 | 说明 |
+|------|------|
+| `verify_code_*.html` | 验证码邮件模板，用于发送注册验证码 |
+| `review_approved_*.html` | 审核通过邮件模板 |
+| `review_rejected_*.html` | 审核拒绝邮件模板 |
+
+<Tip>
+
+**提示**
+
+邮件模板支持变量替换，如 `{code}`、`{username}`、`{reason}` 等。
+
+</Tip>
+
+### 前端资源 (`static/`) {#前端资源-static}
+
+插件内置了一个现代化的 Web 管理面板，基于 Vue.js 构建。
+
+- **GlassX 主题**：默认的玻璃拟态风格主题
+- `index.html`：Web 面板入口文件
+- `css/`：编译后的样式文件
+- `js/`：编译后的 JavaScript 文件
+
+<Warning>
+
+**注意**
+
+不建议直接修改 `static/` 目录下的文件，因为这些是编译后的前端资源。如需自定义，请参考前端开发文档。
+
+</Warning>
+
+### 国际化 (`i18n/`) {#国际化-i18n}
+
+插件支持多语言，消息文件使用 Java Properties 格式。
+
+| 文件 | 说明 |
+|------|------|
+| `messages_en.properties` | 英文消息文件 |
+| `messages_zh.properties` | 中文消息文件 |
+| `*.backup` | 消息文件的自动备份 |
+
+### 数据存储 (`data/`) {#数据存储-data}
+
+插件使用 JSON 文件存储数据：
+
+| 文件 | 说明 |
+|------|------|
+| `users.json` | 存储所有用户的注册信息和状态 |
+| `audits.json` | 存储审核历史记录 |
+
+<Warning>
+
+**警告**
+
+请勿在服务器运行时直接编辑 `data/` 目录下的文件，这可能导致数据丢失或损坏。
+
+</Warning>
+
+### 备份 (`backup/`) {#备份-backup}
+
+插件会自动备份重要数据，备份文件按时间戳分类存储。
+
+---
+
+## 首次启动 {#首次启动}
+
+首次启动插件时，会自动生成以下文件：
+1. `config.yml` - 默认配置
+2. `email/` - 邮件模板
+3. `static/` - 前端资源
+4. `i18n/` - 语言文件
+5. `data/` - 空的数据目录
+
+---
+
+## 相关链接 {#相关链接}
+
+- [配置文件详解](/archive/verifymc/file/config)
+- [常见问题](/archive/verifymc/question)

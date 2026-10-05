@@ -1,0 +1,92 @@
+---
+title: "ArcPass 下载"
+description: "获取 ArcPass 运行插件、中文与英文语言包和开发者 API。"
+mode: "wide"
+canonical: "https://www.kitemc.com/arcpass/download"
+---
+
+import {
+  Downloads,
+  releaseSections,
+  selectKiteMarketAssets,
+  localizedReleaseBody,
+  safeWebLink,
+  selectSingleAsset,
+  downloadUrl,
+  normalizeReleases,
+} from "/snippets/Downloads.jsx";
+
+<Columns cols={2}>
+  <Card title="安装指南" icon="rocket" href="/arcpass/setup/installation">按步骤安装并激活插件。</Card>
+  <Card title="GitHub Releases" icon="github" href="https://github.com/KiteMC/ArcPass/releases">直接查看和下载公开发行文件。</Card>
+</Columns>
+
+## 版本要求 {#版本要求}
+
+| 项目 | 要求 |
+| --- | --- |
+| Minecraft | 1.18 – 最新版本 |
+| Java | 17+ |
+| Paper / Spigot | 1.18+ |
+| Folia | 1.19+ |
+
+## 版本列表 {#版本列表}
+
+<Downloads repo="ArcPass" lang="zh" showLanguagePacks={true} />
+
+<Note>
+  下载列表来自公开 GitHub Releases。若列表无法读取，可以使用上方的 GitHub 按钮；下载不需要在文档站填写 Token。
+</Note>
+
+## 购买许可证 {#购买许可证}
+
+ArcPass 是付费插件，需要有效许可证才能在服务器上激活使用。
+
+<Columns cols={2}>
+  <Card title="标准版 · ¥68" icon="key" href="https://license.kitemc.com/products/arcpass">
+    5 台设备，每台 3 个端口，终身更新。不包含跨服同步和开发者 API。
+  </Card>
+  <Card title="专业版 · ¥198" icon="star" href="https://license.kitemc.com/products/arcpass">
+    25 台设备，每台 15 个端口，终身更新、优先支持、跨服同步与开发者 API。
+  </Card>
+</Columns>
+
+<Card title="查看我的许可证" icon="key" href="https://license.kitemc.com/dashboard/licenses">
+  管理已有许可证和激活记录。
+</Card>
+
+## API 依赖 {#api-依赖}
+
+开发者通过 GitHub Packages 引用 API，使用 `provided` 或 `compileOnly`，不要将 SDK 打包到扩展插件。
+
+<CodeGroup>
+```xml Maven
+<dependency>
+    <groupId>com.kitemc</groupId>
+    <artifactId>arcpass-api</artifactId>
+    <version>1.9.4</version>
+    <scope>provided</scope>
+</dependency>
+```
+
+```kotlin Gradle (Kotlin DSL)
+compileOnly("com.kitemc:arcpass-api:1.9.4")
+```
+
+```groovy Gradle (Groovy)
+compileOnly 'com.kitemc:arcpass-api:1.9.4'
+```
+</CodeGroup>
+
+<Card title="开发者入门" icon="code" href="/arcpass/developer/getting-started">
+  查看 GitHub Packages 仓库、认证配置和完整 API 使用方法。
+</Card>
+
+## 反馈与支持 {#反馈与支持}
+
+<Columns cols={2}>
+  <Card title="Bug 反馈" icon="bug" href="https://github.com/KiteMC/ArcPass/issues">在 GitHub 提交问题。</Card>
+  <Card title="功能建议" icon="lightbulb" href="https://github.com/KiteMC/ArcPass/discussions">在 GitHub Discussions 提出建议。</Card>
+  <Card title="QQ 社区" icon="messages-square" href="https://qm.qq.com/q/R83fq82HWm">获取社区支持。</Card>
+  <Card title="邮件支持" icon="mail" href="mailto:starry_cbz@outlook.com">starry_cbz@outlook.com</Card>
+</Columns>

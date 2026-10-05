@@ -1,0 +1,300 @@
+---
+title: "Pass Configuration"
+canonical: "https://www.kitemc.com/en/arcpass/config/passes"
+---
+
+<span id="pass-configuration" />
+
+Passes are the core of ArcPass, defining player progression and reward tracks.
+
+## File Location {#file-location}
+
+```
+plugins/ArcPass/passes/
+├── default.yml     # Default pass
+├── combat.yml      # Combat pass (example)
+├── builder.yml     # Builder pass (example)
+└── ...
+```
+
+## Basic Structure {#basic-structure}
+
+```yaml
+# passes/default.yml
+
+# Pass display name
+display-name: "&6&lSeason Pass"
+
+# Pass description
+description: "&7Complete quests for awesome rewards!"
+
+# Set as default pass (auto-assigned to players on join)
+default: true
+
+# Maximum level
+max-level: 100
+
+# Experience curve settings
+experience:
+  base: 100        # Base EXP for level 1
+  multiplier: 1.08 # 8% increase per level
+```
+
+## Tier Configuration {#tier-configuration}
+
+Tiers define different reward tracks:
+
+```yaml
+tiers:
+  # Free tier - available to all players
+  free:
+    display-name: "&fFree"
+    description: "&7Basic rewards for free players"
+    free: true
+    priority: 0
+    icon: PAPER                # Supports: vanilla material, "itemsadder:ns:id", "oraxen:id"
+    # custom-model-data: 0    # Optional CustomModelData (v1.1.5+)
+
+  # Premium tier - paid upgrade
+  premium:
+    display-name: "&6Premium"
+    description: "&eUnlock more rewards and exclusive content"
+    price: 980.0
+    # Currency type: vault (Vault/CMI economy) or points (PlayerPoints/CoinsEngine/TokenManager)
+    currency-type: vault
+    free: false
+    priority: 1
+    icon: GOLD_INGOT
+    permission: null
+
+  # Deluxe tier - highest tier
+  deluxe:
+    display-name: "&dDeluxe"
+    description: "&5Enjoy all rewards and exclusive privileges"
+    price: 1980.0
+    currency-type: vault
+    free: false
+    priority: 2
+    icon: DIAMOND
+    permission: null
+```
+
+## Level Rewards {#level-rewards}
+
+Configure rewards for each level and tier. Reward ID format is `type_value_amount`:
+
+```yaml
+# Reward ID format: type_value_amount
+# Types: item, economy, exp, permission, title, command
+
+levels:
+  # === Level 1: Starter Rewards ===
+  1:
+    rewards:
+      free:
+        - "item_bread_16"
+        - "economy_50"
+      premium:
+        - "item_bread_32"
+        - "economy_100"
+        - "item_iron_pickaxe_1"
+      deluxe:
+        - "item_bread_64"
+        - "economy_200"
+        - "item_iron_pickaxe_1"
+        - "item_iron_sword_1"
+
+  # === Level 10: First Milestone ===
+  10:
+    rewards:
+      free:
+        - "economy_200"
+        - "item_iron_ingot_8"
+        - "title_novice"
+      premium:
+        - "economy_500"
+        - "item_iron_ingot_16"
+        - "item_iron_helmet_1"
+        - "title_adventurer"
+      deluxe:
+        - "economy_1000"
+        - "item_iron_ingot_32"
+        - "item_iron_helmet_1"
+        - "item_iron_chestplate_1"
+        - "title_adventurer"
+        - "exp_500"
+
+  # === Level 50: Midway Milestone ===
+  50:
+    rewards:
+      free:
+        - "economy_1000"
+        - "item_diamond_5"
+        - "title_veteran"
+      premium:
+        - "economy_2500"
+        - "item_diamond_10"
+        - "item_diamond_helmet_1"
+        - "item_diamond_chestplate_1"
+        - "title_champion"
+        - "permission_arcpass.vip.silver"
+      deluxe:
+        - "economy_5000"
+        - "item_diamond_20"
+        - "item_diamond_helmet_1"
+        - "item_diamond_chestplate_1"
+        - "item_diamond_leggings_1"
+        - "item_diamond_boots_1"
+        - "title_legend"
+        - "permission_arcpass.vip.silver"
+        - "cosmetic_particle_flame"
+        - "exp_2000"
+
+  # === Level 100: Final Milestone ===
+  100:
+    rewards:
+      free:
+        - "economy_5000"
+        - "item_diamond_block_2"
+        - "item_netherite_ingot_1"
+        - "title_season_master"
+      premium:
+        - "economy_15000"
+        - "item_diamond_block_4"
+        - "item_netherite_ingot_2"
+        - "item_netherite_sword_1"
+        - "item_netherite_pickaxe_1"
+        - "title_season_champion"
+        - "permission_arcpass.vip.platinum"
+        - "cosmetic_particle_totem"
+      deluxe:
+        - "economy_30000"
+        - "item_diamond_block_8"
+        - "item_netherite_ingot_4"
+        - "item_netherite_sword_1"
+        - "item_netherite_pickaxe_1"
+        - "item_netherite_axe_1"
+        - "item_netherite_helmet_1"
+        - "item_netherite_chestplate_1"
+        - "item_netherite_leggings_1"
+        - "item_netherite_boots_1"
+        - "item_elytra_1"
+        - "title_season_legend"
+        - "permission_arcpass.vip.platinum"
+        - "permission_arcpass.fly"
+        - "cosmetic_particle_totem"
+        - "cosmetic_particle_end_rod"
+        - "exp_10000"
+```
+
+## Experience Sources {#experience-sources}
+
+### Quest Experience {#quest-experience}
+
+Set in quest configuration:
+
+```yaml
+experience-reward: 50
+```
+
+### Manual Award {#manual-award}
+
+Admin command:
+
+```
+/arcpass admin give <player> exp <amount>
+```
+
+### Via API {#via-api}
+
+```java
+ArcPassAPI api = ArcPassProvider.get();
+api.addExperience(player.getUniqueId(), 100);
+```
+
+## Advanced Configuration {#advanced-configuration}
+
+### Experience Formula {#experience-formula}
+
+```yaml
+experience-curve:
+  type: formula
+  base: 100
+  exponent: 1.2
+  flat: 0
+```
+
+### Level Templates {#level-templates}
+
+```yaml
+level-templates:
+  every-5:
+    levels: [5, 10, 15, 20, 25, 30]
+    free:
+      - reward_bonus_exp
+    premium:
+      - reward_bonus_premium
+```
+
+### Conditional Tiers {#conditional-tiers}
+
+```yaml
+tiers:
+  veteran:
+    display-name: "&eVeteran Pass"
+    free: false
+    price: 500
+    conditions:
+      - type: previous_season_completed
+        value: true
+```
+
+## Example: Combat Pass {#example-combat-pass}
+
+```yaml
+display-name: "&cCombat Pass"
+description:
+  - "&7Designed for PVP players"
+  - "&7Earn XP by defeating enemies"
+icon: DIAMOND_SWORD
+default: false
+max-level: 50
+
+experience-curve:
+  base: 200
+  increment: 100
+
+tiers:
+  free:
+    display-name: "&fWarrior's Path"
+    icon: IRON_SWORD
+    free: true
+
+  elite:
+    display-name: "&cElite Warrior"
+    icon: DIAMOND_SWORD
+    free: false
+    price: 500
+
+levels:
+  1:
+    free: [reward_iron_sword]
+    elite: [reward_diamond_sword]
+  10:
+    free: [reward_iron_armor]
+    elite: [reward_diamond_armor, reward_title_warrior]
+  50:
+    free: [reward_combat_final_free]
+    elite: [reward_combat_final_elite, reward_title_champion]
+```
+
+## Next Steps {#next-steps}
+
+<Columns cols={2}>
+  <Card title="Configure Rewards" icon="gift" href="/en/arcpass/config/rewards">
+  Set up reward types and values
+</Card>
+  <Card title="Configure Quests" icon="clipboard-list" href="/en/arcpass/config/quests">
+  Set up quest objectives
+</Card>
+</Columns>

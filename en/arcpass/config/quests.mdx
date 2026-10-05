@@ -1,0 +1,283 @@
+---
+title: "Quest Configuration"
+canonical: "https://www.kitemc.com/en/arcpass/config/quests"
+---
+
+<span id="quest-configuration" />
+
+The quest system is the primary way players earn experience, supporting various quest types and triggers.
+
+## File Location {#file-location}
+
+```
+plugins/ArcPass/quests/
+├── daily/          # Daily quests (reset daily)
+│   ├── mining.yml
+│   ├── combat.yml
+│   └── ...
+├── weekly/         # Weekly quests (reset weekly)
+│   ├── boss_hunt.yml
+│   └── ...
+└── seasonal/       # Seasonal quests (reset per season)
+    ├── main_story.yml
+    └── ...
+```
+
+## Quest Types {#quest-types}
+
+| Type | Description | Reset Cycle |
+|------|-------------|-------------|
+| `daily` | Daily quests | Daily at 00:00 |
+| `weekly` | Weekly quests | Monday 00:00 |
+| `seasonal` | Seasonal quests | Season end |
+| `story` | Story quests | Never |
+| `challenge` | Challenge quests | Never |
+
+## Basic Structure {#basic-structure}
+
+```yaml
+# quests/daily/mining.yml
+
+# Quest display name
+display-name: "&6Miner's Daily"
+
+# Quest description
+description: "&7Mine various ores and become a mining star!"
+
+# Quest icon (supports: vanilla material, "itemsadder:ns:id", "oraxen:id")
+icon: IRON_PICKAXE
+# custom-model-data: 0    # Optional CustomModelData (v1.1.5+)
+
+# Quest category
+category: mining
+
+# Priority (for sorting)
+priority: 1
+
+# Experience earned on completion
+experience: 100
+
+# Quest objectives
+objectives:
+  mine_stone:
+    type: break
+    target: STONE,COBBLESTONE,DEEPSLATE,COBBLED_DEEPSLATE
+    amount: 100
+    description: "Mine 100 stone/deepslate"
+
+  mine_coal:
+    type: break
+    target: COAL_ORE,DEEPSLATE_COAL_ORE
+    amount: 15
+    description: "Mine 15 coal ore"
+
+  mine_iron:
+    type: break
+    target: IRON_ORE,DEEPSLATE_IRON_ORE
+    amount: 10
+    description: "Mine 10 iron ore"
+
+# Prerequisites
+conditions: []
+
+# Additional rewards
+rewards:
+  - "economy_100"
+```
+
+## Objective Types {#objective-types}
+
+### Block Related {#block-related}
+
+```yaml
+objectives:
+  - type: block_break
+    block: DIAMOND_ORE
+    amount: 10
+
+  - type: block_place
+    block: COBBLESTONE
+    amount: 100
+```
+
+### Kill Related {#kill-related}
+
+```yaml
+objectives:
+  - type: kill
+    entity: ZOMBIE
+    amount: 50
+
+  - type: player_kill
+    amount: 10
+
+  - type: mythicmobs_kill
+    mob: SkeletonKing
+    amount: 1
+```
+
+### Item Related {#item-related}
+
+```yaml
+objectives:
+  - type: craft
+    item: DIAMOND_SWORD
+    amount: 1
+
+  - type: enchant
+    item: DIAMOND_PICKAXE
+    amount: 1
+
+  - type: fish
+    item: COD
+    amount: 20
+```
+
+### Other Activities {#other-activities}
+
+```yaml
+objectives:
+  - type: walk
+    amount: 1000  # blocks
+
+  - type: playtime
+    amount: 60  # minutes
+```
+
+### Jobs Reborn {#jobs-reborn}
+
+```yaml
+objectives:
+  - type: jobs_exp
+    job: Miner
+    amount: 1000
+```
+
+### Custom Events {#custom-events}
+
+```yaml
+objectives:
+  - type: custom
+    event: my_custom_event
+    amount: 1
+```
+
+## Quest Conditions {#quest-conditions}
+
+```yaml
+mine_deep:
+  display-name: "&bDeep Miner"
+
+  requires:
+    - mine_stone_100
+    - mine_iron_50
+
+  conditions:
+    - type: level
+      min: 10
+
+    - type: permission
+      permission: arcpass.quest.deep_mining
+
+    - type: world
+      worlds:
+        - world
+        - world_nether
+```
+
+## Multi-Objective Quests {#multi-objective-quests}
+
+```yaml
+explorer_challenge:
+  display-name: "&6Explorer Challenge"
+  type: challenge
+  experience-reward: 500
+
+  objectives:
+    - id: visit_nether
+      type: world_visit
+      world: world_nether
+      amount: 1
+      description: "&7Visit the Nether"
+
+    - id: visit_end
+      type: world_visit
+      world: world_the_end
+      amount: 1
+      description: "&7Visit the End"
+
+    - id: kill_dragon
+      type: kill
+      entity: ENDER_DRAGON
+      amount: 1
+      description: "&7Slay the Ender Dragon"
+```
+
+## Progress Display {#progress-display}
+
+```yaml
+objectives:
+  - type: block_break
+    block: STONE
+    amount: 100
+    progress-format: "&7Stone mined: &e%current%&7/&e%required%"
+```
+
+## Quest Rewards {#quest-rewards}
+
+```yaml
+special_task:
+  experience-reward: 100
+
+  rewards:
+    - type: item
+      item: DIAMOND
+      amount: 5
+    - type: money
+      amount: 1000
+    - type: command
+      command: "say %player% completed a special task!"
+```
+
+## Example: Daily Combat Quests {#example-daily-combat-quests}
+
+```yaml
+# quests/daily/combat.yml
+
+kill_zombies:
+  type: daily
+  display-name: "&cUndead Hunter"
+  description:
+    - "&7Slay 30 zombies"
+    - "&7Reward: &e+30 XP"
+  icon: ROTTEN_FLESH
+  experience-reward: 30
+  objectives:
+    - type: kill
+      entity: ZOMBIE
+      amount: 30
+
+kill_skeletons:
+  type: daily
+  display-name: "&cBone Collector"
+  description:
+    - "&7Slay 20 skeletons"
+    - "&7Reward: &e+25 XP"
+  icon: BONE
+  experience-reward: 25
+  objectives:
+    - type: kill
+      entity: SKELETON
+      amount: 20
+```
+
+## Next Steps {#next-steps}
+
+<Columns cols={2}>
+  <Card title="Configure Rewards" icon="gift" href="/en/arcpass/config/rewards">
+  Set up reward types and values
+</Card>
+  <Card title="Configure Seasons" icon="trophy" href="/en/arcpass/config/seasons">
+  Set up season timing and rules
+</Card>
+</Columns>

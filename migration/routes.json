@@ -1,0 +1,1125 @@
+{
+  "schema": 1,
+  "sourceCommit": "340aff85cba5eb76752439df02c884e030255b82",
+  "pages": [
+    {
+      "source": "docs/arcpass/commands/index.md",
+      "oldPath": "/docs/arcpass/commands/",
+      "oldPaths": [
+        "/docs/arcpass/commands/",
+        "/docs/arcpass/commands",
+        "/docs/arcpass/commands/index",
+        "/docs/arcpass/commands/index.html"
+      ],
+      "locale": "zh",
+      "target": "/arcpass/commands",
+      "file": "arcpass/commands.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "docs/arcpass/config/gui.md",
+      "oldPath": "/docs/arcpass/config/gui",
+      "oldPaths": [
+        "/docs/arcpass/config/gui",
+        "/docs/arcpass/config/gui/",
+        "/docs/arcpass/config/gui.html"
+      ],
+      "locale": "zh",
+      "target": "/arcpass/config/gui",
+      "file": "arcpass/config/gui.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "docs/arcpass/config/index.md",
+      "oldPath": "/docs/arcpass/config/",
+      "oldPaths": [
+        "/docs/arcpass/config/",
+        "/docs/arcpass/config",
+        "/docs/arcpass/config/index",
+        "/docs/arcpass/config/index.html"
+      ],
+      "locale": "zh",
+      "target": "/arcpass/config",
+      "file": "arcpass/config.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "docs/arcpass/config/passes.md",
+      "oldPath": "/docs/arcpass/config/passes",
+      "oldPaths": [
+        "/docs/arcpass/config/passes",
+        "/docs/arcpass/config/passes/",
+        "/docs/arcpass/config/passes.html"
+      ],
+      "locale": "zh",
+      "target": "/arcpass/config/passes",
+      "file": "arcpass/config/passes.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "docs/arcpass/config/quests.md",
+      "oldPath": "/docs/arcpass/config/quests",
+      "oldPaths": [
+        "/docs/arcpass/config/quests",
+        "/docs/arcpass/config/quests/",
+        "/docs/arcpass/config/quests.html"
+      ],
+      "locale": "zh",
+      "target": "/arcpass/config/quests",
+      "file": "arcpass/config/quests.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "docs/arcpass/config/rewards.md",
+      "oldPath": "/docs/arcpass/config/rewards",
+      "oldPaths": [
+        "/docs/arcpass/config/rewards",
+        "/docs/arcpass/config/rewards/",
+        "/docs/arcpass/config/rewards.html"
+      ],
+      "locale": "zh",
+      "target": "/arcpass/config/rewards",
+      "file": "arcpass/config/rewards.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "docs/arcpass/config/seasons.md",
+      "oldPath": "/docs/arcpass/config/seasons",
+      "oldPaths": [
+        "/docs/arcpass/config/seasons",
+        "/docs/arcpass/config/seasons/",
+        "/docs/arcpass/config/seasons.html"
+      ],
+      "locale": "zh",
+      "target": "/arcpass/config/seasons",
+      "file": "arcpass/config/seasons.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "docs/arcpass/developer/events.md",
+      "oldPath": "/docs/arcpass/developer/events",
+      "oldPaths": [
+        "/docs/arcpass/developer/events",
+        "/docs/arcpass/developer/events/",
+        "/docs/arcpass/developer/events.html"
+      ],
+      "locale": "zh",
+      "target": "/arcpass/developer/events",
+      "file": "arcpass/developer/events.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "docs/arcpass/developer/examples.md",
+      "oldPath": "/docs/arcpass/developer/examples",
+      "oldPaths": [
+        "/docs/arcpass/developer/examples",
+        "/docs/arcpass/developer/examples/",
+        "/docs/arcpass/developer/examples.html"
+      ],
+      "locale": "zh",
+      "target": "/arcpass/developer/examples",
+      "file": "arcpass/developer/examples.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "docs/arcpass/developer/getting-started.md",
+      "oldPath": "/docs/arcpass/developer/getting-started",
+      "oldPaths": [
+        "/docs/arcpass/developer/getting-started",
+        "/docs/arcpass/developer/getting-started/",
+        "/docs/arcpass/developer/getting-started.html"
+      ],
+      "locale": "zh",
+      "target": "/arcpass/developer/getting-started",
+      "file": "arcpass/developer/getting-started.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "docs/arcpass/developer/index.md",
+      "oldPath": "/docs/arcpass/developer/",
+      "oldPaths": [
+        "/docs/arcpass/developer/",
+        "/docs/arcpass/developer",
+        "/docs/arcpass/developer/index",
+        "/docs/arcpass/developer/index.html"
+      ],
+      "locale": "zh",
+      "target": "/arcpass/developer",
+      "file": "arcpass/developer.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "docs/arcpass/download.md",
+      "oldPath": "/docs/arcpass/download",
+      "oldPaths": [
+        "/docs/arcpass/download",
+        "/docs/arcpass/download/",
+        "/docs/arcpass/download.html"
+      ],
+      "locale": "zh",
+      "target": "/arcpass/download",
+      "file": "arcpass/download.mdx",
+      "kind": "download"
+    },
+    {
+      "source": "docs/arcpass/faq/index.md",
+      "oldPath": "/docs/arcpass/faq/",
+      "oldPaths": [
+        "/docs/arcpass/faq/",
+        "/docs/arcpass/faq",
+        "/docs/arcpass/faq/index",
+        "/docs/arcpass/faq/index.html"
+      ],
+      "locale": "zh",
+      "target": "/arcpass/faq",
+      "file": "arcpass/faq.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "docs/arcpass/guide/index.md",
+      "oldPath": "/docs/arcpass/guide/",
+      "oldPaths": [
+        "/docs/arcpass/guide/",
+        "/docs/arcpass/guide",
+        "/docs/arcpass/guide/index",
+        "/docs/arcpass/guide/index.html"
+      ],
+      "locale": "zh",
+      "target": "/arcpass/guide",
+      "file": "arcpass/guide.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "docs/arcpass/index.md",
+      "oldPath": "/docs/arcpass/",
+      "oldPaths": [
+        "/docs/arcpass/",
+        "/docs/arcpass",
+        "/docs/arcpass/index",
+        "/docs/arcpass/index.html"
+      ],
+      "locale": "zh",
+      "target": "/arcpass",
+      "file": "arcpass.mdx",
+      "kind": "landing"
+    },
+    {
+      "source": "docs/arcpass/integrations/index.md",
+      "oldPath": "/docs/arcpass/integrations/",
+      "oldPaths": [
+        "/docs/arcpass/integrations/",
+        "/docs/arcpass/integrations",
+        "/docs/arcpass/integrations/index",
+        "/docs/arcpass/integrations/index.html"
+      ],
+      "locale": "zh",
+      "target": "/arcpass/integrations",
+      "file": "arcpass/integrations.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "docs/arcpass/placeholders/index.md",
+      "oldPath": "/docs/arcpass/placeholders/",
+      "oldPaths": [
+        "/docs/arcpass/placeholders/",
+        "/docs/arcpass/placeholders",
+        "/docs/arcpass/placeholders/index",
+        "/docs/arcpass/placeholders/index.html"
+      ],
+      "locale": "zh",
+      "target": "/arcpass/placeholders",
+      "file": "arcpass/placeholders.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "docs/arcpass/setup/installation.md",
+      "oldPath": "/docs/arcpass/setup/installation",
+      "oldPaths": [
+        "/docs/arcpass/setup/installation",
+        "/docs/arcpass/setup/installation/",
+        "/docs/arcpass/setup/installation.html"
+      ],
+      "locale": "zh",
+      "target": "/arcpass/setup/installation",
+      "file": "arcpass/setup/installation.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "docs/arcpass/setup/license.md",
+      "oldPath": "/docs/arcpass/setup/license",
+      "oldPaths": [
+        "/docs/arcpass/setup/license",
+        "/docs/arcpass/setup/license/",
+        "/docs/arcpass/setup/license.html"
+      ],
+      "locale": "zh",
+      "target": "/arcpass/setup/license",
+      "file": "arcpass/setup/license.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "docs/arcpass/setup/requirements.md",
+      "oldPath": "/docs/arcpass/setup/requirements",
+      "oldPaths": [
+        "/docs/arcpass/setup/requirements",
+        "/docs/arcpass/setup/requirements/",
+        "/docs/arcpass/setup/requirements.html"
+      ],
+      "locale": "zh",
+      "target": "/arcpass/setup/requirements",
+      "file": "arcpass/setup/requirements.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "docs/kitemarket/api.md",
+      "oldPath": "/docs/kitemarket/api",
+      "oldPaths": [
+        "/docs/kitemarket/api",
+        "/docs/kitemarket/api/",
+        "/docs/kitemarket/api.html"
+      ],
+      "locale": "zh",
+      "target": "/kitemarket/api",
+      "file": "kitemarket/api.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "docs/kitemarket/commands.md",
+      "oldPath": "/docs/kitemarket/commands",
+      "oldPaths": [
+        "/docs/kitemarket/commands",
+        "/docs/kitemarket/commands/",
+        "/docs/kitemarket/commands.html"
+      ],
+      "locale": "zh",
+      "target": "/kitemarket/commands",
+      "file": "kitemarket/commands.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "docs/kitemarket/compatibility.md",
+      "oldPath": "/docs/kitemarket/compatibility",
+      "oldPaths": [
+        "/docs/kitemarket/compatibility",
+        "/docs/kitemarket/compatibility/",
+        "/docs/kitemarket/compatibility.html"
+      ],
+      "locale": "zh",
+      "target": "/kitemarket/compatibility",
+      "file": "kitemarket/compatibility.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "docs/kitemarket/dlc.md",
+      "oldPath": "/docs/kitemarket/dlc",
+      "oldPaths": [
+        "/docs/kitemarket/dlc",
+        "/docs/kitemarket/dlc/",
+        "/docs/kitemarket/dlc.html"
+      ],
+      "locale": "zh",
+      "target": "/kitemarket/dlc",
+      "file": "kitemarket/dlc.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "docs/kitemarket/download.md",
+      "oldPath": "/docs/kitemarket/download",
+      "oldPaths": [
+        "/docs/kitemarket/download",
+        "/docs/kitemarket/download/",
+        "/docs/kitemarket/download.html"
+      ],
+      "locale": "zh",
+      "target": "/kitemarket/download",
+      "file": "kitemarket/download.mdx",
+      "kind": "download"
+    },
+    {
+      "source": "docs/kitemarket/guide.md",
+      "oldPath": "/docs/kitemarket/guide",
+      "oldPaths": [
+        "/docs/kitemarket/guide",
+        "/docs/kitemarket/guide/",
+        "/docs/kitemarket/guide.html"
+      ],
+      "locale": "zh",
+      "target": "/kitemarket/guide",
+      "file": "kitemarket/guide.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "docs/kitemarket/index.md",
+      "oldPath": "/docs/kitemarket/",
+      "oldPaths": [
+        "/docs/kitemarket/",
+        "/docs/kitemarket",
+        "/docs/kitemarket/index",
+        "/docs/kitemarket/index.html"
+      ],
+      "locale": "zh",
+      "target": "/kitemarket",
+      "file": "kitemarket.mdx",
+      "kind": "landing"
+    },
+    {
+      "source": "docs/kitemarket/license.md",
+      "oldPath": "/docs/kitemarket/license",
+      "oldPaths": [
+        "/docs/kitemarket/license",
+        "/docs/kitemarket/license/",
+        "/docs/kitemarket/license.html"
+      ],
+      "locale": "zh",
+      "target": "/kitemarket/license",
+      "file": "kitemarket/license.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "docs/kitemarket/operations.md",
+      "oldPath": "/docs/kitemarket/operations",
+      "oldPaths": [
+        "/docs/kitemarket/operations",
+        "/docs/kitemarket/operations/",
+        "/docs/kitemarket/operations.html"
+      ],
+      "locale": "zh",
+      "target": "/kitemarket/operations",
+      "file": "kitemarket/operations.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "docs/kitemarket/trading.md",
+      "oldPath": "/docs/kitemarket/trading",
+      "oldPaths": [
+        "/docs/kitemarket/trading",
+        "/docs/kitemarket/trading/",
+        "/docs/kitemarket/trading.html"
+      ],
+      "locale": "zh",
+      "target": "/kitemarket/trading",
+      "file": "kitemarket/trading.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "docs/kitemarket/ui-development.md",
+      "oldPath": "/docs/kitemarket/ui-development",
+      "oldPaths": [
+        "/docs/kitemarket/ui-development",
+        "/docs/kitemarket/ui-development/",
+        "/docs/kitemarket/ui-development.html"
+      ],
+      "locale": "zh",
+      "target": "/kitemarket/ui-development",
+      "file": "kitemarket/ui-development.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "docs/kitemarket/wallet.md",
+      "oldPath": "/docs/kitemarket/wallet",
+      "oldPaths": [
+        "/docs/kitemarket/wallet",
+        "/docs/kitemarket/wallet/",
+        "/docs/kitemarket/wallet.html"
+      ],
+      "locale": "zh",
+      "target": "/kitemarket/wallet",
+      "file": "kitemarket/wallet.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "docs/verifymc/command/index.md",
+      "oldPath": "/docs/verifymc/command/",
+      "oldPaths": [
+        "/docs/verifymc/command/",
+        "/docs/verifymc/command",
+        "/docs/verifymc/command/index",
+        "/docs/verifymc/command/index.html"
+      ],
+      "locale": "zh",
+      "target": "/archive/verifymc/command",
+      "file": "archive/verifymc/command.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "docs/verifymc/download.md",
+      "oldPath": "/docs/verifymc/download",
+      "oldPaths": [
+        "/docs/verifymc/download",
+        "/docs/verifymc/download/",
+        "/docs/verifymc/download.html"
+      ],
+      "locale": "zh",
+      "target": "/archive/verifymc/download",
+      "file": "archive/verifymc/download.mdx",
+      "kind": "download"
+    },
+    {
+      "source": "docs/verifymc/file/config.md",
+      "oldPath": "/docs/verifymc/file/config",
+      "oldPaths": [
+        "/docs/verifymc/file/config",
+        "/docs/verifymc/file/config/",
+        "/docs/verifymc/file/config.html"
+      ],
+      "locale": "zh",
+      "target": "/archive/verifymc/file/config",
+      "file": "archive/verifymc/file/config.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "docs/verifymc/file/directory.md",
+      "oldPath": "/docs/verifymc/file/directory",
+      "oldPaths": [
+        "/docs/verifymc/file/directory",
+        "/docs/verifymc/file/directory/",
+        "/docs/verifymc/file/directory.html"
+      ],
+      "locale": "zh",
+      "target": "/archive/verifymc/file/directory",
+      "file": "archive/verifymc/file/directory.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "docs/verifymc/front/api.md",
+      "oldPath": "/docs/verifymc/front/api",
+      "oldPaths": [
+        "/docs/verifymc/front/api",
+        "/docs/verifymc/front/api/",
+        "/docs/verifymc/front/api.html"
+      ],
+      "locale": "zh",
+      "target": "/archive/verifymc/front/api",
+      "file": "archive/verifymc/front/api.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "docs/verifymc/guide/default.md",
+      "oldPath": "/docs/verifymc/guide/default",
+      "oldPaths": [
+        "/docs/verifymc/guide/default",
+        "/docs/verifymc/guide/default/",
+        "/docs/verifymc/guide/default.html"
+      ],
+      "locale": "zh",
+      "target": "/archive/verifymc/guide/default",
+      "file": "archive/verifymc/guide/default.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "docs/verifymc/guide/index.md",
+      "oldPath": "/docs/verifymc/guide/",
+      "oldPaths": [
+        "/docs/verifymc/guide/",
+        "/docs/verifymc/guide",
+        "/docs/verifymc/guide/index",
+        "/docs/verifymc/guide/index.html"
+      ],
+      "locale": "zh",
+      "target": "/archive/verifymc/guide",
+      "file": "archive/verifymc/guide.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "docs/verifymc/index.md",
+      "oldPath": "/docs/verifymc/",
+      "oldPaths": [
+        "/docs/verifymc/",
+        "/docs/verifymc",
+        "/docs/verifymc/index",
+        "/docs/verifymc/index.html"
+      ],
+      "locale": "zh",
+      "target": "/archive/verifymc",
+      "file": "archive/verifymc.mdx",
+      "kind": "landing"
+    },
+    {
+      "source": "docs/verifymc/question/index.md",
+      "oldPath": "/docs/verifymc/question/",
+      "oldPaths": [
+        "/docs/verifymc/question/",
+        "/docs/verifymc/question",
+        "/docs/verifymc/question/index",
+        "/docs/verifymc/question/index.html"
+      ],
+      "locale": "zh",
+      "target": "/archive/verifymc/question",
+      "file": "archive/verifymc/question.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "en/docs/arcpass/commands/index.md",
+      "oldPath": "/en/docs/arcpass/commands/",
+      "oldPaths": [
+        "/en/docs/arcpass/commands/",
+        "/en/docs/arcpass/commands",
+        "/en/docs/arcpass/commands/index",
+        "/en/docs/arcpass/commands/index.html"
+      ],
+      "locale": "en",
+      "target": "/en/arcpass/commands",
+      "file": "en/arcpass/commands.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "en/docs/arcpass/config/gui.md",
+      "oldPath": "/en/docs/arcpass/config/gui",
+      "oldPaths": [
+        "/en/docs/arcpass/config/gui",
+        "/en/docs/arcpass/config/gui/",
+        "/en/docs/arcpass/config/gui.html"
+      ],
+      "locale": "en",
+      "target": "/en/arcpass/config/gui",
+      "file": "en/arcpass/config/gui.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "en/docs/arcpass/config/index.md",
+      "oldPath": "/en/docs/arcpass/config/",
+      "oldPaths": [
+        "/en/docs/arcpass/config/",
+        "/en/docs/arcpass/config",
+        "/en/docs/arcpass/config/index",
+        "/en/docs/arcpass/config/index.html"
+      ],
+      "locale": "en",
+      "target": "/en/arcpass/config",
+      "file": "en/arcpass/config.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "en/docs/arcpass/config/passes.md",
+      "oldPath": "/en/docs/arcpass/config/passes",
+      "oldPaths": [
+        "/en/docs/arcpass/config/passes",
+        "/en/docs/arcpass/config/passes/",
+        "/en/docs/arcpass/config/passes.html"
+      ],
+      "locale": "en",
+      "target": "/en/arcpass/config/passes",
+      "file": "en/arcpass/config/passes.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "en/docs/arcpass/config/quests.md",
+      "oldPath": "/en/docs/arcpass/config/quests",
+      "oldPaths": [
+        "/en/docs/arcpass/config/quests",
+        "/en/docs/arcpass/config/quests/",
+        "/en/docs/arcpass/config/quests.html"
+      ],
+      "locale": "en",
+      "target": "/en/arcpass/config/quests",
+      "file": "en/arcpass/config/quests.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "en/docs/arcpass/config/rewards.md",
+      "oldPath": "/en/docs/arcpass/config/rewards",
+      "oldPaths": [
+        "/en/docs/arcpass/config/rewards",
+        "/en/docs/arcpass/config/rewards/",
+        "/en/docs/arcpass/config/rewards.html"
+      ],
+      "locale": "en",
+      "target": "/en/arcpass/config/rewards",
+      "file": "en/arcpass/config/rewards.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "en/docs/arcpass/config/seasons.md",
+      "oldPath": "/en/docs/arcpass/config/seasons",
+      "oldPaths": [
+        "/en/docs/arcpass/config/seasons",
+        "/en/docs/arcpass/config/seasons/",
+        "/en/docs/arcpass/config/seasons.html"
+      ],
+      "locale": "en",
+      "target": "/en/arcpass/config/seasons",
+      "file": "en/arcpass/config/seasons.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "en/docs/arcpass/developer/events.md",
+      "oldPath": "/en/docs/arcpass/developer/events",
+      "oldPaths": [
+        "/en/docs/arcpass/developer/events",
+        "/en/docs/arcpass/developer/events/",
+        "/en/docs/arcpass/developer/events.html"
+      ],
+      "locale": "en",
+      "target": "/en/arcpass/developer/events",
+      "file": "en/arcpass/developer/events.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "en/docs/arcpass/developer/examples.md",
+      "oldPath": "/en/docs/arcpass/developer/examples",
+      "oldPaths": [
+        "/en/docs/arcpass/developer/examples",
+        "/en/docs/arcpass/developer/examples/",
+        "/en/docs/arcpass/developer/examples.html"
+      ],
+      "locale": "en",
+      "target": "/en/arcpass/developer/examples",
+      "file": "en/arcpass/developer/examples.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "en/docs/arcpass/developer/getting-started.md",
+      "oldPath": "/en/docs/arcpass/developer/getting-started",
+      "oldPaths": [
+        "/en/docs/arcpass/developer/getting-started",
+        "/en/docs/arcpass/developer/getting-started/",
+        "/en/docs/arcpass/developer/getting-started.html"
+      ],
+      "locale": "en",
+      "target": "/en/arcpass/developer/getting-started",
+      "file": "en/arcpass/developer/getting-started.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "en/docs/arcpass/developer/index.md",
+      "oldPath": "/en/docs/arcpass/developer/",
+      "oldPaths": [
+        "/en/docs/arcpass/developer/",
+        "/en/docs/arcpass/developer",
+        "/en/docs/arcpass/developer/index",
+        "/en/docs/arcpass/developer/index.html"
+      ],
+      "locale": "en",
+      "target": "/en/arcpass/developer",
+      "file": "en/arcpass/developer.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "en/docs/arcpass/download.md",
+      "oldPath": "/en/docs/arcpass/download",
+      "oldPaths": [
+        "/en/docs/arcpass/download",
+        "/en/docs/arcpass/download/",
+        "/en/docs/arcpass/download.html"
+      ],
+      "locale": "en",
+      "target": "/en/arcpass/download",
+      "file": "en/arcpass/download.mdx",
+      "kind": "download"
+    },
+    {
+      "source": "en/docs/arcpass/faq/index.md",
+      "oldPath": "/en/docs/arcpass/faq/",
+      "oldPaths": [
+        "/en/docs/arcpass/faq/",
+        "/en/docs/arcpass/faq",
+        "/en/docs/arcpass/faq/index",
+        "/en/docs/arcpass/faq/index.html"
+      ],
+      "locale": "en",
+      "target": "/en/arcpass/faq",
+      "file": "en/arcpass/faq.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "en/docs/arcpass/guide/index.md",
+      "oldPath": "/en/docs/arcpass/guide/",
+      "oldPaths": [
+        "/en/docs/arcpass/guide/",
+        "/en/docs/arcpass/guide",
+        "/en/docs/arcpass/guide/index",
+        "/en/docs/arcpass/guide/index.html"
+      ],
+      "locale": "en",
+      "target": "/en/arcpass/guide",
+      "file": "en/arcpass/guide.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "en/docs/arcpass/index.md",
+      "oldPath": "/en/docs/arcpass/",
+      "oldPaths": [
+        "/en/docs/arcpass/",
+        "/en/docs/arcpass",
+        "/en/docs/arcpass/index",
+        "/en/docs/arcpass/index.html"
+      ],
+      "locale": "en",
+      "target": "/en/arcpass",
+      "file": "en/arcpass.mdx",
+      "kind": "landing"
+    },
+    {
+      "source": "en/docs/arcpass/integrations/index.md",
+      "oldPath": "/en/docs/arcpass/integrations/",
+      "oldPaths": [
+        "/en/docs/arcpass/integrations/",
+        "/en/docs/arcpass/integrations",
+        "/en/docs/arcpass/integrations/index",
+        "/en/docs/arcpass/integrations/index.html"
+      ],
+      "locale": "en",
+      "target": "/en/arcpass/integrations",
+      "file": "en/arcpass/integrations.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "en/docs/arcpass/placeholders/index.md",
+      "oldPath": "/en/docs/arcpass/placeholders/",
+      "oldPaths": [
+        "/en/docs/arcpass/placeholders/",
+        "/en/docs/arcpass/placeholders",
+        "/en/docs/arcpass/placeholders/index",
+        "/en/docs/arcpass/placeholders/index.html"
+      ],
+      "locale": "en",
+      "target": "/en/arcpass/placeholders",
+      "file": "en/arcpass/placeholders.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "en/docs/arcpass/setup/installation.md",
+      "oldPath": "/en/docs/arcpass/setup/installation",
+      "oldPaths": [
+        "/en/docs/arcpass/setup/installation",
+        "/en/docs/arcpass/setup/installation/",
+        "/en/docs/arcpass/setup/installation.html"
+      ],
+      "locale": "en",
+      "target": "/en/arcpass/setup/installation",
+      "file": "en/arcpass/setup/installation.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "en/docs/arcpass/setup/license.md",
+      "oldPath": "/en/docs/arcpass/setup/license",
+      "oldPaths": [
+        "/en/docs/arcpass/setup/license",
+        "/en/docs/arcpass/setup/license/",
+        "/en/docs/arcpass/setup/license.html"
+      ],
+      "locale": "en",
+      "target": "/en/arcpass/setup/license",
+      "file": "en/arcpass/setup/license.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "en/docs/arcpass/setup/requirements.md",
+      "oldPath": "/en/docs/arcpass/setup/requirements",
+      "oldPaths": [
+        "/en/docs/arcpass/setup/requirements",
+        "/en/docs/arcpass/setup/requirements/",
+        "/en/docs/arcpass/setup/requirements.html"
+      ],
+      "locale": "en",
+      "target": "/en/arcpass/setup/requirements",
+      "file": "en/arcpass/setup/requirements.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "en/docs/kitemarket/api.md",
+      "oldPath": "/en/docs/kitemarket/api",
+      "oldPaths": [
+        "/en/docs/kitemarket/api",
+        "/en/docs/kitemarket/api/",
+        "/en/docs/kitemarket/api.html"
+      ],
+      "locale": "en",
+      "target": "/en/kitemarket/api",
+      "file": "en/kitemarket/api.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "en/docs/kitemarket/commands.md",
+      "oldPath": "/en/docs/kitemarket/commands",
+      "oldPaths": [
+        "/en/docs/kitemarket/commands",
+        "/en/docs/kitemarket/commands/",
+        "/en/docs/kitemarket/commands.html"
+      ],
+      "locale": "en",
+      "target": "/en/kitemarket/commands",
+      "file": "en/kitemarket/commands.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "en/docs/kitemarket/compatibility.md",
+      "oldPath": "/en/docs/kitemarket/compatibility",
+      "oldPaths": [
+        "/en/docs/kitemarket/compatibility",
+        "/en/docs/kitemarket/compatibility/",
+        "/en/docs/kitemarket/compatibility.html"
+      ],
+      "locale": "en",
+      "target": "/en/kitemarket/compatibility",
+      "file": "en/kitemarket/compatibility.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "en/docs/kitemarket/dlc.md",
+      "oldPath": "/en/docs/kitemarket/dlc",
+      "oldPaths": [
+        "/en/docs/kitemarket/dlc",
+        "/en/docs/kitemarket/dlc/",
+        "/en/docs/kitemarket/dlc.html"
+      ],
+      "locale": "en",
+      "target": "/en/kitemarket/dlc",
+      "file": "en/kitemarket/dlc.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "en/docs/kitemarket/download.md",
+      "oldPath": "/en/docs/kitemarket/download",
+      "oldPaths": [
+        "/en/docs/kitemarket/download",
+        "/en/docs/kitemarket/download/",
+        "/en/docs/kitemarket/download.html"
+      ],
+      "locale": "en",
+      "target": "/en/kitemarket/download",
+      "file": "en/kitemarket/download.mdx",
+      "kind": "download"
+    },
+    {
+      "source": "en/docs/kitemarket/guide.md",
+      "oldPath": "/en/docs/kitemarket/guide",
+      "oldPaths": [
+        "/en/docs/kitemarket/guide",
+        "/en/docs/kitemarket/guide/",
+        "/en/docs/kitemarket/guide.html"
+      ],
+      "locale": "en",
+      "target": "/en/kitemarket/guide",
+      "file": "en/kitemarket/guide.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "en/docs/kitemarket/index.md",
+      "oldPath": "/en/docs/kitemarket/",
+      "oldPaths": [
+        "/en/docs/kitemarket/",
+        "/en/docs/kitemarket",
+        "/en/docs/kitemarket/index",
+        "/en/docs/kitemarket/index.html"
+      ],
+      "locale": "en",
+      "target": "/en/kitemarket",
+      "file": "en/kitemarket.mdx",
+      "kind": "landing"
+    },
+    {
+      "source": "en/docs/kitemarket/license.md",
+      "oldPath": "/en/docs/kitemarket/license",
+      "oldPaths": [
+        "/en/docs/kitemarket/license",
+        "/en/docs/kitemarket/license/",
+        "/en/docs/kitemarket/license.html"
+      ],
+      "locale": "en",
+      "target": "/en/kitemarket/license",
+      "file": "en/kitemarket/license.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "en/docs/kitemarket/operations.md",
+      "oldPath": "/en/docs/kitemarket/operations",
+      "oldPaths": [
+        "/en/docs/kitemarket/operations",
+        "/en/docs/kitemarket/operations/",
+        "/en/docs/kitemarket/operations.html"
+      ],
+      "locale": "en",
+      "target": "/en/kitemarket/operations",
+      "file": "en/kitemarket/operations.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "en/docs/kitemarket/trading.md",
+      "oldPath": "/en/docs/kitemarket/trading",
+      "oldPaths": [
+        "/en/docs/kitemarket/trading",
+        "/en/docs/kitemarket/trading/",
+        "/en/docs/kitemarket/trading.html"
+      ],
+      "locale": "en",
+      "target": "/en/kitemarket/trading",
+      "file": "en/kitemarket/trading.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "en/docs/kitemarket/ui-development.md",
+      "oldPath": "/en/docs/kitemarket/ui-development",
+      "oldPaths": [
+        "/en/docs/kitemarket/ui-development",
+        "/en/docs/kitemarket/ui-development/",
+        "/en/docs/kitemarket/ui-development.html"
+      ],
+      "locale": "en",
+      "target": "/en/kitemarket/ui-development",
+      "file": "en/kitemarket/ui-development.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "en/docs/kitemarket/wallet.md",
+      "oldPath": "/en/docs/kitemarket/wallet",
+      "oldPaths": [
+        "/en/docs/kitemarket/wallet",
+        "/en/docs/kitemarket/wallet/",
+        "/en/docs/kitemarket/wallet.html"
+      ],
+      "locale": "en",
+      "target": "/en/kitemarket/wallet",
+      "file": "en/kitemarket/wallet.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "en/docs/verifymc/command/index.md",
+      "oldPath": "/en/docs/verifymc/command/",
+      "oldPaths": [
+        "/en/docs/verifymc/command/",
+        "/en/docs/verifymc/command",
+        "/en/docs/verifymc/command/index",
+        "/en/docs/verifymc/command/index.html"
+      ],
+      "locale": "en",
+      "target": "/en/archive/verifymc/command",
+      "file": "en/archive/verifymc/command.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "en/docs/verifymc/download.md",
+      "oldPath": "/en/docs/verifymc/download",
+      "oldPaths": [
+        "/en/docs/verifymc/download",
+        "/en/docs/verifymc/download/",
+        "/en/docs/verifymc/download.html"
+      ],
+      "locale": "en",
+      "target": "/en/archive/verifymc/download",
+      "file": "en/archive/verifymc/download.mdx",
+      "kind": "download"
+    },
+    {
+      "source": "en/docs/verifymc/file/config.md",
+      "oldPath": "/en/docs/verifymc/file/config",
+      "oldPaths": [
+        "/en/docs/verifymc/file/config",
+        "/en/docs/verifymc/file/config/",
+        "/en/docs/verifymc/file/config.html"
+      ],
+      "locale": "en",
+      "target": "/en/archive/verifymc/file/config",
+      "file": "en/archive/verifymc/file/config.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "en/docs/verifymc/file/directory.md",
+      "oldPath": "/en/docs/verifymc/file/directory",
+      "oldPaths": [
+        "/en/docs/verifymc/file/directory",
+        "/en/docs/verifymc/file/directory/",
+        "/en/docs/verifymc/file/directory.html"
+      ],
+      "locale": "en",
+      "target": "/en/archive/verifymc/file/directory",
+      "file": "en/archive/verifymc/file/directory.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "en/docs/verifymc/front/api.md",
+      "oldPath": "/en/docs/verifymc/front/api",
+      "oldPaths": [
+        "/en/docs/verifymc/front/api",
+        "/en/docs/verifymc/front/api/",
+        "/en/docs/verifymc/front/api.html"
+      ],
+      "locale": "en",
+      "target": "/en/archive/verifymc/front/api",
+      "file": "en/archive/verifymc/front/api.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "en/docs/verifymc/guide/default.md",
+      "oldPath": "/en/docs/verifymc/guide/default",
+      "oldPaths": [
+        "/en/docs/verifymc/guide/default",
+        "/en/docs/verifymc/guide/default/",
+        "/en/docs/verifymc/guide/default.html"
+      ],
+      "locale": "en",
+      "target": "/en/archive/verifymc/guide/default",
+      "file": "en/archive/verifymc/guide/default.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "en/docs/verifymc/guide/index.md",
+      "oldPath": "/en/docs/verifymc/guide/",
+      "oldPaths": [
+        "/en/docs/verifymc/guide/",
+        "/en/docs/verifymc/guide",
+        "/en/docs/verifymc/guide/index",
+        "/en/docs/verifymc/guide/index.html"
+      ],
+      "locale": "en",
+      "target": "/en/archive/verifymc/guide",
+      "file": "en/archive/verifymc/guide.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "en/docs/verifymc/index.md",
+      "oldPath": "/en/docs/verifymc/",
+      "oldPaths": [
+        "/en/docs/verifymc/",
+        "/en/docs/verifymc",
+        "/en/docs/verifymc/index",
+        "/en/docs/verifymc/index.html"
+      ],
+      "locale": "en",
+      "target": "/en/archive/verifymc",
+      "file": "en/archive/verifymc.mdx",
+      "kind": "landing"
+    },
+    {
+      "source": "en/docs/verifymc/question/index.md",
+      "oldPath": "/en/docs/verifymc/question/",
+      "oldPaths": [
+        "/en/docs/verifymc/question/",
+        "/en/docs/verifymc/question",
+        "/en/docs/verifymc/question/index",
+        "/en/docs/verifymc/question/index.html"
+      ],
+      "locale": "en",
+      "target": "/en/archive/verifymc/question",
+      "file": "en/archive/verifymc/question.mdx",
+      "kind": "document"
+    },
+    {
+      "source": "en/index.md",
+      "oldPath": "/en/",
+      "oldPaths": [
+        "/en/",
+        "/en",
+        "/en/index",
+        "/en/index.html"
+      ],
+      "locale": "en",
+      "target": "/en",
+      "file": "en.mdx",
+      "kind": "landing"
+    },
+    {
+      "source": "index.md",
+      "oldPath": "/",
+      "oldPaths": [
+        "/",
+        "/index",
+        "/index.html"
+      ],
+      "locale": "zh",
+      "target": "/",
+      "file": "index.mdx",
+      "kind": "landing"
+    }
+  ]
+}

@@ -1,0 +1,163 @@
+---
+title: "快速入门"
+canonical: "https://www.kitemc.com/arcpass/guide"
+---
+
+<span id="快速入门" />
+
+本指南将帮助您在 5 分钟内完成 ArcPass 的安装和基本配置。
+
+## 前置要求 {#前置要求}
+
+在开始之前，请确保您的服务器满足以下要求：
+
+| 要求 | 最低版本 |
+|------|----------|
+| Minecraft 服务端 | Paper 1.18+ / Spigot 1.18+ / Folia 1.20+ |
+| Java | 17 或更高版本 |
+| 许可证 | 有效的 ArcPass 许可证密钥 |
+
+### 可选依赖 {#可选依赖}
+
+| 插件 | 用途 |
+|------|------|
+| Vault | 经济系统支持 |
+| PlaceholderAPI | 变量占位符支持 |
+| LuckPerms | 权限奖励支持 |
+
+## 步骤 1：安装插件 {#步骤-1-安装插件}
+
+1. 从 [下载页面](/arcpass/download) 获取最新版本的 `ArcPass-x.x.x.jar`
+2. 将 JAR 文件放入服务器的 `plugins` 文件夹
+3. 重启服务器
+
+首次启动时，插件会生成默认配置文件：
+
+```
+plugins/ArcPass/
+├── config.yml          # 主配置
+├── database.yml        # 数据库配置
+├── license.yml         # 许可证配置
+├── lang/               # 语言文件
+├── passes/             # 通行证配置
+├── quests/             # 任务配置
+├── rewards/            # 奖励配置
+└── gui/                # GUI 配置
+```
+
+## 步骤 2：激活许可证 {#步骤-2-激活许可证}
+
+编辑 `plugins/ArcPass/license.yml`：
+
+```yaml
+# 许可证密钥（从 KiteMC 购买后获取）
+license-key: "YOUR-LICENSE-KEY-HERE"
+
+# 是否显示许可证状态信息
+show-status: true
+```
+
+保存文件后，执行 `/arcpass admin reload` 或重启服务器。
+
+<Tip>
+
+**如何获取许可证？**
+
+访问 [KiteMC 许可证中心](https://license.kitemc.com/products/arcpass) 购买许可证。购买后，您可以在 [许可证管理页面](https://license.kitemc.com/dashboard/licenses) 查看您的密钥。
+
+</Tip>
+
+## 步骤 3：基本配置 {#步骤-3-基本配置}
+
+### 3.1 语言设置 {#_3-1-语言设置}
+
+编辑 `config.yml`，设置默认语言：
+
+```yaml
+locale:
+  # 新玩家的默认语言
+  default: zh_CN
+  # 是否允许玩家更改语言
+  allow-change: true
+```
+
+### 3.2 数据库配置 {#_3-2-数据库配置}
+
+默认使用 SQLite，无需额外配置。如需使用 MySQL：
+
+```yaml
+# database.yml
+type: mysql
+mysql:
+  host: localhost
+  port: 3306
+  database: arcpass
+  username: root
+  password: your_password
+```
+
+## 步骤 4：开启赛季 {#步骤-4-开启赛季}
+
+ArcPass 需要一个活动的赛季才能正常工作。
+
+### 方式一：使用命令 {#方式一-使用命令}
+
+```
+/arcpass admin season start 第一赛季
+```
+
+### 方式二：使用管理界面 {#方式二-使用管理界面}
+
+1. 执行 `/arcpass admin` 打开管理面板
+2. 点击「开启赛季」按钮
+3. 在聊天框输入赛季名称
+4. 确认开启
+
+<Frame caption="管理面板界面">
+  <img src="/images/arcpass/screenshot-admin-panel.png" alt="管理面板" />
+</Frame>
+
+## 步骤 5：测试功能 {#步骤-5-测试功能}
+
+现在您可以测试 ArcPass 的基本功能：
+
+| 命令 | 说明 |
+|------|------|
+| `/arcpass` | 打开通行证主界面 |
+| `/arcpass quests` | 查看当前任务 |
+| `/arcpass level` | 查看等级和经验 |
+| `/arcpass admin` | 打开管理面板（需要权限） |
+
+<Frame caption="ArcPass 主菜单（/arcpass）">
+  <img src="/images/arcpass/screenshot-main-menu.png" alt="主菜单" />
+</Frame>
+
+## 下一步 {#下一步}
+
+恭喜！您已经完成了 ArcPass 的基本配置。接下来您可以：
+
+<Columns cols={2}>
+  <Card title="配置通行证等级和奖励" icon="ticket" href="/arcpass/config/passes">
+  自定义通行证档位和等级奖励
+</Card>
+  <Card title="设置任务系统" icon="clipboard-list" href="/arcpass/config/quests">
+  配置日常、周常和赛季任务
+</Card>
+  <Card title="自定义 GUI 界面" icon="palette" href="/arcpass/config/gui">
+  美化您的通行证界面
+</Card>
+  <Card title="集成第三方插件" icon="puzzle" href="/arcpass/integrations">
+  连接 Vault、LuckPerms 等插件
+</Card>
+</Columns>
+
+## 遇到问题？ {#遇到问题}
+
+<Columns cols={2}>
+  <Card title="常见问题" icon="circle-help" href="/arcpass/faq">
+  查看 FAQ 解决常见问题
+</Card>
+  <Card title="QQ 社区" icon="messages-square" href="https://qm.qq.com/q/R83fq82HWm">
+  加入社区获取帮助
+</Card>
+</Columns>

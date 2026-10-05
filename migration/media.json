@@ -1,0 +1,93 @@
+{
+  "schema": 1,
+  "assets": [
+    {
+      "path": "/images/arcpass/cover-16x9.png",
+      "bytes": 2082271,
+      "sha256": "107db90fd849d4167f9c2702289376567b724ee3b9832103dd143efe36e6eb18"
+    },
+    {
+      "path": "/images/arcpass/scenes/S02.gif",
+      "bytes": 419387,
+      "sha256": "9a164ed05bee4d651f3c94f168e421c994591ee8e30daaca4dc7371ad405f16a"
+    },
+    {
+      "path": "/images/arcpass/scenes/S05.gif",
+      "bytes": 2915550,
+      "sha256": "204995d8a3608cd43798b98ce951853979b97a84354f0e1ad6d8f0974d1e1b98"
+    },
+    {
+      "path": "/images/arcpass/scenes/S06.gif",
+      "bytes": 3124941,
+      "sha256": "7a7acba80e210ef12be80e00df8d3a1ae98e3bc6767d69e2e442dcf7815331be"
+    },
+    {
+      "path": "/images/arcpass/scenes/S07.gif",
+      "bytes": 1105906,
+      "sha256": "f7bbc16e651a477bf291288e0954ef2a14380bfd67a0f38705c74402a5a30ca0"
+    },
+    {
+      "path": "/images/arcpass/screenshot-admin-panel.png",
+      "bytes": 725311,
+      "sha256": "d3d769dde891d76ae7db10d27c0fc2fd1604a6dfe3ee9eb268cc947d2024c628"
+    },
+    {
+      "path": "/images/arcpass/screenshot-leaderboard.png",
+      "bytes": 773625,
+      "sha256": "68d5b7bdcce670f4ea693a344e1093909c213e768853f59f0ff9b94fb2239693"
+    },
+    {
+      "path": "/images/arcpass/screenshot-main-menu.png",
+      "bytes": 769186,
+      "sha256": "41373f7d7954873c77aa9de030b2241736381a013820b2517e4678052507a269"
+    },
+    {
+      "path": "/images/arcpass/screenshot-quest-list.png",
+      "bytes": 782218,
+      "sha256": "397583234c56eb5efc5650dd1dd7a49f12b3de84afb40462d3100b81b9307815"
+    },
+    {
+      "path": "/images/arcpass/screenshot-reward-track.png",
+      "bytes": 754738,
+      "sha256": "1e1f419bf758063e9712ed16a392ec1529aaa6468ed2b32767eb92cce420f09e"
+    },
+    {
+      "path": "/images/kitemarket/kitemarket-icon-128.png",
+      "bytes": 6880,
+      "sha256": "45545e48424d1cfcb4e57bcc09ac0a4d3da2733e2110e661fc908fd23fe67d7c"
+    },
+    {
+      "path": "/images/kitemarket/kitemarket-icon-512.png",
+      "bytes": 34780,
+      "sha256": "7080f6647fa3fd3766558a566dedabfe58b51b1d6f3da32a2d27d6e999d4cbc2"
+    },
+    {
+      "path": "/images/kitemarket/kitemarket-icon.svg",
+      "bytes": 1237,
+      "sha256": "3574f6c3277fd32b27ad065c1514bb1fc064ce676de11204627de8173cb7854f"
+    },
+    {
+      "path": "/images/logo/arcpass.svg",
+      "bytes": 3170,
+      "sha256": "10e46836b704b1952e730c22a3aeb5fd0bb981b37ebac5ba8b1c43ff2c0dcea1"
+    },
+    {
+      "path": "/images/logo/kitemc.svg",
+      "bytes": 1098,
+      "sha256": "4acce223c4fd2d982e6a1b8e66aaa7f472713ba7c1d8880af6c3b4fc05353d1e"
+    },
+    {
+      "path": "/images/logo/verifymc.svg",
+      "bytes": 802,
+      "sha256": "fe5c9fe312df41d06ff84952e112b19c048fb85de649e0cdffbd0e49e5619ef9"
+    }
+  ],
+  "placeholders": [
+    "/images/kitemarket/screenshot-home.png",
+    "/images/kitemarket/screenshot-market.png",
+    "/images/kitemarket/screenshot-rule-editor.png",
+    "/images/kitemarket/screenshot-supply-preview.png",
+    "/images/kitemarket/screenshot-auction-confirm.png",
+    "/images/kitemarket/screenshot-wallet.png"
+  ]
+}

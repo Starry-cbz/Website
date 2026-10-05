@@ -1,0 +1,67 @@
+---
+title: "VerifyMC Historical Downloads"
+description: "Download existing VerifyMC releases and matching proxy extensions."
+mode: "wide"
+canonical: "https://www.kitemc.com/en/archive/verifymc/download"
+---
+
+import {
+  Downloads,
+  releaseSections,
+  selectKiteMarketAssets,
+  localizedReleaseBody,
+  safeWebLink,
+  selectSingleAsset,
+  downloadUrl,
+  normalizeReleases,
+} from "/snippets/Downloads.jsx";
+
+<Warning>
+  VerifyMC is no longer maintained. This page preserves historical downloads and does not promise compatibility with current Minecraft versions.
+</Warning>
+
+<Columns cols={2}>
+  <Card title="GitHub Releases" icon="github" href="https://github.com/KiteMC/VerifyMC/releases">Browse existing server-plugin and proxy-extension files directly.</Card>
+  <Card title="Archived installation guide" icon="archive" href="/en/archive/verifymc/guide">Read the existing configuration and deployment instructions.</Card>
+</Columns>
+
+## Historical requirements {#requirements}
+
+| Component | Original documentation |
+| --- | --- |
+| Minecraft | From 1.13 |
+| Java | 17+ |
+| Server | Paper / Spigot / Folia |
+| Optional proxy | BungeeCord / Velocity |
+
+These statements come from documentation written before maintenance ended. They do not certify later server versions.
+
+## Historical releases {#releases}
+
+<Downloads repo="VerifyMC" lang="en" showProxy={true} />
+
+<Note>
+  The server plugin and `verifymc-proxy` come from public GitHub Releases. If the list cannot load, use the GitHub link above. Keep the server plugin and proxy extension on matching versions.
+</Note>
+
+## Historical installation {#quick-start}
+
+<Steps>
+  <Step title="Get matching files">
+    Download the required `VerifyMC-*.jar` from GitHub Releases.
+  </Step>
+  <Step title="Install the server plugin">
+    Place the main JAR in the backend server's `plugins/` directory and restart cleanly.
+  </Step>
+  <Step title="Optional proxy extension">
+    Install the matching `verifymc-proxy-*.jar` on BungeeCord or Velocity if needed.
+  </Step>
+  <Step title="Read archived configuration">
+    Use the archived guide for database, mail and questionnaire configuration. Back up existing configuration and data first.
+  </Step>
+</Steps>
+
+<Columns cols={2}>
+  <Card title="Public source" icon="github" href="https://github.com/KiteMC/VerifyMC">View the existing implementation and release history.</Card>
+  <Card title="Archived documentation" icon="archive" href="/en/archive/verifymc">Return to VerifyMC's historical documentation.</Card>
+</Columns>

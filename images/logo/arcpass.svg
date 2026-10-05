@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <!-- 1. 色彩升级：径向渐变 (Radial Gradient) -->
+    <!-- 从左上角的高光向右下角的深色扩散，营造深邃的光感和立体感 -->
+    <radialGradient id="magicalGlow" cx="0" cy="0" r="1.5" fx="0" fy="0">
+      <stop offset="0%" stop-color="#A78BFA" />   <!-- 亮紫 (Highlight) -->
+      <stop offset="45%" stop-color="#7C3AED" />  <!-- 纯紫 (Midtone) -->
+      <stop offset="100%" stop-color="#DB2777" /> <!-- 深粉红 (Shadow/Depth) -->
+    </radialGradient>
+
+    <!-- 2. 质感滤镜：内发光 + 柔和投影 -->
+    <filter id="iconDepth" x="-50%" y="-50%" width="200%" height="200%">
+      <!-- 投影 -->
+      <feGaussianBlur in="SourceAlpha" stdDeviation="6"/>
+      <feOffset dx="0" dy="8" result="shadow"/>
+      <feFlood flood-color="#4C1D95" flood-opacity="0.4"/>
+      <feComposite in2="shadow" operator="in"/>
+
+      <!-- 叠加主体 -->
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- 背景：统一圆角 -->
+  <rect width="512" height="512" rx="108" fill="url(#magicalGlow)"/>
+
+  <!-- 主体容器：旋转 -9 度，保持动感但不过分倾斜 -->
+  <g transform="rotate(-9, 256, 256)" filter="url(#iconDepth)">
+
+    <!-- 1. 简化的卡片/门票轮廓 (Ticket Frame) -->
+    <!-- 优化：线条减细至 36px (原48px)，显得更精致 -->
+    <!-- 造型：右上角断开，留出空间给星星 -->
+    <!-- 圆角：统一使用较大的圆角 (rx 60)，与外框风格一致 -->
+    <path d="
+      M 330 110
+      H 170
+      A 60 60 0 0 0 110 170
+      V 342
+      A 60 60 0 0 0 170 402
+      H 342
+      A 60 60 0 0 0 402 342
+      V 220
+    "
+    fill="none"
+    stroke="white"
+    stroke-width="36"
+    stroke-linecap="round"
+    stroke-linejoin="round"/>
+
+    <!-- 2. 统一风格的星星 (Rounded Star) -->
+    <!-- 造型：四角星，但是端点圆润，避免尖锐感，与整体圆润风格融合 -->
+    <!-- 位置：衔接右上角缺口，大小适中，不突兀 -->
+    <!-- 填充：实心白色，作为视觉重心 -->
+    <path d="
+      M 402 110
+      Q 412 110, 415 120
+      L 425 150
+      Q 428 160, 438 163
+      L 468 173
+      Q 478 176, 468 186
+      L 438 196
+      Q 428 199, 425 209
+      L 415 239
+      Q 412 249, 402 249
+      Q 392 249, 389 239
+      L 379 209
+      Q 376 199, 366 196
+      L 336 186
+      Q 326 176, 336 173
+      L 366 163
+      Q 376 160, 379 150
+      L 389 120
+      Q 392 110, 402 110
+      Z
+    "
+    fill="white"/>
+
+    <!-- 3. 极简内部符号 (The Arc) -->
+    <!-- 优化：不再是点+线，而是一条简洁有力的“微笑曲线”或“上升弧线” -->
+    <!-- 寓意：Pass 带来的提升/快乐 -->
+    <!-- 布局：居中，留白充足 -->
+    <path d="M 180 290 Q 256 310, 332 230"
+          fill="none"
+          stroke="white"
+          stroke-width="36"
+          stroke-linecap="round"
+          stroke-linejoin="round"/>
+  </g>
+</svg>

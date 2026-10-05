@@ -1,0 +1,149 @@
+---
+title: "安装指南"
+canonical: "https://www.kitemc.com/arcpass/setup/installation"
+---
+
+<span id="安装指南" />
+
+本页面详细说明如何在不同服务端上安装 ArcPass。
+
+## 支持的服务端 {#支持的服务端}
+
+| 服务端 | 支持版本 | 备注 |
+|--------|----------|------|
+| Paper | 1.18 - 1.21+ | 推荐使用 |
+| Spigot | 1.18 - 1.21+ | 完全支持 |
+| Folia | 1.20 - 1.21+ | 完全支持多线程 |
+| Purpur | 1.18 - 1.21+ | 基于 Paper，完全支持 |
+| Bukkit | 1.18 - 1.21+ | 基本功能支持 |
+
+<Warning>
+
+**注意**
+
+不支持 CraftBukkit 和低于 1.18 的版本。
+
+</Warning>
+
+## 安装步骤 {#安装步骤}
+
+### 1. 下载插件 {#_1-下载插件}
+
+从以下渠道获取最新版本：
+
+<Columns cols={2}>
+  <Card title="GitHub Releases" icon="download" href="https://github.com/KiteMC/ArcPass/releases">
+  从 GitHub 下载
+</Card>
+  <Card title="KiteMC 许可证平台" icon="shopping-cart" href="https://license.kitemc.com/products/arcpass">
+  购买和下载
+</Card>
+</Columns>
+
+### 2. 放置文件 {#_2-放置文件}
+
+将下载的 `ArcPass-x.x.x.jar` 文件放入服务器的 `plugins` 文件夹：
+
+```
+your-server/
+├── plugins/
+│   ├── ArcPass-1.9.2.jar    ← 放在这里
+│   └── ... 其他插件
+├── server.jar
+└── ...
+```
+
+### 3. 启动服务器 {#_3-启动服务器}
+
+首次启动时，插件会：
+
+1. 检测服务端类型（Paper/Spigot/Folia）
+2. 生成默认配置文件
+3. 创建数据库（默认 SQLite）
+4. 等待许可证激活
+
+### 4. 查看启动日志 {#_4-查看启动日志}
+
+正常启动时，您会看到类似以下日志：
+
+```
+[ArcPass] Loading ArcPass v1.9.2
+[ArcPass] Detected platform: PAPER
+[ArcPass] Loading configuration files...
+[ArcPass] Initializing database (SQLite)...
+[ArcPass] Waiting for license validation...
+[ArcPass] License validation required. Please configure license.yml
+```
+
+## 生成的文件结构 {#生成的文件结构}
+
+```
+plugins/ArcPass/
+├── config.yml              # 主配置文件
+├── database.yml            # 数据库配置
+├── license.yml             # 许可证配置
+├── lang/
+│   ├── en_US.yml          # 英文语言
+│   └── zh_CN.yml          # 中文语言
+├── passes/
+│   └── default.yml        # 默认通行证
+├── quests/
+│   ├── daily/             # 日常任务
+│   ├── weekly/            # 周常任务
+│   └── seasonal/          # 赛季任务
+├── rewards/
+│   └── default.yml        # 默认奖励
+└── gui/
+    ├── main-menu.yml      # 主菜单配置
+    ├── quests.yml         # 任务界面配置
+    └── rewards.yml        # 奖励界面配置
+```
+
+## Folia 服务端特殊说明 {#folia-服务端特殊说明}
+
+ArcPass 完全支持 Folia 的区域化多线程架构：
+
+- 所有调度器调用使用 Folia 兼容 API
+- 数据库操作异步执行
+- GUI 操作在正确的区域线程执行
+
+无需任何额外配置，插件会自动检测并适配 Folia。
+
+## 故障排除 {#故障排除}
+
+### 插件未加载 {#插件未加载}
+
+检查以下几点：
+
+1. 确认 JAR 文件名正确（不要重命名）
+2. 检查 Java 版本是否为 17+
+3. 查看控制台是否有错误信息
+
+### 配置文件未生成 {#配置文件未生成}
+
+1. 确认插件文件夹有写入权限
+2. 检查磁盘空间是否充足
+3. 尝试手动创建 `plugins/ArcPass` 文件夹
+
+### 依赖插件问题 {#依赖插件问题}
+
+确保可选依赖插件版本兼容：
+
+| 插件 | 推荐版本 |
+|------|----------|
+| Vault | 1.7.3+ |
+| PlaceholderAPI | 2.11.0+ |
+| LuckPerms | 5.4+ |
+
+## 下一步 {#下一步}
+
+安装完成后，请继续：
+
+<Columns cols={2}>
+  <Card title="激活许可证" icon="key" href="/arcpass/setup/license">
+  配置许可证密钥
+</Card>
+  <Card title="查看系统要求" icon="settings" href="/arcpass/setup/requirements">
+  查看完整要求
+</Card>
+</Columns>

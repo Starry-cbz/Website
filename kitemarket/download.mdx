@@ -1,0 +1,77 @@
+---
+title: "KiteMarket 下载"
+description: "选择运行包，获取两个公开 SDK、可运行示例、双语配置和 SHA-256 校验文件。"
+mode: "wide"
+canonical: "https://www.kitemc.com/kitemarket/download"
+---
+
+import {
+  Downloads,
+  releaseSections,
+  selectKiteMarketAssets,
+  localizedReleaseBody,
+  safeWebLink,
+  selectSingleAsset,
+  downloadUrl,
+  normalizeReleases,
+} from "/snippets/Downloads.jsx";
+
+<Columns cols={2}>
+  <Card title="安装指南" icon="rocket" href="/kitemarket/guide">选择正确的服务器运行包并完成配置。</Card>
+  <Card title="购买许可证" icon="shopping-cart" href="https://license.kitemc.com/products/kitemarket">一份许可证对应一个独立市场网络，网络内不限节点。</Card>
+  <Card title="市场 API" icon="code" href="/kitemarket/api">查询市场数据并监听成交通知。</Card>
+  <Card title="GitHub Releases" icon="github" href="https://github.com/KiteMC/KiteMarket/releases">直接查看公开版本和全部资产文件。</Card>
+</Columns>
+
+全部发行文件由 GitHub Releases 提供，使用 GitHub 直接下载，不要求 GitHub Packages Token。下方只展示已经公开的版本。
+
+## 版本列表 {#版本列表}
+
+<Downloads repo="KiteMarket" lang="zh" assetProfile="kitemarket" />
+
+## 服主：按服务器选择一份运行包 {#服主-按服务器选择一份运行包}
+
+| 运行包 | 目标 Minecraft 范围 | 插件字节码 | 1.0.0 文件名 |
+| --- | --- | --- | --- |
+| Legacy | 1.16.5–1.20.4 | Java 11 | `KiteMarket-legacy-1.0.0.jar` |
+| Modern | 1.20.5–1.21.11 | Java 21 | `KiteMarket-modern-1.0.0.jar` |
+| Current | 26.2 | Java 25 | `KiteMarket-current-1.0.0.jar` |
+
+只向 `plugins/` 放入对应范围的一份主插件 JAR。服务器 JVM 仍须满足服务端自身要求；Legacy 字节码不是所有旧版服务器都能使用 Java 11 的保证。ItemsAdder 与经济插件需另行准备。
+
+<Card title="兼容说明" icon="list-checks" href="/kitemarket/compatibility">
+  目标范围不等于全部实测通过；查看代表组合、仅启动记录和未验证组合。
+</Card>
+
+## 开发者：SDK、源码与示例 {#开发者-sdk、源码与示例}
+
+| 用途 | 文件名 |
+| --- | --- |
+| 只读市场查询与成交通知 | `KiteMarket-API-1.0.0.jar` |
+| 市场 API 源码 / Javadoc | `KiteMarket-API-1.0.0-sources.jar` / `KiteMarket-API-1.0.0-javadoc.jar` |
+| 页面与主题呈现接口 | `KiteMarket-UI-API-1.0.0.jar` |
+| UI API 源码 / Javadoc | `KiteMarket-UI-API-1.0.0-sources.jar` / `KiteMarket-UI-API-1.0.0-javadoc.jar` |
+| 可运行查询及 IA 扩展示例 | `KiteMarket-Examples-1.0.0.zip` |
+
+两个 SDK 均为 Java 11 / MIT。使用 `compileOnly` 或 `provided`，**不将 SDK 打包或重定位**；API、sources 和 Javadoc JAR 均不能放入服务器 `plugins/`。服务由主插件提供，SDK 不能代替主插件授权。
+
+GitHub Packages 仓库为 `https://maven.pkg.github.com/kitemc/KiteMarket`，坐标为 `com.kitemc:kitemarket-api:1.0.0` 与 `com.kitemc:kitemarket-ui-api:1.0.0`。Packages 引用需要认证，Release 文件下载不需要。使用前请确认对应版本已在 Packages 发布。
+
+<Columns cols={2}>
+  <Card title="市场 API 入门" icon="code" href="/kitemarket/api">Maven、Gradle、认证及查询示例。</Card>
+  <Card title="界面 SDK" icon="panels-top-left" href="/kitemarket/ui-development">制作自有界面主题和 ItemsAdder 扩展。</Card>
+</Columns>
+
+## 配置与校验 {#配置与校验}
+
+双语配置包为 `KiteMarket-config-zh_CN-1.0.0.zip`、`KiteMarket-config-en_US-1.0.0.zip`，校验文件为 `SHA256SUMS.txt`。它们与对应版本一起列在 GitHub Release 中。
+
+配置包含产品信息与可信公钥，仅填写自己的许可证、数据库及实际经济配置。下载后按校验文件核对 SHA-256：
+
+```powershell
+Get-FileHash -Algorithm SHA256 .\KiteMarket-modern-1.0.0.jar
+```
+
+<Card title="备份、升级与回滚" icon="archive" href="/kitemarket/operations">
+  有资产的网络升级前正常停服，备份完整数据库和配置。公开文件不含混淆映射、私钥或网络凭据。
+</Card>

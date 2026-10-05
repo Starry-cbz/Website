@@ -1,54 +1,486 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mintlify Starter Kit",
+  "name": "KiteMC",
+  "description": "Minecraft 服务器工具与插件：KiteMarket、ArcPass 与历史文档。",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#5672cd",
+    "light": "#839bef",
+    "dark": "#405aa7"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/images/logo/kitemc.svg",
+  "logo": {
+    "light": "/images/logo/kitemc.svg",
+    "dark": "/images/logo/kitemc.svg",
+    "href": "/"
+  },
+  "appearance": {
+    "default": "system"
+  },
   "navigation": {
-    "pages": [
+    "languages": [
       {
-        "group": "Getting Started",
-        "pages": [
-          "index",
-          "quickstart"
+        "language": "zh-CN",
+        "default": true,
+        "navbar": {
+          "links": [
+            {
+              "label": "首页",
+              "href": "/"
+            },
+            {
+              "label": "GitHub",
+              "href": "https://github.com/KiteMC/"
+            },
+            {
+              "label": "社区",
+              "href": "https://qm.qq.com/q/R83fq82HWm"
+            }
+          ],
+          "primary": {
+            "type": "button",
+            "label": "许可证中心",
+            "href": "https://license.kitemc.com/"
+          }
+        },
+        "footer": {
+          "socials": {
+            "github": "https://github.com/KiteMC/",
+            "discord": "https://discord.gg/dcsBw5Z5ZT"
+          },
+          "links": [
+            {
+              "header": "产品",
+              "items": [
+                {
+                  "label": "KiteMarket",
+                  "href": "/kitemarket"
+                },
+                {
+                  "label": "ArcPass",
+                  "href": "/arcpass"
+                },
+                {
+                  "label": "历史文档",
+                  "href": "/archive/verifymc"
+                }
+              ]
+            },
+            {
+              "header": "资源",
+              "items": [
+                {
+                  "label": "许可证中心",
+                  "href": "https://license.kitemc.com/"
+                },
+                {
+                  "label": "加入社区",
+                  "href": "https://qm.qq.com/q/R83fq82HWm"
+                },
+                {
+                  "label": "爱发电",
+                  "href": "https://ifdian.net/a/kitemc"
+                }
+              ]
+            }
+          ]
+        },
+        "tabs": [
+          {
+            "tab": "首页",
+            "icon": "house",
+            "pages": [
+              "index"
+            ]
+          },
+          {
+            "tab": "ArcPass",
+            "icon": "ticket",
+            "groups": [
+              {
+                "group": "快速开始",
+                "pages": [
+                  "arcpass",
+                  "arcpass/guide",
+                  "arcpass/download"
+                ]
+              },
+              {
+                "group": "安装配置",
+                "pages": [
+                  "arcpass/setup/installation",
+                  "arcpass/setup/license",
+                  "arcpass/setup/requirements"
+                ]
+              },
+              {
+                "group": "配置文件",
+                "pages": [
+                  "arcpass/config",
+                  "arcpass/config/passes",
+                  "arcpass/config/quests",
+                  "arcpass/config/rewards",
+                  "arcpass/config/seasons",
+                  "arcpass/config/gui"
+                ]
+              },
+              {
+                "group": "使用指南",
+                "pages": [
+                  "arcpass/commands",
+                  "arcpass/integrations",
+                  "arcpass/placeholders"
+                ]
+              },
+              {
+                "group": "开发者 API",
+                "pages": [
+                  "arcpass/developer",
+                  "arcpass/developer/getting-started",
+                  "arcpass/developer/events",
+                  "arcpass/developer/examples"
+                ]
+              },
+              {
+                "group": "帮助",
+                "pages": [
+                  "arcpass/faq"
+                ]
+              }
+            ]
+          },
+          {
+            "tab": "KiteMarket",
+            "icon": "store",
+            "groups": [
+              {
+                "group": "快速开始",
+                "pages": [
+                  "kitemarket",
+                  "kitemarket/download",
+                  "kitemarket/guide"
+                ]
+              },
+              {
+                "group": "使用指南",
+                "pages": [
+                  "kitemarket/trading",
+                  "kitemarket/wallet",
+                  "kitemarket/commands"
+                ]
+              },
+              {
+                "group": "界面集成",
+                "pages": [
+                  "kitemarket/dlc"
+                ]
+              },
+              {
+                "group": "开发者 API",
+                "pages": [
+                  "kitemarket/api",
+                  "kitemarket/ui-development"
+                ]
+              },
+              {
+                "group": "授权与运维",
+                "pages": [
+                  "kitemarket/license",
+                  "kitemarket/operations",
+                  "kitemarket/compatibility"
+                ]
+              }
+            ]
+          },
+          {
+            "tab": "历史文档",
+            "icon": "box-archive",
+            "groups": [
+              {
+                "group": "VerifyMC · 已停止维护",
+                "pages": [
+                  "archive/verifymc",
+                  "archive/verifymc/guide"
+                ]
+              },
+              {
+                "group": "插件指令",
+                "pages": [
+                  "archive/verifymc/command"
+                ]
+              },
+              {
+                "group": "插件文件",
+                "pages": [
+                  "archive/verifymc/file/directory",
+                  "archive/verifymc/file/config",
+                  "archive/verifymc/guide/default"
+                ]
+              },
+              {
+                "group": "常见问题",
+                "pages": [
+                  "archive/verifymc/question"
+                ]
+              },
+              {
+                "group": "前端开发",
+                "pages": [
+                  "archive/verifymc/front/api"
+                ]
+              },
+              {
+                "group": "下载",
+                "pages": [
+                  "archive/verifymc/download"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "language": "en",
+        "navbar": {
+          "links": [
+            {
+              "label": "Home",
+              "href": "/en"
+            },
+            {
+              "label": "GitHub",
+              "href": "https://github.com/KiteMC/"
+            },
+            {
+              "label": "Community",
+              "href": "https://discord.gg/dcsBw5Z5ZT"
+            }
+          ],
+          "primary": {
+            "type": "button",
+            "label": "License Center",
+            "href": "https://license.kitemc.com/en"
+          }
+        },
+        "footer": {
+          "socials": {
+            "github": "https://github.com/KiteMC/",
+            "discord": "https://discord.gg/dcsBw5Z5ZT"
+          },
+          "links": [
+            {
+              "header": "Products",
+              "items": [
+                {
+                  "label": "KiteMarket",
+                  "href": "/en/kitemarket"
+                },
+                {
+                  "label": "ArcPass",
+                  "href": "/en/arcpass"
+                },
+                {
+                  "label": "Historical archive",
+                  "href": "/en/archive/verifymc"
+                }
+              ]
+            },
+            {
+              "header": "Resources",
+              "items": [
+                {
+                  "label": "License Center",
+                  "href": "https://license.kitemc.com/en"
+                },
+                {
+                  "label": "Community",
+                  "href": "https://discord.gg/dcsBw5Z5ZT"
+                },
+                {
+                  "label": "Afdian",
+                  "href": "https://ifdian.net/a/kitemc"
+                }
+              ]
+            }
+          ]
+        },
+        "tabs": [
+          {
+            "tab": "Home",
+            "icon": "house",
+            "pages": [
+              "en"
+            ]
+          },
+          {
+            "tab": "ArcPass",
+            "icon": "ticket",
+            "groups": [
+              {
+                "group": "Getting started",
+                "pages": [
+                  "en/arcpass",
+                  "en/arcpass/guide",
+                  "en/arcpass/download"
+                ]
+              },
+              {
+                "group": "Setup guide",
+                "pages": [
+                  "en/arcpass/setup/installation",
+                  "en/arcpass/setup/license",
+                  "en/arcpass/setup/requirements"
+                ]
+              },
+              {
+                "group": "Configuration",
+                "pages": [
+                  "en/arcpass/config",
+                  "en/arcpass/config/passes",
+                  "en/arcpass/config/quests",
+                  "en/arcpass/config/rewards",
+                  "en/arcpass/config/seasons",
+                  "en/arcpass/config/gui"
+                ]
+              },
+              {
+                "group": "Usage",
+                "pages": [
+                  "en/arcpass/commands",
+                  "en/arcpass/integrations",
+                  "en/arcpass/placeholders"
+                ]
+              },
+              {
+                "group": "Developer API",
+                "pages": [
+                  "en/arcpass/developer",
+                  "en/arcpass/developer/getting-started",
+                  "en/arcpass/developer/events",
+                  "en/arcpass/developer/examples"
+                ]
+              },
+              {
+                "group": "Help",
+                "pages": [
+                  "en/arcpass/faq"
+                ]
+              }
+            ]
+          },
+          {
+            "tab": "KiteMarket",
+            "icon": "store",
+            "groups": [
+              {
+                "group": "Getting started",
+                "pages": [
+                  "en/kitemarket",
+                  "en/kitemarket/download",
+                  "en/kitemarket/guide"
+                ]
+              },
+              {
+                "group": "Usage",
+                "pages": [
+                  "en/kitemarket/trading",
+                  "en/kitemarket/wallet",
+                  "en/kitemarket/commands"
+                ]
+              },
+              {
+                "group": "Interface integration",
+                "pages": [
+                  "en/kitemarket/dlc"
+                ]
+              },
+              {
+                "group": "Developer API",
+                "pages": [
+                  "en/kitemarket/api",
+                  "en/kitemarket/ui-development"
+                ]
+              },
+              {
+                "group": "Licensing & operations",
+                "pages": [
+                  "en/kitemarket/license",
+                  "en/kitemarket/operations",
+                  "en/kitemarket/compatibility"
+                ]
+              }
+            ]
+          },
+          {
+            "tab": "Archive",
+            "icon": "box-archive",
+            "groups": [
+              {
+                "group": "VerifyMC · Discontinued",
+                "pages": [
+                  "en/archive/verifymc",
+                  "en/archive/verifymc/guide"
+                ]
+              },
+              {
+                "group": "Plugin commands",
+                "pages": [
+                  "en/archive/verifymc/command"
+                ]
+              },
+              {
+                "group": "Plugin files",
+                "pages": [
+                  "en/archive/verifymc/file/directory",
+                  "en/archive/verifymc/file/config",
+                  "en/archive/verifymc/guide/default"
+                ]
+              },
+              {
+                "group": "FAQ",
+                "pages": [
+                  "en/archive/verifymc/question"
+                ]
+              },
+              {
+                "group": "Frontend development",
+                "pages": [
+                  "en/archive/verifymc/front/api"
+                ]
+              },
+              {
+                "group": "Downloads",
+                "pages": [
+                  "en/archive/verifymc/download"
+                ]
+              }
+            ]
+          }
         ]
       }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
-        }
-      ]
-    }
-  },
-  "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    ]
   },
   "navbar": {
     "links": [
       {
-        "label": "Support",
-        "href": "mailto:support@mintlify.com"
+        "label": "GitHub",
+        "href": "https://github.com/KiteMC/"
       }
     ],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://app.mintlify.com"
+      "label": "许可证中心",
+      "href": "https://license.kitemc.com/"
     }
+  },
+  "footer": {
+    "socials": {
+      "github": "https://github.com/KiteMC/",
+      "discord": "https://discord.gg/dcsBw5Z5ZT"
+    }
+  },
+  "search": {
+    "prompt": "搜索文档…"
   },
   "contextual": {
     "options": [
@@ -56,17 +488,1132 @@
       "view",
       "chatgpt",
       "claude",
-      "perplexity",
-      "mcp",
-      "cursor",
-      "vscode"
+      "mcp"
     ]
   },
-  "footer": {
-    "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+  "seo": {
+    "indexing": "navigable",
+    "organization": {
+      "name": "KiteMC",
+      "url": "https://www.kitemc.com",
+      "logo": "https://www.kitemc.com/images/logo/kitemc.svg",
+      "sameAs": [
+        "https://github.com/KiteMC/",
+        "https://discord.gg/dcsBw5Z5ZT"
+      ]
+    },
+    "metatags": {
+      "canonical": "https://www.kitemc.com",
+      "author": "KiteMC Team",
+      "theme-color": "#5672cd",
+      "og:site_name": "KiteMC",
+      "twitter:card": "summary_large_image"
     }
-  }
+  },
+  "redirects": [
+    {
+      "source": "/docs/arcpass/commands/",
+      "destination": "/arcpass/commands"
+    },
+    {
+      "source": "/docs/arcpass/commands",
+      "destination": "/arcpass/commands"
+    },
+    {
+      "source": "/docs/arcpass/commands/index",
+      "destination": "/arcpass/commands"
+    },
+    {
+      "source": "/docs/arcpass/commands/index.html",
+      "destination": "/arcpass/commands"
+    },
+    {
+      "source": "/docs/arcpass/config/gui",
+      "destination": "/arcpass/config/gui"
+    },
+    {
+      "source": "/docs/arcpass/config/gui/",
+      "destination": "/arcpass/config/gui"
+    },
+    {
+      "source": "/docs/arcpass/config/gui.html",
+      "destination": "/arcpass/config/gui"
+    },
+    {
+      "source": "/docs/arcpass/config/",
+      "destination": "/arcpass/config"
+    },
+    {
+      "source": "/docs/arcpass/config",
+      "destination": "/arcpass/config"
+    },
+    {
+      "source": "/docs/arcpass/config/index",
+      "destination": "/arcpass/config"
+    },
+    {
+      "source": "/docs/arcpass/config/index.html",
+      "destination": "/arcpass/config"
+    },
+    {
+      "source": "/docs/arcpass/config/passes",
+      "destination": "/arcpass/config/passes"
+    },
+    {
+      "source": "/docs/arcpass/config/passes/",
+      "destination": "/arcpass/config/passes"
+    },
+    {
+      "source": "/docs/arcpass/config/passes.html",
+      "destination": "/arcpass/config/passes"
+    },
+    {
+      "source": "/docs/arcpass/config/quests",
+      "destination": "/arcpass/config/quests"
+    },
+    {
+      "source": "/docs/arcpass/config/quests/",
+      "destination": "/arcpass/config/quests"
+    },
+    {
+      "source": "/docs/arcpass/config/quests.html",
+      "destination": "/arcpass/config/quests"
+    },
+    {
+      "source": "/docs/arcpass/config/rewards",
+      "destination": "/arcpass/config/rewards"
+    },
+    {
+      "source": "/docs/arcpass/config/rewards/",
+      "destination": "/arcpass/config/rewards"
+    },
+    {
+      "source": "/docs/arcpass/config/rewards.html",
+      "destination": "/arcpass/config/rewards"
+    },
+    {
+      "source": "/docs/arcpass/config/seasons",
+      "destination": "/arcpass/config/seasons"
+    },
+    {
+      "source": "/docs/arcpass/config/seasons/",
+      "destination": "/arcpass/config/seasons"
+    },
+    {
+      "source": "/docs/arcpass/config/seasons.html",
+      "destination": "/arcpass/config/seasons"
+    },
+    {
+      "source": "/docs/arcpass/developer/events",
+      "destination": "/arcpass/developer/events"
+    },
+    {
+      "source": "/docs/arcpass/developer/events/",
+      "destination": "/arcpass/developer/events"
+    },
+    {
+      "source": "/docs/arcpass/developer/events.html",
+      "destination": "/arcpass/developer/events"
+    },
+    {
+      "source": "/docs/arcpass/developer/examples",
+      "destination": "/arcpass/developer/examples"
+    },
+    {
+      "source": "/docs/arcpass/developer/examples/",
+      "destination": "/arcpass/developer/examples"
+    },
+    {
+      "source": "/docs/arcpass/developer/examples.html",
+      "destination": "/arcpass/developer/examples"
+    },
+    {
+      "source": "/docs/arcpass/developer/getting-started",
+      "destination": "/arcpass/developer/getting-started"
+    },
+    {
+      "source": "/docs/arcpass/developer/getting-started/",
+      "destination": "/arcpass/developer/getting-started"
+    },
+    {
+      "source": "/docs/arcpass/developer/getting-started.html",
+      "destination": "/arcpass/developer/getting-started"
+    },
+    {
+      "source": "/docs/arcpass/developer/",
+      "destination": "/arcpass/developer"
+    },
+    {
+      "source": "/docs/arcpass/developer",
+      "destination": "/arcpass/developer"
+    },
+    {
+      "source": "/docs/arcpass/developer/index",
+      "destination": "/arcpass/developer"
+    },
+    {
+      "source": "/docs/arcpass/developer/index.html",
+      "destination": "/arcpass/developer"
+    },
+    {
+      "source": "/docs/arcpass/download",
+      "destination": "/arcpass/download"
+    },
+    {
+      "source": "/docs/arcpass/download/",
+      "destination": "/arcpass/download"
+    },
+    {
+      "source": "/docs/arcpass/download.html",
+      "destination": "/arcpass/download"
+    },
+    {
+      "source": "/docs/arcpass/faq/",
+      "destination": "/arcpass/faq"
+    },
+    {
+      "source": "/docs/arcpass/faq",
+      "destination": "/arcpass/faq"
+    },
+    {
+      "source": "/docs/arcpass/faq/index",
+      "destination": "/arcpass/faq"
+    },
+    {
+      "source": "/docs/arcpass/faq/index.html",
+      "destination": "/arcpass/faq"
+    },
+    {
+      "source": "/docs/arcpass/guide/",
+      "destination": "/arcpass/guide"
+    },
+    {
+      "source": "/docs/arcpass/guide",
+      "destination": "/arcpass/guide"
+    },
+    {
+      "source": "/docs/arcpass/guide/index",
+      "destination": "/arcpass/guide"
+    },
+    {
+      "source": "/docs/arcpass/guide/index.html",
+      "destination": "/arcpass/guide"
+    },
+    {
+      "source": "/docs/arcpass/",
+      "destination": "/arcpass"
+    },
+    {
+      "source": "/docs/arcpass",
+      "destination": "/arcpass"
+    },
+    {
+      "source": "/docs/arcpass/index",
+      "destination": "/arcpass"
+    },
+    {
+      "source": "/docs/arcpass/index.html",
+      "destination": "/arcpass"
+    },
+    {
+      "source": "/docs/arcpass/integrations/",
+      "destination": "/arcpass/integrations"
+    },
+    {
+      "source": "/docs/arcpass/integrations",
+      "destination": "/arcpass/integrations"
+    },
+    {
+      "source": "/docs/arcpass/integrations/index",
+      "destination": "/arcpass/integrations"
+    },
+    {
+      "source": "/docs/arcpass/integrations/index.html",
+      "destination": "/arcpass/integrations"
+    },
+    {
+      "source": "/docs/arcpass/placeholders/",
+      "destination": "/arcpass/placeholders"
+    },
+    {
+      "source": "/docs/arcpass/placeholders",
+      "destination": "/arcpass/placeholders"
+    },
+    {
+      "source": "/docs/arcpass/placeholders/index",
+      "destination": "/arcpass/placeholders"
+    },
+    {
+      "source": "/docs/arcpass/placeholders/index.html",
+      "destination": "/arcpass/placeholders"
+    },
+    {
+      "source": "/docs/arcpass/setup/installation",
+      "destination": "/arcpass/setup/installation"
+    },
+    {
+      "source": "/docs/arcpass/setup/installation/",
+      "destination": "/arcpass/setup/installation"
+    },
+    {
+      "source": "/docs/arcpass/setup/installation.html",
+      "destination": "/arcpass/setup/installation"
+    },
+    {
+      "source": "/docs/arcpass/setup/license",
+      "destination": "/arcpass/setup/license"
+    },
+    {
+      "source": "/docs/arcpass/setup/license/",
+      "destination": "/arcpass/setup/license"
+    },
+    {
+      "source": "/docs/arcpass/setup/license.html",
+      "destination": "/arcpass/setup/license"
+    },
+    {
+      "source": "/docs/arcpass/setup/requirements",
+      "destination": "/arcpass/setup/requirements"
+    },
+    {
+      "source": "/docs/arcpass/setup/requirements/",
+      "destination": "/arcpass/setup/requirements"
+    },
+    {
+      "source": "/docs/arcpass/setup/requirements.html",
+      "destination": "/arcpass/setup/requirements"
+    },
+    {
+      "source": "/docs/kitemarket/api",
+      "destination": "/kitemarket/api"
+    },
+    {
+      "source": "/docs/kitemarket/api/",
+      "destination": "/kitemarket/api"
+    },
+    {
+      "source": "/docs/kitemarket/api.html",
+      "destination": "/kitemarket/api"
+    },
+    {
+      "source": "/docs/kitemarket/commands",
+      "destination": "/kitemarket/commands"
+    },
+    {
+      "source": "/docs/kitemarket/commands/",
+      "destination": "/kitemarket/commands"
+    },
+    {
+      "source": "/docs/kitemarket/commands.html",
+      "destination": "/kitemarket/commands"
+    },
+    {
+      "source": "/docs/kitemarket/compatibility",
+      "destination": "/kitemarket/compatibility"
+    },
+    {
+      "source": "/docs/kitemarket/compatibility/",
+      "destination": "/kitemarket/compatibility"
+    },
+    {
+      "source": "/docs/kitemarket/compatibility.html",
+      "destination": "/kitemarket/compatibility"
+    },
+    {
+      "source": "/docs/kitemarket/dlc",
+      "destination": "/kitemarket/dlc"
+    },
+    {
+      "source": "/docs/kitemarket/dlc/",
+      "destination": "/kitemarket/dlc"
+    },
+    {
+      "source": "/docs/kitemarket/dlc.html",
+      "destination": "/kitemarket/dlc"
+    },
+    {
+      "source": "/docs/kitemarket/download",
+      "destination": "/kitemarket/download"
+    },
+    {
+      "source": "/docs/kitemarket/download/",
+      "destination": "/kitemarket/download"
+    },
+    {
+      "source": "/docs/kitemarket/download.html",
+      "destination": "/kitemarket/download"
+    },
+    {
+      "source": "/docs/kitemarket/guide",
+      "destination": "/kitemarket/guide"
+    },
+    {
+      "source": "/docs/kitemarket/guide/",
+      "destination": "/kitemarket/guide"
+    },
+    {
+      "source": "/docs/kitemarket/guide.html",
+      "destination": "/kitemarket/guide"
+    },
+    {
+      "source": "/docs/kitemarket/",
+      "destination": "/kitemarket"
+    },
+    {
+      "source": "/docs/kitemarket",
+      "destination": "/kitemarket"
+    },
+    {
+      "source": "/docs/kitemarket/index",
+      "destination": "/kitemarket"
+    },
+    {
+      "source": "/docs/kitemarket/index.html",
+      "destination": "/kitemarket"
+    },
+    {
+      "source": "/docs/kitemarket/license",
+      "destination": "/kitemarket/license"
+    },
+    {
+      "source": "/docs/kitemarket/license/",
+      "destination": "/kitemarket/license"
+    },
+    {
+      "source": "/docs/kitemarket/license.html",
+      "destination": "/kitemarket/license"
+    },
+    {
+      "source": "/docs/kitemarket/operations",
+      "destination": "/kitemarket/operations"
+    },
+    {
+      "source": "/docs/kitemarket/operations/",
+      "destination": "/kitemarket/operations"
+    },
+    {
+      "source": "/docs/kitemarket/operations.html",
+      "destination": "/kitemarket/operations"
+    },
+    {
+      "source": "/docs/kitemarket/trading",
+      "destination": "/kitemarket/trading"
+    },
+    {
+      "source": "/docs/kitemarket/trading/",
+      "destination": "/kitemarket/trading"
+    },
+    {
+      "source": "/docs/kitemarket/trading.html",
+      "destination": "/kitemarket/trading"
+    },
+    {
+      "source": "/docs/kitemarket/ui-development",
+      "destination": "/kitemarket/ui-development"
+    },
+    {
+      "source": "/docs/kitemarket/ui-development/",
+      "destination": "/kitemarket/ui-development"
+    },
+    {
+      "source": "/docs/kitemarket/ui-development.html",
+      "destination": "/kitemarket/ui-development"
+    },
+    {
+      "source": "/docs/kitemarket/wallet",
+      "destination": "/kitemarket/wallet"
+    },
+    {
+      "source": "/docs/kitemarket/wallet/",
+      "destination": "/kitemarket/wallet"
+    },
+    {
+      "source": "/docs/kitemarket/wallet.html",
+      "destination": "/kitemarket/wallet"
+    },
+    {
+      "source": "/docs/verifymc/command/",
+      "destination": "/archive/verifymc/command"
+    },
+    {
+      "source": "/docs/verifymc/command",
+      "destination": "/archive/verifymc/command"
+    },
+    {
+      "source": "/docs/verifymc/command/index",
+      "destination": "/archive/verifymc/command"
+    },
+    {
+      "source": "/docs/verifymc/command/index.html",
+      "destination": "/archive/verifymc/command"
+    },
+    {
+      "source": "/docs/verifymc/download",
+      "destination": "/archive/verifymc/download"
+    },
+    {
+      "source": "/docs/verifymc/download/",
+      "destination": "/archive/verifymc/download"
+    },
+    {
+      "source": "/docs/verifymc/download.html",
+      "destination": "/archive/verifymc/download"
+    },
+    {
+      "source": "/docs/verifymc/file/config",
+      "destination": "/archive/verifymc/file/config"
+    },
+    {
+      "source": "/docs/verifymc/file/config/",
+      "destination": "/archive/verifymc/file/config"
+    },
+    {
+      "source": "/docs/verifymc/file/config.html",
+      "destination": "/archive/verifymc/file/config"
+    },
+    {
+      "source": "/docs/verifymc/file/directory",
+      "destination": "/archive/verifymc/file/directory"
+    },
+    {
+      "source": "/docs/verifymc/file/directory/",
+      "destination": "/archive/verifymc/file/directory"
+    },
+    {
+      "source": "/docs/verifymc/file/directory.html",
+      "destination": "/archive/verifymc/file/directory"
+    },
+    {
+      "source": "/docs/verifymc/front/api",
+      "destination": "/archive/verifymc/front/api"
+    },
+    {
+      "source": "/docs/verifymc/front/api/",
+      "destination": "/archive/verifymc/front/api"
+    },
+    {
+      "source": "/docs/verifymc/front/api.html",
+      "destination": "/archive/verifymc/front/api"
+    },
+    {
+      "source": "/docs/verifymc/guide/default",
+      "destination": "/archive/verifymc/guide/default"
+    },
+    {
+      "source": "/docs/verifymc/guide/default/",
+      "destination": "/archive/verifymc/guide/default"
+    },
+    {
+      "source": "/docs/verifymc/guide/default.html",
+      "destination": "/archive/verifymc/guide/default"
+    },
+    {
+      "source": "/docs/verifymc/guide/",
+      "destination": "/archive/verifymc/guide"
+    },
+    {
+      "source": "/docs/verifymc/guide",
+      "destination": "/archive/verifymc/guide"
+    },
+    {
+      "source": "/docs/verifymc/guide/index",
+      "destination": "/archive/verifymc/guide"
+    },
+    {
+      "source": "/docs/verifymc/guide/index.html",
+      "destination": "/archive/verifymc/guide"
+    },
+    {
+      "source": "/docs/verifymc/",
+      "destination": "/archive/verifymc"
+    },
+    {
+      "source": "/docs/verifymc",
+      "destination": "/archive/verifymc"
+    },
+    {
+      "source": "/docs/verifymc/index",
+      "destination": "/archive/verifymc"
+    },
+    {
+      "source": "/docs/verifymc/index.html",
+      "destination": "/archive/verifymc"
+    },
+    {
+      "source": "/docs/verifymc/question/",
+      "destination": "/archive/verifymc/question"
+    },
+    {
+      "source": "/docs/verifymc/question",
+      "destination": "/archive/verifymc/question"
+    },
+    {
+      "source": "/docs/verifymc/question/index",
+      "destination": "/archive/verifymc/question"
+    },
+    {
+      "source": "/docs/verifymc/question/index.html",
+      "destination": "/archive/verifymc/question"
+    },
+    {
+      "source": "/en/docs/arcpass/commands/",
+      "destination": "/en/arcpass/commands"
+    },
+    {
+      "source": "/en/docs/arcpass/commands",
+      "destination": "/en/arcpass/commands"
+    },
+    {
+      "source": "/en/docs/arcpass/commands/index",
+      "destination": "/en/arcpass/commands"
+    },
+    {
+      "source": "/en/docs/arcpass/commands/index.html",
+      "destination": "/en/arcpass/commands"
+    },
+    {
+      "source": "/en/docs/arcpass/config/gui",
+      "destination": "/en/arcpass/config/gui"
+    },
+    {
+      "source": "/en/docs/arcpass/config/gui/",
+      "destination": "/en/arcpass/config/gui"
+    },
+    {
+      "source": "/en/docs/arcpass/config/gui.html",
+      "destination": "/en/arcpass/config/gui"
+    },
+    {
+      "source": "/en/docs/arcpass/config/",
+      "destination": "/en/arcpass/config"
+    },
+    {
+      "source": "/en/docs/arcpass/config",
+      "destination": "/en/arcpass/config"
+    },
+    {
+      "source": "/en/docs/arcpass/config/index",
+      "destination": "/en/arcpass/config"
+    },
+    {
+      "source": "/en/docs/arcpass/config/index.html",
+      "destination": "/en/arcpass/config"
+    },
+    {
+      "source": "/en/docs/arcpass/config/passes",
+      "destination": "/en/arcpass/config/passes"
+    },
+    {
+      "source": "/en/docs/arcpass/config/passes/",
+      "destination": "/en/arcpass/config/passes"
+    },
+    {
+      "source": "/en/docs/arcpass/config/passes.html",
+      "destination": "/en/arcpass/config/passes"
+    },
+    {
+      "source": "/en/docs/arcpass/config/quests",
+      "destination": "/en/arcpass/config/quests"
+    },
+    {
+      "source": "/en/docs/arcpass/config/quests/",
+      "destination": "/en/arcpass/config/quests"
+    },
+    {
+      "source": "/en/docs/arcpass/config/quests.html",
+      "destination": "/en/arcpass/config/quests"
+    },
+    {
+      "source": "/en/docs/arcpass/config/rewards",
+      "destination": "/en/arcpass/config/rewards"
+    },
+    {
+      "source": "/en/docs/arcpass/config/rewards/",
+      "destination": "/en/arcpass/config/rewards"
+    },
+    {
+      "source": "/en/docs/arcpass/config/rewards.html",
+      "destination": "/en/arcpass/config/rewards"
+    },
+    {
+      "source": "/en/docs/arcpass/config/seasons",
+      "destination": "/en/arcpass/config/seasons"
+    },
+    {
+      "source": "/en/docs/arcpass/config/seasons/",
+      "destination": "/en/arcpass/config/seasons"
+    },
+    {
+      "source": "/en/docs/arcpass/config/seasons.html",
+      "destination": "/en/arcpass/config/seasons"
+    },
+    {
+      "source": "/en/docs/arcpass/developer/events",
+      "destination": "/en/arcpass/developer/events"
+    },
+    {
+      "source": "/en/docs/arcpass/developer/events/",
+      "destination": "/en/arcpass/developer/events"
+    },
+    {
+      "source": "/en/docs/arcpass/developer/events.html",
+      "destination": "/en/arcpass/developer/events"
+    },
+    {
+      "source": "/en/docs/arcpass/developer/examples",
+      "destination": "/en/arcpass/developer/examples"
+    },
+    {
+      "source": "/en/docs/arcpass/developer/examples/",
+      "destination": "/en/arcpass/developer/examples"
+    },
+    {
+      "source": "/en/docs/arcpass/developer/examples.html",
+      "destination": "/en/arcpass/developer/examples"
+    },
+    {
+      "source": "/en/docs/arcpass/developer/getting-started",
+      "destination": "/en/arcpass/developer/getting-started"
+    },
+    {
+      "source": "/en/docs/arcpass/developer/getting-started/",
+      "destination": "/en/arcpass/developer/getting-started"
+    },
+    {
+      "source": "/en/docs/arcpass/developer/getting-started.html",
+      "destination": "/en/arcpass/developer/getting-started"
+    },
+    {
+      "source": "/en/docs/arcpass/developer/",
+      "destination": "/en/arcpass/developer"
+    },
+    {
+      "source": "/en/docs/arcpass/developer",
+      "destination": "/en/arcpass/developer"
+    },
+    {
+      "source": "/en/docs/arcpass/developer/index",
+      "destination": "/en/arcpass/developer"
+    },
+    {
+      "source": "/en/docs/arcpass/developer/index.html",
+      "destination": "/en/arcpass/developer"
+    },
+    {
+      "source": "/en/docs/arcpass/download",
+      "destination": "/en/arcpass/download"
+    },
+    {
+      "source": "/en/docs/arcpass/download/",
+      "destination": "/en/arcpass/download"
+    },
+    {
+      "source": "/en/docs/arcpass/download.html",
+      "destination": "/en/arcpass/download"
+    },
+    {
+      "source": "/en/docs/arcpass/faq/",
+      "destination": "/en/arcpass/faq"
+    },
+    {
+      "source": "/en/docs/arcpass/faq",
+      "destination": "/en/arcpass/faq"
+    },
+    {
+      "source": "/en/docs/arcpass/faq/index",
+      "destination": "/en/arcpass/faq"
+    },
+    {
+      "source": "/en/docs/arcpass/faq/index.html",
+      "destination": "/en/arcpass/faq"
+    },
+    {
+      "source": "/en/docs/arcpass/guide/",
+      "destination": "/en/arcpass/guide"
+    },
+    {
+      "source": "/en/docs/arcpass/guide",
+      "destination": "/en/arcpass/guide"
+    },
+    {
+      "source": "/en/docs/arcpass/guide/index",
+      "destination": "/en/arcpass/guide"
+    },
+    {
+      "source": "/en/docs/arcpass/guide/index.html",
+      "destination": "/en/arcpass/guide"
+    },
+    {
+      "source": "/en/docs/arcpass/",
+      "destination": "/en/arcpass"
+    },
+    {
+      "source": "/en/docs/arcpass",
+      "destination": "/en/arcpass"
+    },
+    {
+      "source": "/en/docs/arcpass/index",
+      "destination": "/en/arcpass"
+    },
+    {
+      "source": "/en/docs/arcpass/index.html",
+      "destination": "/en/arcpass"
+    },
+    {
+      "source": "/en/docs/arcpass/integrations/",
+      "destination": "/en/arcpass/integrations"
+    },
+    {
+      "source": "/en/docs/arcpass/integrations",
+      "destination": "/en/arcpass/integrations"
+    },
+    {
+      "source": "/en/docs/arcpass/integrations/index",
+      "destination": "/en/arcpass/integrations"
+    },
+    {
+      "source": "/en/docs/arcpass/integrations/index.html",
+      "destination": "/en/arcpass/integrations"
+    },
+    {
+      "source": "/en/docs/arcpass/placeholders/",
+      "destination": "/en/arcpass/placeholders"
+    },
+    {
+      "source": "/en/docs/arcpass/placeholders",
+      "destination": "/en/arcpass/placeholders"
+    },
+    {
+      "source": "/en/docs/arcpass/placeholders/index",
+      "destination": "/en/arcpass/placeholders"
+    },
+    {
+      "source": "/en/docs/arcpass/placeholders/index.html",
+      "destination": "/en/arcpass/placeholders"
+    },
+    {
+      "source": "/en/docs/arcpass/setup/installation",
+      "destination": "/en/arcpass/setup/installation"
+    },
+    {
+      "source": "/en/docs/arcpass/setup/installation/",
+      "destination": "/en/arcpass/setup/installation"
+    },
+    {
+      "source": "/en/docs/arcpass/setup/installation.html",
+      "destination": "/en/arcpass/setup/installation"
+    },
+    {
+      "source": "/en/docs/arcpass/setup/license",
+      "destination": "/en/arcpass/setup/license"
+    },
+    {
+      "source": "/en/docs/arcpass/setup/license/",
+      "destination": "/en/arcpass/setup/license"
+    },
+    {
+      "source": "/en/docs/arcpass/setup/license.html",
+      "destination": "/en/arcpass/setup/license"
+    },
+    {
+      "source": "/en/docs/arcpass/setup/requirements",
+      "destination": "/en/arcpass/setup/requirements"
+    },
+    {
+      "source": "/en/docs/arcpass/setup/requirements/",
+      "destination": "/en/arcpass/setup/requirements"
+    },
+    {
+      "source": "/en/docs/arcpass/setup/requirements.html",
+      "destination": "/en/arcpass/setup/requirements"
+    },
+    {
+      "source": "/en/docs/kitemarket/api",
+      "destination": "/en/kitemarket/api"
+    },
+    {
+      "source": "/en/docs/kitemarket/api/",
+      "destination": "/en/kitemarket/api"
+    },
+    {
+      "source": "/en/docs/kitemarket/api.html",
+      "destination": "/en/kitemarket/api"
+    },
+    {
+      "source": "/en/docs/kitemarket/commands",
+      "destination": "/en/kitemarket/commands"
+    },
+    {
+      "source": "/en/docs/kitemarket/commands/",
+      "destination": "/en/kitemarket/commands"
+    },
+    {
+      "source": "/en/docs/kitemarket/commands.html",
+      "destination": "/en/kitemarket/commands"
+    },
+    {
+      "source": "/en/docs/kitemarket/compatibility",
+      "destination": "/en/kitemarket/compatibility"
+    },
+    {
+      "source": "/en/docs/kitemarket/compatibility/",
+      "destination": "/en/kitemarket/compatibility"
+    },
+    {
+      "source": "/en/docs/kitemarket/compatibility.html",
+      "destination": "/en/kitemarket/compatibility"
+    },
+    {
+      "source": "/en/docs/kitemarket/dlc",
+      "destination": "/en/kitemarket/dlc"
+    },
+    {
+      "source": "/en/docs/kitemarket/dlc/",
+      "destination": "/en/kitemarket/dlc"
+    },
+    {
+      "source": "/en/docs/kitemarket/dlc.html",
+      "destination": "/en/kitemarket/dlc"
+    },
+    {
+      "source": "/en/docs/kitemarket/download",
+      "destination": "/en/kitemarket/download"
+    },
+    {
+      "source": "/en/docs/kitemarket/download/",
+      "destination": "/en/kitemarket/download"
+    },
+    {
+      "source": "/en/docs/kitemarket/download.html",
+      "destination": "/en/kitemarket/download"
+    },
+    {
+      "source": "/en/docs/kitemarket/guide",
+      "destination": "/en/kitemarket/guide"
+    },
+    {
+      "source": "/en/docs/kitemarket/guide/",
+      "destination": "/en/kitemarket/guide"
+    },
+    {
+      "source": "/en/docs/kitemarket/guide.html",
+      "destination": "/en/kitemarket/guide"
+    },
+    {
+      "source": "/en/docs/kitemarket/",
+      "destination": "/en/kitemarket"
+    },
+    {
+      "source": "/en/docs/kitemarket",
+      "destination": "/en/kitemarket"
+    },
+    {
+      "source": "/en/docs/kitemarket/index",
+      "destination": "/en/kitemarket"
+    },
+    {
+      "source": "/en/docs/kitemarket/index.html",
+      "destination": "/en/kitemarket"
+    },
+    {
+      "source": "/en/docs/kitemarket/license",
+      "destination": "/en/kitemarket/license"
+    },
+    {
+      "source": "/en/docs/kitemarket/license/",
+      "destination": "/en/kitemarket/license"
+    },
+    {
+      "source": "/en/docs/kitemarket/license.html",
+      "destination": "/en/kitemarket/license"
+    },
+    {
+      "source": "/en/docs/kitemarket/operations",
+      "destination": "/en/kitemarket/operations"
+    },
+    {
+      "source": "/en/docs/kitemarket/operations/",
+      "destination": "/en/kitemarket/operations"
+    },
+    {
+      "source": "/en/docs/kitemarket/operations.html",
+      "destination": "/en/kitemarket/operations"
+    },
+    {
+      "source": "/en/docs/kitemarket/trading",
+      "destination": "/en/kitemarket/trading"
+    },
+    {
+      "source": "/en/docs/kitemarket/trading/",
+      "destination": "/en/kitemarket/trading"
+    },
+    {
+      "source": "/en/docs/kitemarket/trading.html",
+      "destination": "/en/kitemarket/trading"
+    },
+    {
+      "source": "/en/docs/kitemarket/ui-development",
+      "destination": "/en/kitemarket/ui-development"
+    },
+    {
+      "source": "/en/docs/kitemarket/ui-development/",
+      "destination": "/en/kitemarket/ui-development"
+    },
+    {
+      "source": "/en/docs/kitemarket/ui-development.html",
+      "destination": "/en/kitemarket/ui-development"
+    },
+    {
+      "source": "/en/docs/kitemarket/wallet",
+      "destination": "/en/kitemarket/wallet"
+    },
+    {
+      "source": "/en/docs/kitemarket/wallet/",
+      "destination": "/en/kitemarket/wallet"
+    },
+    {
+      "source": "/en/docs/kitemarket/wallet.html",
+      "destination": "/en/kitemarket/wallet"
+    },
+    {
+      "source": "/en/docs/verifymc/command/",
+      "destination": "/en/archive/verifymc/command"
+    },
+    {
+      "source": "/en/docs/verifymc/command",
+      "destination": "/en/archive/verifymc/command"
+    },
+    {
+      "source": "/en/docs/verifymc/command/index",
+      "destination": "/en/archive/verifymc/command"
+    },
+    {
+      "source": "/en/docs/verifymc/command/index.html",
+      "destination": "/en/archive/verifymc/command"
+    },
+    {
+      "source": "/en/docs/verifymc/download",
+      "destination": "/en/archive/verifymc/download"
+    },
+    {
+      "source": "/en/docs/verifymc/download/",
+      "destination": "/en/archive/verifymc/download"
+    },
+    {
+      "source": "/en/docs/verifymc/download.html",
+      "destination": "/en/archive/verifymc/download"
+    },
+    {
+      "source": "/en/docs/verifymc/file/config",
+      "destination": "/en/archive/verifymc/file/config"
+    },
+    {
+      "source": "/en/docs/verifymc/file/config/",
+      "destination": "/en/archive/verifymc/file/config"
+    },
+    {
+      "source": "/en/docs/verifymc/file/config.html",
+      "destination": "/en/archive/verifymc/file/config"
+    },
+    {
+      "source": "/en/docs/verifymc/file/directory",
+      "destination": "/en/archive/verifymc/file/directory"
+    },
+    {
+      "source": "/en/docs/verifymc/file/directory/",
+      "destination": "/en/archive/verifymc/file/directory"
+    },
+    {
+      "source": "/en/docs/verifymc/file/directory.html",
+      "destination": "/en/archive/verifymc/file/directory"
+    },
+    {
+      "source": "/en/docs/verifymc/front/api",
+      "destination": "/en/archive/verifymc/front/api"
+    },
+    {
+      "source": "/en/docs/verifymc/front/api/",
+      "destination": "/en/archive/verifymc/front/api"
+    },
+    {
+      "source": "/en/docs/verifymc/front/api.html",
+      "destination": "/en/archive/verifymc/front/api"
+    },
+    {
+      "source": "/en/docs/verifymc/guide/default",
+      "destination": "/en/archive/verifymc/guide/default"
+    },
+    {
+      "source": "/en/docs/verifymc/guide/default/",
+      "destination": "/en/archive/verifymc/guide/default"
+    },
+    {
+      "source": "/en/docs/verifymc/guide/default.html",
+      "destination": "/en/archive/verifymc/guide/default"
+    },
+    {
+      "source": "/en/docs/verifymc/guide/",
+      "destination": "/en/archive/verifymc/guide"
+    },
+    {
+      "source": "/en/docs/verifymc/guide",
+      "destination": "/en/archive/verifymc/guide"
+    },
+    {
+      "source": "/en/docs/verifymc/guide/index",
+      "destination": "/en/archive/verifymc/guide"
+    },
+    {
+      "source": "/en/docs/verifymc/guide/index.html",
+      "destination": "/en/archive/verifymc/guide"
+    },
+    {
+      "source": "/en/docs/verifymc/",
+      "destination": "/en/archive/verifymc"
+    },
+    {
+      "source": "/en/docs/verifymc",
+      "destination": "/en/archive/verifymc"
+    },
+    {
+      "source": "/en/docs/verifymc/index",
+      "destination": "/en/archive/verifymc"
+    },
+    {
+      "source": "/en/docs/verifymc/index.html",
+      "destination": "/en/archive/verifymc"
+    },
+    {
+      "source": "/en/docs/verifymc/question/",
+      "destination": "/en/archive/verifymc/question"
+    },
+    {
+      "source": "/en/docs/verifymc/question",
+      "destination": "/en/archive/verifymc/question"
+    },
+    {
+      "source": "/en/docs/verifymc/question/index",
+      "destination": "/en/archive/verifymc/question"
+    },
+    {
+      "source": "/en/docs/verifymc/question/index.html",
+      "destination": "/en/archive/verifymc/question"
+    },
+    {
+      "source": "/en/index",
+      "destination": "/en"
+    },
+    {
+      "source": "/en/index.html",
+      "destination": "/en"
+    },
+    {
+      "source": "/index",
+      "destination": "/"
+    },
+    {
+      "source": "/index.html",
+      "destination": "/"
+    }
+  ]
 }

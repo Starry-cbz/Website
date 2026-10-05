@@ -1,0 +1,86 @@
+---
+title: "KiteMarket - Minecraft Trading Market"
+description: "Advanced buy orders, fixed-price sales, auctions and shared wallets. Complete vanilla GUI, ItemsAdder compatibility and public SDKs. USD 9.99 for one market network with unlimited nodes."
+mode: "custom"
+canonical: "https://www.kitemc.com/en/kitemarket"
+"og:image": "https://www.kitemc.com/images/kitemarket/kitemarket-icon-512.png"
+---
+
+import { LandingHero, ActionLinks, LandingFooter } from "/snippets/landing.jsx";
+import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
+
+<div className="km-landing">
+  <LandingHero
+    title="KiteMarket"
+    subtitle="Clear trades. A welcoming market."
+    description="Advanced buy orders, fixed-price sales and public auctions. Show players what they trade and where their money and items go. One market network, unlimited nodes."
+    image="/images/kitemarket/kitemarket-icon.svg"
+    eyebrow="A MARKET FOR YOUR PLAYERS"
+    links={[
+      { label: "Getting started", href: "/en/kitemarket/guide" },
+      { label: "Download", href: "/en/kitemarket/download" },
+      { label: "Buy a license", href: "https://license.kitemc.com/en/products/kitemarket" }
+    ]}
+  />
+
+  <section className="km-section">
+    <Columns cols={3}>
+      <Card title="Advanced buy orders" icon="cart-shopping">Reserve the full budget and match materials, enchantments, durability, name, lore or an exact sample. Multiple players can fulfill portions.</Card>
+      <Card title="Fixed-price sales" icon="box">Escrow actual items, sell at a unit price and set a minimum purchase quantity. Purchased items go to claims.</Card>
+      <Card title="Public auctions" icon="gavel">Manual bids reserve the highest valid offer. Outbid funds release immediately and late valid bids extend the deadline.</Card>
+      <Card title="Configurable vanilla GUI" icon="sliders">Customize all 35 pages' titles, functional icons, lore, positions and backgrounds in files. No resource pack needed.</Card>
+      <Card title="A shared market network" icon="globe">Same-version nodes share wallets, orders and claim assets, with no node-count limit.</Card>
+      <Card title="Public developer interfaces" icon="code">Java 11 / MIT query and UI SDKs for your own ItemsAdder themes and independent integrations.</Card>
+    </Columns>
+  </section>
+
+  <section className="km-section">
+    <h2 id="understand-the-trade-before-confirming">Understand the trade before confirming</h2>
+    <p>Buying, selling, fulfillment and bidding share the same flows. Review quantity, total, tax and net income before confirming. Fulfillment previews show which actual items leave your inventory and which stay. Income goes to wallets and items go to claims; a full inventory does not drop or discard assets.</p>
+    <p>Published prices, conditions and fees are fixed. Administrative intervention needs a recorded reason. Uncertain results enter review with a queryable operation ID. <a href="/en/kitemarket/trading">Read trading and item conditions</a>.</p>
+    <ScreenshotPlaceholder image="/images/kitemarket/screenshot-market.png" title="Market listings" description="Real gameplay screenshot coming later: search, filters, actual items and pagination." lang="en" />
+  </section>
+
+  <section className="km-section">
+    <h2 id="ready-for-vanilla-clients-made-for-your-own-design">Ready for vanilla clients, made for your own design</h2>
+    <p>The complete vanilla GUI needs no resource pack. A 54-slot layout, 36 listing slots, guided publishing and amount buttons explain each step. Home separates sales, fulfillment and auctions, with personal activity, claims, wallet and my orders in its corners. Actual asset and review reminders report unavailable queries clearly.</p>
+    <p>Configure titles, functional item icons, lore, positions and backgrounds for all 35 pages with bilingual text and existing home-layout support. Invalid reloads retain the previous valid configuration. There is no in-game appearance editor. Actual items retain their names, enchantments and lore; appearance configuration cannot disguise trade items.</p>
+    <ScreenshotPlaceholder image="/images/kitemarket/screenshot-home.png" title="Market home" description="Real gameplay screenshot coming later: trading entrances, personal activity and asset reminders." lang="en" />
+    <p>ItemsAdder v4 compatibility is a base capability. Install your own or a third-party theme to use a resource-pack interface. Missing resources explain the reason and fall back to vanilla; switching preserves drafts. Developers may create configuration themes or Java renderers for private use, free distribution or independent sale without an extra KiteMC theme license. IA theme resources are not bundled.</p>
+    <Columns cols={2}>
+      <Card title="ItemsAdder integration" icon="puzzle-piece" href="/en/kitemarket/dlc">Install your own theme, register resources and check readiness.</Card>
+      <Card title="UI SDK & theme development" icon="code" href="/en/kitemarket/ui-development">Configuration themes, Java renderers and actual market-page examples.</Card>
+    </Columns>
+  </section>
+
+  <section className="km-section">
+    <h2 id="cny-68-usd-9-99-for-the-complete-product">CNY 68 / USD 9.99 for the complete product</h2>
+    <p>One license binds to one independent market network with no node-count limit. Separate purchases create separate licenses instead of merging networks. A one-time purchase includes base-plugin updates and issue support while maintained; perpetual maintenance service is not promised. Third-party economy plugins, ItemsAdder and resource packs are not included.</p>
+    <p>Query SDKs and examples have independent MIT licenses; the core remains closed source. <a href="/en/kitemarket/license">Read network licensing</a>.</p>
+    <ActionLinks links={[
+      { label: "Buy a license", href: "https://license.kitemc.com/en/products/kitemarket" },
+      { label: "Downloads & versions", href: "/en/kitemarket/download" },
+      { label: "GitHub repository", href: "https://github.com/KiteMC/KiteMarket" }
+    ]} />
+  </section>
+
+  <section className="km-section">
+    <h2 id="shared-accounting-clear-boundaries">Shared accounting, clear boundaries</h2>
+    <p>MySQL 8 or MariaDB 10.11 is the authoritative ledger. Each currency uses integer minor units with fixed precision. Vault, PlayerPoints, CoinsEngine and ExcellentEconomy have separate transfer adapters. Existing wallet funds remain usable when a gateway is unavailable. Uncertain external results require review instead of blindly repeating a debit or delivery.</p>
+    <p>The base target begins at Minecraft 1.16.5 with three runtime distributions. Nodes sharing a network use the same Minecraft version. See <a href="/en/kitemarket/compatibility">compatibility</a> for target coverage, actual tests and startup-only checks. V1 does not include barter, a web market, mixed-version networks or semantic integration with third-party item IDs. Exact samples still obey special-item admission and fidelity checks.</p>
+    <p>Standard bStats basic metrics (ID 34434) are enabled by default and can be disabled in the plugin or global bStats configuration. No custom player, transaction, license or database metrics are added.</p>
+  </section>
+
+  <section className="km-section">
+    <h2 id="get-started">Get started</h2>
+    <Columns cols={3}>
+      <Card title="Installation & configuration" icon="rocket" href="/en/kitemarket/guide">Choose a runtime, connect a database and configure currencies.</Card>
+      <Card title="Trading & item conditions" icon="cart-shopping" href="/en/kitemarket/trading">Three trade types and advanced matching rules.</Card>
+      <Card title="Shared wallets" icon="wallet" href="/en/kitemarket/wallet">Balances, transfers, reservations and income.</Card>
+      <Card title="Commands & permissions" icon="terminal" href="/en/kitemarket/commands">Player commands, administration and read-only audit.</Card>
+      <Card title="Market API" icon="code" href="/en/kitemarket/api">Async queries, immutable data and trade notifications.</Card>
+      <Card title="Recovery & upgrades" icon="shield" href="/en/kitemarket/operations">Review operations, back up assets and upgrade safely.</Card>
+    </Columns>
+  </section>
+  <LandingFooter lang="en" />
+</div>

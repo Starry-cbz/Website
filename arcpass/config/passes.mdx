@@ -1,0 +1,323 @@
+---
+title: "通行证配置"
+canonical: "https://www.kitemc.com/arcpass/config/passes"
+---
+
+<span id="通行证配置" />
+
+通行证是 ArcPass 的核心系统，定义了玩家的等级进度和奖励路线。
+
+## 文件位置 {#文件位置}
+
+```
+plugins/ArcPass/passes/
+├── default.yml     # 默认通行证
+├── combat.yml      # 战斗通行证（示例）
+├── builder.yml     # 建造通行证（示例）
+└── ...
+```
+
+## 基本结构 {#基本结构}
+
+```yaml
+# passes/default.yml
+
+# 通行证显示名称
+display-name: "&6&l赛季通行证"
+
+# 通行证描述
+description: "&7完成任务，获取丰厚奖励！"
+
+# 是否为默认通行证（玩家加入时自动分配）
+default: true
+
+# 最大等级
+max-level: 100
+
+# 经验曲线设置
+experience:
+  base: 100        # 等级1的基础经验
+  multiplier: 1.08 # 每级增加8%
+```
+
+## 档位配置 {#档位配置}
+
+档位（Tier）定义不同的奖励路线：
+
+```yaml
+tiers:
+  # 免费档位 - 所有玩家可用
+  free:
+    display-name: "&f免费版"
+    description: "&7免费玩家可领取的基础奖励"
+    free: true
+    priority: 0
+    icon: PAPER                # 支持: 原版材料名, "itemsadder:命名空间:ID", "oraxen:ID"
+    # custom-model-data: 0    # 可选 CustomModelData (v1.1.5+)
+
+  # 高级档位 - 付费升级
+  premium:
+    display-name: "&6高级版"
+    description: "&e解锁更多奖励和专属内容"
+    price: 980.0
+    # 货币类型: vault (Vault/CMI 经济) 或 points (PlayerPoints/CoinsEngine/TokenManager 点卷)
+    currency-type: vault
+    free: false
+    priority: 1
+    icon: GOLD_INGOT
+    permission: null
+
+  # 豪华档位 - 最高档位
+  deluxe:
+    display-name: "&d豪华版"
+    description: "&5尊享全部奖励与独家特权"
+    price: 1980.0
+    currency-type: vault
+    free: false
+    priority: 2
+    icon: DIAMOND
+    permission: null
+```
+
+## 等级奖励 {#等级奖励}
+
+每个等级可以配置不同档位的奖励。奖励 ID 格式为 `类型_值_数量`：
+
+```yaml
+# 奖励ID格式: 类型_值_数量
+# 类型: item（物品）, economy（经济）, exp（经验）, permission（权限）, title（称号）, command（命令）
+
+levels:
+  # === 等级 1: 新手奖励 ===
+  1:
+    rewards:
+      free:
+        - "item_bread_16"
+        - "economy_50"
+      premium:
+        - "item_bread_32"
+        - "economy_100"
+        - "item_iron_pickaxe_1"
+      deluxe:
+        - "item_bread_64"
+        - "economy_200"
+        - "item_iron_pickaxe_1"
+        - "item_iron_sword_1"
+
+  # === 等级 10: 第一个里程碑 ===
+  10:
+    rewards:
+      free:
+        - "economy_200"
+        - "item_iron_ingot_8"
+        - "title_novice"
+      premium:
+        - "economy_500"
+        - "item_iron_ingot_16"
+        - "item_iron_helmet_1"
+        - "title_adventurer"
+      deluxe:
+        - "economy_1000"
+        - "item_iron_ingot_32"
+        - "item_iron_helmet_1"
+        - "item_iron_chestplate_1"
+        - "title_adventurer"
+        - "exp_500"
+
+  # === 等级 50: 中途里程碑 ===
+  50:
+    rewards:
+      free:
+        - "economy_1000"
+        - "item_diamond_5"
+        - "title_veteran"
+      premium:
+        - "economy_2500"
+        - "item_diamond_10"
+        - "item_diamond_helmet_1"
+        - "item_diamond_chestplate_1"
+        - "title_champion"
+        - "permission_arcpass.vip.silver"
+      deluxe:
+        - "economy_5000"
+        - "item_diamond_20"
+        - "item_diamond_helmet_1"
+        - "item_diamond_chestplate_1"
+        - "item_diamond_leggings_1"
+        - "item_diamond_boots_1"
+        - "title_legend"
+        - "permission_arcpass.vip.silver"
+        - "cosmetic_particle_flame"
+        - "exp_2000"
+
+  # === 等级 100: 最终里程碑 ===
+  100:
+    rewards:
+      free:
+        - "economy_5000"
+        - "item_diamond_block_2"
+        - "item_netherite_ingot_1"
+        - "title_season_master"
+      premium:
+        - "economy_15000"
+        - "item_diamond_block_4"
+        - "item_netherite_ingot_2"
+        - "item_netherite_sword_1"
+        - "item_netherite_pickaxe_1"
+        - "title_season_champion"
+        - "permission_arcpass.vip.platinum"
+        - "cosmetic_particle_totem"
+      deluxe:
+        - "economy_30000"
+        - "item_diamond_block_8"
+        - "item_netherite_ingot_4"
+        - "item_netherite_sword_1"
+        - "item_netherite_pickaxe_1"
+        - "item_netherite_axe_1"
+        - "item_netherite_helmet_1"
+        - "item_netherite_chestplate_1"
+        - "item_netherite_leggings_1"
+        - "item_netherite_boots_1"
+        - "item_elytra_1"
+        - "title_season_legend"
+        - "permission_arcpass.vip.platinum"
+        - "permission_arcpass.fly"
+        - "cosmetic_particle_totem"
+        - "cosmetic_particle_end_rod"
+        - "exp_10000"
+```
+
+## 经验获取 {#经验获取}
+
+### 任务经验 {#任务经验}
+
+任务完成时自动获得经验，在任务配置中设置：
+
+```yaml
+# quests/daily/mining.yml
+experience-reward: 50
+```
+
+### 手动给予 {#手动给予}
+
+管理员可以手动给予经验：
+
+```
+/arcpass admin give <玩家> exp <数量>
+```
+
+### API 给予 {#api-给予}
+
+通过 API 给予经验：
+
+```java
+ArcPassAPI api = ArcPassProvider.get();
+api.addExperience(player.getUniqueId(), 100);
+```
+
+## 高级配置 {#高级配置}
+
+### 经验公式 {#经验公式}
+
+使用公式计算每级所需经验：
+
+```yaml
+experience-curve:
+  type: formula
+  # 公式：base * (level ^ exponent) + flat
+  base: 100
+  exponent: 1.2
+  flat: 0
+```
+
+### 等级奖励模板 {#等级奖励模板}
+
+使用模板简化重复配置：
+
+```yaml
+level-templates:
+  every-5:
+    levels: [5, 10, 15, 20, 25, 30, ...]
+    free:
+      - reward_bonus_exp
+    premium:
+      - reward_bonus_premium
+
+  every-10:
+    levels: [10, 20, 30, 40, 50, ...]
+    free:
+      - reward_milestone_free
+    premium:
+      - reward_milestone_premium
+```
+
+### 条件档位 {#条件档位}
+
+设置档位解锁条件：
+
+```yaml
+tiers:
+  veteran:
+    display-name: "&e老兵通行证"
+    free: false
+    price: 500
+    # 需要完成上赛季
+    conditions:
+      - type: previous_season_completed
+        value: true
+      # 或达到指定等级
+      - type: previous_season_level
+        value: 50
+```
+
+## 示例：战斗通行证 {#示例-战斗通行证}
+
+```yaml
+# passes/combat.yml
+display-name: "&c战斗通行证"
+description:
+  - "&7专为 PVP 玩家设计"
+  - "&7击杀敌人获取经验"
+icon: DIAMOND_SWORD
+default: false
+max-level: 50
+
+experience-curve:
+  base: 200
+  increment: 100
+
+tiers:
+  free:
+    display-name: "&f战士之路"
+    icon: IRON_SWORD
+    free: true
+
+  elite:
+    display-name: "&c精英战士"
+    icon: DIAMOND_SWORD
+    free: false
+    price: 500
+
+levels:
+  1:
+    free: [reward_iron_sword]
+    elite: [reward_diamond_sword]
+  10:
+    free: [reward_iron_armor]
+    elite: [reward_diamond_armor, reward_title_warrior]
+  # ...
+  50:
+    free: [reward_combat_final_free]
+    elite: [reward_combat_final_elite, reward_title_champion]
+```
+
+## 下一步 {#下一步}
+
+<Columns cols={2}>
+  <Card title="配置奖励" icon="gift" href="/arcpass/config/rewards">
+  设置奖励类型和数值
+</Card>
+  <Card title="配置任务" icon="clipboard-list" href="/arcpass/config/quests">
+  设置任务目标和条件
+</Card>
+</Columns>

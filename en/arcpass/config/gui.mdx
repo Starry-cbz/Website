@@ -1,0 +1,332 @@
+---
+title: "GUI Configuration"
+canonical: "https://www.kitemc.com/en/arcpass/config/gui"
+---
+
+<span id="gui-configuration" />
+
+ArcPass provides a highly customizable GUI system with custom layouts, items, and interactions.
+
+## File Location {#file-location}
+
+```
+plugins/ArcPass/gui/
+├── main-menu.yml   # Main menu
+├── quests.yml      # Quests interface
+├── rewards.yml     # Rewards interface
+├── admin.yml       # Admin panel
+└── shop.yml        # Shop interface
+```
+
+## Basic Structure {#basic-structure}
+
+```yaml
+# GUI title
+title: "&6&lArcPass Battle Pass"
+
+# GUI size (54 = 6 rows)
+size: 54
+
+# Border fill
+border:
+  enabled: true
+  material: GRAY_STAINED_GLASS_PANE
+  name: " "
+
+# Static items (fixed positions)
+items:
+  # Player info - top center
+  player-info:
+    slot: 4
+    material: PLAYER_HEAD
+    name: "&6%player_name%'s Battle Pass"
+    lore:
+      - "&7Current Level: &e%level%"
+      - "&7Total EXP: &e%total_exp%"
+      - "&7Current Progress: &e%current_exp%&7/&e%next_level_exp%"
+      - ""
+      - "&7Unlocked Tiers: &e%unlocked_tiers%"
+    skull-owner: "%player_name%"
+```
+
+## Hex RGB Colors v1.9.2 {#hex-rgb-colors}
+
+GUI titles, item names, lore, plugin messages, and title text support hex RGB colors. Both formats below work alongside existing color codes:
+
+```yaml
+title: "#12ABEFArcPass Battle Pass"
+name: "&#FF8800Season Reward"
+lore:
+  - "&7Legacy colors and #55FFAAhex colors&7 can be combined"
+```
+
+## Slot Numbers {#slot-numbers}
+
+Slots are numbered from 0, row by row:
+
+```
+Row 1:  0  1  2  3  4  5  6  7  8
+Row 2:  9 10 11 12 13 14 15 16 17
+Row 3: 18 19 20 21 22 23 24 25 26
+Row 4: 27 28 29 30 31 32 33 34 35
+Row 5: 36 37 38 39 40 41 42 43 44
+Row 6: 45 46 47 48 49 50 51 52 53
+```
+
+Multiple slots:
+
+```yaml
+items:
+  border:
+    slots: [0, 1, 2, 3, 4, 5, 6, 7, 8, 45, 46, 47, 48, 49, 50, 51, 52, 53]
+    material: BLACK_STAINED_GLASS_PANE
+    name: " "
+```
+
+## Click Actions {#click-actions}
+
+Actions are configured using the `action` field with the following types:
+
+| Type | Description | Example |
+|------|-------------|---------|
+| `CLOSE` | Close GUI | `type: CLOSE` |
+| `OPEN_GUI` | Open another GUI | `type: OPEN_GUI` + `gui: quests` |
+| `COMMAND` | Execute command | `type: COMMAND` + `command: "arcpass help"` |
+| `INPUT` | Request player input | `type: INPUT` + `prompt:` + `command:` |
+
+```yaml
+items:
+  # Quests button
+  quests:
+    slot: 29
+    material: BOOK
+    name: "&eQuest List"
+    lore:
+      - "&7Complete quests to earn EXP"
+      - ""
+      - "&7Daily Quests: &e%daily_quests_count%"
+      - "&7Weekly Quests: &e%weekly_quests_count%"
+      - ""
+      - "&aClick to view"
+    action:
+      type: OPEN_GUI
+      gui: quests
+
+  # Close button
+  close:
+    slot: 45
+    material: BARRIER
+    name: "&cClose"
+    lore:
+      - "&7Click to close menu"
+    action:
+      type: CLOSE
+```
+
+## Placeholders {#placeholders}
+
+| Placeholder | Description |
+|-------------|-------------|
+| `%player_name%` | Player name |
+| `%level%` | Current level |
+| `%exp%` | Current XP |
+| `%required_exp%` | XP needed to level |
+| `%total_exp%` | Total XP |
+| `%progress%` | Progress percentage |
+| `%progress_bar%` | Progress bar |
+| `%season_name%` | Season name |
+| `%tiers%` | Owned tiers |
+
+PlaceholderAPI variables also work if installed.
+
+## Screenshots {#screenshots}
+
+<Columns cols={2}>
+  <Frame caption="Main Menu">
+    <img src="/images/arcpass/screenshot-main-menu.png" alt="Main Menu" />
+  </Frame>
+  <Frame caption="Quest List">
+    <img src="/images/arcpass/screenshot-quest-list.png" alt="Quest List" />
+  </Frame>
+  <Frame caption="Reward Track">
+    <img src="/images/arcpass/screenshot-reward-track.png" alt="Reward Track" />
+  </Frame>
+  <Frame caption="Admin Panel">
+    <img src="/images/arcpass/screenshot-admin-panel.png" alt="Admin Panel" />
+  </Frame>
+</Columns>
+
+## Main Menu Example {#main-menu-example}
+
+```yaml
+# gui/main-menu.yml
+
+title: "&6&lArcPass Battle Pass"
+size: 54  # 6 rows
+
+# Border fill
+border:
+  enabled: true
+  material: GRAY_STAINED_GLASS_PANE
+  name: " "
+
+# Static items (fixed positions)
+items:
+  # Player info - top center
+  player-info:
+    slot: 4
+    material: PLAYER_HEAD
+    name: "&6%player_name%'s Battle Pass"
+    lore:
+      - "&7Current Level: &e%level%"
+      - "&7Total EXP: &e%total_exp%"
+      - "&7Current Progress: &e%current_exp%&7/&e%next_level_exp%"
+      - ""
+      - "&7Unlocked Tiers: &e%unlocked_tiers%"
+    skull-owner: "%player_name%"
+
+  # Quests button
+  quests:
+    slot: 29
+    material: BOOK
+    name: "&eQuest List"
+    lore:
+      - "&7Complete quests to earn EXP"
+      - ""
+      - "&7Daily Quests: &e%daily_quests_count%"
+      - "&7Weekly Quests: &e%weekly_quests_count%"
+      - ""
+      - "&aClick to view"
+    action:
+      type: OPEN_GUI
+      gui: quests
+
+  # Rewards button
+  rewards:
+    slot: 31
+    material: CHEST
+    name: "&6Reward Track"
+    lore:
+      - "&7View and claim level rewards"
+      - ""
+      - "&7Claimable Rewards: &e%claimable_rewards%"
+      - ""
+      - "&aClick to view"
+    action:
+      type: OPEN_GUI
+      gui: rewards
+
+  # Shop/Upgrade button
+  shop:
+    slot: 33
+    material: GOLD_INGOT
+    name: "&eBuy Pass"
+    lore:
+      - "&7Upgrade your pass tier"
+      - ""
+      - "&7Current Tier: &e%current_tier%"
+      - ""
+      - "&aClick to purchase"
+    action:
+      type: OPEN_GUI
+      gui: shop
+
+  # Season info
+  season-info:
+    slot: 49
+    material: CLOCK
+    name: "&b%season_name%"
+    lore:
+      - "&7Status: %season_status%"
+      - "&7Time Left: &e%season_time_remaining%"
+    condition:
+      type: SEASON_ACTIVE
+      true-material: CLOCK
+      false-material: BARRIER
+      false-name: "&7No Season"
+      false-lore:
+        - "&cNo active season"
+
+  # Close button
+  close:
+    slot: 45
+    material: BARRIER
+    name: "&cClose"
+    lore:
+      - "&7Click to close menu"
+    action:
+      type: CLOSE
+
+# Progress bar configuration
+progress-bar:
+  enabled: true
+  start-slot: 19
+  end-slot: 25
+  filled:
+    material: LIME_STAINED_GLASS_PANE
+    name: "&aProgress"
+  empty:
+    material: WHITE_STAINED_GLASS_PANE
+    name: "&7Progress"
+  lore:
+    - "&7Level %level% Progress"
+    - "&e%current_exp% &7/ &e%next_level_exp% &7EXP"
+    - "&7(%progress_percent%%)"
+```
+
+## Dynamic Content {#dynamic-content}
+
+### Conditional Display {#conditional-display}
+
+```yaml
+items:
+  premium_info:
+    slot: 31
+    condition: "has_tier:premium"
+    material: GOLD_BLOCK
+    name: "&6Premium Member"
+    lore:
+      - "&aYou own the premium pass!"
+
+  premium_buy:
+    slot: 31
+    condition: "!has_tier:premium"
+    material: GOLD_INGOT
+    name: "&6Buy Premium Pass"
+    lore:
+      - "&7Click to purchase"
+    action: "buy_tier:premium"
+```
+
+### Dynamic Item Amount {#dynamic-item-amount}
+
+```yaml
+items:
+  exp_display:
+    slot: 13
+    material: EXPERIENCE_BOTTLE
+    amount: "%level%"
+    name: "&aExperience"
+```
+
+## Sound Effects {#sound-effects}
+
+```yaml
+sounds:
+  open: "BLOCK_CHEST_OPEN"
+  click: "UI_BUTTON_CLICK"
+  claim: "ENTITY_PLAYER_LEVELUP"
+  purchase: "BLOCK_NOTE_BLOCK_PLING"
+  error: "ENTITY_VILLAGER_NO"
+```
+
+## Next Steps {#next-steps}
+
+<Columns cols={2}>
+  <Card title="View Commands" icon="terminal" href="/en/arcpass/commands">
+  Commands and permissions
+</Card>
+  <Card title="PlaceholderAPI Variables" icon="code" href="/en/arcpass/placeholders">
+  Available placeholders
+</Card>
+</Columns>
