@@ -1,0 +1,127 @@
+---
+title: "界面与布局"
+description: "配置呈现后端、首页布局、玩家界面偏好与资源包身份。"
+canonical: "https://www.kitemc.com/kitemarket/configuration/gui"
+---
+
+默认原版采用暖色54槽界面：分类首页、顶部工具区、中间36格列表、底部翻页与返回；无需资源包。
+
+安装流程见[安装与配置](/kitemarket/guide)。标题、图标、Lore 和位置个性化见[原版菜单个性化](/kitemarket/configuration/menus)。
+
+## 常用设置
+
+```yaml
+gui:
+  renderer: auto
+  auto-order: [itemsadder, vanilla]
+  default-themes: {}
+  allow-player-switch: true
+  home-layout: auto
+  sounds:
+    enabled: true
+  vanilla:
+    layout: auto
+  itemsadder:
+    enabled: true
+    diagnostics: false
+    pack-sha1: ""
+    pack-id: ""
+```
+
+当前呈现选项为 `auto/vanilla/itemsadder`。
+
+`auto-order` 决定自动尝试顺序，默认 ItemsAdder→原版；`default-themes` 指定后端默认主题。
+
+布尔字段使用 YAML 的 `true/false`，不能写成字符串。音效可通过 `gui.sounds.enabled: false` 关闭。
+
+## 通用槽位布局
+
+`gui.vanilla.layout: auto|warm|legacy` 控制通用槽位映射。
+
+`auto` 在旧首页入口位置偏离默认或页面配置 `slots`／`buttons.slot` 时保留兼容布局；只修改标题、图标、名称、Lore 或背景不改变这项映射。
+
+显式 `warm` 与自定义位置冲突会被拒绝。
+
+## 首页布局
+
+`gui.home-layout` 单独选择首页内容：
+
+| 值 | 首页行为 |
+|---|---|
+| `auto` | 使用暖布局、没有自定义 `gui.home-slots` 且没有 `menus.home` 时采用紧凑分类首页；已有首页个性化配置则保留旧首页 |
+| `compact` | 明确采用紧凑分类首页；旧首页按钮配置需改用下表的原始槽位 |
+| `legacy` | 使用旧首页入口及 `gui.home-slots`，适合保留已有首页配置 |
+
+即使 `menus.home` 只修改标题或 Lore，`home-layout: auto` 也会保留旧首页。
+
+两项布局设置作用不同：`vanilla.layout` 管理通用位置映射，`home-layout` 管理首页入口。
+
+## 紧凑首页 {#紧凑首页}
+
+默认紧凑首页的原始槽位与物理槽位相同：
+
+| 槽位 | 内容 |
+|---|---|
+| `0` | 玩家头像“我的集市”：界面偏好、自己的待核对操作、历史与按权限显示的管理入口 |
+| `4` | 问候与使用说明，仅作提示 |
+| `8` | 领取箱及真实待领提醒 |
+| `20` / `22` / `24` | 一口价市场／收购供货市场／竞拍市场 |
+| `31` | 发布 / 编辑草稿，直接进入发布向导 |
+| `45` | 钱包 |
+| `53` | 我的挂单及发布入口提示 |
+
+挂单、待领和待核对提醒使用真实查询；查询失败显示暂不可用。
+
+“我的集市”使用独立 `profile` 页面，返回首页和界面切换保留当前发布草稿。
+
+### 发布入口
+
+首页 `31` 号槽位的“发布 / 编辑草稿”按钮直接打开向导，继续编辑当前草稿。
+
+各类市场及“我的挂单”列表顶部中央也保留该入口，默认原始槽位为 `52`，新版布局物理槽位为 `4`，页码显示在 Lore 中。
+
+发布后的订单需要更改时，先撤单再重新发布，不能直接修改已发布的价格和条件。
+
+## 商品说明与数量
+
+默认商品说明分为商品信息和购买／供货／竞拍提示，保留原名称、附魔及 Lore。
+
+数量显示单独数值，详情将总量与已成交分开；拍卖显示整个标的数量。
+
+角标仅在物品原生堆叠允许范围内（最多99）显示真实数量，超出时使用单图标，精确数量始终以 Lore 为准，不改变真实物品数量。
+
+### 日期与倒计时
+
+上架和到期显示日期，中文为 `yyyy年MM月dd日 HH:mm:ss`，英文为 `yyyy-MM-dd HH:mm:ss`，使用服务器时区。
+
+剩余时间自动更新：至少一小时显示整小时，至少一分钟显示整分钟，不足一分钟显示秒；到期提示不等于结算已经完成。
+
+## 玩家界面偏好
+
+玩家从头像进入个人页选择界面，也可用 `/km ui` 打开设置，或选择 `/km ui <auto|vanilla|itemsadder> [theme-id]`。
+
+这是选择后端和已安装主题，不是样式编辑器；服主的样式个性化只通过 `config.yml` 完成，不提供游戏内样式编辑功能。
+
+偏好保存在同网络共享数据库中，没有记录为 `AUTO`；`allow-player-switch: false` 禁用选择并采用服务器偏好。
+
+默认不指定 IA 主题；安装自己的主题后，可将其 ID 填入 `gui.default-themes.itemsadder`。
+
+实际资源包的 SHA-1 和 UUID 登记后，玩家加载指定包成功才可启用；完整步骤见[ItemsAdder 接入](/kitemarket/dlc)。
+
+## ItemsAdder 与资源包身份
+
+IA 运行插件与 ProtocolLib 必须另行合法安装；已有实测组合及摘要见[兼容说明](/kitemarket/compatibility)。
+
+按实际 IA 指南安装主题，等待 `/iareload` 完成，再执行 `/iazip`。
+
+可临时设置 `gui.itemsadder.diagnostics: true` 并 `/km reload`，从服务端 `[KITEMARKET_PACK]` 读取实际下发的 UUID、SHA-1及 URL，登记到上述字段后再次 `/km reload`；诊断完成后关闭。
+
+发送或接受不等于加载成功，资源包内容更新必须使用新的实际下发 UUID和对应摘要，不能只在 KiteMarket 中填写一个随机 UUID。
+
+## 第三方主题
+
+第三方界面可自由开发和销售，无需额外的 KiteMC 主题授权：将独立主题放入 `plugins/KiteMarket/themes/*.yml`，使用自有资源和已注册 provider。格式与示例见[界面 SDK](/kitemarket/ui-development)。
+
+旧 `germ`／`dragoncore` 偏好、配置和 SDK 扩展位置仍可读取，但不代表内置厂商适配器；没有已注册的实际 provider 时返回 `UI_BACKEND_RETIRED` 并回退，保留原偏好。
+
+资源包或主题不可用不触发市场清退。

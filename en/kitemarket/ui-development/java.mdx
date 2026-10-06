@@ -1,0 +1,122 @@
+---
+title: "Java renderer development"
+description: "UI SDK dependencies, provider registration, page updates and the real ItemsAdder example."
+canonical: "https://www.kitemc.com/en/kitemarket/ui-development/java"
+---
+
+For custom rendering logic, register your own provider through the public SDK and maintain its actual engine, resources and thread compatibility. Compatibility enum values do not imply that the base plugin bundles the corresponding vendor adapters.
+
+## Java example: GitHub Packages {#java-example-github-packages}
+
+Reference `com.kitemc:kitemarket-ui-api:1.0.0` with `compileOnly`, never bundling or relocating the SDK. Runnable source is in the public `examples/ui-java` project, without proprietary core dependencies.
+
+First merge the [market API's Packages registry and authentication configuration](/en/kitemarket/api/dependencies#github-packages), then add these dependencies.
+
+Public packages also need a classic PAT with `read:packages`, provided through user-level `gpr.user`/`gpr.key` or `GITHUB_ACTOR`/`GITHUB_TOKEN`. Never store tokens in the project. Confirm that the repository's Packages list contains the version before using it; this guide does not claim the package is already uploaded.
+
+```kotlin
+dependencies {
+    compileOnly("com.kitemc:kitemarket-ui-api:1.0.0")
+    compileOnly("com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT")
+    compileOnly("beer.devs:itemsadder-api:4.0.18-beta-10")
+}
+tasks.withType<JavaCompile>().configureEach {
+    options.release.set(21) // IA adapter code; the public SDK stays on Java 11.
+}
+```
+
+For Maven, use the same `github-kitemarket` registry and `settings.xml` credentials, then add:
+
+```xml
+<dependency>
+  <groupId>com.kitemc</groupId>
+  <artifactId>kitemarket-ui-api</artifactId>
+  <version>1.0.0</version>
+  <scope>provided</scope>
+</dependency>
+```
+
+Retain the Paper/Bukkit and IA API compile dependencies and their own registries. Packages do not contain vendor runtime plugins. Both SDKs remain Java 11; the real IA adapter example remains Java 21.
+
+For offline development or when Packages authentication is unavailable, download `KiteMarket-UI-API-1.0.0.jar` directly from [GitHub Releases](https://github.com/KiteMC/KiteMarket/releases) as a fallback compile dependency without a Packages Token. No reference method allows bundling, shading or relocating the SDK.
+
+## Resources and provider implementations {#resources-and-provider-implementations}
+
+Providers render and capture input; the shared server controller handles transactions. Callbacks must use server-registered action/input identifiers, never client-supplied amounts, identities, or stale pages. Closing pages, expiry, and repeated confirmations retain the shared session safeguards.
+
+### Registration and callbacks {#registration-and-callbacks}
+
+The public `KiteMarket-UI-API` module targets Java 11 under its own MIT License. Reference it with `compileOnly`, never bundling a second SDK.
+
+Implement `com.kitemc.market.api.ui.UiProvider`, obtain `KiteMarketUiApi` through Bukkit's ServicesManager, and call `api.register(owningPlugin, provider)`. Close the returned handle on plugin disable. Registration does not check official DLC ownership.
+
+`UiPage.token()/pageVersion()` and `UiPrompt.token()` describe page/field identity; `UiPage.actions()` and opening parameters supply opaque action identifiers.
+
+Return interactions only through `UiCallbacks.action(token)`, `input(raw)`, and `closed()`; the bound callback validates and schedules them again.
+
+### Page updates and resource changes {#page-updates-and-resource-changes}
+
+`UiProvider.update(...)` defaults to `open(...)`. A native interface may update in place only if it replaces the page identity, every action token and all callbacks, including close handling.
+
+After a genuine vendor event changes client/resource readiness, update the provider's own state and call `api.changed(owningPlugin)` for re-evaluation. Only enabled owners with a live registration may notify; the method itself is not proof that resources are ready.
+
+### Display refresh within one page {#display-refresh-within-one-page}
+
+Optional `UiProvider.refresh(player, page, theme)` refreshes display data within the same page, such as a countdown, and defaults to `false`.
+
+The token, page version, action map and existing callbacks stay unchanged. Update display clones in the current open view only; never reopen an inventory or invoke an action. Return `true` after applying it, or `false` when unsupported or closed.
+
+Existing providers retain static snapshots until normal navigation or a player refresh; unsupported refreshes do not periodically reopen menus. Verify current page identity so a late result cannot overwrite a replacement page.
+
+### IA resource checks {#ia-resource-checks}
+
+An IA adapter can call the read-only `api.itemsAdderUnavailable(player, page, theme)` in the player's scheduling context to reuse the host's observed font registry, actual sent UUID/SHA-1 and matching successful load.
+
+Only `null` means the page resource is ready; other values describe a fallback reason. This check neither sends packs, changes preferences, evaluates official DLC rights nor grants trading authority.
+
+Its default returns `IA_READINESS_UNSUPPORTED` for existing service implementations and does not treat unknown state as readiness. Calling it requires a KiteMarket version shipping this method; do not bundle a replacement SDK into a provider.
+
+## Real IA example {#real-ia-example}
+
+Public `examples/ui/` contains the minimal white-frame configuration theme, and `examples/ui-java/` contains a real Java IA adapter.
+
+The latter targets Java 21 with a compile-only public vendor API and the real `TexturedInventoryWrapper`. It registers `example.itemsadder` to render actual market pages and registered actions; it never invents balances or transaction outcomes.
+
+The public SDK remains Java 11. Do not install this example on Java 11 Legacy or unverified Folia nodes.
+
+### Inventory rendering order {#inventory-rendering-order}
+
+The IA adapter fills the protected inventory returned by `TexturedInventoryWrapper.getInternal()`, registers the replacement holder, actions and callbacks, then calls the public `showInventory(player)` to display the font title.
+
+Opening only the internal inventory through Bukkit leaves IA's placeholder title. Retain this order and whole-view protection so a previous close is handled separately from the new page.
+
+### Install the example bundle {#install-the-example-bundle}
+
+The `KiteMarket-Examples-1.0.0.zip` example bundle combines query and IA examples, including runnable JARs, themes, MIT resources, bilingual instructions and source/build files.
+
+Install the IA example JAR, place `theme.yml` in `plugins/KiteMarket/themes/example-ia-java.yml`, and copy `itemsadder/` into `plugins/ItemsAdder/contents/km_example/`. Rebuild/send the pack using the installed IA instructions, register its identity and select `/km ui itemsadder example-ia-java`.
+
+Updates, stale closes, repeated clicks and chat input retain the shared safeguards.
+
+### Licensing and recorded scope {#licensing-and-recorded-scope}
+
+Source and resources identified as MIT in the configuration and Java examples may be modified for commercial interfaces without an additional KiteMC theme license. Other themes retain their own licenses.
+
+The examples' real publishing pages have been opened on the [representative environment](/en/kitemarket/compatibility); this record does not certify other packs or every page. Source, compilation and registration do not replace actual client verification.
+
+## Troubleshooting {#troubleshooting}
+
+| Symptom | Check |
+|---|---|
+| Theme absent | `themes/*.yml`, unique ID and a valid candidate reload |
+| `UI_PROVIDER_UNAVAILABLE` | Matching registered provider ID and enabled owner |
+| `IA_PACK_NOT_REGISTERED` | Actual observed pack UUID and SHA-1, not random values |
+| `IA_PACK_NOT_APPLIED` | Matching successful load rather than send/accept only |
+| `IA_RESOURCES_PENDING` | Registered font/icon IDs and completed pack rebuild |
+| Placeholder title | Use IA `showInventory(player)`, not only the internal Bukkit inventory |
+| Rejected action / stale page | Replace all tokens and callbacks; reopen instead of replaying |
+| Reload retains old theme | Read the exact field path in logs; invalid candidates never replace valid configuration |
+
+<Card title="Pages, actions and lifecycle" href="/en/kitemarket/ui-development/pages">
+  Check templates, action tokens, input and provider contracts across all 35 pages.
+</Card>

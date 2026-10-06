@@ -1,0 +1,49 @@
+---
+title: "Search, history and transaction receipts"
+description: "Filter market orders and review individual amounts, tax, income recipients and operation states."
+canonical: "https://www.kitemc.com/en/kitemarket/trading/history"
+---
+
+import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
+
+## Search and filters {#search-and-transaction-receipts}
+
+Filter by type, currency, or material, then sort by ending time, newest first, or price.
+
+Search covers order IDs, material IDs, real names, lore, and active advanced-condition text. `%` and `_` are literal characters; serialized bytes and fingerprints are excluded.
+
+Database filtering happens before pagination, and pages retain your filters.
+
+Price sorting uses sale and buy-order unit prices and the current highest auction bid, or the starting price when there are no bids. Filter to the same type and currency first; no exchange rates or cross-currency valuation are applied.
+
+## Individual transaction receipts
+
+Click a history entry for a read-only receipt showing the individual trade's quantity, currency, gross amount, fixed tax, net-income recipient, and confirmed refunds or returned items.
+
+Seller proceeds come from the linked transaction, never cumulative order quantities. Your proceeds receipt does not expose the buyer's original operation evidence.
+
+<ScreenshotPlaceholder image="/images/kitemarket/screenshot-receipt.png" title="Trade receipt: amount, tax and income recipient" description="Inspect the individual trade and its historical and current operation states." lang="en" />
+
+<Note>
+The pictured order has a 0% tax rate. Each order retains the rate configured when it was published; later configuration changes do not change its tax rules.
+</Note>
+
+## Auction history
+
+Bidder history includes the amount unfrozen when outbid and the settled whole lot when winning.
+
+Raising your own bid is not recorded as being outbid; duplicate requests or concurrent settlement workers do not duplicate these records.
+
+## Historical and current states
+
+Historical and current operation states are separate. Missing older details are explicitly marked, not treated as zero or successful.
+
+Result messages distinguish success, failure and pending review, with details and relevant wallet or claims entrances.
+
+Pending results do not offer automatic retries, refunds or redelivery.
+
+## Viewing an operation ID
+
+When needed, use the receipt's **View / copy operation ID** control to show the complete UUID in chat and copy it for `inspect`.
+
+Default summaries stay concise, and audit records retain the ID.

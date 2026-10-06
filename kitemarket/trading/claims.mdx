@@ -1,0 +1,30 @@
+---
+title: "托管与领取箱"
+description: "查看待领取物品与状态，了解堆叠上限、背包空间和异常处理。"
+canonical: "https://www.kitemc.com/kitemarket/trading/claims"
+---
+
+import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
+
+## 领取规则 {#托管与领取}
+
+物品进入托管后，即使发单失败，也应先检查领取区与操作记录，不能直接再次扣取。
+
+领取按真实物品自身的堆叠上限拆分，GUI 角标不会放宽这个上限。
+
+空间不足时物品仍留在领取箱，并提示先腾出空间再领，不掉落或删除。
+
+<Tabs>
+  <Tab title="领取箱入口">
+    <ScreenshotPlaceholder image="/images/kitemarket/screenshot-claims-entrance.png" title="首页的待领取资产提醒" description="首页显示待领取物品的条目数，点击进入领取箱。" lang="zh" />
+  </Tab>
+  <Tab title="待领取物品">
+    <ScreenshotPlaceholder image="/images/kitemarket/screenshot-claims.png" title="待领取物品与领取状态" description="领取列表保留物品名称、附魔和原始 Lore，并显示数量与状态。" lang="zh" />
+  </Tab>
+</Tabs>
+
+## 结果不确定时
+
+余额或物品结果显示 `UNKNOWN` 时停止重试并记录操作 ID，交由管理员[核对](/kitemarket/operations)。
+
+单笔结果与操作编号的查看方式见[历史与交易收据](/kitemarket/trading/history)。

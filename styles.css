@@ -14,6 +14,18 @@
   --km-soft: #161c2a;
 }
 
+#content-area #content > :is(p, [data-as="p"]),
+#content-area #content [role="tabpanel"] > :is(p, [data-as="p"]) {
+  margin-top: 26px;
+  margin-bottom: 26px;
+  line-height: 1.9;
+}
+
+#content > h2 { margin-top: 52px; margin-bottom: 22px; }
+#content > h3 { margin-top: 36px; margin-bottom: 18px; }
+#content > :is(ul, ol) { margin-top: 24px; margin-bottom: 24px; }
+#content > :is(ul, ol) > li { margin-top: 12px; margin-bottom: 12px; line-height: 1.9; }
+
 .km-landing {
   max-width: 1120px;
   margin: 0 auto;
@@ -52,7 +64,7 @@
 .km-product-name span { font-size: 20px; font-weight: 650; }
 .km-cover { display: block; width: 100%; border-radius: 16px; margin-top: 32px; }
 .km-gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
-.km-gallery figure, .km-screenshot { margin: 24px 0; }
+.km-gallery figure, .km-screenshot { margin: 32px 0; }
 .km-gallery img { display: block; width: 100%; border: 1px solid var(--km-border); border-radius: 12px; }
 .km-gallery figcaption, .km-screenshot figcaption { margin: 12px 0 0; text-align: center; font-size: 14px; color: var(--km-muted); }
 .km-screenshot-frame { overflow: hidden; border: 1px dashed var(--km-border); border-radius: 12px; background: var(--km-soft); }

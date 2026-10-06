@@ -1,0 +1,61 @@
+---
+title: "币种配置"
+description: "设置经济适配器、充提版本范围与币种显示名称。"
+canonical: "https://www.kitemc.com/kitemarket/configuration/currencies"
+---
+
+本页说明 `config.yml` 的 `currencies` 配置。首次安装按[安装与配置](/kitemarket/guide#_3-配置币种)完成各步，再按实际经济插件填写币种。
+
+## 配置示例
+
+例如，一个整数 PlayerPoints 币种：
+
+```yaml
+currencies:
+  points:
+    provider: playerpoints
+    scale: 0
+    native-id: ""
+    gateway: survival-1
+    maximum: 2147483647
+    certified-versions: []
+    certified-folia: false
+```
+
+## 经济适配器与安全范围
+
+可选 provider 为 `vault`、`playerpoints`、`coinsengine`、`excellenteconomy`。
+
+Vault 需要 `vault-provider` 与实际 Economy 服务名称一致；后两者需要正确的 `native-id`。不要复制别人的版本号，也不要为同一个实际币种创建两个重复入口。
+
+`maximum` 使用最小货币单位，不能超过实际后端安全范围。
+
+`certified-versions` 默认留空，充提保持关闭；在隔离环境测试过具体版本后，才登记实际版本号。该列表不是官方认证报告。
+
+[钱包说明](/kitemarket/wallet)包含网关和失败处理。
+
+## 币种显示名称
+
+币种显示名称与内部 ID 分开。语言文件中的 `currency-names.coins`、`currency-names.points` 默认显示为“金币”“点券”；自定义币种也可在各语言文件的 `currency-names.<币种ID>` 配置名称，执行 `/km reload` 后生效。
+
+也可显式配置：
+
+```yaml
+currencies:
+  points:
+    display-name:
+      zh_CN: '点券'
+      en_US: 'Points'
+```
+
+把此块合并到已有 `points` 配置，不替换它的经济字段。
+
+`display-name` 可写共同字符串或中英映射，优先于语言文件；未配置的语言使用该语言文件名称，仍未配置时使用内部 ID。
+
+商品、确认和钱包使用显示名称，不额外附加内部 ID。
+
+## 重载与重启
+
+名称不改变钱包、精度、后端币种或网络身份；`currencies` 下的修改仍需完整重启。
+
+只改显示名称时，优先编辑语言文件。

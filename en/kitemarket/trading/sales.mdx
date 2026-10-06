@@ -1,0 +1,68 @@
+---
+title: "Publishing and buying fixed-price sales"
+description: "Set unit price, listing quantity and minimum purchase quantity, then review tax and expected proceeds."
+canonical: "https://www.kitemc.com/en/kitemarket/trading/sales"
+---
+
+import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
+
+## Publishing and buying {#fixed-price-sales}
+
+The seller escrows real items with the same properties as the main-hand sample and chooses a **per-item unit price** and duration. One listing cannot mix differing item properties.
+
+Buyers can choose a partial quantity. For example, 16 items at a unit price of 8 cost 128 in total. Buyers review the unit price, quantity, currency and purchase total before confirming.
+
+Items enter the buyer's claims, and the seller receives income after the order's tax. Unsold items can be withdrawn to the seller's claims; a full inventory does not cause items to be dropped on the ground.
+
+## Minimum purchase quantity
+
+Set a **minimum purchase quantity** on the sale terms page. It defaults to 1 and ranges from 1 to the listed quantity.
+
+A purchase must reach the minimum; when fewer items remain, the entire remainder must be purchased together. For example, a minimum of 3 with only 2 remaining permits a purchase of 2, but not 1.
+
+The published minimum is fixed; cancel and recreate to change it.
+
+## Tax and income preview
+
+The listing confirmation estimates gross proceeds, tax and net income for selling all items in one purchase.
+
+Partial purchases calculate tax separately, so accumulated net income can differ through minor-unit rounding; use [individual transaction records](/en/kitemarket/trading/history) for the actual amounts. Buy orders use unit prices for partial fulfillment, and auction bids remain whole-lot totals.
+
+<ScreenshotPlaceholder image="/images/kitemarket/screenshot-publish-terms.png" title="Sale terms and income preview" description="Review quantity, minimum purchase quantity, tax and estimated net income before publishing." lang="en" />
+
+## Listing quantities and maximum values {#listing-quantities-and-maximum-values}
+
+The publishing wizard calculates **Maximum** for all three modes from what is actually available:
+
+| Type | Quantity limit |
+|---|---|
+| Buy order | Minimum whole quantity allowed by the configured limit, currency amount limit ÷ unit price, and available market funds ÷ unit price |
+| Fixed-price sale | Minimum of the configured quantity limit, currency amount limit ÷ unit price, and actual inventory quantity matching the main-hand sample's complete properties |
+| Auction | Minimum of the configured quantity limit and the current main-hand stack; the starting price is for the entire lot |
+
+External economy funds are not automatically included in a buy-order budget. Insufficient market funds offer a deposit entrance while retaining the draft; missing sale or auction items show a shortfall.
+
+Applying a quantity and confirming publication recheck it. Reduced funds or items require another choice; a GUI quote does not reserve future capacity.
+
+[Fulfillment](/en/kitemarket/trading/supply)'s **Maximum available** separately uses remaining demand and the selected matching items.
+
+## Item information in listings
+
+Market and detail icons retain the actual sample's name, enchantments and original lore, followed by separate item-information and purchase, fulfillment or bidding guidance sections.
+
+Remaining quantity is one value; details list total and traded quantities separately rather than using remaining/total fractions.
+
+Count badges show the real quantity only within the item's native stack limit, capped at 99. Larger quantities use a single icon; the exact Lore quantity is always authoritative. Visual counts do not change real stacking limits.
+
+### Time display
+
+Item information includes listing time, expiry and remaining time, using the server time zone.
+
+| Language | Date format |
+|---|---|
+| Chinese | `yyyy年MM月dd日 HH:mm:ss` |
+| English | `yyyy-MM-dd HH:mm:ss` |
+
+Remaining time shows whole hours when at least one hour remains, whole minutes when at least one minute remains, and seconds below that. Display countdowns do not change database deadlines or settlement rules.
+
+Use the order description and confirmation for quantities and amounts; display icons are never regenerated into settlement items.

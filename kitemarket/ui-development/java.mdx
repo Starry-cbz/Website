@@ -1,0 +1,122 @@
+---
+title: "Java 呈现器开发"
+description: "UI SDK 引用、提供者注册、页面更新与真实 ItemsAdder 示例。"
+canonical: "https://www.kitemc.com/kitemarket/ui-development/java"
+---
+
+需要自定义呈现逻辑时，通过公开 SDK 注册自己的 provider，独立维护实际引擎、资源和线程兼容。SDK 的兼容枚举值不代表基础插件内置相应厂商适配器。
+
+## Java 示例：GitHub Packages {#java-示例-github-packages}
+
+Java 项目使用 `com.kitemc:kitemarket-ui-api:1.0.0` 为 `compileOnly` 依赖，不得打包或重定位 SDK。完整可运行源码位于公开仓库 `examples/ui-java`，不需要私有市场核心。
+
+先合并[市场 API 的 Packages 仓库和认证配置](/kitemarket/api/dependencies#github-packages)，再添加以下依赖。
+
+公开包也需要 `read:packages` classic PAT，使用用户级 `gpr.user`／`gpr.key` 或 `GITHUB_ACTOR`／`GITHUB_TOKEN`，不要把 Token 写入项目。引用前确认公开仓库的 Packages 列表有该版本；本说明不代表包已上传。
+
+```kotlin
+dependencies {
+    compileOnly("com.kitemc:kitemarket-ui-api:1.0.0")
+    compileOnly("com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT")
+    compileOnly("beer.devs:itemsadder-api:4.0.18-beta-10")
+}
+tasks.withType<JavaCompile>().configureEach {
+    options.release.set(21) // IA 例的适配代码；公开 SDK 本身仍为 Java 11。
+}
+```
+
+Maven 使用相同的 `github-kitemarket` 仓库与 `settings.xml` 凭据，并添加：
+
+```xml
+<dependency>
+  <groupId>com.kitemc</groupId>
+  <artifactId>kitemarket-ui-api</artifactId>
+  <version>1.0.0</version>
+  <scope>provided</scope>
+</dependency>
+```
+
+继续保留 Paper／Bukkit 和 IA API 的编译依赖及各自仓库；Packages 不包含厂商运行插件。两个 SDK 仍为 Java 11，真实 IA 示例适配代码仍为 Java 21。
+
+离线开发或无法使用 Packages 认证时，也可从 [GitHub Releases](https://github.com/KiteMC/KiteMarket/releases)直接下载 `KiteMarket-UI-API-1.0.0.jar` 作为备用编译依赖，下载无需 Packages Token。任何引用方式都不能打包、shade 或重定位 SDK。
+
+## 安装资源与实现提供者 {#安装资源与实现提供者}
+
+提供者负责显示和输入，交易仍由共用服务端控制器处理。回调必须使用服务器登记的动作／输入标识，不能把客户端金额、玩家身份或旧页面当作有效请求。页面关闭、失效或重复确认继续执行共用会话保护。
+
+### 注册与回调 {#注册与回调}
+
+公开 `KiteMarket-UI-API` 模块使用 Java 11 和独立 MIT License，适配插件只做 `compileOnly` 引用，不打包第二份 SDK。
+
+实现 `com.kitemc.market.api.ui.UiProvider` 后，通过 Bukkit `ServicesManager` 取得 `KiteMarketUiApi` 并调用 `api.register(owningPlugin, provider)`；禁用插件时关闭返回句柄。注册本身不查官方 DLC 权益。
+
+`UiPage.token()/pageVersion()` 和 `UiPrompt.token()` 描述页面／字段身份，`UiPage.actions()` 及打开参数提供不透明动作标识。
+
+输入／动作仅通过 `UiCallbacks.action(token)`、`input(raw)`、`closed()` 返回，绑定回调再次校验并调度。
+
+### 页面更新与资源变化 {#页面更新与资源变化}
+
+`UiProvider.update(...)` 默认调用 `open(...)`；原生界面可就地更新，但必须一并替换页面身份、全部动作令牌及全部回调，包括关闭回调。
+
+厂商事件改变真实客户端／资源就绪状态后，先更新自己的状态，再调用 `api.changed(owningPlugin)` 请求重新检查；只有启用中且仍有有效注册的拥有者可以通知，该方法本身不证明资源就绪。
+
+### 同页显示刷新 {#同页显示刷新}
+
+可选 `UiProvider.refresh(player, page, theme)` 用于同页显示刷新，例如倒计时，默认返回 `false`。
+
+它保持 token、pageVersion、动作字典及原回调不变，只更新当前已打开视图的显示副本，不重开库存或触发动作；完成返回 `true`，不支持或已关闭返回 `false`。
+
+旧提供者保持静态快照，直到正常导航或玩家刷新；主插件不会因不支持此方法而定时重开界面。应用前必须核对当前页面身份，迟到结果不能覆盖新页面。
+
+### IA 资源检查 {#ia-资源检查}
+
+IA 适配者在玩家调度上下文调用只读 `api.itemsAdderUnavailable(player, page, theme)`，复用主插件观察的字体注册、实际下发 UUID／SHA-1 及对应成功加载证明。
+
+`null` 才表示本页资源就绪，其他值为回退原因；该检查不发送资源包、不改偏好、不查官方 DLC 或授予交易权。
+
+默认实现为 `IA_READINESS_UNSUPPORTED`，兼容既有接口实现并拒绝把未知状态当作就绪；调用此方法需要安装包含它的 KiteMarket 版本，不能在自己的插件中打包新 SDK 替换旧主插件。
+
+## 真实 IA 示例 {#真实-ia-示例}
+
+公开仓库 `examples/ui/` 提供极简白框配置主题，`examples/ui-java/` 提供真实 Java IA 适配器。
+
+后者使用 Java 21、厂商公共 `compileOnly` API 和真实 `TexturedInventoryWrapper`，注册 `example.itemsadder`，呈现真实市场页面及已登记动作；没有演示余额或假的交易结果。
+
+公开 SDK 仍使用 Java 11，示例不安装到 Java 11 Legacy 或未验证的 Folia 节点。
+
+### 库存呈现顺序 {#库存呈现顺序}
+
+IA 适配器先填充 `TexturedInventoryWrapper.getInternal()` 返回的受保护库存，登记新 holder、动作和回调，再调用公开 `showInventory(player)` 呈现字体标题。
+
+只用 Bukkit 打开内部库存会显示 IA 占位标题。保留这一步骤顺序及整窗保护，旧页关闭事件才能与新页分开处理。
+
+### 安装示例包 {#安装示例包}
+
+`KiteMarket-Examples-1.0.0.zip` 示例包汇总查询例与 IA 例，包含可运行 JAR、主题、MIT 自有资源、双语说明及源码／构建文件。
+
+将 IA 示例 JAR 放入 `plugins/`、`theme.yml` 放到 `plugins/KiteMarket/themes/example-ia-java.yml`、`itemsadder/` 内容放到 `plugins/ItemsAdder/contents/km_example/`；按实际 IA 指南重建和下发，登记真实包身份后通过 `/km ui itemsadder example-ia-java` 选择主题。
+
+更新、旧关闭、重复点击和聊天输入继续遵循共用保护。
+
+### 许可与验证范围 {#许可与验证范围}
+
+配置主题及 Java 示例中标记为 MIT 的源码与资源可以修改并用于商业界面，无需额外的 KiteMC 主题授权。其他主题遵循各自许可。
+
+白框配置与 Java 示例的真实发布页已在[代表组合](/kitemarket/compatibility)打开，这项记录不认证其他资源包或全部页面；源码、编译和注册成功也不替代实际客户端验证。
+
+## 错误定位 {#错误定位}
+
+| 现象 | 检查 |
+|---|---|
+| 找不到主题 | 文件位于 `themes/*.yml`、ID 唯一、候选重载已通过 |
+| `UI_PROVIDER_UNAVAILABLE` | `provider` 与实际注册 ID、所属插件状态一致 |
+| `IA_PACK_NOT_REGISTERED` | 登记实际观察到的包 UUID、SHA-1，不填随机值 |
+| `IA_PACK_NOT_APPLIED` | 指定包真正加载成功，而非只发送或接受 |
+| `IA_RESOURCES_PENDING` | 字体、图标 ID 已在 IA 注册，资源重建完成 |
+| 打开后仍显示占位标题 | 使用 IA `showInventory(player)`，不要只开内部 Bukkit 库存 |
+| 操作被拒绝或页面过期 | 替换全部令牌与回调，重新打开页面，不重放旧动作 |
+| 重载后保持旧主题 | 查看日志的具体字段路径；无效候选不会替换现有配置 |
+
+<Card title="页面、动作与生命周期" href="/kitemarket/ui-development/pages">
+  核对35页的模板、动作令牌、输入约定及提供者生命周期。
+</Card>

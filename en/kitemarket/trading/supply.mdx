@@ -1,0 +1,45 @@
+---
+title: "Fulfillment preview and confirmation"
+description: "Inspect real inventory matches and quantities to take and leave before confirming fulfillment."
+canonical: "https://www.kitemc.com/en/kitemarket/trading/supply"
+---
+
+import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
+
+Previewing does not move or modify inventory items. Fulfillment transfers snapshots of the actual selected items instead of generating replacements from the buyer's sample.
+
+<ScreenshotPlaceholder image="/images/kitemarket/screenshot-supply-preview.png" title="Fulfillment preview: low-durability items stay in your inventory" description="Each inventory slot shows its match result, rejection reason and quantities to take and leave." lang="en" />
+
+## Fulfillment steps {#fulfillment-preview}
+
+<Steps>
+  <Step title="Inspect matching items">
+    Click **Supply** in a buy order to preview your inventory storage slots.
+
+    Icons retain the real name, enchantments, and original lore, with added match results, rejection reasons, and quantities to take and leave.
+  </Step>
+  <Step title="Protect items you want to keep">
+    Click a matching slot to protect it; click again to include it. Protected items are excluded from this fulfillment.
+
+    Protection belongs only to this preview flow, not a permanent inventory setting; select it again when starting another fulfillment.
+  </Step>
+  <Step title="Set the fulfillment quantity">
+    Set a quantity or use **Maximum available** to recalculate from unprotected matching items and the order's remaining demand.
+
+    Items are selected in inventory-slot order. A shortfall is shown and prevents final confirmation.
+
+    **Refresh** reads the order and inventory again for the latest available quantity.
+  </Step>
+  <Step title="Review items and proceeds">
+    Review the quantity from each slot, gross proceeds, tax, and net income.
+
+    The confirmation also lists source slots and quantities so you can catch a selected tool or collectible before submitting.
+  </Step>
+  <Step title="Confirm fulfillment">
+    After final confirmation, the actual inventory properties and quantities are checked again before removal; submitting the order rechecks its revision and remaining demand. Inventory changes reject removal.
+
+    If the order expires or another supplier fills it, use the operation record to check any items already escrowed and inspect claims before starting a new operation.
+  </Step>
+</Steps>
+
+For items that do not match, see [advanced buy orders and conditions](/en/kitemarket/trading/buy-orders). After a trade or item return, open [claims](/en/kitemarket/trading/claims).

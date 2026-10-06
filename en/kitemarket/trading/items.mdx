@@ -1,0 +1,35 @@
+---
+title: "Exact samples and item admission"
+description: "Understand complete item fingerprints, custom data, node consistency and special-item restrictions."
+canonical: "https://www.kitemc.com/en/kitemarket/trading/items"
+---
+
+## Exact matching {#exact-samples-and-custom-items}
+
+Exact mode retains serialized item data and compares complete properties, including the name, lore, enchantments, and serializable custom data.
+
+Sample stack size does not define the order quantity or price. Changing durability, name, or other metadata can make an item stop matching.
+
+## Sample storage and display
+
+New exact buy orders retain both the real sample and rule fingerprint, validate admission and matching material/fingerprint when published, and normalize the sample quantity to one.
+
+The sample is for display; fulfillment still transfers the supplier's actual items.
+
+Historical orders containing only a fingerprint identify the missing display sample instead of guessing or recreating the original item.
+
+## Custom items and node consistency
+
+KiteMarket does not interpret third-party item IDs or equate items solely by appearance.
+
+Nodes must have matching Minecraft versions and item profiles. Validate real samples created by your item plugin before enabling player trading.
+
+## Item admission
+
+Exact samples still must pass item admission and serialization round-trip checks. Exact mode cannot bypass these restrictions.
+
+`1.0.0` does not accept new trades in items with nested storage structures, such as shulker boxes and bundles; empty shulker boxes are also excluded. Other special items or data can be traded only if admitted by the current build.
+
+If you see `UNVERIFIED_SPECIAL_ITEM`, `UNVERIFIED_ITEM_DATA`, or `ITEM_ROUNDTRIP_UNSAFE`, stop listing that item instead of retrying in exact mode.
+
+Follow the [operations and migration guide](/en/kitemarket/operations) for safe withdrawal of assets already in escrow. See [buy-order condition editing](/en/kitemarket/trading/buy-orders#editing-conditions) for advanced rules.

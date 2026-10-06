@@ -1,0 +1,101 @@
+---
+title: "Configuration themes and IA resources"
+description: "Theme declarations, page backgrounds, actual pack identity and custom functional icons."
+canonical: "https://www.kitemc.com/en/kitemarket/ui-development/templates"
+---
+
+The built-in ItemsAdder renderer needs your resources and theme declaration. Actual items, amounts, results and executable actions remain server-owned.
+
+## Own theme declarations {#own-theme-declarations}
+
+Place declarations in `plugins/KiteMarket/themes/*.yml` and validate/load them with `/km reload`; an invalid candidate retains the active catalog.
+
+IDs use lowercase letters, digits, dots, underscores and hyphens, up to 96 characters, beginning with a letter or digit. `official.*` and the `km_market_stall` namespace are reserved identifiers. Third parties should use their own IDs and namespaces.
+
+```yaml
+schema: 1
+id: example-ia
+backend: itemsadder
+provider: kitemarket.itemsadder
+requires: {}
+resources:
+  font-image: km_example:market
+config:
+  title-offset: 8
+  texture-offset: -8
+pages:
+  '*': {}
+  supply:
+    font-image: km_example:market
+    title-offset: 8
+  result:
+    state-font-images:
+      SUCCESS: km_example:market
+```
+
+This is KiteMarket's common theme format, not a vendor-native configuration. `provider` is the stable ID of an actually registered implementation; omitting it does not create an SDK bridge.
+
+### Page and state backgrounds {#page-and-state-backgrounds}
+
+`pages.'*'` supplies defaults for shared pages, including `themes`; a specific **template ID** overrides font and title/background offsets. The [page list](/en/kitemarket/ui-development/pages#pages-actions-and-lifecycle) distinguishes page IDs from template IDs: `supply-preview` uses the `supply` template.
+
+`state-font-images` selects artwork from the server's `result.status`: `SUCCESS`, `PENDING`, `FAILED` and `UNCONFIRMED` describe completion, review required, refusal and an unconfirmed outcome. These presentation values are distinct from ledger operation states.
+
+A page mapping takes precedence over a resource-level state mapping; absent mappings use the page/general background. An exact page declaration is used when present, otherwise `*`; omitted font/offset fields use `resources`/`config` defaults.
+
+## Install resources and identify the pack {#install-resources-and-identify-the-pack}
+
+ItemsAdder themes maintain their own namespace, manually rebuild and send the pack, and register its actual SHA-1 and Minecraft pack UUID. Sending a pack does not mean it has loaded. Market items remain actual ItemStacks; font images decorate standard inventories.
+
+The built-in ItemsAdder provider is `kitemarket.itemsadder`. Third-party themes may reference their own registered font IDs, such as `km_example:market`, without a theme product ID or entitlement receipt.
+
+### Use the node's default pack {#use-the-nodes-default-pack}
+
+`requires: {}` omits pack fields and inherits node defaults.
+
+### Use a separate pack {#use-a-separate-pack}
+
+For a separate pack, add its actual lowercase SHA-1 (40 digits) and sent UUID as `requires.pack-sha1` and `pack-id`. **Empty strings fail theme validation.**
+
+Missing valid identity or an unsuccessfully applied pack falls back. Updated content requires a new actual sent UUID; a registered UUID cannot be assigned a different digest.
+
+### Confirm successful loading {#confirm-successful-loading}
+
+Readiness uses public ProtocolLib observations of actual UUID, SHA-1 and URL, correlated with IA's public send event; it does not call internal obfuscated classes or treat a send event alone as readiness.
+
+Temporarily enable `gui.itemsadder.diagnostics: true` to inspect `[KITEMARKET_PACK]`, then disable it after registering identity.
+
+Failure, discard or removal revokes only that pack, leaving unrelated loaded IA state intact. Disconnects, node changes, removal of every pack or IA reload require confirmation again.
+
+Native status messages carry no send generation, so delayed responses to a repeated UUID with identical content cannot be distinguished by the protocol; changed content must use a fresh actual UUID.
+
+## Custom IA functional icons {#custom-ia-functional-icons}
+
+Existing functional buttons may use your own registered IA items. `resources.item-icons` maps vanilla `Material` defaults; `pages.<template>.slot-icons` overrides **physical slots** on that template. Actual `subject()` trade items are never replaced:
+
+```yaml
+resources:
+  font-image: my_theme:market
+  item-icons:
+    BOOK: my_theme:book_button
+pages:
+  '*': {}
+  browse:
+    slot-icons:
+      '49': my_theme:back_button
+```
+
+`UiItemIcons.resolve(page, theme)` returns read-only bindings, creating no actions or readiness proof.
+
+Obtain and clone registered items through the real IA API, preserving host names, lore, quantities and actions. Missing icons report `IA_RESOURCES_PENDING` and fall back.
+
+Exact templates do not merge with `'*'`. Resources cannot substitute trade subjects, wallet amounts or transaction rules.
+
+<Columns cols={2}>
+  <Card title="Java renderers" href="/en/kitemarket/ui-development/java">
+    Custom rendering, resource checks and the real IA example.
+  </Card>
+  <Card title="Pages and actions" href="/en/kitemarket/ui-development/pages">
+    Page IDs, template IDs, actions and lifecycle contracts.
+  </Card>
+</Columns>

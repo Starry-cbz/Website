@@ -1,0 +1,45 @@
+---
+title: "供货预览与确认"
+description: "检查真实背包物品的匹配结果、扣取数量和保留数量，再确认交货。"
+canonical: "https://www.kitemc.com/kitemarket/trading/supply"
+---
+
+import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
+
+供货预览不会移动或修改背包物品。交易转移本次选中的真实物品快照，不会根据采购样品重新生成物品。
+
+<ScreenshotPlaceholder image="/images/kitemarket/screenshot-supply-preview.png" title="供货预览：耐久不足的物品会保留" description="每个背包格显示匹配结果、不匹配原因，以及本次扣取和保留数量。" lang="zh" />
+
+## 供货步骤 {#供货预览}
+
+<Steps>
+  <Step title="查看匹配结果">
+    在收购订单详情点击「供货」，进入背包存储格预览。
+
+    物品图标保留真实名称、附魔和原始 Lore，并追加是否匹配、不匹配原因、本次扣取和保留数量。
+  </Step>
+  <Step title="保护要保留的物品">
+    点击符合条件的物品格，可以保护该格；再次点击取消保护。受保护物品不参与本次供货。
+
+    保护仅属于本次预览流程，不是永久背包设置，重新进入供货时需重新选择。
+  </Step>
+  <Step title="设置交货数量">
+    设置交货数量，或点击「最多可交」按当前未保护的匹配物品和订单余量重新计算。
+
+    系统按背包格顺序选择物品；数量不足时显示缺口，不能进入最终确认。
+
+    点击「刷新」重新读取订单和背包，查看最新余量。
+  </Step>
+  <Step title="核对物品与收入">
+    查看每格的扣取数量，以及本次成交总额、税额和净收入。
+
+    确认页继续列出供货来源格和数量，便于发现误选的工具或收藏品。
+  </Step>
+  <Step title="最终确认">
+    最终确认后，扣物前再次检查实际背包的属性和数量，订单提交时重新检查订单版本和余量。背包变化会拒绝扣取。
+
+    订单过期或被其他玩家供满时，按操作记录处理已托管物品，先查看领取箱再发起新操作。
+  </Step>
+</Steps>
+
+条件不匹配时，查看[高级收购与条件编辑](/kitemarket/trading/buy-orders)。成交或物品返还后，前往[领取箱](/kitemarket/trading/claims)。

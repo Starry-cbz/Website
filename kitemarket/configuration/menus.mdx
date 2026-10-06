@@ -1,0 +1,132 @@
+---
+title: "原版菜单个性化"
+description: "在 menus 中调整页面标题、图标、说明和槽位，并保留真实物品与动作。"
+canonical: "https://www.kitemc.com/kitemarket/configuration/menus"
+---
+
+在 `plugins/KiteMarket/config.yml` 的 `menus` 中可个性化全部35个页面，包括 `profile`、`ui`、`themes` 和 `result`。无需资源包或 IA。
+
+编辑后执行 `/km reload`，再重新打开页面；重载先校验候选，无效配置保留上一份有效配置。
+
+显示设置只改变外观与位置，不改变原有动作、权限、交易规则或资产处理，也不能新增交易按钮。
+
+呈现后端与首页选择见[界面与布局](/kitemarket/configuration/gui)。
+
+## 标题、背景与按钮
+
+下面示例保留旧首页的“我的挂单”原始槽位 `32`，因此明确选择 `home-layout: legacy`。
+
+合并到已有 `gui` 和 `menus` 中，不要重复写顶层键。未填写的字段保留默认值：
+
+```yaml
+gui:
+  home-layout: legacy
+menus:
+  home:
+    title:
+      zh_CN: '&6交易集市'
+      en_US: '&6Marketplace'
+    background: BROWN_STAINED_GLASS_PANE
+    buttons:
+      '32':
+        material: NAME_TAG
+        name:
+          zh_CN: '&6我的挂单'
+          en_US: '&6My orders'
+        lore:
+          zh_CN:
+            - '{default}'
+            - '&8点击查看自己的订单。'
+          en_US:
+            - '{default}'
+            - '&8View your own orders.'
+```
+
+### 配置字段
+
+| 字段 | 含义 |
+|---|---|
+| `menus.<页面>.title` | 标题，字符串或 `zh_CN`／`en_US` 文本映射 |
+| `background` | 当前版本的原版 `Material`；仅装饰新版布局空闲的顶栏、底栏，`AIR` 关闭装饰 |
+| `buttons.<原始槽位>.material` | 功能按钮的原版物品图标 |
+| `buttons.<原始槽位>.name` | 功能按钮名称，字符串或双语文本映射 |
+| `buttons.<原始槽位>.lore` | 附加市场说明，字符串列表或双语列表映射 |
+| `buttons.<原始槽位>.slot` | 该控件的目标槽位 |
+| `slots`／`icons` | 兼容旧位置／图标写法，键仍为原始槽位 |
+| `switch.*` | 旧配置兼容读取，不再生成页面右上角的界面切换按钮 |
+
+## 原始槽位与位置交换
+
+菜单槽位为 `0..53`，不包括下方玩家背包。
+
+`buttons`、`slots`、`icons` 按**原始槽位**配置，不按新版布局移位后的视觉位置：列表原始 `0..35` 对应新版物理 `9..44`，所以第一件商品的附加说明配置 `buttons.'0'`。
+
+旧首页 `32` 为“我的挂单”，`34` 为“交易历史”；紧凑首页使用[界面与布局中的槽位表](/kitemarket/configuration/gui#紧凑首页)。
+
+位置变更必须完整交换，不能只移动一边；以下示例明确保留旧首页：
+
+```yaml
+gui:
+  home-layout: legacy
+  vanilla:
+    layout: auto
+menus:
+  home:
+    buttons:
+      '32':
+        slot: 34
+      '34':
+        slot: 32
+```
+
+`buttons.slot` 与 `slots` 共用位置机制，不要重复配置同一来源；旧写法可改为 `slots: {'32': 34, '34': 32}`。
+
+位置改动要求 `gui.vanilla.layout: auto` 使用兼容布局，原始槽位直接对应物理槽位；不要同时强制 `warm`。
+
+### 已有首页配置
+
+`gui.home-slots` 的旧首页位置配置仍可读取；切换为 `compact` 后应迁移为对应的新首页槽位。
+
+旧 `menus.<页面>.switch` 配置保留读取，不向页面注入按钮；界面偏好从个人页或 `/km ui` 进入。
+
+## 文本与默认说明
+
+标题和名称可写单一字符串或双语映射，Lore 可写单一列表或双语列表映射。
+
+`&`／`§` 支持原版颜色和格式，生成名称默认金色、Lore 默认灰色，未明确设置斜体时不使用斜体。
+
+标题／名称中的 `{default}` 保留原文；Lore **独占一行**的 `'{default}'` 展开默认市场说明。
+
+省略 `lore` 保留原说明，`lore: []` 只清除附加说明。
+
+`${字段名}` 读取本页已有只读字段，如 `${wizard.step}`；缺失字段显示 `—`，不执行脚本。
+
+金额原值为最小单位，优先保留 `{default}` 中的格式化金额与资产去向。
+
+## 真实商品与资产
+
+功能按钮可改材料和名称；商品、样品、供货背包物品及领取资产仍保留真实材料、名称、附魔和原 Lore，`material`／`name` 不能把它们伪装成另一种物品。
+
+只能调整其位置及附加市场说明，不改变背包、托管快照或交易标的。
+
+## 全部页面 ID
+
+```text
+home, profile, browse, browse-filters, order, details, editor, confirm, preview,
+supply-preview, number, materials, durability, text-condition, enchantments,
+enchantment-range, insufficient, wallet, wallet-currency, assets, history,
+receipt, admin, admin-player, admin-wallet, admin-assets, admin-orders,
+admin-player-history, resolve-source, doctor, inspect, evidence, ui, themes, result
+```
+
+使用页面 ID，不使用窗口标题、语言键或 IA 模板别名；例如 `claims`／`wizard-confirm` 应分别使用 `assets`／`confirm`。
+
+## 配置校验与排查
+
+每条文本最多512字符，Lore 最多64行；材料必须在当前服务端存在。
+
+未知配置字段、无效槽位或不完整交换会使候选无效，`command`、`action`、脚本与表达式不属于样式配置。
+
+重载失败按反馈和日志中的字段路径修正；未显示修改时重新开页并检查原始槽位、布局及第三方主题是否使用自己的模板。
+
+上述设置不安装或下载 IA 资源。

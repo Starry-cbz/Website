@@ -5,8 +5,12 @@ import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const pages = JSON.parse(readFileSync(resolve(root, 'migration/routes.json'), 'utf8')).pages;
+const pages = [
+  ...JSON.parse(readFileSync(resolve(root, 'migration/routes.json'), 'utf8')).pages,
+  ...JSON.parse(readFileSync(resolve(root, 'content-pages.json'), 'utf8')).pages,
+];
 const paths = new Set(pages.map(page => page.target));
+assert.equal(paths.size, pages.length, 'Canonical routes must be unique');
 const origin = 'https://www.kitemc.com';
 const escapeXml = value => value.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 const lines = [
@@ -29,7 +33,7 @@ const content = lines.join('\n') + '\n';
 const output = resolve(root, 'sitemap.xml');
 if (process.argv.includes('--check')) {
   assert.ok(readFileSync(output, 'utf8').replace(/\r\n/g, '\n') === content,
-    'Run node tools/generate-sitemap.mjs after changing the route map');
+    'Run node tools/generate-sitemap.mjs after changing the route map or content-pages.json');
   console.log(`Sitemap checks passed: ${pages.length} canonical URLs with reciprocal language links.`);
 } else {
   writeFileSync(output, content);

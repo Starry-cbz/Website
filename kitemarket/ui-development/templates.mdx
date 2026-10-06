@@ -1,0 +1,101 @@
+---
+title: "配置主题与 IA 资源"
+description: "主题声明、页面背景、真实资源包身份与自定义功能图标。"
+canonical: "https://www.kitemc.com/kitemarket/ui-development/templates"
+---
+
+使用内置 ItemsAdder 呈现器时，安装自有资源和主题声明即可。服务端继续提供实际商品、金额、结果和可执行动作。
+
+## 自有主题描述 {#自有主题描述}
+
+把声明文件保存到 `plugins/KiteMarket/themes/*.yml`，用 `/km reload` 校验并加载；无效候选保留当前有效目录。
+
+主题 ID 使用小写字母、数字、点、下划线和连字符，最长 96 字符，首字符为字母或数字。`official.*` 及 `km_market_stall` 资源命名空间为保留标识，第三方应使用自己的 ID 和命名空间。
+
+```yaml
+schema: 1
+id: example-ia
+backend: itemsadder
+provider: kitemarket.itemsadder
+requires: {}
+resources:
+  font-image: km_example:market
+config:
+  title-offset: 8
+  texture-offset: -8
+pages:
+  '*': {}
+  supply:
+    font-image: km_example:market
+    title-offset: 8
+  result:
+    state-font-images:
+      SUCCESS: km_example:market
+```
+
+上面是 KiteMarket 的通用主题格式，不是厂商原生界面文件。`provider` 是真实已注册实现的稳定 ID；省略时不代表自动生成厂商桥接。
+
+### 页面与状态背景 {#页面与状态背景}
+
+`pages.'*'` 作为全部共用页面的默认值，具体**模板 ID**可覆盖字体图片及标题／背景偏移，包括主题列表页 `themes`。页面 ID 与模板 ID 的区别见[页面清单](/kitemarket/ui-development/pages#页面、动作与生命周期)，`supply-preview` 页面使用 `supply` 模板。
+
+`state-font-images` 根据服务端的 `result.status` 选择状态背景。运行值为 `SUCCESS`、`PENDING`、`FAILED`、`UNCONFIRMED`，分别说明完成、待核对、拒绝和尚不能确认结果；不要与账本操作状态混用。
+
+先检查本页映射，再检查 `resources` 的状态映射，没有匹配时使用本页／通用背景。具体页面存在时使用该页配置，否则使用 `*`；未指定的字体和偏移使用 `resources`／`config` 默认值。
+
+## 安装资源与包身份 {#安装资源与包身份}
+
+ItemsAdder 主题需自行维护独立命名空间，手动重建和下发资源包，登记实际 SHA-1 与 Minecraft pack UUID。资源包“已发送”不等于“已加载”。市场图标仍为真实 ItemStack；字体图片仅装饰原版容器。
+
+ItemsAdder 内置 provider 为 `kitemarket.itemsadder`。第三方可以使用自己注册的字体 ID，例如 `km_example:market`，无需主题商品 ID 或权益凭据。
+
+### 使用节点默认包 {#使用节点默认包}
+
+`requires: {}` 省略资源包字段，继承节点默认身份。
+
+### 使用另一个包 {#使用另一个包}
+
+使用另一个包时，添加实际小写 SHA-1（40 位）和下发 UUID 为 `requires.pack-sha1`、`pack-id`，覆盖节点默认值。**空字符串会导致主题校验失败**。
+
+未登记有效身份或玩家未成功应用指定包时回退；更新内容必须对应新的实际下发 UUID，不允许已登记的同一 UUID 换摘要。
+
+### 确认实际加载状态 {#确认实际加载状态}
+
+资源就绪使用公开 ProtocolLib 记录真实 UUID、SHA-1和URL，再与 IA公共发送事件关联；不是调用内部混淆类或只等待发送事件。
+
+临时启用 `gui.itemsadder.diagnostics: true` 可查看 `[KITEMARKET_PACK]`，完成身份登记后关闭。
+
+对应包失败、丢弃或移除会撤销该记录，无关包不清空 IA状态；断线、换节点、全量移除或 IA重载后重新确认。
+
+原生状态报文没有发送代次，同 UUID同内容重发的迟到响应无法凭协议区分，因此内容更新必须使用新实际 UUID。
+
+## 自定义 IA 功能图标 {#自定义-ia-功能图标}
+
+可将已有功能按钮换成自己注册的 IA 物品。`resources.item-icons` 按原版 `Material` 默认映射，`pages.<模板>.slot-icons` 按该页**物理槽位**覆盖；真实 `subject()` 商品不被替换：
+
+```yaml
+resources:
+  font-image: my_theme:market
+  item-icons:
+    BOOK: my_theme:book_button
+pages:
+  '*': {}
+  browse:
+    slot-icons:
+      '49': my_theme:back_button
+```
+
+`UiItemIcons.resolve(page, theme)` 返回只读图标绑定，不创建动作或证明资源就绪。
+
+呈现器通过实际 IA API 取得已注册物品并克隆，保留服务端名称、Lore、数量和动作；不存在的注册图标返回 `IA_RESOURCES_PENDING` 并回退。
+
+具体模板存在时不与 `'*'` 合并，物品标的、钱包金额和交易规则都不能被素材替换。
+
+<Columns cols={2}>
+  <Card title="Java 呈现器" href="/kitemarket/ui-development/java">
+    自定义呈现逻辑、资源检查与真实 IA 示例。
+  </Card>
+  <Card title="页面与动作" href="/kitemarket/ui-development/pages">
+    页面 ID、模板 ID、动作与生命周期约定。
+  </Card>
+</Columns>

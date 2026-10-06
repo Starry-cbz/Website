@@ -1,0 +1,43 @@
+---
+title: "Public auctions and settlement"
+description: "Bid for the whole lot and understand reserved funds, late-bid extensions and settlement."
+canonical: "https://www.kitemc.com/en/kitemarket/trading/auctions"
+---
+
+import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
+
+## Bidding rules {#public-auctions}
+
+Bids are manual total amounts for one item or stack. The highest accepted bid is fully reserved, and outbid funds immediately return to the wallet.
+
+There is no proxy bidding, buyout, or hidden reserve price. Use the order's starting price, minimum increment, and deadline. Self-bidding is not permitted.
+
+The starting price is the total price for the whole auction lot, not a price multiplied by item quantity. The listing confirmation estimates tax and net income at the starting price; settlement uses the final highest accepted bid.
+
+<ScreenshotPlaceholder image="/images/kitemarket/screenshot-market.png" title="Real item details in the auction list" description="Before bidding, inspect the name, enchantments, current price, quantity and expiry." lang="en" />
+
+## Bid confirmation
+
+Details show the minimum accepted bid, increment, whether you are leading, and additional funds needed for the minimum bid. A leading bidder only needs to fund the increase.
+
+**Bid the current minimum** opens a confirmation first; a higher total can also be entered.
+
+Another bid changes the revision and rejects an old confirmation, requiring a refresh; bids are never automatically increased. If the next minimum exceeds the currency limit, further bidding is disabled while the existing highest bid still settles normally.
+
+<ScreenshotPlaceholder image="/images/kitemarket/screenshot-auction-confirm.png" title="Auction confirmation" description="Real gameplay screenshot coming later: the actual lot, total bid, reserved funds and final confirmation." lang="en" />
+
+## Late bids and extensions
+
+An accepted bid with less than 30 seconds remaining extends the deadline to at least 30 seconds after that bid, capped at 5 minutes after the original deadline.
+
+These are fixed rules, with deadlines checked against database time.
+
+## Settlement at expiry
+
+At expiry, the winner receives the items in [claims](/en/kitemarket/trading/claims) and the seller receives income after tax. With no bids, items return to the seller's claims.
+
+A seller must not bypass settlement by cancelling an auction with an accepted bid; administrative intervention requires an audit reason.
+
+Published prices, conditions, and fees are fixed; cancel and recreate to change them. Administrators cannot directly reverse completed trades.
+
+See [history and transaction receipts](/en/kitemarket/trading/history) for released reservations and winning-bid settlement records.

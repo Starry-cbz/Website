@@ -106,9 +106,34 @@
                 ]
               },
               {
+                "group": "配置文件",
+                "pages": [
+                  "kitemarket/configuration/currencies",
+                  "kitemarket/configuration/gui",
+                  "kitemarket/configuration/menus"
+                ]
+              },
+              {
                 "group": "使用指南",
                 "pages": [
                   "kitemarket/trading",
+                  {
+                    "group": "交易流程",
+                    "pages": [
+                      "kitemarket/trading/buy-orders",
+                      "kitemarket/trading/supply",
+                      "kitemarket/trading/sales",
+                      "kitemarket/trading/auctions"
+                    ]
+                  },
+                  {
+                    "group": "物品与记录",
+                    "pages": [
+                      "kitemarket/trading/items",
+                      "kitemarket/trading/claims",
+                      "kitemarket/trading/history"
+                    ]
+                  },
                   "kitemarket/wallet",
                   "kitemarket/commands"
                 ]
@@ -122,8 +147,22 @@
               {
                 "group": "开发者 API",
                 "pages": [
-                  "kitemarket/api",
-                  "kitemarket/ui-development"
+                  {
+                    "group": "市场 API",
+                    "pages": [
+                      "kitemarket/api",
+                      "kitemarket/api/dependencies"
+                    ]
+                  },
+                  {
+                    "group": "界面 SDK",
+                    "pages": [
+                      "kitemarket/ui-development",
+                      "kitemarket/ui-development/templates",
+                      "kitemarket/ui-development/java",
+                      "kitemarket/ui-development/pages"
+                    ]
+                  }
                 ]
               },
               {
@@ -325,9 +364,34 @@
                 ]
               },
               {
+                "group": "Configuration",
+                "pages": [
+                  "en/kitemarket/configuration/currencies",
+                  "en/kitemarket/configuration/gui",
+                  "en/kitemarket/configuration/menus"
+                ]
+              },
+              {
                 "group": "Usage",
                 "pages": [
                   "en/kitemarket/trading",
+                  {
+                    "group": "Trading",
+                    "pages": [
+                      "en/kitemarket/trading/buy-orders",
+                      "en/kitemarket/trading/supply",
+                      "en/kitemarket/trading/sales",
+                      "en/kitemarket/trading/auctions"
+                    ]
+                  },
+                  {
+                    "group": "Items and records",
+                    "pages": [
+                      "en/kitemarket/trading/items",
+                      "en/kitemarket/trading/claims",
+                      "en/kitemarket/trading/history"
+                    ]
+                  },
                   "en/kitemarket/wallet",
                   "en/kitemarket/commands"
                 ]
@@ -341,8 +405,22 @@
               {
                 "group": "Developer API",
                 "pages": [
-                  "en/kitemarket/api",
-                  "en/kitemarket/ui-development"
+                  {
+                    "group": "Market API",
+                    "pages": [
+                      "en/kitemarket/api",
+                      "en/kitemarket/api/dependencies"
+                    ]
+                  },
+                  {
+                    "group": "Interface SDK",
+                    "pages": [
+                      "en/kitemarket/ui-development",
+                      "en/kitemarket/ui-development/templates",
+                      "en/kitemarket/ui-development/java",
+                      "en/kitemarket/ui-development/pages"
+                    ]
+                  }
                 ]
               },
               {

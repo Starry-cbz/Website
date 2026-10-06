@@ -1,0 +1,132 @@
+---
+title: "Vanilla menu customization"
+description: "Adjust titles, icons, help, and slots while preserving real items and actions."
+canonical: "https://www.kitemc.com/en/kitemarket/configuration/menus"
+---
+
+`menus` in `plugins/KiteMarket/config.yml` customizes all 35 pages, including `profile`, `ui`, `themes` and `result`. No resource pack or IA is required.
+
+Edit the file, run `/km reload`, then reopen the page. Reload validates a candidate first; invalid settings preserve the previous working configuration.
+
+Appearance and placement do not change existing actions, permissions, trading rules or assets, and cannot add trading buttons.
+
+See [interface and layout](/en/kitemarket/configuration/gui) for renderer and home settings.
+
+## Titles, backgrounds, and controls
+
+This example retains the legacy “My orders” source slot `32`, so it explicitly selects `home-layout: legacy`.
+
+Merge it into the existing `gui` and `menus` sections without duplicating root keys. Omitted fields retain their defaults:
+
+```yaml
+gui:
+  home-layout: legacy
+menus:
+  home:
+    title:
+      zh_CN: '&6交易集市'
+      en_US: '&6Marketplace'
+    background: BROWN_STAINED_GLASS_PANE
+    buttons:
+      '32':
+        material: NAME_TAG
+        name:
+          zh_CN: '&6我的挂单'
+          en_US: '&6My orders'
+        lore:
+          zh_CN:
+            - '{default}'
+            - '&8点击查看自己的订单。'
+          en_US:
+            - '{default}'
+            - '&8View your own orders.'
+```
+
+### Configuration fields
+
+| Field | Meaning |
+|---|---|
+| `menus.<page>.title` | Title string or a text map with `zh_CN`/`en_US` |
+| `background` | Vanilla `Material` available on the current server; decorates only empty top/bottom slots in the new layout; `AIR` disables it |
+| `buttons.<source-slot>.material` | Vanilla item icon for a functional control |
+| `buttons.<source-slot>.name` | Control name as a string or bilingual text map |
+| `buttons.<source-slot>.lore` | Additional market help as a text list or bilingual list map |
+| `buttons.<source-slot>.slot` | That control's target slot |
+| `slots`/`icons` | Existing placement/icon syntax; keys remain source slots |
+| `switch.*` | Read for legacy compatibility; no automatic top-right interface switch is added |
+
+## Source slots and placement swaps
+
+Menu slots are `0..53`, excluding the player's inventory.
+
+`buttons`, `slots` and `icons` use **source slots**, not the final visible position after the new layout remaps them. List sources `0..35` become physical `9..44`, so additional help for the first product uses `buttons.'0'`.
+
+Legacy home source `32` is “My orders” and `34` is “History”; the compact home uses the [slot table in interface and layout](/en/kitemarket/configuration/gui#compact-home).
+
+Placement changes must swap both sides rather than moving only one. This example explicitly retains the legacy home:
+
+```yaml
+gui:
+  home-layout: legacy
+  vanilla:
+    layout: auto
+menus:
+  home:
+    buttons:
+      '32':
+        slot: 34
+      '34':
+        slot: 32
+```
+
+`buttons.slot` and `slots` share one placement mechanism; do not configure a source twice. Existing syntax may instead use `slots: {'32': 34, '34': 32}`.
+
+Custom placement requires `gui.vanilla.layout: auto` to select the compatibility layout, where source and physical slots match; do not simultaneously force `warm`.
+
+### Existing home settings
+
+Legacy `gui.home-slots` remains readable; migrate to the corresponding new home slots when choosing `compact`.
+
+Existing `menus.<page>.switch` settings remain readable without injecting a button. Use the profile or `/km ui` to reach interface preferences.
+
+## Text and default help
+
+Titles and names accept a shared string or bilingual text map; Lore accepts a shared list or bilingual list map.
+
+`&`/`§` support vanilla colors and formatting. Generated names default to gold and Lore to gray, with italics disabled unless explicitly requested.
+
+`{default}` preserves original title/name text; a Lore line containing **only** `'{default}'` expands the default market help.
+
+Omitting `lore` preserves help; `lore: []` clears only additional help.
+
+`${field-name}` reads an existing read-only page field, such as `${wizard.step}`; missing fields display `—` without executing scripts.
+
+Raw money fields use minor units, so prefer `{default}` to retain formatted amounts and asset destinations.
+
+## Real products and assets
+
+Functional controls may change material and name. Products, samples, selected inventory items and claim assets retain their actual material, name, enchantments and original Lore; `material`/`name` cannot disguise them as another item.
+
+Only their placement and additional market help can change, without altering inventories, escrow snapshots or transaction subjects.
+
+## All page IDs
+
+```text
+home, profile, browse, browse-filters, order, details, editor, confirm, preview,
+supply-preview, number, materials, durability, text-condition, enchantments,
+enchantment-range, insufficient, wallet, wallet-currency, assets, history,
+receipt, admin, admin-player, admin-wallet, admin-assets, admin-orders,
+admin-player-history, resolve-source, doctor, inspect, evidence, ui, themes, result
+```
+
+Use page IDs rather than titles, translation keys or IA template aliases; for example, use `assets`/`confirm` for `claims`/`wizard-confirm`.
+
+## Validation and troubleshooting
+
+Text entries are limited to 512 characters and Lore lists to 64 lines. Materials must exist on the current server.
+
+Unknown settings, invalid slots and incomplete swaps invalidate a candidate; `command`, `action`, scripts and expressions are not style settings.
+
+On failure, fix the field path identified by the response and logs. If changes are missing, reopen the page and check source slots, layout and whether a third-party theme uses its own template.
+
+These settings do not install or download IA resources.

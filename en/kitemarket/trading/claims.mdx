@@ -1,0 +1,30 @@
+---
+title: "Escrow and item claims"
+description: "Inspect claimable items and their status, with stack limits, inventory space and uncertain results."
+canonical: "https://www.kitemc.com/en/kitemarket/trading/claims"
+---
+
+import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
+
+## Claiming rules {#escrow-and-claims}
+
+If listing creation fails after item escrow, inspect claims and the operation record before submitting the items again.
+
+Claims split items according to their actual stack limits, independently of GUI count badges.
+
+Insufficient inventory space leaves items in claims and asks the player to make room before trying again; nothing is dropped or deleted.
+
+<Tabs>
+  <Tab title="Claim-box entrance">
+    <ScreenshotPlaceholder image="/images/kitemarket/screenshot-claims-entrance.png" title="Unclaimed asset reminder on the home screen" description="Home shows the number of unclaimed item entries; select it to open claims." lang="en" />
+  </Tab>
+  <Tab title="Claimable items">
+    <ScreenshotPlaceholder image="/images/kitemarket/screenshot-claims.png" title="Claimable items and claim status" description="The claims list retains the item name, enchantments and original lore, alongside its quantity and status." lang="en" />
+  </Tab>
+</Tabs>
+
+## Uncertain results
+
+If money or item delivery becomes `UNKNOWN`, stop retrying, record the operation ID, and ask an administrator to [reconcile it](/en/kitemarket/operations).
+
+See [history and transaction receipts](/en/kitemarket/trading/history) for individual results and operation IDs.
