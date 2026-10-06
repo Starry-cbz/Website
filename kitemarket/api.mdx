@@ -14,89 +14,21 @@ canonical: "https://www.kitemc.com/kitemarket/api"
 
 ### GitHub Packages {#github-packages}
 
-| SDK | Maven 坐标 |
-|---|---|
-| 只读市场 API | `com.kitemc:kitemarket-api:1.0.0` |
-| 界面 SDK | `com.kitemc:kitemarket-ui-api:1.0.0` |
+两个 SDK 以 `compileOnly`／`provided` 引用；公开 Packages 下载需要 `read:packages` classic PAT。引用前先确认所需版本已上传。
 
-仓库地址为 `https://maven.pkg.github.com/kitemc/KiteMarket`。对应正式版本发布后，由发行流程上传两个 SDK、sources、Javadoc 和 POM；引用前先确认[公开仓库](https://github.com/KiteMC/KiteMarket)的 Packages 列表已包含所需版本。下面是引用配置，不表示版本已经上传；运行插件、示例和语言／配置包继续从 GitHub Releases 获取。
-
-GitHub 的 Maven／Gradle 仓库即使包是公开的，也要求下载认证。本地使用具有 `read:packages` 的 **personal access token (classic)**，用户名为你的 GitHub 用户名；只读下载不需要 `write:packages`。将用户名与 Token 放到用户级 `~/.gradle/gradle.properties`，不要写入项目或提交到 Git：
-
-```properties
-gpr.user=YOUR_GITHUB_USERNAME
-gpr.key=YOUR_CLASSIC_PAT_WITH_READ_PACKAGES
-```
-
-Gradle Kotlin DSL：
-
-```kotlin
-repositories {
-    maven("https://repo.papermc.io/repository/maven-public/")
-    maven {
-        name = "GitHubKiteMarket"
-        url = uri("https://maven.pkg.github.com/kitemc/KiteMarket")
-        credentials {
-            username = providers.gradleProperty("gpr.user")
-                .orElse(providers.environmentVariable("GITHUB_ACTOR")).orNull
-            password = providers.gradleProperty("gpr.key")
-                .orElse(providers.environmentVariable("GITHUB_TOKEN")).orNull
-        }
-        content {
-            includeModule("com.kitemc", "kitemarket-api")
-            includeModule("com.kitemc", "kitemarket-ui-api")
-        }
-    }
-}
-dependencies {
-    compileOnly("com.kitemc:kitemarket-api:1.0.0")
-    compileOnly("com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT")
-}
-tasks.withType<JavaCompile>().configureEach {
-    options.release.set(11)
-}
-```
-
-也可使用 `GITHUB_ACTOR`／`GITHUB_TOKEN` 环境变量提供同一组下载凭据。仍需保留项目原有的 Paper／Bukkit 编译依赖及其仓库。
-
-Maven 项目的 `pom.xml` 增加以下仓库和依赖：
-
-```xml
-<repositories>
-  <repository>
-    <id>github-kitemarket</id>
-    <url>https://maven.pkg.github.com/kitemc/KiteMarket</url>
-  </repository>
-</repositories>
-<dependencies>
-  <dependency>
-    <groupId>com.kitemc</groupId>
-    <artifactId>kitemarket-api</artifactId>
-    <version>1.0.0</version>
-    <scope>provided</scope>
-  </dependency>
-</dependencies>
-```
-
-在用户级 `~/.m2/settings.xml` 配置同名服务器，凭据从环境变量读取；如果文件已存在，只合并 `server` 条目：
-
-```xml
-<settings>
-  <servers>
-    <server>
-      <id>github-kitemarket</id>
-      <username>${env.GITHUB_ACTOR}</username>
-      <password>${env.GITHUB_TOKEN}</password>
-    </server>
-  </servers>
-</settings>
-```
-
-`401`／`403` 先检查 Token 类型、权限、有效期与用户名；`404` 还需检查坐标和该版本是否已发布。认证规则以 GitHub 的 [Gradle](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-gradle-registry)与 [Maven](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-apache-maven-registry)文档为准。
+<Card title="Packages 引用配置" href="/kitemarket/api/dependencies#github-packages">
+  SDK 坐标、Gradle、Maven、用户级凭据与认证检查。
+</Card>
 
 ### Release 下载备用 {#release-下载备用}
 
-离线开发或无法使用 Packages 认证时，可从 [GitHub Releases](https://github.com/KiteMC/KiteMarket/releases)直接下载对应版本的 `KiteMarket-API-1.0.0.jar`，自行管理仅供编译的依赖。Release 文件下载不需要 Packages Token；公开仓库提供接口源码、Javadoc 与可运行示例。这里只是备用文件获取方式，不改变下述运行时约束。
+Release 文件下载不需要 Packages Token，可作为离线开发的备用编译依赖。
+
+<Card title="Release 下载与运行时约束" href="/kitemarket/api/dependencies#release-下载备用">
+  SDK 文件获取、插件依赖与禁止打包 SDK 的约定。
+</Card>
+
+### 运行时约束 {#运行时约束}
 
 `plugin.yml` 添加 `depend: [KiteMarket]`。若你的插件没有市场也能运行，可使用 `softdepend`，但仅在确认主插件存在后加载引用 API 的适配类，避免缺失类错误。
 
@@ -141,15 +73,27 @@ api.orders(null, null, "", 0, 36).whenComplete((orders, failure) -> {
 
 分页要求 `offset >= 0`、`1 <= limit <= 100`，搜索最多256字符。历史按原审计行分页，未知内部类型投影为 `OTHER`，不泄露原始记录。
 
+### 金额与价格 {#金额与价格}
+
 所有金额使用 `long` 最小货币单位。`CurrencyView.getPrecision() == 2` 时，`128` 表示 `1.28`；用 `currency.display(amount).toPlainString()` 格式化。时间为 Unix 毫秒，税率使用基点。
 
 一口价 `SELL` 和收购 `BUY` 的 `getUnitPrice()` 是每件单价；拍卖 `AUCTION` 为整标起价。一口价允许部分购买，金额为单价×本次购买数量，计算时检查整数溢出，例如使用 `Math.multiplyExact`。
 
-`OrderView.getMinimumPurchaseQuantity()` 为发布时固定的最低购买量，默认1，SELL可设为1至发布数量，其他类型为1。购买量须大于零、不超过剩余量，且至少为 `min(getMinimumPurchaseQuantity(), getRemaining())`；尾单不足最低量时必须一次买走全部剩余。原构造器保持可用并默认1，新重载在末尾增加 `long minimumPurchaseQuantity`。快照不替代最终校验，核心提交仍检查数量、资金和订单版本；历史与成交通知记录本次实际金额。
+### 最低购买量 {#最低购买量}
+
+`OrderView.getMinimumPurchaseQuantity()` 为发布时固定的最低购买量，默认1，SELL可设为1至发布数量，其他类型为1。
+
+购买量须大于零、不超过剩余量，且至少为 `min(getMinimumPurchaseQuantity(), getRemaining())`；尾单不足最低量时必须一次买走全部剩余。
+
+原构造器保持可用并默认1，新重载在末尾增加 `long minimumPurchaseQuantity`。快照不替代最终校验，核心提交仍检查数量、资金和订单版本；历史与成交通知记录本次实际金额。
+
+### 不可变 DTO {#不可变-dto}
 
 独立 DTO 在 `com.kitemc.market.api.model` 下：`CurrencyView`、`OrderView`、`WalletView`、`ClaimAssetView`、`HistoryEntry`、`TradeSummary`、`ItemSummary` 及枚举。字段和嵌套列表、集合、映射不可变。订单的可选样品摘要只含材质、名称、Lore、附魔与耐久，不能据此生成或领取资产。
 
-接口不返回原始审计 JSON、序列化物品字节、精确样品指纹、许可证凭据、执行令牌或恢复证据。缺失历史金额保持 `null`，不猜成零；`RECORDED` 不表示外部副作用已经成功，`PENDING_REVIEW` 表示需要核对。物品匹配和交易提交由主插件处理，不属于公开查询接口。
+接口不返回原始审计 JSON、序列化物品字节、精确样品指纹、许可证凭据、执行令牌或恢复证据。
+
+缺失历史金额保持 `null`，不猜成零；`RECORDED` 不表示外部副作用已经成功，`PENDING_REVIEW` 表示需要核对。物品匹配和交易提交由主插件处理，不属于公开查询接口。
 
 ## 成交后通知 {#成交后通知}
 
@@ -170,7 +114,11 @@ public void onTrade(MarketCommittedEvent event) {
 
 `MarketCommittedEvent` 异步、不可取消，只报告已提交的 `BUY`、`SUPPLY`、`AUCTION_WON`。`getTrade()` 返回订单与操作 ID、类型、物品收取人、收益收取人、数量、币种、总额、税额和净收入；没有原始 `getPayload()`。
 
-通知通过节点增量轮询触发，可能延迟或遗漏，启动前历史不自动补发，多个节点可能看到同一事件。按**网络 UUID＋事件 ID**去重；事件 ID 不保证连续。需要长期去重时自行持久化，不能把通知用作补发资金或物品的依据。重启后重新查询权威状态。
+### 去重与重新查询 {#去重与重新查询}
+
+通知通过节点增量轮询触发，可能延迟或遗漏，启动前历史不自动补发，多个节点可能看到同一事件。
+
+按**网络 UUID＋事件 ID**去重；事件 ID 不保证连续。需要长期去重时自行持久化，不能把通知用作补发资金或物品的依据。重启后重新查询权威状态。
 
 ## 需要扩展玩家界面？ {#需要扩展玩家界面}
 

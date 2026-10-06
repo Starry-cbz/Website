@@ -3,118 +3,65 @@ title: "Trading and item conditions"
 canonical: "https://www.kitemc.com/en/kitemarket/trading"
 ---
 
-import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
-
 <span id="trading-and-item-conditions" />
 
-All three modes use market funds and escrowed assets. Other nodes may change an order while a confirmation is open. The server rechecks its revision, price, and remaining quantity. Refresh an expired view instead of relying on an old screenshot.
+All three modes use market funds and escrowed assets. Other nodes may change an order while a confirmation is open. The server rechecks its revision, price, and remaining quantity.
 
-Choose “Create / edit draft” on `/km` home to open the wizard directly and continue the current draft. Each market and “My orders” list retains the same entrance. Returning, refreshing or switching interfaces retains unpublished conditions. Published orders must be cancelled and recreated to change them.
+Refresh an expired view instead of relying on an old screenshot.
 
-Listing, purchase, and bid confirmations retain the real sale/auction item's name, enchantments, and lore. Exact-sample buy orders also show their saved sample. Use the confirmation text for quantity, total, reserved funds, and tax; display items never become the assets removed or settled.
+## Choose a trade type
+
+<Columns cols={2}>
+  <Card title="Advanced buy orders" icon="cart-shopping" href="/en/kitemarket/trading/buy-orders">
+    <span id="advanced-buy-orders" />
+    <span id="editing-conditions" />
+    Reserve a budget, choose plain materials, advanced conditions or an exact sample, and edit matching rules.
+  </Card>
+  <Card title="Fixed-price sales" icon="box" href="/en/kitemarket/trading/sales">
+    <span id="fixed-price-sales" />
+    Sell real items at a unit price, set listing and minimum purchase quantities, and review expected proceeds.
+  </Card>
+  <Card title="Public auctions" icon="gavel" href="/en/kitemarket/trading/auctions">
+    <span id="public-auctions" />
+    Bid manually for the whole lot and understand reservations, late-bid extensions and settlement.
+  </Card>
+</Columns>
+
+## Drafts and confirmation
+
+Choose “Create / edit draft” on `/km` home to open the wizard directly and continue the current draft. Each market and “My orders” list retains the same entrance.
+
+Returning, refreshing or switching interfaces retains unpublished conditions. Published orders must be cancelled and recreated to change them.
+
+Listing, purchase, and bid confirmations retain the real sale/auction item's name, enchantments, and lore. Exact-sample buy orders also show their saved sample.
+
+Use the confirmation text for quantity, total, reserved funds, and tax; display items never become the assets removed or settled.
+
+<Note>
+All modes forbid self-purchasing, self-fulfillment, and self-bidding. Published prices, conditions, and fees are fixed; cancel and recreate to change them. Administrators cannot directly reverse completed trades.
+</Note>
 
 ### Listing quantities and maximum values {#listing-quantities-and-maximum-values}
 
-The publishing wizard calculates **Maximum** from what is actually available:
+The wizard calculates the maximum from what is actually available and rechecks it when applying a quantity and confirming publication. See [quantity limits and calculations for all three modes](/en/kitemarket/trading/sales#listing-quantities-and-maximum-values).
 
-| Type | Quantity limit |
-|---|---|
-| Buy order | Minimum whole quantity allowed by the configured limit, currency amount limit ÷ unit price, and available market funds ÷ unit price |
-| Fixed-price sale | Minimum of the configured quantity limit, currency amount limit ÷ unit price, and actual inventory quantity matching the main-hand sample's complete properties |
-| Auction | Minimum of the configured quantity limit and the current main-hand stack; the starting price is for the entire lot |
+## Items and transaction records
 
-External economy funds are not automatically included in a buy-order budget. Insufficient market funds offer a deposit entrance while retaining the draft; missing sale or auction items show a shortfall. Applying a quantity and confirming publication recheck it. Reduced funds or items require another choice; a GUI quote does not reserve future capacity. Fulfillment's **Maximum available** separately uses remaining demand and the selected matching items.
-
-## Advanced buy orders {#advanced-buy-orders}
-
-The buyer selects a currency, unit price, quantity, duration, and item conditions, then reserves the necessary market funds. A supplier selects matching items and a quantity before confirming. Partial fulfillment is allowed; cancellation or expiry returns unspent funds.
-
-Buy orders have three modes. **Plain material** accepts the selected vanilla materials only without attached metadata; named, enchanted, or custom items are not silently accepted. **Advanced conditions** apply explicit rules. **Exact sample** compares the complete item fingerprint with quantity excluded.
-
-Advanced conditions use **AND**: an item must satisfy every configured condition, while any material in the selected set is accepted. Extra enchantments are disabled by default and require an explicit toggle. Name and lore support exact and contains matching, without regular expressions.
-
-| Condition | Meaning |
-|---|---|
-| Material | Match one material from the selected set, together with the other conditions |
-| Enchantments | Each requested enchantment must be in its own level range; extra enchantments are a separate setting |
-| Durability | Remaining durability percentage, 0–100; 80–100 means at least 80% remains; items without durability are rejected when this condition is set |
-| Name / lore | Use the editor's exact or contains rule; unset fields impose no restriction |
-| Exact sample | Compare the fingerprint of an item normalized to a quantity of one; trading quantity is separate |
-
-Advanced vanilla rules inspect only properties the editor explicitly understands. Admitted custom data that advanced rules cannot interpret requires an exact sample. Exact mode does not lift the item admission restrictions described below.
-
-<ScreenshotPlaceholder image="/images/kitemarket/screenshot-rule-editor.png" title="Advanced conditions" description="Real gameplay screenshot coming later: materials, enchantment ranges, durability and name/lore conditions." lang="en" />
-
-### Editing conditions {#editing-conditions}
-
-Order details and listing confirmations explain which conditions apply in the selected mode. Plain material mode does not apply advanced conditions retained in the editor. Advanced mode shows its individual rules; exact-sample mode compares the sample's complete properties.
-
-Open **Materials** to select multiple items from the current server catalog. Click a selected item to remove it. Filter by material ID, show selected items only, add the held material, or enter IDs in bulk, up to 64 materials. Materials failing item admission cannot be newly selected. Invalid bulk input preserves the existing selection; a cleared set must be filled before listing.
-
-Click **Enchantments** to open the selector. Search Chinese names, English names or IDs, such as `锋利`, `Sharpness` or `minecraft:sharpness`, or clear the search. Cancelling input preserves the filter and draft. Then choose an enchantment and adjust its minimum and maximum levels with the buttons. You can also remove an individual condition. A minimum of zero allows the enchantment to be absent; `0–0` requires its absence. **Import from main hand** replaces the current enchantment conditions with the held item's enchantments, setting each minimum and maximum to its held level. If no material is selected, it also adds the held material. Other edited conditions remain, and importing switches to advanced mode.
-
-**Durability** provides minimum and maximum percentage buttons in steps of 5%. Click a value to enter a precise integer, choose 100% or at least 50%, or import the held item's remaining durability. A configured range requires a durable item; clearing it removes that restriction.
-
-Name and lore have dedicated pages for **Exact** and **Contains** matching. Chat accepts only content, without `=` or `~` condition prefixes. Use `\n` between lore lines. Importing from the main hand uses the complete original text, including formatting and line breaks, for exact matching. Clearing removes the restriction; importing empty text with exact matching requires that field to be empty.
-
-### Fulfillment preview {#fulfillment-preview}
-
-1. Click **Supply** in a buy order to preview your inventory storage slots. Icons retain the real name, enchantments, and original lore, with added match results, rejection reasons, and quantities to take and leave.
-2. Click a matching slot to protect it; click again to include it. Protected items are excluded from this fulfillment. Protection belongs only to this preview flow, not a permanent inventory setting; select it again when starting another fulfillment.
-3. Set a quantity or use **Maximum available** to recalculate from unprotected matching items and the order's remaining demand. Items are selected in inventory-slot order. A shortfall is shown and prevents final confirmation. **Refresh** reads the order and inventory again for the latest available quantity.
-4. Review the quantity from each slot, gross proceeds, tax, and net income. The confirmation also lists source slots and quantities so you can catch a selected tool or collectible before submitting.
-5. After final confirmation, the actual inventory properties and quantities are checked again before removal; submitting the order rechecks its revision and remaining demand. Inventory changes reject removal. If the order expires or another supplier fills it, use the operation record to check any items already escrowed and inspect claims before starting a new operation.
-
-Previewing does not move or modify inventory items. Fulfillment transfers snapshots of the actual selected items instead of generating replacements from the buyer's sample.
-
-<ScreenshotPlaceholder image="/images/kitemarket/screenshot-supply-preview.png" title="Fulfillment preview" description="Real gameplay screenshot coming later: quantities to take and leave, mismatch reasons and net income." lang="en" />
-
-## Exact samples and custom items {#exact-samples-and-custom-items}
-
-Exact mode retains serialized item data and compares complete properties, including the name, lore, enchantments, and serializable custom data. Sample stack size does not define the order quantity or price. Changing durability, name, or other metadata can make an item stop matching.
-
-New exact buy orders retain both the real sample and rule fingerprint, validate admission and matching material/fingerprint when published, and normalize the sample quantity to one. The sample is for display; fulfillment still transfers the supplier's actual items. Historical orders containing only a fingerprint identify the missing display sample instead of guessing or recreating the original item.
-
-KiteMarket does not interpret third-party item IDs or equate items solely by appearance. Nodes must have matching Minecraft versions and item profiles. Validate real samples created by your item plugin before enabling player trading.
-
-Exact samples still must pass item admission and serialization round-trip checks. Exact mode cannot bypass these restrictions. `1.0.0` does not accept new trades in items with nested storage structures, such as shulker boxes and bundles; empty shulker boxes are also excluded. Other special items or data can be traded only if admitted by the current build. If you see `UNVERIFIED_SPECIAL_ITEM`, `UNVERIFIED_ITEM_DATA`, or `ITEM_ROUNDTRIP_UNSAFE`, stop listing that item instead of retrying in exact mode. Follow the [operations and migration guide](/en/kitemarket/operations) for safe withdrawal of assets already in escrow.
-
-## Fixed-price sales {#fixed-price-sales}
-
-The seller escrows real items with the same properties as the main-hand sample and chooses a **per-item unit price** and duration. One listing cannot mix differing item properties, and buyers can choose a partial quantity. For example, 16 items at a unit price of 8 cost 128 in total. Buyers review the unit price, quantity, currency and purchase total before confirming. Items enter the buyer's claims, and the seller receives income after the order's tax. Unsold items can be withdrawn to the seller's claims. A full inventory does not cause items to be dropped on the ground.
-
-Set a **minimum purchase quantity** on the sale terms page. It defaults to 1 and ranges from 1 to the listed quantity. A purchase must reach the minimum; when fewer items remain, the entire remainder must be purchased together. For example, a minimum of 3 with only 2 remaining permits a purchase of 2, but not 1. The published minimum is fixed; cancel and recreate to change it.
-
-The listing confirmation estimates gross proceeds, tax and net income for selling all items in one purchase. Partial purchases calculate tax separately, so accumulated net income can differ through minor-unit rounding; use individual transaction records for the actual amounts. Buy orders use unit prices for partial fulfillment, and auction bids remain whole-lot totals.
-
-Market and detail icons retain the actual sample's name, enchantments and original lore, followed by separate item-information and purchase, fulfillment or bidding guidance sections. Remaining quantity is one value; details list total and traded quantities separately rather than using remaining/total fractions. Count badges show the real quantity only within the item's native stack limit, capped at 99. Larger quantities use a single icon; the exact Lore quantity is always authoritative. Visual counts do not change real stacking limits.
-
-Item information includes listing time, expiry and remaining time. Chinese dates use `yyyy年MM月dd日 HH:mm:ss`, English dates use `yyyy-MM-dd HH:mm:ss`, and both use the server time zone. Remaining time shows whole hours when at least one hour remains, whole minutes when at least one minute remains, and seconds below that. Display countdowns do not change database deadlines or settlement rules. Use the order description and confirmation for quantities and amounts; display icons are never regenerated into settlement items.
-
-## Public auctions {#public-auctions}
-
-Bids are manual total amounts for one item or stack. The highest accepted bid is fully reserved, and outbid funds immediately return to the wallet. There is no proxy bidding, buyout, or hidden reserve price. An accepted bid with less than 30 seconds remaining extends the deadline to at least 30 seconds after that bid, capped at 5 minutes after the original deadline. These are fixed rules, with deadlines checked against database time.
-
-Use the order's starting price, minimum increment, and deadline. Self-bidding is not permitted. A seller must not bypass settlement by cancelling an auction with an accepted bid; administrative intervention requires an audit reason.
-
-The starting price is the total price for the whole auction lot, not a price multiplied by item quantity. The listing confirmation estimates tax and net income at the starting price; settlement uses the final highest accepted bid.
-
-Details show the minimum accepted bid, increment, whether you are leading, and additional funds needed for the minimum bid. A leading bidder only needs to fund the increase. **Bid the current minimum** opens a confirmation first; a higher total can also be entered. Another bid changes the revision and rejects an old confirmation, requiring a refresh; bids are never automatically increased. If the next minimum exceeds the currency limit, further bidding is disabled while the existing highest bid still settles normally.
-
-<ScreenshotPlaceholder image="/images/kitemarket/screenshot-auction-confirm.png" title="Auction confirmation" description="Real gameplay screenshot coming later: the actual lot, total bid, reserved funds and final confirmation." lang="en" />
-
-At expiry, the winner receives the items in claims and the seller receives income after tax. With no bids, items return to the seller's claims. All modes forbid self-purchasing, self-fulfillment, and self-bidding. Published prices, conditions, and fees are fixed; cancel and recreate to change them. Administrators cannot directly reverse completed trades.
-
-## Escrow and claims {#escrow-and-claims}
-
-If listing creation fails after item escrow, inspect claims and the operation record before submitting the items again. Claims split items according to their actual stack limits, independently of GUI count badges. Insufficient inventory space leaves items in claims and asks the player to make room before trying again; nothing is dropped or deleted. If money or item delivery becomes `UNKNOWN`, stop retrying, record the operation ID, and ask an administrator to [reconcile it](/en/kitemarket/operations).
-
-## Search and transaction receipts {#search-and-transaction-receipts}
-
-Filter by type, currency, or material, then sort by ending time, newest first, or price. Search covers order IDs, material IDs, real names, lore, and active advanced-condition text. `%` and `_` are literal characters; serialized bytes and fingerprints are excluded. Database filtering happens before pagination, and pages retain your filters. Price sorting uses sale and buy-order unit prices and the current highest auction bid, or the starting price when there are no bids. Filter to the same type and currency first; no exchange rates or cross-currency valuation are applied.
-
-Click a history entry for a read-only receipt showing the individual trade's quantity, currency, gross amount, fixed tax, net-income recipient, and confirmed refunds or returned items. Seller proceeds come from the linked transaction, never cumulative order quantities. Your proceeds receipt does not expose the buyer's original operation evidence.
-
-Bidder history includes the amount unfrozen when outbid and the settled whole lot when winning. Raising your own bid is not recorded as being outbid; duplicate requests or concurrent settlement workers do not duplicate these records.
-
-Historical and current operation states are separate. Missing older details are explicitly marked, not treated as zero or successful. Result messages distinguish success, failure and pending review, with details and relevant wallet or claims entrances. When needed, use the receipt's **View / copy operation ID** control to show the complete UUID in chat and copy it for `inspect`. Default summaries stay concise, and audit records retain the ID. Pending results do not offer automatic retries, refunds or redelivery.
+<Columns cols={2}>
+  <Card title="Fulfillment preview and confirmation" icon="cart-shopping" href="/en/kitemarket/trading/supply">
+    <span id="fulfillment-preview" />
+    Inspect matching results, protect inventory slots, and review quantities to take and expected proceeds.
+  </Card>
+  <Card title="Exact samples and item admission" icon="fingerprint" href="/en/kitemarket/trading/items">
+    <span id="exact-samples-and-custom-items" />
+    Understand complete fingerprints, custom data, node consistency and special-item restrictions.
+  </Card>
+  <Card title="Escrow and item claims" icon="box-open" href="/en/kitemarket/trading/claims">
+    <span id="escrow-and-claims" />
+    Inspect claimable items and their status, with stack limits, inventory space and uncertain results.
+  </Card>
+  <Card title="Search, history and transaction receipts" icon="clock" href="/en/kitemarket/trading/history">
+    <span id="search-and-transaction-receipts" />
+    Filter market orders and review individual amounts, tax, income recipients and operation states.
+  </Card>
+</Columns>

@@ -1,0 +1,127 @@
+---
+title: "Interface and layout"
+description: "Configure renderers, home layouts, player preferences, and resource-pack identity."
+canonical: "https://www.kitemc.com/en/kitemarket/configuration/gui"
+---
+
+The default vanilla interface uses a warm 54-slot layout: a category home, tools at the top, 36 list entries in the middle, and paging/back controls below. No resource pack is needed.
+
+See [installation and configuration](/en/kitemarket/guide) for setup. For titles, icons, Lore, and custom placement, see [vanilla menu customization](/en/kitemarket/configuration/menus).
+
+## Common settings
+
+```yaml
+gui:
+  renderer: auto
+  auto-order: [itemsadder, vanilla]
+  default-themes: {}
+  allow-player-switch: true
+  home-layout: auto
+  sounds:
+    enabled: true
+  vanilla:
+    layout: auto
+  itemsadder:
+    enabled: true
+    diagnostics: false
+    pack-sha1: ""
+    pack-id: ""
+```
+
+Current renderer choices are `auto/vanilla/itemsadder`.
+
+`auto-order` selects the attempt order, defaulting to ItemsAdder, then vanilla; `default-themes` names backend defaults.
+
+Boolean fields require YAML `true/false`, not strings. Use `gui.sounds.enabled: false` to disable sounds.
+
+## General slot layout
+
+`gui.vanilla.layout: auto|warm|legacy` controls general slot mapping.
+
+`auto` selects the compatibility layout when legacy home positions differ from defaults or a page defines `slots`/`buttons.slot`. Changing only titles, icons, names, Lore or backgrounds does not change this mapping.
+
+Explicit `warm` conflicts with custom placement and is rejected.
+
+## Home layout
+
+`gui.home-layout` selects the home page content separately:
+
+| Value | Home behavior |
+|---|---|
+| `auto` | Use the compact category home with the warm layout, no custom `gui.home-slots` and no `menus.home`; preserve the legacy home when existing home customization is present |
+| `compact` | Explicitly use the compact category home; migrate legacy button settings to the source slots below |
+| `legacy` | Use legacy home entrances and `gui.home-slots` to preserve existing customization |
+
+Even a `menus.home` section that only changes the title or Lore preserves the legacy home with `home-layout: auto`.
+
+The settings serve separate purposes: `vanilla.layout` manages general position mapping, and `home-layout` selects home entrances.
+
+## Compact home {#compact-home}
+
+The compact home's default source and physical slots are the same:
+
+| Slot | Content |
+|---|---|
+| `0` | Player head, “My market”: interface preferences, personal review queue, history and permission-dependent administration |
+| `4` | Greeting and help, informational only |
+| `8` | Claims and actual unclaimed-asset reminder |
+| `20` / `22` / `24` | Fixed-price market / buy-order fulfillment market / auction market |
+| `31` | Create / edit draft, opening the publishing wizard directly |
+| `45` | Wallet |
+| `53` | My orders and a publishing entrance hint |
+
+Orders, claims and review reminders use actual queries; failed queries show unavailable.
+
+“My market” uses the separate `profile` page. Returning home or switching interfaces retains the current publishing draft.
+
+### Publishing entrances
+
+“Create / edit draft” at home slot `31` opens the wizard directly and continues the current draft.
+
+Each market and “My orders” list retains that entrance at the top center: source slot `52` maps to physical slot `4` in the new layout, with paging shown in Lore.
+
+To change a published order, cancel it and publish a new one; its published price and conditions cannot be edited in place.
+
+## Item help and quantities
+
+Default listing help separates item information from purchase, supply or bidding guidance, retaining the original name, enchantments and Lore.
+
+Quantity is one value; details show total and traded quantities separately. Auction quantities represent the entire lot.
+
+Count badges show the real quantity only within the item's native stack limit, capped at 99. Larger quantities use a single icon; the exact Lore quantity is always authoritative. Real item quantities stay unchanged.
+
+### Dates and countdowns
+
+Listing and expiry dates use `yyyy年MM月dd日 HH:mm:ss` in Chinese and `yyyy-MM-dd HH:mm:ss` in English, in the server's time zone.
+
+The countdown updates automatically: whole hours when at least one hour remains, whole minutes when at least one minute remains, then seconds. A deadline message does not prove settlement has completed.
+
+## Player interface preferences
+
+Players select an interface through the player-head profile entry, open `/km ui`, or choose `/km ui <auto|vanilla|itemsadder> [theme-id]`.
+
+This selects a backend and installed theme; it is not a style editor. Server owners customize appearance through `config.yml` only, without an in-game style editor.
+
+Preferences are shared through the same network's database; no saved row means `AUTO`. `allow-player-switch: false` disables choices and uses the server preference.
+
+No IA theme is selected by default; after installing your own theme, put its ID in `gui.default-themes.itemsadder`.
+
+Register the actual pack's SHA-1 and UUID; a player must successfully load that specific pack. See [ItemsAdder integration](/en/kitemarket/dlc) for the steps.
+
+## ItemsAdder and pack identity
+
+Install a legitimate IA runtime and ProtocolLib separately; see the [pinned environment and checksums](/en/kitemarket/compatibility).
+
+Follow the actual IA guide to install a theme, wait for `/iareload` to finish, then run `/iazip`.
+
+Temporarily enable `gui.itemsadder.diagnostics: true` with `/km reload` to read the actual sent UUID, SHA-1 and URL from `[KITEMARKET_PACK]`. Register that identity in the fields above, run `/km reload` again, and disable diagnostics afterward.
+
+Sending or accepting is not successful loading. Updated pack content requires a fresh actual sent UUID and matching digest; entering a random UUID only in KiteMarket cannot establish readiness.
+
+## Third-party themes
+
+Third-party interfaces may be freely developed and sold without an additional KiteMC theme license. Place independent themes in `plugins/KiteMarket/themes/*.yml`, using their own resources and a registered provider; see the [UI SDK](/en/kitemarket/ui-development).
+
+Old `germ`/`dragoncore` preferences, settings and SDK extension positions remain readable, without implying bundled vendor adapters. Without an actual registered provider they report `UI_BACKEND_RETIRED`, fall back and retain the saved preference.
+
+An unavailable pack or theme never triggers market wind-down.

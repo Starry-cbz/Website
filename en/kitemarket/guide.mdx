@@ -1,5 +1,6 @@
 ---
 title: "Installation and configuration"
+description: "Set up the environment, database, currencies, and network license, then verify deployment."
 canonical: "https://www.kitemc.com/en/kitemarket/guide"
 ---
 
@@ -43,41 +44,33 @@ market:
 
 Create a dedicated database with the required permissions. An unavailable database, mismatched network definition, or incomplete initialization must prevent trading. Changing the network, currencies, or database requires a planned stop rather than routine hot reload.
 
-`market.minimum-purchase-quantity` is the default minimum for sale drafts, initially 1. Sellers can set it from 1 to the listed quantity on the terms page. Sales and buy orders use per-item prices; auctions use whole-lot starting totals. A remainder below the purchase minimum must be bought together. Before attaching a protocol 4 build to an existing network, follow the exit, backup and full-stop gates in the [upgrade guide](/en/kitemarket/operations). New markets omit the upgrade source.
+### Quantities and prices
 
-`language` accepts `zh_CN`, `en_US`, or `auto`; language files are in `plugins/KiteMarket/lang/`. `tax-bps` uses basis points, so 100 is 1%. Fees are deducted from the recipient's income, with no listing fee. `market.taxes.<buy/sell/auction>.<currency-id>` overrides that type's `default`, then falls back to `market.tax-bps`. Values range from 0 to 9999 basis points. Orders retain the fee settings captured at creation.
+`market.minimum-purchase-quantity` is the default minimum for sale drafts, initially 1. Sellers can set it from 1 to the listed quantity on the terms page.
+
+Sales and buy orders use per-item prices; auctions use whole-lot starting totals. A remainder below the purchase minimum must be bought together.
+
+Before attaching a protocol 4 build to an existing network, follow the exit, backup and full-stop gates in the [upgrade guide](/en/kitemarket/operations). New markets omit the upgrade source.
+
+### Language and fees
+
+`language` accepts `zh_CN`, `en_US`, or `auto`; language files are in `plugins/KiteMarket/lang/`.
+
+`tax-bps` uses basis points, so 100 is 1%. Fees are deducted from the recipient's income, with no listing fee.
+
+`market.taxes.<buy/sell/auction>.<currency-id>` overrides that type's `default`, then falls back to `market.tax-bps`. Values range from 0 to 9999 basis points.
+
+Orders retain the fee settings captured at creation.
 
 ## 3. Currencies {#_3-currencies}
 
-For example, an integer PlayerPoints currency:
+Set the provider, precision, gateway, and safe limit for your economy plugin under `currencies`. Currency definitions must match throughout a network; do not expose the same external currency twice.
 
-```yaml
-currencies:
-  points:
-    provider: playerpoints
-    scale: 0
-    native-id: ""
-    gateway: survival-1
-    maximum: 2147483647
-    certified-versions: []
-    certified-folia: false
-```
+Keep `certified-versions` empty until you have tested a specific version in isolation; an empty list disables transfers.
 
-`maximum` is in minor units and must fit the backend's safe range. Keep `certified-versions` empty until you have tested a specific version in isolation; an empty list disables transfers. This allowlist is not an official certification report.
-
-Display names are separate from internal currency IDs. Language files provide `currency-names.coins`, `currency-names.points` and labels for custom IDs under `currency-names.<currency-id>`; edit each language file and run `/km reload`. You may instead explicitly configure:
-
-```yaml
-currencies:
-  points:
-    display-name:
-      zh_CN: '点券'
-      en_US: 'Points'
-```
-
-Merge this into the existing `points` configuration without replacing its economy settings. `display-name` accepts a shared string or bilingual map and takes precedence over language-file names. An omitted locale uses its language-file label, then the internal ID if no label is defined. Names do not change wallets, precision, native currencies or network identity. Changes under `currencies` still require a full restart; prefer language files for label-only edits. Listings, confirmations and wallets use the display name without appending the internal ID.
-
-Providers are `vault`, `playerpoints`, `coinsengine`, and `excellenteconomy`. Vault requires `vault-provider` to match the actual Economy service name; the latter two need their native currency ID. Do not copy unverified version numbers or expose the same external currency twice. See [wallets](/en/kitemarket/wallet) for gateway and recovery behavior.
+<Card title="Currency configuration" icon="coins" href="/en/kitemarket/configuration/currencies">
+  See the full PlayerPoints example, provider requirements, display names, and restart rules.
+</Card>
 
 ## 4. Network license {#_4-network-license}
 
@@ -94,148 +87,45 @@ Production defaults provide the product and trust information below. Server owne
 | `license.product-id` | `57ef7c59-7c76-4192-abeb-4c4d7ac0a00f` |
 | `license.public-key` | Bundled KiteMC production RSA public key, retaining the existing trust system |
 
-Retain these values and supply your own key; never substitute a product name or private key. The client appends `/api/v2/license/activate` or `/api/v2/license/heartbeat` to the service root. Remote endpoints require HTTPS and first activation requires online verification. Purchase a license on the [product page](https://license.kitemc.com/en/products/kitemarket), then find the key under [your licenses](https://license.kitemc.com/en/dashboard/licenses).
+Retain these values and supply your own key; never substitute a product name or private key.
+
+The client appends `/api/v2/license/activate` or `/api/v2/license/heartbeat` to the service root. Remote endpoints require HTTPS and first activation requires online verification.
+
+Purchase a license on the [product page](https://license.kitemc.com/en/products/kitemarket), then find the key under [your licenses](https://license.kitemc.com/en/dashboard/licenses).
 
 ## 5. Restart and check the deployment {#_5-restart-and-check-the-deployment}
 
-Restart and verify plugin initialization, database, sessions, and licensing. With isolated test players, exercise a deposit, fixed-price purchase, buy-order fulfillment, auction, withdrawal, and item claim. Then test concurrent operations on two nodes. Validate every enabled provider; a loaded JAR does not prove transfers work.
+Restart and verify plugin initialization, database, sessions, and licensing.
 
-Restart fully after changing network, database, currency, license, or quantity/duration limits. `/km reload` validates and updates presentation settings and new-order fees; invalid candidates leave current settings intact. Server `/reload` and hot plugin unloading are unsupported. See [commands](/en/kitemarket/commands) and [operations](/en/kitemarket/operations).
+With isolated test players, exercise a deposit, fixed-price purchase, buy-order fulfillment, auction, withdrawal, and item claim. Then test concurrent operations on two nodes. Validate every enabled provider; a loaded JAR does not prove transfers work.
+
+### Restarts and reloads
+
+Restart fully after changing network, database, currency, license, or quantity/duration limits.
+
+`/km reload` validates and updates presentation settings and new-order fees; invalid candidates leave current settings intact. Server `/reload` and hot plugin unloading are unsupported.
+
+See [commands](/en/kitemarket/commands) and [operations](/en/kitemarket/operations).
 
 ## 6. Menu configuration {#_6-menu-configuration}
 
-The default vanilla interface uses a warm 54-slot layout: a category home, tools at the top, 36 list entries in the middle, and paging/back controls below. No resource pack is needed. Common settings:
+The default vanilla interface uses a warm 54-slot layout without a resource pack. `gui` controls renderers, general slot layout, home selection, and player preferences.
 
-```yaml
-gui:
-  renderer: auto
-  auto-order: [itemsadder, vanilla]
-  default-themes: {}
-  allow-player-switch: true
-  home-layout: auto
-  sounds:
-    enabled: true
-  vanilla:
-    layout: auto
-  itemsadder:
-    enabled: true
-    diagnostics: false
-    pack-sha1: ""
-    pack-id: ""
-```
+Players choose a backend and installed theme from their profile or `/km ui`. An unavailable pack or theme never triggers market wind-down.
 
-Current renderer choices are `auto/vanilla/itemsadder`. `auto-order` selects the attempt order, defaulting to ItemsAdder, then vanilla; `default-themes` names backend defaults. Boolean fields require YAML `true/false`, not strings. Use `gui.sounds.enabled: false` to disable sounds.
-
-`gui.vanilla.layout: auto|warm|legacy` controls general slot mapping. `auto` selects the compatibility layout when legacy home positions differ from defaults or a page defines `slots`/`buttons.slot`. Changing only titles, icons, names, Lore or backgrounds does not change this mapping. Explicit `warm` conflicts with custom placement and is rejected.
-
-`gui.home-layout` selects the home page content separately:
-
-| Value | Home behavior |
-|---|---|
-| `auto` | Use the compact category home with the warm layout, no custom `gui.home-slots` and no `menus.home`; preserve the legacy home when existing home customization is present |
-| `compact` | Explicitly use the compact category home; migrate legacy button settings to the source slots below |
-| `legacy` | Use legacy home entrances and `gui.home-slots` to preserve existing customization |
-
-Even a `menus.home` section that only changes the title or Lore preserves the legacy home with `home-layout: auto`. The settings serve separate purposes: `vanilla.layout` manages general position mapping, and `home-layout` selects home entrances.
-
-The compact home's default source and physical slots are the same:
-
-| Slot | Content |
-|---|---|
-| `0` | Player head, “My market”: interface preferences, personal review queue, history and permission-dependent administration |
-| `4` | Greeting and help, informational only |
-| `8` | Claims and actual unclaimed-asset reminder |
-| `20` / `22` / `24` | Fixed-price market / buy-order fulfillment market / auction market |
-| `31` | Create / edit draft, opening the publishing wizard directly |
-| `45` | Wallet |
-| `53` | My orders and a publishing entrance hint |
-
-Orders, claims and review reminders use actual queries; failed queries show unavailable. “My market” uses the separate `profile` page. Returning home or switching interfaces retains the current publishing draft.
-
-“Create / edit draft” at home slot `31` opens the wizard directly and continues the current draft. Each market and “My orders” list retains that entrance at the top center: source slot `52` maps to physical slot `4` in the new layout, with paging shown in Lore. To change a published order, cancel it and publish a new one; its published price and conditions cannot be edited in place.
-
-Default listing help separates item information from purchase, supply or bidding guidance, retaining the original name, enchantments and Lore. Quantity is one value; details show total and traded quantities separately. Auction quantities represent the entire lot. Count badges show the real quantity only within the item's native stack limit, capped at 99. Larger quantities use a single icon; the exact Lore quantity is always authoritative. Real item quantities stay unchanged. Listing and expiry dates use `yyyy年MM月dd日 HH:mm:ss` in Chinese and `yyyy-MM-dd HH:mm:ss` in English, in the server's time zone. The countdown updates automatically: whole hours when at least one hour remains, whole minutes when at least one minute remains, then seconds. A deadline message does not prove settlement has completed.
-
-Players select an interface through the player-head profile entry, open `/km ui`, or choose `/km ui <auto|vanilla|itemsadder> [theme-id]`. This selects a backend and installed theme; it is not a style editor. Server owners customize appearance through `config.yml` only, without an in-game style editor. Preferences are shared through the same network's database; no saved row means `AUTO`. `allow-player-switch: false` disables choices and uses the server preference. No IA theme is selected by default; after installing your own theme, put its ID in `gui.default-themes.itemsadder`. Register the actual pack's SHA-1 and UUID; a player must successfully load that specific pack. See [ItemsAdder integration](/en/kitemarket/dlc) for the steps.
-
-Install a legitimate IA runtime and ProtocolLib separately; see the [pinned environment and checksums](/en/kitemarket/compatibility). Follow the actual IA guide to install a theme, wait for `/iareload` to finish, then run `/iazip`. Temporarily enable `gui.itemsadder.diagnostics: true` with `/km reload` to read the actual sent UUID, SHA-1 and URL from `[KITEMARKET_PACK]`. Register that identity in the fields above, run `/km reload` again, and disable diagnostics afterward. Sending or accepting is not successful loading. Updated pack content requires a fresh actual sent UUID and matching digest; entering a random UUID only in KiteMarket cannot establish readiness.
-
-Third-party interfaces may be freely developed and sold without an additional KiteMC theme license. Place independent themes in `plugins/KiteMarket/themes/*.yml`, using their own resources and a registered provider; see the [UI SDK](/en/kitemarket/ui-development). Old `germ`/`dragoncore` preferences, settings and SDK extension positions remain readable, without implying bundled vendor adapters. Without an actual registered provider they report `UI_BACKEND_RETIRED`, fall back and retain the saved preference. An unavailable pack or theme never triggers market wind-down.
+<Card title="Interface and layout" icon="table-cells-large" href="/en/kitemarket/configuration/gui">
+  See the gui example, compact home slots, item help, and ItemsAdder pack configuration.
+</Card>
 
 ### Customize the vanilla GUI {#customize-the-vanilla-gui}
 
-`menus` in `plugins/KiteMarket/config.yml` customizes all 35 pages, including `profile`, `ui`, `themes` and `result`. No resource pack or IA is required. Edit the file, run `/km reload`, then reopen the page. Reload validates a candidate first; invalid settings preserve the previous working configuration. Appearance and placement do not change existing actions, permissions, trading rules or assets, and cannot add trading buttons.
+Server owners use `menus` in `config.yml` to customize all 35 pages. Edit the file, run `/km reload`, and reopen the page; invalid candidates preserve the previous working configuration.
 
-This example retains the legacy “My orders” source slot `32`, so it explicitly selects `home-layout: legacy`. Merge it into the existing `gui` and `menus` sections without duplicating root keys. Omitted fields retain their defaults:
+Appearance and placement do not change existing actions, permissions, trading rules or assets, and cannot add trading buttons.
 
-```yaml
-gui:
-  home-layout: legacy
-menus:
-  home:
-    title:
-      zh_CN: '&6交易集市'
-      en_US: '&6Marketplace'
-    background: BROWN_STAINED_GLASS_PANE
-    buttons:
-      '32':
-        material: NAME_TAG
-        name:
-          zh_CN: '&6我的挂单'
-          en_US: '&6My orders'
-        lore:
-          zh_CN:
-            - '{default}'
-            - '&8点击查看自己的订单。'
-          en_US:
-            - '{default}'
-            - '&8View your own orders.'
-```
-
-| Field | Meaning |
-|---|---|
-| `menus.<page>.title` | Title string or a text map with `zh_CN`/`en_US` |
-| `background` | Vanilla `Material` available on the current server; decorates only empty top/bottom slots in the new layout; `AIR` disables it |
-| `buttons.<source-slot>.material` | Vanilla item icon for a functional control |
-| `buttons.<source-slot>.name` | Control name as a string or bilingual text map |
-| `buttons.<source-slot>.lore` | Additional market help as a text list or bilingual list map |
-| `buttons.<source-slot>.slot` | That control's target slot |
-| `slots`/`icons` | Existing placement/icon syntax; keys remain source slots |
-| `switch.*` | Read for legacy compatibility; no automatic top-right interface switch is added |
-
-Menu slots are `0..53`, excluding the player's inventory. `buttons`, `slots` and `icons` use **source slots**, not the final visible position after the new layout remaps them. List sources `0..35` become physical `9..44`, so additional help for the first product uses `buttons.'0'`. Legacy home source `32` is “My orders” and `34` is “History”; the compact home uses the slots above. Placement changes must swap both sides rather than moving only one. This example explicitly retains the legacy home:
-
-```yaml
-gui:
-  home-layout: legacy
-  vanilla:
-    layout: auto
-menus:
-  home:
-    buttons:
-      '32':
-        slot: 34
-      '34':
-        slot: 32
-```
-
-`buttons.slot` and `slots` share one placement mechanism; do not configure a source twice. Existing syntax may instead use `slots: {'32': 34, '34': 32}`. Custom placement requires `gui.vanilla.layout: auto` to select the compatibility layout, where source and physical slots match; do not simultaneously force `warm`. Legacy `gui.home-slots` remains readable; migrate to the corresponding new home slots when choosing `compact`. Existing `menus.<page>.switch` settings remain readable without injecting a button. Use the profile or `/km ui` to reach interface preferences.
-
-Titles and names accept a shared string or bilingual text map; Lore accepts a shared list or bilingual list map. `&`/`§` support vanilla colors and formatting. Generated names default to gold and Lore to gray, with italics disabled unless explicitly requested. `{default}` preserves original title/name text; a Lore line containing **only** `'{default}'` expands the default market help. Omitting `lore` preserves help; `lore: []` clears only additional help. `${field-name}` reads an existing read-only page field, such as `${wizard.step}`; missing fields display `—` without executing scripts. Raw money fields use minor units, so prefer `{default}` to retain formatted amounts and asset destinations.
-
-Functional controls may change material and name. Products, samples, selected inventory items and claim assets retain their actual material, name, enchantments and original Lore; `material`/`name` cannot disguise them as another item. Only their placement and additional market help can change, without altering inventories, escrow snapshots or transaction subjects.
-
-All configurable page IDs:
-
-```text
-home, profile, browse, browse-filters, order, details, editor, confirm, preview,
-supply-preview, number, materials, durability, text-condition, enchantments,
-enchantment-range, insufficient, wallet, wallet-currency, assets, history,
-receipt, admin, admin-player, admin-wallet, admin-assets, admin-orders,
-admin-player-history, resolve-source, doctor, inspect, evidence, ui, themes, result
-```
-
-Use page IDs rather than titles, translation keys or IA template aliases; for example, use `assets`/`confirm` for `claims`/`wizard-confirm`. Text entries are limited to 512 characters and Lore lists to 64 lines. Materials must exist on the current server. Unknown settings, invalid slots and incomplete swaps invalidate a candidate; `command`, `action`, scripts and expressions are not style settings. On failure, fix the field path identified by the response and logs. If changes are missing, reopen the page and check source slots, layout and whether a third-party theme uses its own template. These settings do not install or download IA resources.
+<Card title="Vanilla menu customization" icon="sliders" href="/en/kitemarket/configuration/menus">
+  See bilingual titles and Lore, real-item protection, source slot swaps, and all page IDs.
+</Card>
 
 ## 7. bStats basic metrics {#_7-bstats-basic-metrics}
 
@@ -250,12 +140,18 @@ metrics:
   enabled: false
 ```
 
-The default is `true`. Alternatively, set the global `enabled` value to `false` in `plugins/bStats/config.yml` to disable bStats collection for plugins that honor that server-wide setting. Either disabled switch prevents the corresponding collection. Restart fully after changing it. Metrics settings do not change trading features or license rules.
+The default is `true`. Alternatively, set the global `enabled` value to `false` in `plugins/bStats/config.yml` to disable bStats collection for plugins that honor that server-wide setting.
+
+Either disabled switch prevents the corresponding collection. Restart fully after changing it. Metrics settings do not change trading features or license rules.
 
 ## 8. Runtime, configuration and SDKs {#_8-runtime-configuration-and-sdks}
 
 Choose **one** matching Legacy, Modern or Current JAR on the [download page](/en/kitemarket/download). The `1.0.0` filenames are `KiteMarket-legacy-1.0.0.jar`, `KiteMarket-modern-1.0.0.jar` and `KiteMarket-current-1.0.0.jar`. API, sources and Javadoc JARs are not server plugins.
 
-Chinese and English configuration packages are labeled `zh_CN` and `en_US`. Retain their production product ID, license endpoint and trusted public key, filling in your license, database and economy configuration. Back up and merge changes into an existing configuration rather than overwriting its network, database or currency identity.
+Chinese and English configuration packages are labeled `zh_CN` and `en_US`. Retain their production product ID, license endpoint and trusted public key, filling in your license, database and economy configuration.
 
-Verify files using `SHA256SUMS.txt` and record the installed version. Isolated test signing keys and credentials are not production configuration. The public repository also provides SDKs and runnable examples; see [market API](/en/kitemarket/api), [interface development](/en/kitemarket/ui-development), and the [compatibility scope](/en/kitemarket/compatibility).
+Back up and merge changes into an existing configuration rather than overwriting its network, database or currency identity.
+
+Verify files using `SHA256SUMS.txt` and record the installed version. Isolated test signing keys and credentials are not production configuration.
+
+The public repository also provides SDKs and runnable examples; see [market API](/en/kitemarket/api), [interface development](/en/kitemarket/ui-development), and the [compatibility scope](/en/kitemarket/compatibility).

@@ -1,0 +1,43 @@
+---
+title: "公开竞拍与结算"
+description: "按整标总价出价，了解冻结资金、末秒延时和到期结算。"
+canonical: "https://www.kitemc.com/kitemarket/trading/auctions"
+---
+
+import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
+
+## 出价规则 {#公开竞拍}
+
+玩家手动提交整件或整堆拍卖的总出价，最高有效出价全额冻结市场资金，被超价后立即释放回钱包。
+
+不存在自动代理最高出价、买断或隐藏保留价。起拍价、最小加价和结束时间以订单为准，不能给自己的订单出价。
+
+起拍价是整个拍卖标的的总价，不乘以物品数量。发布确认页的税额和净收入按起拍价预估，最终使用成交时的最高有效出价结算。
+
+<ScreenshotPlaceholder image="/images/kitemarket/screenshot-market.png" title="竞拍列表中的真实物品说明" description="出价前查看名称、附魔、当前价格、数量及结束时间。" lang="zh" />
+
+## 出价确认
+
+详情显示最低有效出价、最低加价、你是否领先，以及按最低价出价还需追加冻结的金额。领先者再次加价仅需补足差额。
+
+「按当前最低价出价」会先打开确认页；也可以输入更高总价。
+
+其它玩家出价改变订单版本后，旧确认会被拒绝，需要刷新；不会自动追价。最低有效价超过币种上限时不能再加价，已有最高价仍按规则结算。
+
+<ScreenshotPlaceholder image="/images/kitemarket/screenshot-auction-confirm.png" title="竞拍确认" description="真实游戏截图待补充：展示实际标的、总出价、冻结金额和最终确认。" lang="zh" />
+
+## 末秒出价与延时
+
+在剩余不足 30 秒时接受有效出价，会将截止延至至少该次出价后 30 秒，总延长不超过原截止后的 5 分钟。
+
+这些值是固定规则，截止以数据库时间判断。
+
+## 到期结算
+
+到期后物品进入胜出者[领取箱](/kitemarket/trading/claims)，税后收入进入卖家钱包；无人出价则将物品退回卖家领取箱。
+
+已经存在有效出价的拍卖不应通过普通卖家撤单绕过结算；管理员干预需要审计原因。
+
+发布后的价格、条件和费率不能直接改写，修改需撤单重建。管理员不能直接撤销已经完成的成交。
+
+竞拍的冻结释放与胜出结算记录见[历史与交易收据](/kitemarket/trading/history)。

@@ -1,0 +1,80 @@
+---
+title: "Advanced buy orders and conditions"
+description: "Reserve a buy-order budget and configure materials, enchantments, durability, name and lore."
+canonical: "https://www.kitemc.com/en/kitemarket/trading/buy-orders"
+---
+
+import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
+
+The buyer selects a currency, unit price, quantity, duration, and item conditions, then reserves the necessary market funds.
+
+A supplier selects matching items and a quantity before confirming. Partial fulfillment is allowed; cancellation or expiry returns unspent funds.
+
+## Buy-order modes {#advanced-buy-orders}
+
+| Mode | Matching behavior |
+|---|---|
+| Plain material | Accepts the selected vanilla materials only without attached metadata; named, enchanted, or custom items are not silently accepted |
+| Advanced conditions | Applies explicit rules |
+| Exact sample | Compares the complete item fingerprint with quantity excluded |
+
+Order details and listing confirmations explain which conditions apply in the selected mode. Plain material mode does not apply advanced conditions retained in the editor. Advanced mode shows its individual rules; exact-sample mode compares the sample's complete properties.
+
+## Advanced conditions
+
+Advanced conditions use **AND**: an item must satisfy every configured condition, while any material in the selected set is accepted.
+
+Extra enchantments are disabled by default and require an explicit toggle. Name and lore support exact and contains matching, without regular expressions.
+
+| Condition | Meaning |
+|---|---|
+| Material | Match one material from the selected set, together with the other conditions |
+| Enchantments | Each requested enchantment must be in its own level range; extra enchantments are a separate setting |
+| Durability | Remaining durability percentage, 0–100; 80–100 means at least 80% remains; items without durability are rejected when this condition is set |
+| Name / lore | Use the editor's exact or contains rule; unset fields impose no restriction |
+| Exact sample | Compare the fingerprint of an item normalized to a quantity of one; trading quantity is separate |
+
+Advanced vanilla rules inspect only properties the editor explicitly understands. Admitted custom data that advanced rules cannot interpret requires an [exact sample](/en/kitemarket/trading/items). Exact mode does not lift item admission restrictions.
+
+<ScreenshotPlaceholder image="/images/kitemarket/screenshot-rule-editor.png" title="Advanced conditions" description="Editor entrances for materials, enchantments, durability, name, lore and exact samples." lang="en" />
+
+## Editing conditions {#editing-conditions}
+
+### Materials
+
+Open **Materials** to select multiple items from the current server catalog. Click a selected item to remove it.
+
+Filter by material ID, show selected items only, add the held material, or enter IDs in bulk, up to 64 materials. Materials failing item admission cannot be newly selected.
+
+Invalid bulk input preserves the existing selection; a cleared set must be filled before listing.
+
+### Enchantments
+
+Click **Enchantments** to open the selector. Search Chinese names, English names or IDs, such as `锋利`, `Sharpness` or `minecraft:sharpness`, or clear the search. Cancelling input preserves the filter and draft.
+
+Then choose an enchantment and adjust its minimum and maximum levels with the buttons. You can also remove an individual condition.
+
+| Level setting | Meaning |
+|---|---|
+| Minimum of zero | Allows the enchantment to be absent |
+| Range `0–0` | Requires the enchantment to be absent |
+
+**Import from main hand** replaces the current enchantment conditions with the held item's enchantments, setting each minimum and maximum to its held level.
+
+If no material is selected, it also adds the held material. Other edited conditions remain, and importing switches to advanced mode.
+
+### Durability
+
+**Durability** provides minimum and maximum percentage buttons in steps of 5%. Click a value to enter a precise integer, choose 100% or at least 50%, or import the held item's remaining durability.
+
+A configured range requires a durable item; clearing it removes that restriction.
+
+### Name and lore
+
+Name and lore have dedicated pages for **Exact** and **Contains** matching. Chat accepts only content, without `=` or `~` condition prefixes. Use `\n` between lore lines.
+
+Importing from the main hand uses the complete original text, including formatting and line breaks, for exact matching.
+
+Clearing removes the restriction; importing empty text with exact matching requires that field to be empty.
+
+See [listing quantities and maximum values](/en/kitemarket/trading/sales#listing-quantities-and-maximum-values), or continue to [fulfillment preview and confirmation](/en/kitemarket/trading/supply).

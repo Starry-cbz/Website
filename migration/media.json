@@ -67,6 +67,51 @@
       "sha256": "3574f6c3277fd32b27ad065c1514bb1fc064ce676de11204627de8173cb7854f"
     },
     {
+      "path": "/images/kitemarket/screenshot-claims-entrance.png",
+      "bytes": 714903,
+      "sha256": "1f9255c180829c9d82f754874de644235ebbf8eab46a2e5afb496764c275bdbc"
+    },
+    {
+      "path": "/images/kitemarket/screenshot-claims.png",
+      "bytes": 714655,
+      "sha256": "d07264528c1127d165b77788b7cfde903f0830e5da39e60e5dbf3ef6170bb052"
+    },
+    {
+      "path": "/images/kitemarket/screenshot-home.png",
+      "bytes": 629895,
+      "sha256": "65cbbd6b72cd889c3e1ccb005f39b1e6983b24033e2cbbea15277c24be12acf1"
+    },
+    {
+      "path": "/images/kitemarket/screenshot-market.png",
+      "bytes": 208566,
+      "sha256": "16f3ada6b649ad1a77f454c1fb458d4574fc9f2f48fd667aaa1fa202995b304a"
+    },
+    {
+      "path": "/images/kitemarket/screenshot-publish-terms.png",
+      "bytes": 321196,
+      "sha256": "e20eedf375431b3ee5909e0156e6a7826b0b6f801d0c5b0aba4454ddf42c2c9f"
+    },
+    {
+      "path": "/images/kitemarket/screenshot-receipt.png",
+      "bytes": 180752,
+      "sha256": "3eff07f05a83e18b674d36e48f40ed6d565eb13f5d4e2379a050a2563a9dfb20"
+    },
+    {
+      "path": "/images/kitemarket/screenshot-rule-editor.png",
+      "bytes": 648927,
+      "sha256": "599ccd71934efe22d2f841a645d8ee18206fee79dd8747744b9af3b5b8a520e3"
+    },
+    {
+      "path": "/images/kitemarket/screenshot-supply-preview.png",
+      "bytes": 216211,
+      "sha256": "d2e3dbcd0fe0a958fb6f08039fc2521c5ccdcaf998ea8f754758ca9b8aaced14"
+    },
+    {
+      "path": "/images/kitemarket/screenshot-wallet.png",
+      "bytes": 708164,
+      "sha256": "562e69ad5a5c91343f945bd7d95fc16a89ec15f4b08caf9f5708ab7588ad8918"
+    },
+    {
       "path": "/images/logo/arcpass.svg",
       "bytes": 3170,
       "sha256": "10e46836b704b1952e730c22a3aeb5fd0bb981b37ebac5ba8b1c43ff2c0dcea1"
@@ -83,11 +128,6 @@
     }
   ],
   "placeholders": [
-    "/images/kitemarket/screenshot-home.png",
-    "/images/kitemarket/screenshot-market.png",
-    "/images/kitemarket/screenshot-rule-editor.png",
-    "/images/kitemarket/screenshot-supply-preview.png",
-    "/images/kitemarket/screenshot-auction-confirm.png",
-    "/images/kitemarket/screenshot-wallet.png"
+    "/images/kitemarket/screenshot-auction-confirm.png"
   ]
 }

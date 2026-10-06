@@ -1,0 +1,124 @@
+---
+title: "引用市场 SDK"
+description: "GitHub Packages 的 Gradle、Maven 配置与 Release 文件下载备用方式。"
+canonical: "https://www.kitemc.com/kitemarket/api/dependencies"
+---
+
+## 引用 SDK {#引用-sdk}
+
+项目示例使用 GitHub Packages 的 Maven 坐标引用 SDK。GitHub Releases 的直接文件下载作为备用途径；两者提供同一套公开接口，不包含闭源交易核心。
+
+## GitHub Packages {#github-packages}
+
+| SDK | Maven 坐标 |
+|---|---|
+| 只读市场 API | `com.kitemc:kitemarket-api:1.0.0` |
+| 界面 SDK | `com.kitemc:kitemarket-ui-api:1.0.0` |
+
+仓库地址为 `https://maven.pkg.github.com/kitemc/KiteMarket`。对应正式版本发布后，由发行流程上传两个 SDK、sources、Javadoc 和 POM。
+
+引用前先确认[公开仓库](https://github.com/KiteMC/KiteMarket)的 Packages 列表已包含所需版本。下面是引用配置，不表示版本已经上传；运行插件、示例和语言／配置包继续从 GitHub Releases 获取。
+
+### 下载认证 {#下载认证}
+
+GitHub 的 Maven／Gradle 仓库即使包是公开的，也要求下载认证。本地使用具有 `read:packages` 的 **personal access token (classic)**，用户名为你的 GitHub 用户名；只读下载不需要 `write:packages`。
+
+将用户名与 Token 放到用户级 `~/.gradle/gradle.properties`，不要写入项目或提交到 Git：
+
+```properties
+gpr.user=YOUR_GITHUB_USERNAME
+gpr.key=YOUR_CLASSIC_PAT_WITH_READ_PACKAGES
+```
+
+### Gradle Kotlin DSL {#gradle-kotlin-dsl}
+
+```kotlin
+repositories {
+    maven("https://repo.papermc.io/repository/maven-public/")
+    maven {
+        name = "GitHubKiteMarket"
+        url = uri("https://maven.pkg.github.com/kitemc/KiteMarket")
+        credentials {
+            username = providers.gradleProperty("gpr.user")
+                .orElse(providers.environmentVariable("GITHUB_ACTOR")).orNull
+            password = providers.gradleProperty("gpr.key")
+                .orElse(providers.environmentVariable("GITHUB_TOKEN")).orNull
+        }
+        content {
+            includeModule("com.kitemc", "kitemarket-api")
+            includeModule("com.kitemc", "kitemarket-ui-api")
+        }
+    }
+}
+dependencies {
+    compileOnly("com.kitemc:kitemarket-api:1.0.0")
+    compileOnly("com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT")
+}
+tasks.withType<JavaCompile>().configureEach {
+    options.release.set(11)
+}
+```
+
+也可使用 `GITHUB_ACTOR`／`GITHUB_TOKEN` 环境变量提供同一组下载凭据。仍需保留项目原有的 Paper／Bukkit 编译依赖及其仓库。
+
+### Maven {#maven}
+
+Maven 项目的 `pom.xml` 增加以下仓库和依赖：
+
+```xml
+<repositories>
+  <repository>
+    <id>github-kitemarket</id>
+    <url>https://maven.pkg.github.com/kitemc/KiteMarket</url>
+  </repository>
+</repositories>
+<dependencies>
+  <dependency>
+    <groupId>com.kitemc</groupId>
+    <artifactId>kitemarket-api</artifactId>
+    <version>1.0.0</version>
+    <scope>provided</scope>
+  </dependency>
+</dependencies>
+```
+
+在用户级 `~/.m2/settings.xml` 配置同名服务器，凭据从环境变量读取；如果文件已存在，只合并 `server` 条目：
+
+```xml
+<settings>
+  <servers>
+    <server>
+      <id>github-kitemarket</id>
+      <username>${env.GITHUB_ACTOR}</username>
+      <password>${env.GITHUB_TOKEN}</password>
+    </server>
+  </servers>
+</settings>
+```
+
+### 认证与版本检查 {#认证与版本检查}
+
+`401`／`403` 先检查 Token 类型、权限、有效期与用户名；`404` 还需检查坐标和该版本是否已发布。
+
+认证规则以 GitHub 的 [Gradle](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-gradle-registry)与 [Maven](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-apache-maven-registry)文档为准。
+
+## Release 下载备用 {#release-下载备用}
+
+离线开发或无法使用 Packages 认证时，可从 [GitHub Releases](https://github.com/KiteMC/KiteMarket/releases)直接下载对应版本的 `KiteMarket-API-1.0.0.jar`，自行管理仅供编译的依赖。
+
+Release 文件下载不需要 Packages Token；公开仓库提供接口源码、Javadoc 与可运行示例。这里只是备用文件获取方式，不改变下述运行时约束。
+
+## 运行时约束 {#运行时约束}
+
+`plugin.yml` 添加 `depend: [KiteMarket]`。若你的插件没有市场也能运行，可使用 `softdepend`，但仅在确认主插件存在后加载引用 API 的适配类，避免缺失类错误。
+
+**不要打包、shade 或重定位 SDK**。运行时由 KiteMarket 提供唯一接口类，重复副本可能导致服务无法识别。SDK JAR 不是服务器插件。
+
+<Columns cols={2}>
+  <Card title="市场查询与通知" href="/kitemarket/api#等待服务-再异步查询">
+    服务注册、异步查询、不可变 DTO 与成交后通知。
+  </Card>
+  <Card title="Java 界面示例" href="/kitemarket/ui-development/java#java-示例-github-packages">
+    UI SDK 与 Paper、ItemsAdder 的编译依赖。
+  </Card>
+</Columns>

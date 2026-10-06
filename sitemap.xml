@@ -504,4 +504,172 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://www.kitemc.com/en" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kitemc.com/" />
   </url>
+  <url>
+    <loc>https://www.kitemc.com/kitemarket/configuration/currencies</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.kitemc.com/kitemarket/configuration/currencies" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kitemc.com/en/kitemarket/configuration/currencies" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kitemc.com/kitemarket/configuration/currencies" />
+  </url>
+  <url>
+    <loc>https://www.kitemc.com/en/kitemarket/configuration/currencies</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.kitemc.com/kitemarket/configuration/currencies" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kitemc.com/en/kitemarket/configuration/currencies" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kitemc.com/kitemarket/configuration/currencies" />
+  </url>
+  <url>
+    <loc>https://www.kitemc.com/kitemarket/configuration/gui</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.kitemc.com/kitemarket/configuration/gui" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kitemc.com/en/kitemarket/configuration/gui" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kitemc.com/kitemarket/configuration/gui" />
+  </url>
+  <url>
+    <loc>https://www.kitemc.com/en/kitemarket/configuration/gui</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.kitemc.com/kitemarket/configuration/gui" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kitemc.com/en/kitemarket/configuration/gui" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kitemc.com/kitemarket/configuration/gui" />
+  </url>
+  <url>
+    <loc>https://www.kitemc.com/kitemarket/configuration/menus</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.kitemc.com/kitemarket/configuration/menus" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kitemc.com/en/kitemarket/configuration/menus" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kitemc.com/kitemarket/configuration/menus" />
+  </url>
+  <url>
+    <loc>https://www.kitemc.com/en/kitemarket/configuration/menus</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.kitemc.com/kitemarket/configuration/menus" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kitemc.com/en/kitemarket/configuration/menus" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kitemc.com/kitemarket/configuration/menus" />
+  </url>
+  <url>
+    <loc>https://www.kitemc.com/kitemarket/trading/buy-orders</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.kitemc.com/kitemarket/trading/buy-orders" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kitemc.com/en/kitemarket/trading/buy-orders" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kitemc.com/kitemarket/trading/buy-orders" />
+  </url>
+  <url>
+    <loc>https://www.kitemc.com/en/kitemarket/trading/buy-orders</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.kitemc.com/kitemarket/trading/buy-orders" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kitemc.com/en/kitemarket/trading/buy-orders" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kitemc.com/kitemarket/trading/buy-orders" />
+  </url>
+  <url>
+    <loc>https://www.kitemc.com/kitemarket/trading/supply</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.kitemc.com/kitemarket/trading/supply" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kitemc.com/en/kitemarket/trading/supply" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kitemc.com/kitemarket/trading/supply" />
+  </url>
+  <url>
+    <loc>https://www.kitemc.com/en/kitemarket/trading/supply</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.kitemc.com/kitemarket/trading/supply" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kitemc.com/en/kitemarket/trading/supply" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kitemc.com/kitemarket/trading/supply" />
+  </url>
+  <url>
+    <loc>https://www.kitemc.com/kitemarket/trading/sales</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.kitemc.com/kitemarket/trading/sales" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kitemc.com/en/kitemarket/trading/sales" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kitemc.com/kitemarket/trading/sales" />
+  </url>
+  <url>
+    <loc>https://www.kitemc.com/en/kitemarket/trading/sales</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.kitemc.com/kitemarket/trading/sales" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kitemc.com/en/kitemarket/trading/sales" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kitemc.com/kitemarket/trading/sales" />
+  </url>
+  <url>
+    <loc>https://www.kitemc.com/kitemarket/trading/auctions</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.kitemc.com/kitemarket/trading/auctions" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kitemc.com/en/kitemarket/trading/auctions" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kitemc.com/kitemarket/trading/auctions" />
+  </url>
+  <url>
+    <loc>https://www.kitemc.com/en/kitemarket/trading/auctions</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.kitemc.com/kitemarket/trading/auctions" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kitemc.com/en/kitemarket/trading/auctions" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kitemc.com/kitemarket/trading/auctions" />
+  </url>
+  <url>
+    <loc>https://www.kitemc.com/kitemarket/trading/items</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.kitemc.com/kitemarket/trading/items" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kitemc.com/en/kitemarket/trading/items" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kitemc.com/kitemarket/trading/items" />
+  </url>
+  <url>
+    <loc>https://www.kitemc.com/en/kitemarket/trading/items</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.kitemc.com/kitemarket/trading/items" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kitemc.com/en/kitemarket/trading/items" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kitemc.com/kitemarket/trading/items" />
+  </url>
+  <url>
+    <loc>https://www.kitemc.com/kitemarket/trading/claims</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.kitemc.com/kitemarket/trading/claims" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kitemc.com/en/kitemarket/trading/claims" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kitemc.com/kitemarket/trading/claims" />
+  </url>
+  <url>
+    <loc>https://www.kitemc.com/en/kitemarket/trading/claims</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.kitemc.com/kitemarket/trading/claims" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kitemc.com/en/kitemarket/trading/claims" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kitemc.com/kitemarket/trading/claims" />
+  </url>
+  <url>
+    <loc>https://www.kitemc.com/kitemarket/trading/history</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.kitemc.com/kitemarket/trading/history" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kitemc.com/en/kitemarket/trading/history" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kitemc.com/kitemarket/trading/history" />
+  </url>
+  <url>
+    <loc>https://www.kitemc.com/en/kitemarket/trading/history</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.kitemc.com/kitemarket/trading/history" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kitemc.com/en/kitemarket/trading/history" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kitemc.com/kitemarket/trading/history" />
+  </url>
+  <url>
+    <loc>https://www.kitemc.com/kitemarket/api/dependencies</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.kitemc.com/kitemarket/api/dependencies" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kitemc.com/en/kitemarket/api/dependencies" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kitemc.com/kitemarket/api/dependencies" />
+  </url>
+  <url>
+    <loc>https://www.kitemc.com/en/kitemarket/api/dependencies</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.kitemc.com/kitemarket/api/dependencies" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kitemc.com/en/kitemarket/api/dependencies" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kitemc.com/kitemarket/api/dependencies" />
+  </url>
+  <url>
+    <loc>https://www.kitemc.com/kitemarket/ui-development/templates</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.kitemc.com/kitemarket/ui-development/templates" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kitemc.com/en/kitemarket/ui-development/templates" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kitemc.com/kitemarket/ui-development/templates" />
+  </url>
+  <url>
+    <loc>https://www.kitemc.com/en/kitemarket/ui-development/templates</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.kitemc.com/kitemarket/ui-development/templates" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kitemc.com/en/kitemarket/ui-development/templates" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kitemc.com/kitemarket/ui-development/templates" />
+  </url>
+  <url>
+    <loc>https://www.kitemc.com/kitemarket/ui-development/java</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.kitemc.com/kitemarket/ui-development/java" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kitemc.com/en/kitemarket/ui-development/java" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kitemc.com/kitemarket/ui-development/java" />
+  </url>
+  <url>
+    <loc>https://www.kitemc.com/en/kitemarket/ui-development/java</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.kitemc.com/kitemarket/ui-development/java" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kitemc.com/en/kitemarket/ui-development/java" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kitemc.com/kitemarket/ui-development/java" />
+  </url>
+  <url>
+    <loc>https://www.kitemc.com/kitemarket/ui-development/pages</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.kitemc.com/kitemarket/ui-development/pages" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kitemc.com/en/kitemarket/ui-development/pages" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kitemc.com/kitemarket/ui-development/pages" />
+  </url>
+  <url>
+    <loc>https://www.kitemc.com/en/kitemarket/ui-development/pages</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.kitemc.com/kitemarket/ui-development/pages" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kitemc.com/en/kitemarket/ui-development/pages" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kitemc.com/kitemarket/ui-development/pages" />
+  </url>
 </urlset>

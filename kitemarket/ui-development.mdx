@@ -5,56 +5,48 @@ canonical: "https://www.kitemc.com/kitemarket/ui-development"
 
 <span id="界面、主题与第三方开发" />
 
-KiteMarket 提供**完整原版 GUI＋ItemsAdder v4 兼容**。第三方开发者可以自由制作、修改、自用、分发或独立销售自己的配置／Java 界面，**无需额外的 KiteMC 主题授权**。公开 SDK 与示例采用独立 MIT 许可，基础插件不内置 IA 主题资源。
+KiteMarket 提供**完整原版 GUI＋ItemsAdder v4 兼容**。
+
+第三方开发者可以自由制作、修改、自用、分发或独立销售自己的配置／Java 界面，**无需额外的 KiteMC 主题授权**。公开 SDK 与示例采用独立 MIT 许可，基础插件不内置 IA 主题资源。
 
 <Info>
 
 **版本与获取**
 
-本页对应 `1.0.0` 的公开 UI SDK。接口源码和示例通过[公开仓库](https://github.com/KiteMC/KiteMarket)提供，运行包、SDK 和示例文件名见[下载页](/kitemarket/download)。固定 Paper1.21.11／Java21／ItemsAdder4.0.16组合已有自有配置主题与 Java 市场示例的真实打开记录，具体范围见[兼容说明](/kitemarket/compatibility)，不推及其他版本或 Folia。
+本页对应 `1.0.0` 的公开 UI SDK。接口源码和示例通过[公开仓库](https://github.com/KiteMC/KiteMarket)提供，运行包、SDK 和示例文件名见[下载页](/kitemarket/download)。
+
+固定 Paper1.21.11／Java21／ItemsAdder4.0.16组合已有自有配置主题与 Java 市场示例的真实打开记录，具体范围见[兼容说明](/kitemarket/compatibility)，不推及其他版本或 Folia。
 
 </Info>
 
 ## 快速开始 {#快速开始}
 
-只改原版外观时，使用[原版 GUI 文件配置](/kitemarket/guide#原版-gui-个性化)，无需编写插件。使用内置 IA 呈现器时，安装自有资源和主题声明即可；只有需要自定义呈现逻辑时才使用 Java SDK。
+只改原版外观时，使用[原版 GUI 文件配置](/kitemarket/guide#原版-gui-个性化)，无需编写插件。
 
-1. 从公开仓库取得 `examples/ui/themes/example-ia` 的配置示例；或者在公开发行后下载 `KiteMarket-Examples-1.0.0.zip` 中的 Java IA 例。
-2. 按[IA 接入](/kitemarket/dlc)安装自己的命名空间和主题文件，重建资源包并登记实际 UUID、SHA-1。
-3. Java 示例还需将示例 JAR 放入 `plugins/`，正常重启；配置主题只需 `/km reload`。
-4. 玩家成功应用指定包后使用 `/km ui itemsadder example-ia`；Java 例主题为 `example-ia-java`。确认按钮操作真实市场，开发时使用隔离角色和订单。
+使用内置 IA 呈现器时，安装自有资源和主题声明即可；只有需要自定义呈现逻辑时才使用 Java SDK。
 
-### Java 示例：GitHub Packages {#java-示例-github-packages}
+<Steps>
+  <Step title="取得示例">
+    从公开仓库取得 `examples/ui/themes/example-ia` 的配置示例；或者在公开发行后下载 `KiteMarket-Examples-1.0.0.zip` 中的 Java IA 例。
+  </Step>
+  <Step title="安装资源与主题">
+    按[IA 接入](/kitemarket/dlc)安装自己的命名空间和主题文件，重建资源包并登记实际 UUID、SHA-1。
+  </Step>
+  <Step title="加载配置或插件">
+    Java 示例还需将示例 JAR 放入 `plugins/`，正常重启；配置主题只需 `/km reload`。
+  </Step>
+  <Step title="选择并验证">
+    玩家成功应用指定包后使用 `/km ui itemsadder example-ia`；Java 例主题为 `example-ia-java`。确认按钮操作真实市场，开发时使用隔离角色和订单。
+  </Step>
+</Steps>
 
-Java 项目使用 `com.kitemc:kitemarket-ui-api:1.0.0` 为 `compileOnly` 依赖，不得打包或重定位 SDK。完整可运行源码位于公开仓库 `examples/ui-java`，不需要私有市场核心。
+## Java 示例：GitHub Packages {#java-示例-github-packages}
 
-先合并[市场 API 的 Packages 仓库和认证配置](/kitemarket/api#github-packages)，再添加以下依赖。公开包也需要 `read:packages` classic PAT，使用用户级 `gpr.user`／`gpr.key` 或 `GITHUB_ACTOR`／`GITHUB_TOKEN`，不要把 Token 写入项目。引用前确认公开仓库的 Packages 列表有该版本；本说明不代表包已上传。
+Java 项目以 `compileOnly` 引用 UI SDK；公开 SDK 为 Java 11，真实 IA 示例适配代码为 Java 21。
 
-```kotlin
-dependencies {
-    compileOnly("com.kitemc:kitemarket-ui-api:1.0.0")
-    compileOnly("com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT")
-    compileOnly("beer.devs:itemsadder-api:4.0.18-beta-10")
-}
-tasks.withType<JavaCompile>().configureEach {
-    options.release.set(21) // IA 例的适配代码；公开 SDK 本身仍为 Java 11。
-}
-```
-
-Maven 使用相同的 `github-kitemarket` 仓库与 `settings.xml` 凭据，并添加：
-
-```xml
-<dependency>
-  <groupId>com.kitemc</groupId>
-  <artifactId>kitemarket-ui-api</artifactId>
-  <version>1.0.0</version>
-  <scope>provided</scope>
-</dependency>
-```
-
-继续保留 Paper／Bukkit 和 IA API 的编译依赖及各自仓库；Packages 不包含厂商运行插件。两个 SDK 仍为 Java 11，真实 IA 示例适配代码仍为 Java 21。
-
-离线开发或无法使用 Packages 认证时，也可从 [GitHub Releases](https://github.com/KiteMC/KiteMarket/releases)直接下载 `KiteMarket-UI-API-1.0.0.jar` 作为备用编译依赖，下载无需 Packages Token。任何引用方式都不能打包、shade 或重定位 SDK。
+<Card title="查看 Java 示例依赖" href="/kitemarket/ui-development/java#java-示例-github-packages">
+  Gradle、Maven、Packages 认证及 Release 下载备用方式。
+</Card>
 
 ## 玩家选择与服务器默认值 {#玩家选择与服务器默认值}
 
@@ -66,7 +58,9 @@ Maven 使用相同的 `github-kitemarket` 仓库与 `settings.xml` 凭据，并�
 /km ui itemsadder example-ia
 ```
 
-选择只保存偏好；没有真实提供者、客户端或资源未就绪时继续使用原版并说明原因。设置页中的「选择主题」列出已登记主题的后端与可用原因，也可恢复服务器默认主题。偏好在同一市场网络内跨服保存；切换保留草稿，不能重复提交交易。
+选择只保存偏好；没有真实提供者、客户端或资源未就绪时继续使用原版并说明原因。
+
+设置页中的「选择主题」列出已登记主题的后端与可用原因，也可恢复服务器默认主题。偏好在同一市场网络内跨服保存；切换保留草稿，不能重复提交交易。
 
 服务器自动顺序和默认主题示例：
 
@@ -78,154 +72,59 @@ gui:
     itemsadder: example-ia
 ```
 
-玩家按钮、命令帮助和补全仅显示 auto／vanilla／itemsadder。旧 `germ`／`dragoncore` 偏好、配置与 SDK 枚举保留读取，作为已有第三方扩展位置；开发者可以自行注册、维护并验证实际 provider。没有匹配已注册提供者时报告 `UI_BACKEND_RETIRED` 并回退，保留原偏好。
+玩家按钮、命令帮助和补全仅显示 auto／vanilla／itemsadder。
+
+旧 `germ`／`dragoncore` 偏好、配置与 SDK 枚举保留读取，作为已有第三方扩展位置；开发者可以自行注册、维护并验证实际 provider。没有匹配已注册提供者时报告 `UI_BACKEND_RETIRED` 并回退，保留原偏好。
 
 ## 自有主题描述 {#自有主题描述}
 
-把声明文件保存到 `plugins/KiteMarket/themes/*.yml`，用 `/km reload` 校验并加载；无效候选保留当前有效目录。主题 ID 使用小写字母、数字、点、下划线和连字符，最长 96 字符，首字符为字母或数字。`official.*` 及 `km_market_stall` 资源命名空间为保留标识，第三方应使用自己的 ID 和命名空间。
+配置主题使用 `themes/*.yml` 声明字体背景、页面覆盖和实际资源包身份；用 `/km reload` 校验并加载。
 
-```yaml
-schema: 1
-id: example-ia
-backend: itemsadder
-provider: kitemarket.itemsadder
-requires: {}
-resources:
-  font-image: km_example:market
-config:
-  title-offset: 8
-  texture-offset: -8
-pages:
-  '*': {}
-  supply:
-    font-image: km_example:market
-    title-offset: 8
-  result:
-    state-font-images:
-      SUCCESS: km_example:market
-```
-
-上面是 KiteMarket 的通用主题格式，不是厂商原生界面文件。`provider` 是真实已注册实现的稳定 ID；省略时不代表自动生成厂商桥接。`pages.'*'` 作为全部共用页面的默认值，具体**模板 ID**可覆盖字体图片及标题／背景偏移，包括主题列表页 `themes`。页面 ID 与模板 ID 的区别见下表，`supply-preview` 页面使用 `supply` 模板。服务端继续提供实际商品、金额、结果和可执行动作。
-
-`state-font-images` 根据服务端的 `result.status` 选择状态背景。运行值为 `SUCCESS`、`PENDING`、`FAILED`、`UNCONFIRMED`，分别说明完成、待核对、拒绝和尚不能确认结果；不要与账本操作状态混用。先检查本页映射，再检查 `resources` 的状态映射，没有匹配时使用本页／通用背景。具体页面存在时使用该页配置，否则使用 `*`；未指定的字体和偏移使用 `resources`／`config` 默认值。
-
-ItemsAdder 内置 provider 为 `kitemarket.itemsadder`。第三方可以使用自己注册的字体 ID，例如 `km_example:market`，无需主题商品 ID 或权益凭据。`requires: {}` 省略资源包字段，继承节点默认身份；使用另一个包时，添加实际小写 SHA-1（40 位）和下发 UUID 为 `requires.pack-sha1`、`pack-id`，覆盖节点默认值。**空字符串会导致主题校验失败**。未登记有效身份或玩家未成功应用指定包时回退；更新内容必须对应新的实际下发 UUID，不允许已登记的同一 UUID 换摘要。
-
-资源就绪使用公开 ProtocolLib 记录真实 UUID、SHA-1和URL，再与 IA公共发送事件关联；不是调用内部混淆类或只等待发送事件。临时启用 `gui.itemsadder.diagnostics: true` 可查看 `[KITEMARKET_PACK]`，完成身份登记后关闭。对应包失败、丢弃或移除会撤销该记录，无关包不清空 IA状态；断线、换节点、全量移除或 IA重载后重新确认。原生状态报文没有发送代次，同 UUID同内容重发的迟到响应无法凭协议区分，因此内容更新必须使用新实际 UUID。
+<Card title="配置主题与 IA 资源" href="/kitemarket/ui-development/templates#自有主题描述">
+  完整 YAML 示例、主题 ID 规则、状态背景及包加载确认。
+</Card>
 
 ## 安装资源与实现提供者 {#安装资源与实现提供者}
 
-- **ItemsAdder**：自行维护独立命名空间，手动重建和下发资源包，登记实际 SHA-1 与 Minecraft pack UUID。资源包“已发送”不等于“已加载”。市场图标仍为真实 ItemStack；字体图片仅装饰原版容器。
-- **Java 扩展**：通过公开 SDK 注册自己的 provider，独立维护实际引擎、资源和线程兼容。SDK 的兼容枚举值不代表基础插件内置相应厂商适配器。
+内置 IA 呈现器使用配置主题；Java 扩展自行注册提供者。两者都使用真实市场页面和服务端登记动作。
 
-提供者负责显示和输入，交易仍由共用服务端控制器处理。回调必须使用服务器登记的动作／输入标识，不能把客户端金额、玩家身份或旧页面当作有效请求。页面关闭、失效或重复确认继续执行共用会话保护。
+<Columns cols={2}>
+  <Card title="安装资源" href="/kitemarket/ui-development/templates#安装资源与包身份">
+    独立命名空间、资源重建、下发及实际包身份。
+  </Card>
+  <Card title="实现 Java 提供者" href="/kitemarket/ui-development/java#安装资源与实现提供者">
+    注册与注销、页面更新、显示刷新及真实示例。
+  </Card>
+</Columns>
 
-公开 `KiteMarket-UI-API` 模块使用 Java 11 和独立 MIT License，适配插件只做 `compileOnly` 引用，不打包第二份 SDK。实现 `com.kitemc.market.api.ui.UiProvider` 后，通过 Bukkit `ServicesManager` 取得 `KiteMarketUiApi` 并调用 `api.register(owningPlugin, provider)`；禁用插件时关闭返回句柄。`UiPage.token()/pageVersion()` 和 `UiPrompt.token()` 描述页面／字段身份，`UiPage.actions()` 及打开参数提供不透明动作标识；输入／动作仅通过 `UiCallbacks.action(token)`、`input(raw)`、`closed()` 返回，绑定回调再次校验并调度。注册本身不查官方 DLC 权益。
+## 自定义 IA 功能图标 {#自定义-ia-功能图标}
 
-`UiProvider.update(...)` 默认调用 `open(...)`；原生界面可就地更新，但必须一并替换页面身份、全部动作令牌及全部回调，包括关闭回调。厂商事件改变真实客户端／资源就绪状态后，先更新自己的状态，再调用 `api.changed(owningPlugin)` 请求重新检查；只有启用中且仍有有效注册的拥有者可以通知，该方法本身不证明资源就绪。
+功能按钮可使用自己注册的 IA 物品；真实 `subject()` 商品保留原样。
 
-可选 `UiProvider.refresh(player, page, theme)` 用于同页显示刷新，例如倒计时，默认返回 `false`。它保持 token、pageVersion、动作字典及原回调不变，只更新当前已打开视图的显示副本，不重开库存或触发动作；完成返回 `true`，不支持或已关闭返回 `false`。旧提供者保持静态快照，直到正常导航或玩家刷新；主插件不会因不支持此方法而定时重开界面。应用前必须核对当前页面身份，迟到结果不能覆盖新页面。
-
-IA 适配者在玩家调度上下文调用只读 `api.itemsAdderUnavailable(player, page, theme)`，复用主插件观察的字体注册、实际下发 UUID／SHA-1 及对应成功加载证明。`null` 才表示本页资源就绪，其他值为回退原因；该检查不发送资源包、不改偏好、不查官方 DLC 或授予交易权。默认实现为 `IA_READINESS_UNSUPPORTED`，兼容既有接口实现并拒绝把未知状态当作就绪；调用此方法需要安装包含它的 KiteMarket 版本，不能在自己的插件中打包新 SDK 替换旧主插件。
-
-公开仓库 `examples/ui/` 提供极简白框配置主题，`examples/ui-java/` 提供真实 Java IA 适配器。后者使用 Java 21、厂商公共 `compileOnly` API 和真实 `TexturedInventoryWrapper`，注册 `example.itemsadder`，呈现真实市场页面及已登记动作；没有演示余额或假的交易结果。公开 SDK 仍使用 Java 11，示例不安装到 Java 11 Legacy 或未验证的 Folia 节点。
-
-IA 适配器先填充 `TexturedInventoryWrapper.getInternal()` 返回的受保护库存，登记新 holder、动作和回调，再调用公开 `showInventory(player)` 呈现字体标题。只用 Bukkit 打开内部库存会显示 IA 占位标题。保留这一步骤顺序及整窗保护，旧页关闭事件才能与新页分开处理。
-
-`KiteMarket-Examples-1.0.0.zip` 示例包汇总查询例与 IA 例，包含可运行 JAR、主题、MIT 自有资源、双语说明及源码／构建文件。将 IA 示例 JAR 放入 `plugins/`、`theme.yml` 放到 `plugins/KiteMarket/themes/example-ia-java.yml`、`itemsadder/` 内容放到 `plugins/ItemsAdder/contents/km_example/`；按实际 IA 指南重建和下发，登记真实包身份后通过 `/km ui itemsadder example-ia-java` 选择主题。更新、旧关闭、重复点击和聊天输入继续遵循共用保护。
-
-配置主题及 Java 示例中标记为 MIT 的源码与资源可以修改并用于商业界面，无需额外的 KiteMC 主题授权。其他主题遵循各自许可。白框配置与 Java 示例的真实发布页已在[代表组合](/kitemarket/compatibility)打开，这项记录不认证其他资源包或全部页面；源码、编译和注册成功也不替代实际客户端验证。
-
-### 自定义 IA 功能图标 {#自定义-ia-功能图标}
-
-可将已有功能按钮换成自己注册的 IA 物品。`resources.item-icons` 按原版 `Material` 默认映射，`pages.<模板>.slot-icons` 按该页**物理槽位**覆盖；真实 `subject()` 商品不被替换：
-
-```yaml
-resources:
-  font-image: my_theme:market
-  item-icons:
-    BOOK: my_theme:book_button
-pages:
-  '*': {}
-  browse:
-    slot-icons:
-      '49': my_theme:back_button
-```
-
-`UiItemIcons.resolve(page, theme)` 返回只读图标绑定，不创建动作或证明资源就绪。呈现器通过实际 IA API 取得已注册物品并克隆，保留服务端名称、Lore、数量和动作；不存在的注册图标返回 `IA_RESOURCES_PENDING` 并回退。具体模板存在时不与 `'*'` 合并，物品标的、钱包金额和交易规则都不能被素材替换。
+<Card title="功能图标配置" href="/kitemarket/ui-development/templates#自定义-ia-功能图标">
+  Material 默认映射、物理槽位覆盖与只读图标绑定。
+</Card>
 
 ## 页面、动作与生命周期 {#页面、动作与生命周期}
 
-`UiPage.key()` 是逻辑页面 ID，`UiPage.template()` 是主题选择 ID。原版 `menus` 配置按逻辑 ID，IA `pages` 按模板 ID。完整35页及主要动作如下，标记“同名”的页面使用自己的页面 ID 作为模板：
+原版 `menus` 使用逻辑页面 ID，IA `pages` 使用模板 ID。呈现器读取当前快照、动作令牌与输入范围。
 
-| 页面 ID | 模板 ID | 主要动作 |
-|---|---|---|
-| `home` | 同名 | 紧凑首页：三类交易、头像、钱包、领取、我的挂单；旧首页保留原入口 |
-| `profile` | 同名 | 界面偏好、自己的待核对操作、历史、按权限显示的管理入口及返回 |
-| `browse` | `browse` / `orders` | 搜索筛选、翻页、详情；个人订单使用 `orders` |
-| `browse-filters` | 同名 | 类型、币种、材料、排序、搜索 |
-| `order` | `detail` | 购买、供货、出价、撤单前确认 |
-| `details` | 同名 | 查看长文本和条件 |
-| `editor` | 向导模板，见下文 | 类型、物品或条件、数量、价格、时长 |
-| `confirm` | `confirm` / `wizard-confirm` | 最终确认、返回 |
-| `preview` | 同名 | 当前规则的背包匹配检查 |
-| `supply-preview` | `supply` | 保护格、数量、最大可交、刷新、确认 |
-| `number` | 同名 | 增减、预设、实际可用最大值、自定义输入 |
-| `materials` | 同名 | 多选、筛选、主手导入 |
-| `durability` | 同名 | 范围、预设、导入、清除 |
-| `text-condition` | 同名 | 精确／包含、聊天输入、导入、清除 |
-| `enchantments` | 同名 | 按中文名／英文名／ID 搜索、清空搜索、选择、导入、额外附魔开关 |
-| `enchantment-range` | 同名 | 最低／最高等级、移除 |
-| `insufficient` | 同名 | 所需金额和充值入口 |
-| `wallet` / `wallet-currency` | `wallet` | 查看余额、充值／提现确认 |
-| `assets` | `claims` | 查看资产、领取 |
-| `history` / `receipt` | `history` | 翻页、只读收据、按需查看／复制操作编号 |
-| `admin` / `admin-player` | 同名 | 待核对与指定玩家审计入口 |
-| `admin-wallet` / `admin-assets` | 同名 | 指定玩家余额／全状态资产只读查看 |
-| `admin-orders` / `admin-player-history` | 同名 | 指定玩家订单／历史只读查看 |
-| `resolve-source` | `resolve` | 外部请求停止声明与再次确认 |
-| `doctor` | 同名 | 节点、数据库、授权、充提诊断 |
-| `inspect` / `evidence` | `inspect` | 结构化证据与合法核对入口 |
-| `ui` / `themes` | 同名 | 选择后端、主题或恢复默认 |
-| `result` | 同名 | 状态、收据、钱包、领取和继续浏览 |
-
-发布编辑器的模板依步骤为 `wizard-type`、`wizard-item`、`wizard-terms`（收购）、`wizard-sale-terms`（出售）、`wizard-auction-terms`（拍卖）；最后确认使用 `wizard-confirm`。
-
-默认紧凑首页的原始槽位为 `0` 头像、`4` 提示、`8` 领取、`20/22/24` 三类交易、`45` 钱包、`53` 我的挂单。`profile` 使用 `20` 界面偏好、`22` 待核对、`24` 历史、`31` 管理与 `49` 返回；管理入口随权限显示。待核对列表复用 `history` 页面。首页布局可通过 `gui.home-layout: auto|compact|legacy` 选择；已有 `menus.home` 在 `auto` 下保留旧首页，迁移规则见[原版 GUI 个性化](/kitemarket/guide#原版-gui-个性化)。呈现器应读取当前快照和动作，不假设所有首页都使用同一组槽位。
-
-数量最大值按实际钱包、可用背包物品及币种限额计算，拍卖只取主手这一堆；充值和提现使用真实余额及可预查的后端容量。报价变化会要求重新选择，最终提交仍重新校验，主题不得自行放宽上限。收据提供独立的“查看／复制操作编号”动作，在聊天中显示完整编号和复制入口；摘要保持简短，`inspect` 与只读 API 仍保留编号。
-
-一口价按每件单价部分购买，每单最低购买量默认1，可在发布时设为1至发布数量；余量不足最低量时只能买完全部余量。收购按单价分批供货，竞拍起价为整标总价。主题直接使用服务端金额、输入范围与商品说明。数量、总量与已成交量独立展示，保留真实物品属性；商品时间和倒计时只反映当前展示，不替代数据库截止校验。领取仍遵守物品自身堆叠上限，空间不足时留在领取箱。
-
-动作清单以当前 `page.actions()` 的槽位→不透明令牌为准。没有令牌的格子只展示信息；不得自己制造动作字符串，或将上一页面的令牌复用到新页。每次打开或更新都替换页面身份、令牌与回调。输入通过 `UiCallbacks.input(raw)`，关闭通过 `closed()`；`prompt()` 返回 `false` 时主插件继续使用聊天输入并保留草稿。
-
-| 接口 | 生命周期约定 |
-|---|---|
-| `register(owner, provider)` | 注册启用中的所属插件，返回可重复关闭的注销句柄 |
-| `unavailable(...)` | 只检查本页可用性；`null` 表示就绪，其余为原因码 |
-| `open(...)` / `update(...)` | 在玩家上下文呈现克隆快照，替换全部绑定 |
-| `refresh(...)` | 可选同身份原地显示刷新；保留绑定，不重开；默认 `false` |
-| `isOpen(...)` / `close(...)` | 只识别、关闭自己当前的视图 |
-| `prompt(...)` | 原生输入或 `false` 交给主插件聊天输入 |
-| `changed(owner)` | 实际资源变化后通知复查，不等于授予交易权 |
-
-服务可能在数据库初始化后才注册。获取为空时监听 `ServiceRegisterEvent`，服务替换时丢弃旧句柄与页面；所属插件停用时注销，主插件会按会话保护回退。不要在 Folia 全局线程读写玩家库存，示例不声明 Folia 认证。
+<Card title="页面与动作清单" href="/kitemarket/ui-development/pages#页面、动作与生命周期">
+  完整35页、首页槽位、数量规则、输入与生命周期约定。
+</Card>
 
 ## 错误定位 {#错误定位}
 
-| 现象 | 检查 |
-|---|---|
-| 找不到主题 | 文件位于 `themes/*.yml`、ID 唯一、候选重载已通过 |
-| `UI_PROVIDER_UNAVAILABLE` | `provider` 与实际注册 ID、所属插件状态一致 |
-| `IA_PACK_NOT_REGISTERED` | 登记实际观察到的包 UUID、SHA-1，不填随机值 |
-| `IA_PACK_NOT_APPLIED` | 指定包真正加载成功，而非只发送或接受 |
-| `IA_RESOURCES_PENDING` | 字体、图标 ID 已在 IA 注册，资源重建完成 |
-| 打开后仍显示占位标题 | 使用 IA `showInventory(player)`，不要只开内部 Bukkit 库存 |
-| 操作被拒绝或页面过期 | 替换全部令牌与回调，重新打开页面，不重放旧动作 |
-| 重载后保持旧主题 | 查看日志的具体字段路径；无效候选不会替换现有配置 |
+先核对主题、provider 与实际包加载状态；页面过期时重新打开，不重放旧动作。
+
+<Card title="查看错误定位表" href="/kitemarket/ui-development/java#错误定位">
+  主题、资源、占位标题、回调与重载问题。
+</Card>
 
 ## 安装与使用范围 {#安装与使用范围}
 
-服主使用自己的主题或取得第三方主题后，按[ItemsAdder 接入](/kitemarket/dlc)安装资源并登记实际包身份；无需官方 DLC 商品 ID、签名或权益。插件没有默认提供商业 IA 成品，主题不可用时保留原版界面。主插件自身仍按[网络授权](/kitemarket/license)管理交易与资产退出。
+服主使用自己的主题或取得第三方主题后，按[ItemsAdder 接入](/kitemarket/dlc)安装资源并登记实际包身份；无需官方 DLC 商品 ID、签名或权益。
+
+插件没有默认提供商业 IA 成品，主题不可用时保留原版界面。主插件自身仍按[网络授权](/kitemarket/license)管理交易与资产退出。
 
 [兼容状态](/kitemarket/compatibility)分别记录基础插件、提供者和具体主题的证据。公开 SDK 和扩展注册不替代实际运行验收。

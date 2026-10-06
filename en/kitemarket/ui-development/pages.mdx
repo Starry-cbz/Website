@@ -1,0 +1,112 @@
+---
+title: "Pages, actions and lifecycle"
+description: "Logical IDs, theme templates, actual actions and provider contracts across all 35 pages."
+canonical: "https://www.kitemc.com/en/kitemarket/ui-development/pages"
+---
+
+Renderers read current page snapshots and registered actions. The server continues to control page identity, quantity ranges, quotes and transaction results.
+
+## Pages, actions and lifecycle {#pages-actions-and-lifecycle}
+
+`UiPage.key()` identifies the logical page; `UiPage.template()` selects theme configuration. Vanilla `menus` uses page IDs, while IA `pages` uses template IDs.
+
+The complete 35 pages and their main actions follow; “Same” means the template equals the page ID.
+
+### Market and publishing {#market-and-publishing}
+
+| Page ID | Template ID | Main actions |
+|---|---|---|
+| `home` | Same | Compact home: three trading categories, player head, wallet, claims and my orders; legacy home retains its entrances |
+| `profile` | Same | Interface preferences, personal review queue, history, permission-dependent administration and back |
+| `browse` | `browse` / `orders` | Search, filters, pagination, details; personal orders use `orders` |
+| `browse-filters` | Same | Type, currency, material, sort and search |
+| `order` | `detail` | Purchase, supply, bid and cancellation confirmation |
+| `details` | Same | Long text and conditions |
+| `editor` | Wizard templates below | Type, item/conditions, quantity, price and duration |
+| `confirm` | `confirm` / `wizard-confirm` | Final confirmation and return |
+| `preview` | Same | Inventory matching against the draft rule |
+| `supply-preview` | `supply` | Protect slots, quantity, maximum, refresh and confirm |
+
+Wizard templates follow the step: `wizard-type`, `wizard-item`, `wizard-terms` (buy order), `wizard-sale-terms`, `wizard-auction-terms`, then `wizard-confirm`.
+
+### Input and conditions {#input-and-conditions}
+
+| Page ID | Template ID | Main actions |
+|---|---|---|
+| `number` | Same | Increments, presets, actual available maximum and custom input |
+| `materials` | Same | Multi-select, filter and main-hand import |
+| `durability` | Same | Range, presets, import and clear |
+| `text-condition` | Same | Exact/contains, chat input, import and clear |
+| `enchantments` | Same | Chinese/English name or ID search, clear search, selection, import and extra-enchantment option |
+| `enchantment-range` | Same | Minimum/maximum and removal |
+| `insufficient` | Same | Required funds and deposit entrance |
+
+### Assets and administration {#assets-and-administration}
+
+| Page ID | Template ID | Main actions |
+|---|---|---|
+| `wallet` / `wallet-currency` | `wallet` | Balances and transfer confirmation |
+| `assets` | `claims` | View and claim assets |
+| `history` / `receipt` | `history` | Pagination, read-only receipts and on-demand operation ID viewing/copying |
+| `admin` / `admin-player` | Same | Review queue and player audit entrances |
+| `admin-wallet` / `admin-assets` | Same | Read-only player balances and all asset states |
+| `admin-orders` / `admin-player-history` | Same | Read-only player orders and history |
+| `resolve-source` | `resolve` | Source-quiescence declaration and confirmation |
+| `doctor` | Same | Node, database, licensing and transfer diagnostics |
+| `inspect` / `evidence` | `inspect` | Structured evidence and permitted review entrances |
+| `ui` / `themes` | Same | Backend, theme or server-default selection |
+| `result` | Same | Status, receipt, wallet, claims and continue browsing |
+
+## Home and profile slots {#home-and-profile-slots}
+
+Default compact home source slots are `0` player head, `4` help, `8` claims, `20/22/24` trading categories, `45` wallet and `53` my orders.
+
+`profile` uses `20` interface preferences, `22` review queue, `24` history, `31` administration and `49` back; the administration entrance depends on permissions. The review list reuses `history`.
+
+Select home content with `gui.home-layout: auto|compact|legacy`; an existing `menus.home` preserves the legacy home under `auto`. See [vanilla GUI customization](/en/kitemarket/guide#customize-the-vanilla-gui) for migration.
+
+Read current snapshots and actions instead of assuming all home layouts share one slot set.
+
+## Quantities, amounts and results {#quantities-amounts-and-results}
+
+Quantity maxima use actual wallet funds, available inventory items and currency limits; auctions use only the main-hand stack. Transfers use real balances and any known backend receive capacity.
+
+Changed quotes require another choice, and final submission rechecks limits; a theme must not raise them independently.
+
+Receipts provide a separate “View / copy operation ID” action that sends the complete ID and copy control in chat. Summaries stay concise; `inspect` and the read-only API retain IDs.
+
+### Transaction display {#transaction-display}
+
+Sales support partial purchases at a per-item unit price. Their per-order minimum defaults to 1 and can be set from 1 to the listed quantity; a remainder below the minimum must be purchased together. Buy orders use unit prices for partial fulfillment, and auction starting prices apply to the whole lot.
+
+Render host amounts, input ranges and item descriptions. Remaining, total and traded quantities are separate, and real item properties remain intact.
+
+Display timestamps and countdowns do not replace database deadline checks. Claims use actual item stack limits, leaving assets in claims when inventory space is insufficient.
+
+## Actions and input {#actions-and-input}
+
+The current `page.actions()` slot-to-opaque-token map is the action list. Entries without a token are informational. Never fabricate action strings or reuse a previous page's tokens.
+
+Every open/update replaces identity, tokens and callbacks.
+
+Input returns through `UiCallbacks.input(raw)` and closure through `closed()`. Returning `false` from `prompt()` retains the host's validated chat input and drafts.
+
+## Provider lifecycle {#provider-lifecycle}
+
+| Method | Lifecycle contract |
+|---|---|
+| `register(owner, provider)` | Enabled owning plugin; returns an idempotent unregister handle |
+| `unavailable(...)` | Readiness only: `null` is ready, otherwise a reason code |
+| `open(...)` / `update(...)` | Render cloned snapshots in the player context and replace all bindings |
+| `refresh(...)` | Optional display update with the same identity and bindings; never reopen; default `false` |
+| `isOpen(...)` / `close(...)` | Identify and close only your current view |
+| `prompt(...)` | Native input, or `false` for host chat input |
+| `changed(owner)` | Recheck after genuine resource changes; no trading authority |
+
+Registration can wait for database initialization. If lookup is null, listen for `ServiceRegisterEvent`; discard old registrations and views when replaced. Unregister on owner disable; the host handles safe fallback.
+
+Never manipulate player inventories from Folia's global thread. The example does not claim Folia certification.
+
+<Card title="Java renderer development" href="/en/kitemarket/ui-development/java#resources-and-provider-implementations">
+  Provider registration, page updates, display refresh and resource state checks.
+</Card>

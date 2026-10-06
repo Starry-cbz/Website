@@ -46,8 +46,9 @@ CI 在 Linux 上执行上述检查。固定的 CLI 版本在 Windows 下可能�
 | `snippets/` | 共用组件，包括下载和截图占位 |
 | `images/` | 产品图标与实际引用的媒体 |
 | `migration/routes.json`、`migration/anchors.json` | 旧路径和标题 ID 的兼容清单 |
+| `content-pages.json` | 新增专题页与中英文对应清单 |
 | `sitemap.xml` | 规范地址及中英文页面的语言关联 |
-| `styles.css` | 首页和共享组件的补充样式 |
+| `styles.css` | 正文留白、首页和共享组件的补充样式 |
 | `tools/` | 内容、链接与下载行为检查工具 |
 
 产品首页为同名 MDX 文件，例如 `arcpass.mdx`；目录入口使用扁平路由，例如 `arcpass/guide.mdx` 对应 `/arcpass/guide`。
@@ -56,9 +57,11 @@ CI 在 Linux 上执行上述检查。固定的 CLI 版本在 Windows 下可能�
 
 中文和英文页面使用相同目录结构。更新页面时同步另一语言，保留既有标题 ID，并更新站内链接。`docs.json` 中的旧地址重定向指向对应页面，不统一跳到首页。
 
-调整 `migration/routes.json` 后运行 `node tools/generate-sitemap.mjs`，更新中英文规范地址及互相对应的 `hreflang`。媒体按原始字节保留；替换图片后同步 `migration/media.json` 中的大小和 SHA-256。
+KiteMarket 的交易、配置与开发内容按专题分开，原有入口页提供导读卡片。新增页面登记到 `content-pages.json`，并加入 `docs.json` 的对应语言导航；既有迁移映射继续保留。
 
-KiteMarket 的六处截图位共用 `images/kitemarket/screenshot-{home,market,rule-editor,supply-preview,auction-confirm,wallet}.png`。将实际游戏截图添加到对应位置，组件会自动显示；缺图时保留带说明的空框。
+调整 `migration/routes.json` 或 `content-pages.json` 后运行 `node tools/generate-sitemap.mjs`，更新中英文规范地址及互相对应的 `hreflang`。媒体按原始字节保留；替换图片后同步 `migration/media.json` 中的大小和 SHA-256。
+
+KiteMarket 中英文页面共用 `images/kitemarket/screenshot-*.png`。已有首页、竞拍市场、高级条件、供货、钱包、发布条款、领取入口、待领物品及交易收据九张实机截图；竞拍最终确认仍使用 `screenshot-auction-confirm.png` 空位。按实际页面内容命名，不把市场列表的物品提示当作确认页。添加或替换截图时同步媒体摘要，缺图时保留带说明的空框。
 
 VerifyMC 页面应保留停止维护提示。只陈述实际功能及验证范围，不把版本目标或启动检查写成完整兼容认证。
 
@@ -76,4 +79,6 @@ Install Node.js 20.17 or later and the `mint` CLI, then run `mint dev --no-open`
 
 Keep translated pages paired, preserve heading IDs, and maintain exact redirects for published URLs. Runtime plugins, SDKs, examples and configuration packs are hosted on GitHub. Download components use public Releases without browser tokens.
 
-Six shared KiteMarket screenshot slots render real images once the files are supplied; otherwise they display labeled placeholders. Do not substitute artificial gameplay images or broaden compatibility claims beyond their evidence.
+KiteMarket trading, configuration and developer guides are organized into focused pages. Overview pages link to each topic. Register new pages in `content-pages.json` and the matching language navigation, then regenerate `sitemap.xml`. Keep existing migration routes and heading IDs intact.
+
+Chinese and English KiteMarket pages share nine real screenshots for home, auction listings, advanced conditions, fulfillment, wallet, sale terms, the claims entrance, claimable items and receipts. Final bid confirmation remains a labeled placeholder. Name screenshots for the actual screen they show, update media digests when adding or replacing files, and preserve placeholders for missing images. Do not substitute artificial gameplay images or broaden compatibility claims beyond their evidence.

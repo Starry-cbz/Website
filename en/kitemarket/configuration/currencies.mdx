@@ -1,0 +1,61 @@
+---
+title: "Currency configuration"
+description: "Configure economy providers, transfer version gates, and currency display names."
+canonical: "https://www.kitemc.com/en/kitemarket/configuration/currencies"
+---
+
+This page covers `currencies` in `config.yml`. For a first installation, follow [installation and configuration](/en/kitemarket/guide#_3-currencies), then supply the settings for your economy plugin.
+
+## Configuration example
+
+For example, an integer PlayerPoints currency:
+
+```yaml
+currencies:
+  points:
+    provider: playerpoints
+    scale: 0
+    native-id: ""
+    gateway: survival-1
+    maximum: 2147483647
+    certified-versions: []
+    certified-folia: false
+```
+
+## Providers and safe ranges
+
+Providers are `vault`, `playerpoints`, `coinsengine`, and `excellenteconomy`.
+
+Vault requires `vault-provider` to match the actual Economy service name; the latter two need their native currency ID. Do not copy unverified version numbers or expose the same external currency twice.
+
+`maximum` is in minor units and must fit the backend's safe range.
+
+Keep `certified-versions` empty until you have tested a specific version in isolation; an empty list disables transfers. This allowlist is not an official certification report.
+
+See [wallets](/en/kitemarket/wallet) for gateway and recovery behavior.
+
+## Currency display names
+
+Display names are separate from internal currency IDs. Language files provide `currency-names.coins`, `currency-names.points` and labels for custom IDs under `currency-names.<currency-id>`; edit each language file and run `/km reload`.
+
+You may instead explicitly configure:
+
+```yaml
+currencies:
+  points:
+    display-name:
+      zh_CN: '点券'
+      en_US: 'Points'
+```
+
+Merge this into the existing `points` configuration without replacing its economy settings.
+
+`display-name` accepts a shared string or bilingual map and takes precedence over language-file names. An omitted locale uses its language-file label, then the internal ID if no label is defined.
+
+Listings, confirmations and wallets use the display name without appending the internal ID.
+
+## Reloads and restarts
+
+Names do not change wallets, precision, native currencies or network identity. Changes under `currencies` still require a full restart.
+
+Prefer language files for label-only edits.

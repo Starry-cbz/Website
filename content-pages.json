@@ -1,0 +1,173 @@
+{
+  "schema": 1,
+  "pages": [
+    {
+      "target": "/kitemarket/configuration/currencies",
+      "file": "kitemarket/configuration/currencies.mdx",
+      "locale": "zh",
+      "kind": "document"
+    },
+    {
+      "target": "/en/kitemarket/configuration/currencies",
+      "file": "en/kitemarket/configuration/currencies.mdx",
+      "locale": "en",
+      "kind": "document"
+    },
+    {
+      "target": "/kitemarket/configuration/gui",
+      "file": "kitemarket/configuration/gui.mdx",
+      "locale": "zh",
+      "kind": "document"
+    },
+    {
+      "target": "/en/kitemarket/configuration/gui",
+      "file": "en/kitemarket/configuration/gui.mdx",
+      "locale": "en",
+      "kind": "document"
+    },
+    {
+      "target": "/kitemarket/configuration/menus",
+      "file": "kitemarket/configuration/menus.mdx",
+      "locale": "zh",
+      "kind": "document"
+    },
+    {
+      "target": "/en/kitemarket/configuration/menus",
+      "file": "en/kitemarket/configuration/menus.mdx",
+      "locale": "en",
+      "kind": "document"
+    },
+    {
+      "target": "/kitemarket/trading/buy-orders",
+      "file": "kitemarket/trading/buy-orders.mdx",
+      "locale": "zh",
+      "kind": "document"
+    },
+    {
+      "target": "/en/kitemarket/trading/buy-orders",
+      "file": "en/kitemarket/trading/buy-orders.mdx",
+      "locale": "en",
+      "kind": "document"
+    },
+    {
+      "target": "/kitemarket/trading/supply",
+      "file": "kitemarket/trading/supply.mdx",
+      "locale": "zh",
+      "kind": "document"
+    },
+    {
+      "target": "/en/kitemarket/trading/supply",
+      "file": "en/kitemarket/trading/supply.mdx",
+      "locale": "en",
+      "kind": "document"
+    },
+    {
+      "target": "/kitemarket/trading/sales",
+      "file": "kitemarket/trading/sales.mdx",
+      "locale": "zh",
+      "kind": "document"
+    },
+    {
+      "target": "/en/kitemarket/trading/sales",
+      "file": "en/kitemarket/trading/sales.mdx",
+      "locale": "en",
+      "kind": "document"
+    },
+    {
+      "target": "/kitemarket/trading/auctions",
+      "file": "kitemarket/trading/auctions.mdx",
+      "locale": "zh",
+      "kind": "document"
+    },
+    {
+      "target": "/en/kitemarket/trading/auctions",
+      "file": "en/kitemarket/trading/auctions.mdx",
+      "locale": "en",
+      "kind": "document"
+    },
+    {
+      "target": "/kitemarket/trading/items",
+      "file": "kitemarket/trading/items.mdx",
+      "locale": "zh",
+      "kind": "document"
+    },
+    {
+      "target": "/en/kitemarket/trading/items",
+      "file": "en/kitemarket/trading/items.mdx",
+      "locale": "en",
+      "kind": "document"
+    },
+    {
+      "target": "/kitemarket/trading/claims",
+      "file": "kitemarket/trading/claims.mdx",
+      "locale": "zh",
+      "kind": "document"
+    },
+    {
+      "target": "/en/kitemarket/trading/claims",
+      "file": "en/kitemarket/trading/claims.mdx",
+      "locale": "en",
+      "kind": "document"
+    },
+    {
+      "target": "/kitemarket/trading/history",
+      "file": "kitemarket/trading/history.mdx",
+      "locale": "zh",
+      "kind": "document"
+    },
+    {
+      "target": "/en/kitemarket/trading/history",
+      "file": "en/kitemarket/trading/history.mdx",
+      "locale": "en",
+      "kind": "document"
+    },
+    {
+      "target": "/kitemarket/api/dependencies",
+      "file": "kitemarket/api/dependencies.mdx",
+      "locale": "zh",
+      "kind": "document"
+    },
+    {
+      "target": "/en/kitemarket/api/dependencies",
+      "file": "en/kitemarket/api/dependencies.mdx",
+      "locale": "en",
+      "kind": "document"
+    },
+    {
+      "target": "/kitemarket/ui-development/templates",
+      "file": "kitemarket/ui-development/templates.mdx",
+      "locale": "zh",
+      "kind": "document"
+    },
+    {
+      "target": "/en/kitemarket/ui-development/templates",
+      "file": "en/kitemarket/ui-development/templates.mdx",
+      "locale": "en",
+      "kind": "document"
+    },
+    {
+      "target": "/kitemarket/ui-development/java",
+      "file": "kitemarket/ui-development/java.mdx",
+      "locale": "zh",
+      "kind": "document"
+    },
+    {
+      "target": "/en/kitemarket/ui-development/java",
+      "file": "en/kitemarket/ui-development/java.mdx",
+      "locale": "en",
+      "kind": "document"
+    },
+    {
+      "target": "/kitemarket/ui-development/pages",
+      "file": "kitemarket/ui-development/pages.mdx",
+      "locale": "zh",
+      "kind": "document"
+    },
+    {
+      "target": "/en/kitemarket/ui-development/pages",
+      "file": "en/kitemarket/ui-development/pages.mdx",
+      "locale": "en",
+      "kind": "document"
+    }
+  ]
+}
