@@ -1,10 +1,19 @@
 ---
-title: "v1.1 候选导读"
-description: "KiteMarket v1.1 候选功能、新安装准备与专题入口。"
+title: "v1.1 导读"
+description: "KiteMarket v1.1 功能、新安装准备与专题入口。"
 canonical: "https://www.kitemc.com/kitemarket/v1-1/overview"
 ---
 
-本文记录 **v1.1 候选实现**。v1.1 尚未正式发布，运行包、SDK 和示例以对应 GitHub Release／Packages 实际提供的文件为准；[下载页](/kitemarket/download)继续展示公开版本。兼容范围以固定构件的实际验证记录为准。
+import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
+import { V11FeatureMarker, V11PagePanel } from "/snippets/feature-marker.jsx";
+
+<V11FeatureMarker lang="zh" title="v1.1 新增功能" summary="整包、批量、自动化与管理复核" />
+
+<V11PagePanel lang="zh" items={["整包、批量与容器", "费用、货币与自动化", "社区、通知与统计", "管理与风险复核", "自配云端与隐私"]} />
+
+<ScreenshotPlaceholder title="v1.1 功能总览" description="此处预留真实游戏截图，后续可替换为整包、批量或自动化页面。" lang="zh" />
+
+本文介绍 **v1.1** 的功能、安装路径与专题入口。运行包、SDK 和示例以对应 GitHub Release／Packages 实际提供的文件为准；[下载页](/kitemarket/download)继续展示公开版本。兼容范围以固定构件的实际验证记录为准。
 
 ## 按任务阅读
 
@@ -36,7 +45,7 @@ v1.1 以全新安装为主要交付方式，使用交易协议 `5`、数据库�
 
 v1.1 不承诺直接换包或无缝升级。先完整备份原数据库、插件目录、原 JAR、玩家／世界及经济插件数据，在独立副本核对迁移、资产及恢复流程，再决定是否切换原环境。
 
-候选构件保留旧结构检查、迁移前备份、旧节点围栏和资产恢复保护；这些机制不能代替完整旧环境的实际验证。不要混跑新旧构件、删除数据库、改写币种身份或用新安装配置覆盖旧市场。保留原备份和操作证据，按[迁移与回滚说明](/kitemarket/operations#v1-0-to-v1-1)处理。
+v1.1 构件保留旧结构检查、迁移前备份、旧节点围栏和资产恢复保护；这些机制不能代替完整旧环境的实际验证。不要混跑新旧构件、删除数据库、改写币种身份或用新安装配置覆盖旧市场。保留原备份和操作证据，按[迁移与回滚说明](/kitemarket/operations#v1-0-to-v1-1)处理。
 
 ## 界面与集成范围
 

@@ -8,7 +8,7 @@ canonical: "https://www.kitemc.com/en/kitemarket/api/dependencies"
 
 Project examples reference SDK Maven coordinates on GitHub Packages. Direct GitHub Releases downloads remain a fallback. Both provide the same public interfaces without the proprietary trading core.
 
-Examples on this page target the v1.1 candidate SDK on public repository `main`. Version `1.1.0` has not been formally released and cannot be resolved until the matching package is uploaded. Use matching SDKs with a v1.0.0 host. New bundle, fee and business-condition summaries require both a host and SDK that include the v1.1 implementation.
+Examples on this page target the v1.1 SDK on public repository `main`. Before resolving dependencies, confirm that the selected Packages registry contains `1.1.0`, or use the matching SDK asset from GitHub Releases. Use matching SDKs with a v1.0.0 host. New bundle, fee and business-condition summaries require both a host and SDK that include the v1.1 implementation.
 
 ## GitHub Packages {#github-packages}
 
@@ -106,7 +106,7 @@ GitHub's [Gradle](https://docs.github.com/en/packages/working-with-a-github-pack
 
 ## Release-download fallback {#release-download-fallback}
 
-For offline development or when Packages authentication is unavailable, download an actually published SDK matching the host from [GitHub Releases](https://github.com/KiteMC/KiteMarket/releases) and manage it as a compile-only dependency. The v1.1 release filename will be `KiteMarket-API-1.1.0.jar`; current availability follows the release's actual assets.
+For offline development or when Packages authentication is unavailable, download a matching SDK from [GitHub Releases](https://github.com/KiteMC/KiteMarket/releases) and manage it as a compile-only dependency. V1.1 uses `KiteMarket-API-1.1.0.jar`; choose the exact asset listed by the selected Release.
 
 Release-file downloads do not require a Packages Token. The public repository provides interface sources, Javadoc and runnable examples. This fallback does not change the runtime requirements below.
 

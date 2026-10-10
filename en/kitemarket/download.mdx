@@ -28,7 +28,7 @@ import {
 All release files are hosted on GitHub Releases and download directly from GitHub without a GitHub Packages Token. Only public releases appear below.
 
 <Note>
-  V1.1 has not been formally released. Read the [candidate documentation](/en/kitemarket/v1-1/overview) and public repository `main` for new features and interfaces; they do not mean that v1.1 runtimes, SDKs, examples or configuration bundles have been uploaded. Filename examples below describe v1.0.0. Download the actual assets listed for the selected release.
+  Read the [v1.1 documentation](/en/kitemarket/v1-1/overview) and public repository `main` for new features and interfaces. V1.1 runtimes, SDKs, examples and configuration bundles follow the actual assets listed in the matching GitHub Release or Packages version. Filename examples below describe v1.0.0; select a release and use the exact assets listed there.
 </Note>
 
 ## Available versions {#available-versions}
@@ -63,7 +63,7 @@ Both SDKs target Java 11 with MIT licenses. Use `compileOnly` or `provided`: **d
 
 The GitHub Packages registry is `https://maven.pkg.github.com/kitemc/KiteMarket`, with coordinates `com.kitemc:kitemarket-api:1.0.0` and `com.kitemc:kitemarket-ui-api:1.0.0`. Packages dependencies require authentication; Release-file downloads do not. Check that the requested version is published in Packages before using it.
 
-V1.1 candidate sources and new DTOs use `1.1.0` coordinates; see [SDK dependencies](/en/kitemarket/api/dependencies). Changing a coordinate cannot retrieve an unpublished version, and v1.0 SDKs do not supply new interfaces.
+V1.1 sources and new DTOs use `1.1.0` coordinates; see [SDK dependencies](/en/kitemarket/api/dependencies). Use the matching asset for the selected version; v1.0 SDKs do not supply new interfaces.
 
 <Columns cols={2}>
   <Card title="Market API quick start" icon="code" href="/en/kitemarket/api">Maven, Gradle, authentication and query examples.</Card>

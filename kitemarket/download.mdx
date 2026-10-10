@@ -28,7 +28,7 @@ import {
 全部发行文件由 GitHub Releases 提供，使用 GitHub 直接下载，不要求 GitHub Packages Token。下方只展示已经公开的版本。
 
 <Note>
-  v1.1 尚未正式发布。[候选文档](/kitemarket/v1-1/overview)和公开仓库 `main` 可用于阅读新功能与接口；它们不表示 v1.1 运行包、SDK、示例或配置包已经上传。以下文件名示例对应 v1.0.0，下载时以版本列表中的实际资产为准。
+  [v1.1 文档](/kitemarket/v1-1/overview)和公开仓库 `main` 介绍新功能与接口。v1.1 的运行包、SDK、示例和配置包以对应 GitHub Release／Packages 中的实际资产为准；以下文件名示例对应 v1.0.0，选择版本后请以列表中的实际文件为准。
 </Note>
 
 ## 版本列表 {#版本列表}
@@ -63,7 +63,7 @@ import {
 
 GitHub Packages 仓库为 `https://maven.pkg.github.com/kitemc/KiteMarket`，坐标为 `com.kitemc:kitemarket-api:1.0.0` 与 `com.kitemc:kitemarket-ui-api:1.0.0`。Packages 引用需要认证，Release 文件下载不需要。使用前请确认对应版本已在 Packages 发布。
 
-v1.1 候选源码和新增 DTO 使用 `1.1.0` 坐标，引用方式见[SDK 依赖说明](/kitemarket/api/dependencies)。尚未发布的版本不能仅靠修改坐标从 Packages 获取，也不能用 v1.0 SDK 代替新增接口。
+v1.1 源码和新增 DTO 使用 `1.1.0` 坐标，引用方式见[SDK 依赖说明](/kitemarket/api/dependencies)。Packages 只提供已公开的坐标；不能仅靠修改版本号取得未列出的文件，也不能用 v1.0 SDK 代替新增接口。
 
 <Columns cols={2}>
   <Card title="市场 API 入门" icon="code" href="/kitemarket/api">Maven、Gradle、认证及查询示例。</Card>

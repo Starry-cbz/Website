@@ -1,6 +1,6 @@
 ---
 title: "页面、动作与生命周期"
-description: "基础页面与 v1.1 候选新增页的逻辑 ID、模板、动作和生命周期。"
+description: "基础页面与 v1.1 新增页的逻辑 ID、模板、动作和生命周期。"
 canonical: "https://www.kitemc.com/kitemarket/ui-development/pages"
 ---
 
@@ -10,7 +10,7 @@ canonical: "https://www.kitemc.com/kitemarket/ui-development/pages"
 
 `UiPage.key()` 是逻辑页面 ID，`UiPage.template()` 是主题选择 ID。原版 `menus` 配置按逻辑 ID，IA `pages` 按模板 ID。
 
-v1.0.0 的35个基础页及主要动作如下，标记“同名”的页面使用自己的页面 ID 作为模板。v1.1 候选新增页见下方入口，呈现器始终以当前快照和动作为准。
+v1.0.0 的35个基础页及主要动作如下，标记“同名”的页面使用自己的页面 ID 作为模板。v1.1 新增页见下方入口，呈现器始终以当前快照和动作为准。
 
 ### 市场与发布 {#市场与发布}
 
@@ -57,15 +57,15 @@ v1.0.0 的35个基础页及主要动作如下，标记“同名”的页面使�
 | `ui` / `themes` | 同名 | 选择后端、主题或恢复默认 |
 | `result` | 同名 | 状态、收据、钱包、领取和继续浏览 |
 
-### v1.1 候选新增页面
+### v1.1 新增页面
 
 新增整包／批量、业务条件、社区、通知、卖家统计、自动化、收益预约和管理复核页面继续使用同一 `menus` 及主题机制。页键、模板与按钮位置不能根据显示文字猜测。
 
 <Columns cols={2}>
   <Card title="完整新增页键与源槽位" icon="table-cells-large" href="https://github.com/KiteMC/KiteMarket/blob/main/docs/GUI-CONFIGURATION.md">
-    查看候选 GUI 配置表、列表移位、领取与确认的真实动作位置。
+    查看 v1.1 GUI 配置表、列表移位、领取与确认的真实动作位置。
   </Card>
-  <Card title="v1.1 候选专题" icon="book-open" href="/kitemarket/v1-1/overview">
+  <Card title="v1.1 专题" icon="book-open" href="/kitemarket/v1-1/overview">
     了解整包、批量、社区、自动化和管理页面的操作语义。
   </Card>
 </Columns>

@@ -4,7 +4,7 @@ description: "在 menus 中调整页面标题、图标、说明和槽位，并�
 canonical: "https://www.kitemc.com/kitemarket/configuration/menus"
 ---
 
-v1.0 在 `plugins/KiteMarket/config.yml` 的 `menus` 中可个性化35个既有页面，包括 `profile`、`ui`、`themes` 和 `result`。v1.1 候选新增页继续使用相同配置机制，见[候选物品与领取说明](/kitemarket/v1-1/items)。无需资源包或 IA。
+v1.0 在 `plugins/KiteMarket/config.yml` 的 `menus` 中可个性化35个既有页面，包括 `profile`、`ui`、`themes` 和 `result`。v1.1 新增页继续使用相同配置机制，见[v1.1 物品与领取说明](/kitemarket/v1-1/items)。无需资源包或 IA。
 
 编辑后执行 `/km reload`，再重新打开页面；重载先校验候选，无效配置保留上一份有效配置。
 
@@ -103,7 +103,7 @@ menus:
 
 金额原值为最小单位，优先保留 `{default}` 中的格式化金额与资产去向。
 
-v1.1 候选的 `lot-editor`、`lot-batch-item` 提供当前玩家的只读发布策略：
+v1.1 的 `lot-editor`、`lot-batch-item` 提供当前玩家的只读发布策略：
 
 | 字段 | 含义 |
 | --- | --- |
@@ -142,9 +142,9 @@ admin-player-history, resolve-source, doctor, inspect, evidence, ui, themes, res
 
 上述设置不安装或下载 IA 资源。
 
-## v1.1 候选：整包与领取页 {#v1-1-bundle-and-claims}
+## v1.1：整包与领取页 {#v1-1-bundle-and-claims}
 
-以下页面属于 v1.1 候选，不表示构件已正式发布。按实际页面 ID 与**源槽位**配置：
+以下页面属于 v1.1，不表示构件已正式发布。按实际页面 ID 与**源槽位**配置：
 
 | 页面 ID | 真实内容和按钮 |
 | --- | --- |

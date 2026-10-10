@@ -1,10 +1,19 @@
 ---
-title: "v1.1 candidate overview"
-description: "Candidate features, fresh-install preparation and reading paths for KiteMarket v1.1."
+title: "v1.1 overview"
+description: "V1.1 features, fresh-install preparation and reading paths for KiteMarket v1.1."
 canonical: "https://www.kitemc.com/en/kitemarket/v1-1/overview"
 ---
 
-These pages describe the **v1.1 candidate implementation**. V1.1 has not been formally released. Runtime, SDK and example availability depends on the actual files in the matching GitHub Release or Packages version. The [download page](/en/kitemarket/download) continues to show public releases. Compatibility follows actual verification of pinned builds.
+import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
+import { V11FeatureMarker, V11PagePanel } from "/snippets/feature-marker.jsx";
+
+<V11FeatureMarker lang="en" title="New in v1.1" summary="Bundles, automation and administration review" />
+
+<V11PagePanel lang="en" items={["Bundles, bulk listings and containers", "Fees, currencies and automation", "Community, notices and statistics", "Administration and risk review", "Optional cloud review and privacy"]} />
+
+<ScreenshotPlaceholder title="V1.1 feature overview" description="A real gameplay screenshot can be added here later for bundles, bulk listings or automation." lang="en" />
+
+These pages describe **v1.1** features, installation and reading paths. Runtime, SDK and example availability depends on the actual files in the matching GitHub Release or Packages version. The [download page](/en/kitemarket/download) continues to show public releases. Compatibility follows actual verification of pinned builds.
 
 ## Choose a topic
 
@@ -36,7 +45,7 @@ Each node keeps a unique `network.node-id`. Market identity, game version, item 
 
 V1.1 does not promise a direct JAR replacement or seamless upgrade. Back up the full original database, plugin directories, original JARs, player/world data and economy-provider data. Check migration, assets and recovery on an independent copy before deciding to switch the original environment.
 
-The candidate retains legacy-schema checks, pre-migration backups, old-node fencing and asset-recovery protections. Those mechanisms do not replace complete verification of an existing environment. Do not mix builds, delete the database, change currency identities or overwrite an old market with fresh defaults. Keep original backups and evidence, and follow [migration and rollback guidance](/en/kitemarket/operations#v1-0-to-v1-1).
+The release retains legacy-schema checks, pre-migration backups, old-node fencing and asset-recovery protections. Those mechanisms do not replace complete verification of an existing environment. Do not mix builds, delete the database, change currency identities or overwrite an old market with fresh defaults. Keep original backups and evidence, and follow [migration and rollback guidance](/en/kitemarket/operations#v1-0-to-v1-1).
 
 ## Interfaces and integrations
 
