@@ -1,12 +1,14 @@
 ---
 title: "KiteMarket 市场 API 入门"
-description: "Java 11、MIT 的独立只读市场 SDK：查询、不可变 DTO、异步服务注册与安全成交通知。"
+description: "Java 11、MIT 的市场 SDK：不可变查询、成交通知与 v1.1 受限扩展。"
 canonical: "https://www.kitemc.com/kitemarket/api"
 ---
 
 <span id="市场-api-入门" />
 
-`KiteMarket-API` 是独立的 Java 11／MIT SDK，不依赖闭源 `market-core`。它用于只读查询和成交后通知，不提供交易写入口。运行包、公开接口与示例的获取方式见[下载页](/kitemarket/download)。
+`KiteMarket-API` 是独立的 Java 11／MIT SDK，不依赖闭源 `market-core`。原 `KiteMarketApi` 提供只读查询和成交后通知；v1.1 候选通过独立服务增加扩展登记和必须由玩家确认的受限请求。运行包、公开接口与示例的获取方式见[下载页](/kitemarket/download)。
+
+以下查询签名继续适用于 v1.0.0。标注 v1.1 的 DTO 与服务需匹配主插件和 SDK；候选源码已公开不表示 `1.1.0` 包已正式发布。
 
 ## 引用 SDK {#引用-sdk}
 
@@ -77,7 +79,7 @@ api.orders(null, null, "", 0, 36).whenComplete((orders, failure) -> {
 
 所有金额使用 `long` 最小货币单位。`CurrencyView.getPrecision() == 2` 时，`128` 表示 `1.28`；用 `currency.display(amount).toPlainString()` 格式化。时间为 Unix 毫秒，税率使用基点。
 
-一口价 `SELL` 和收购 `BUY` 的 `getUnitPrice()` 是每件单价；拍卖 `AUCTION` 为整标起价。一口价允许部分购买，金额为单价×本次购买数量，计算时检查整数溢出，例如使用 `Math.multiplyExact`。
+单品一口价 `SELL` 和收购 `BUY` 的 `getUnitPrice()` 是每件单价；拍卖 `AUCTION` 为整标起价。v1.1 中还要检查 `getLotMode()`：`BUNDLE` 为整包总价，数量固定1且不可拆分。单品一口价允许部分购买，金额为单价×本次购买数量，计算时检查整数溢出，例如使用 `Math.multiplyExact`。
 
 ### 最低购买量 {#最低购买量}
 
@@ -89,11 +91,22 @@ api.orders(null, null, "", 0, 36).whenComplete((orders, failure) -> {
 
 ### 不可变 DTO {#不可变-dto}
 
-独立 DTO 在 `com.kitemc.market.api.model` 下：`CurrencyView`、`OrderView`、`WalletView`、`ClaimAssetView`、`HistoryEntry`、`TradeSummary`、`ItemSummary` 及枚举。字段和嵌套列表、集合、映射不可变。订单的可选样品摘要只含材质、名称、Lore、附魔与耐久，不能据此生成或领取资产。
+独立 DTO 在 `com.kitemc.market.api.model` 下：`CurrencyView`、`OrderView`、`WalletView`、`ClaimAssetView`、`HistoryEntry`、`TradeSummary`、`ItemSummary` 及枚举。字段和嵌套列表、集合、映射不可变。可选样品是显示摘要，不能据此生成或领取资产。
 
 接口不返回原始审计 JSON、序列化物品字节、精确样品指纹、许可证凭据、执行令牌或恢复证据。
 
 缺失历史金额保持 `null`，不猜成零；`RECORDED` 不表示外部副作用已经成功，`PENDING_REVIEW` 表示需要核对。物品匹配和交易提交由主插件处理，不属于公开查询接口。
+
+### v1.1 整包、费用与业务条件摘要
+
+| 数据 | 读取方式 |
+| --- | --- |
+| 标的模式与内容 | `getLotMode()` 区分 `SINGLE`／`BUNDLE`；`getLotItems()` 返回原始标的的 `LotItemSummary` 与实际数量，不是剩余库存 |
+| 发布时费用 | `getFees()` 返回不可变 `FeeSummary`，旧单可为 `null`，此时保留 `getTaxBasisPoints()`；已付上架费与累计成交／买卖方费用分别读取 |
+| 物品身份 | `ItemSummary` 可含真实 `source`／`businessId`、模型值、标签名及服主明确公开的业务字段 |
+| 收购条件 | `RuleSummary` 增加对应业务条件和有界 `anyOf`；不包含原始 NBT／PDC、组件、字节或精确指纹 |
+
+两套旧 `OrderView` 构造器仍可用，默认 `SINGLE`。不要使用当前配置重算已发布订单费用，也不要把原始整包条目数量当作可购买余量。
 
 ## 成交后通知 {#成交后通知}
 
@@ -119,6 +132,23 @@ public void onTrade(MarketCommittedEvent event) {
 通知通过节点增量轮询触发，可能延迟或遗漏，启动前历史不自动补发，多个节点可能看到同一事件。
 
 按**网络 UUID＋事件 ID**去重；事件 ID 不保证连续。需要长期去重时自行持久化，不能把通知用作补发资金或物品的依据。重启后重新查询权威状态。
+
+## v1.1 扩展与玩家确认请求
+
+两个独立服务通过 `ServicesManager` 获取，原 `KiteMarketApi` 保持只读：
+
+| 服务 | 用途与边界 |
+| --- | --- |
+| `KiteMarketExtensions` | 由启用中的所属插件登记经济、真实物品身份、辅助容器预览、只可拒绝的规则／复核及成交通知提供者；插件停用自动注销 |
+| `KiteMarketRequests` | `quote(...)` 获得服务端报价，`openConfirmation(...)` 打开主插件玩家确认；`discard(...)` 只丢弃未执行报价 |
+
+请求限于 `CREATE`／`BUY`／`SUPPLY`／`BID`／`CANCEL`，绑定玩家会话、插件拥有者、订单与策略版本及有效期。没有公开 `confirm()`／`commit()`，不能发币、任意扣物、管理修复或远程无人交易。整包使用真实背包槽和数量，确认时仍由核心重新采集和校验。
+
+只有 `WriteResult.Status.SUCCEEDED` 表示核心成功；拒绝、取消、过期和待核对分别处理。扩展收到报价或 future 完成不等于玩家已确认，也不能自动重放未知结果。
+
+<Card title="完整 v1.1 SDK 与可运行示例" icon="code" href="https://github.com/KiteMC/KiteMarket/blob/main/docs/API.md">
+  查看扩展 SPI、受限请求、费用报价、生命周期与真实示例源码。
+</Card>
 
 ## 需要扩展玩家界面？ {#需要扩展玩家界面}
 

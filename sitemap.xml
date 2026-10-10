@@ -672,4 +672,76 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://www.kitemc.com/en/kitemarket/ui-development/pages" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kitemc.com/kitemarket/ui-development/pages" />
   </url>
+  <url>
+    <loc>https://www.kitemc.com/kitemarket/v1-1/overview</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.kitemc.com/kitemarket/v1-1/overview" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kitemc.com/en/kitemarket/v1-1/overview" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kitemc.com/kitemarket/v1-1/overview" />
+  </url>
+  <url>
+    <loc>https://www.kitemc.com/en/kitemarket/v1-1/overview</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.kitemc.com/kitemarket/v1-1/overview" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kitemc.com/en/kitemarket/v1-1/overview" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kitemc.com/kitemarket/v1-1/overview" />
+  </url>
+  <url>
+    <loc>https://www.kitemc.com/kitemarket/v1-1/items</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.kitemc.com/kitemarket/v1-1/items" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kitemc.com/en/kitemarket/v1-1/items" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kitemc.com/kitemarket/v1-1/items" />
+  </url>
+  <url>
+    <loc>https://www.kitemc.com/en/kitemarket/v1-1/items</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.kitemc.com/kitemarket/v1-1/items" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kitemc.com/en/kitemarket/v1-1/items" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kitemc.com/kitemarket/v1-1/items" />
+  </url>
+  <url>
+    <loc>https://www.kitemc.com/kitemarket/v1-1/economy</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.kitemc.com/kitemarket/v1-1/economy" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kitemc.com/en/kitemarket/v1-1/economy" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kitemc.com/kitemarket/v1-1/economy" />
+  </url>
+  <url>
+    <loc>https://www.kitemc.com/en/kitemarket/v1-1/economy</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.kitemc.com/kitemarket/v1-1/economy" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kitemc.com/en/kitemarket/v1-1/economy" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kitemc.com/kitemarket/v1-1/economy" />
+  </url>
+  <url>
+    <loc>https://www.kitemc.com/kitemarket/v1-1/community</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.kitemc.com/kitemarket/v1-1/community" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kitemc.com/en/kitemarket/v1-1/community" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kitemc.com/kitemarket/v1-1/community" />
+  </url>
+  <url>
+    <loc>https://www.kitemc.com/en/kitemarket/v1-1/community</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.kitemc.com/kitemarket/v1-1/community" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kitemc.com/en/kitemarket/v1-1/community" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kitemc.com/kitemarket/v1-1/community" />
+  </url>
+  <url>
+    <loc>https://www.kitemc.com/kitemarket/v1-1/administration-risk</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.kitemc.com/kitemarket/v1-1/administration-risk" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kitemc.com/en/kitemarket/v1-1/administration-risk" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kitemc.com/kitemarket/v1-1/administration-risk" />
+  </url>
+  <url>
+    <loc>https://www.kitemc.com/en/kitemarket/v1-1/administration-risk</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.kitemc.com/kitemarket/v1-1/administration-risk" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kitemc.com/en/kitemarket/v1-1/administration-risk" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kitemc.com/kitemarket/v1-1/administration-risk" />
+  </url>
+  <url>
+    <loc>https://www.kitemc.com/kitemarket/v1-1/cloud-review</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.kitemc.com/kitemarket/v1-1/cloud-review" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kitemc.com/en/kitemarket/v1-1/cloud-review" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kitemc.com/kitemarket/v1-1/cloud-review" />
+  </url>
+  <url>
+    <loc>https://www.kitemc.com/en/kitemarket/v1-1/cloud-review</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.kitemc.com/kitemarket/v1-1/cloud-review" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kitemc.com/en/kitemarket/v1-1/cloud-review" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kitemc.com/kitemarket/v1-1/cloud-review" />
+  </url>
 </urlset>

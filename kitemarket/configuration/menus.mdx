@@ -4,7 +4,7 @@ description: "在 menus 中调整页面标题、图标、说明和槽位，并�
 canonical: "https://www.kitemc.com/kitemarket/configuration/menus"
 ---
 
-在 `plugins/KiteMarket/config.yml` 的 `menus` 中可个性化全部35个页面，包括 `profile`、`ui`、`themes` 和 `result`。无需资源包或 IA。
+v1.0 在 `plugins/KiteMarket/config.yml` 的 `menus` 中可个性化35个既有页面，包括 `profile`、`ui`、`themes` 和 `result`。v1.1 候选新增页继续使用相同配置机制，见[候选物品与领取说明](/kitemarket/v1-1/items)。无需资源包或 IA。
 
 编辑后执行 `/km reload`，再重新打开页面；重载先校验候选，无效配置保留上一份有效配置。
 
@@ -103,6 +103,17 @@ menus:
 
 金额原值为最小单位，优先保留 `{default}` 中的格式化金额与资产去向。
 
+v1.1 候选的 `lot-editor`、`lot-batch-item` 提供当前玩家的只读发布策略：
+
+| 字段 | 含义 |
+| --- | --- |
+| `lot.policy.maximum-quantity` | 数量上限；按单品完整选择、批量每个独立组或一个整包标的检查 |
+| `lot.policy.minimum-price` | 当前价格下界，币种最小单位 |
+| `lot.policy.maximum-price` | 结合策略、币种金额上限与所选数量后的价格上界，币种最小单位 |
+| `lot.policy.maximum-duration` | 最长期限，单位秒；发布期限至少60秒 |
+
+出售单品/批量的价格为每件单价，拍卖/整包为标的总价。策略字段不保证实际背包数量、空间或最终准入；超限保留草稿，逐单确认重查原请求，不自动调价或降低最低购买量。
+
 ## 真实商品与资产
 
 功能按钮可改材料和名称；商品、样品、供货背包物品及领取资产仍保留真实材料、名称、附魔和原 Lore，`material`／`name` 不能把它们伪装成另一种物品。
@@ -130,3 +141,18 @@ admin-player-history, resolve-source, doctor, inspect, evidence, ui, themes, res
 重载失败按反馈和日志中的字段路径修正；未显示修改时重新开页并检查原始槽位、布局及第三方主题是否使用自己的模板。
 
 上述设置不安装或下载 IA 资源。
+
+## v1.1 候选：整包与领取页 {#v1-1-bundle-and-claims}
+
+以下页面属于 v1.1 候选，不表示构件已正式发布。按实际页面 ID 与**源槽位**配置：
+
+| 页面 ID | 真实内容和按钮 |
+| --- | --- |
+| `order-contents` | `0..35`已发布整包条目/真实数量，`45/53`分页，`48`刷新，`49`返回；已验证容器项可继续只读预览 |
+| `claims-categories` | `10`全部来源，`19..28`来源分类，`49`返回 |
+| `claims-details` | `0..35`本页所选真实资产/订单/操作引用，`49`返回 |
+| `claims-confirm` | `22`批次/数量/空间/未知提示，`30`取消，`32`确认，`49`返回 |
+
+原 `assets` 页增加 `46`分类、`50`全选/取消本页、`51`领取所选、`52`所选详情；`0..35`为本页资产勾选，`45/53`分页、`48`刷新、`49`返回。`claims` 仍是 IA 模板别名，不能替代 `assets` 页面 ID。
+
+`order-contents`、`claims-details` 和 `assets` 使用列表布局移位；`claims-categories`、`claims-confirm` 使用原源位置。手动领取只处理明确确认的当前页，最多36项；空间不足项保留，未确认结果或会话变更时停止后续项。

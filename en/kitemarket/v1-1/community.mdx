@@ -1,0 +1,75 @@
+---
+title: "v1.1 community, notices and statistics"
+description: "Favorites, saved searches, durable notices, Discord lifecycle and currency-specific statistics."
+canonical: "https://www.kitemc.com/en/kitemarket/v1-1/community"
+---
+
+This page belongs to the [v1.1 candidate documentation](/en/kitemarket/v1-1/overview). Preferences and notices persist; statistics use observed committed trades.
+
+## Favorites and saved searches
+
+Favorite an order and manage it in the community area. Each player can retain 256 favorites and 20 searches. Unavailable orders remain removable without appearing as valid merchandise.
+
+Searches preserve type, currency, material, readable text, business source, category, price bounds, single/bundle kind, featured state and sorting. Running a search reads current orders; saved results are not guaranteed stock.
+
+Material-name matching follows the main market. Saving “钻石” still finds and subscribes to diamond procurement without an exact sample. Editing the text updates material matches while preserving other filters.
+
+Name searches include readable text without color codes, so per-character gradients do not split keywords. Modern items without a custom display name use the public API's `item_name`; custom display names take priority. Search names do not replace business IDs or complete-property matching.
+
+Price bounds are non-negative integer minor units. `123` means 1.23 for a scale-2 currency. Equal integers in different currencies do not represent equal buying power.
+
+Subscriptions apply to future matching orders. Validated search edits do not automatically buy, supply or bid.
+
+The favorite/subscription discovery index supports up to 1,024 players. A full index rejects new registrations before saving preferences. Unsubscribed manual saved searches remain available.
+
+## Personal notices
+
+Notices cover matching new orders, terminal favorites, purchases, sales and auction outbids. Same-type events merge by minute, deduplicate replay and retain up to 100 entries.
+
+Notices persist in the market network when players are offline. Disabling personal notices affects future entries without deleting the inbox or asset records.
+
+Login reports actual unread entries. Online polling combines changes into at most one reminder every 15 seconds. Growth in the same-minute notice produces an update without one message per event.
+
+Delivery does not mark notices read. Opening details or explicitly marking all read updates durable status. Chat shows only a few short order references; details retain targets. Failed reads never appear as zero unread.
+
+## Public broadcasts and Discord
+
+Both default off and require administrator configuration.
+
+Public broadcasts consume new orders with independent node cursors and combine them over 60 seconds by currency and type. Amounts from different currencies are not added or compared; arbitrary item names and lore are excluded.
+
+Discord retains message identity for each actual order: create once, update the same message when remaining quantity or highest bid changes, and delete it when the order becomes terminal. Network limits and daily quotas coalesce repeated changes. `allowed_mentions` disables mentions.
+
+Summaries localize order types, materials and currencies, formatting amounts at the currency's precision. Unit prices, whole-bundle prices, starting lot prices and current lot bids have distinct labels. Bundles show their actual item count; auctions show the complete lot quantity. Buy orders without a sample list only public materials and the condition mode. Inspect full conditions in-game.
+
+Messages retain an order alias and omit player identities and original names/lore/NBT, with no executable trade buttons.
+
+`notifications.discord.language` accepts `zh_CN`, `en_US` or the default `auto`. `auto` inherits the server's `language`; when that is also `auto`, it uses Chinese. Currency labels read the selected language's `display-name`. Customize wording under `community.discord` in `lang/community_<language>.yml`.
+
+Discord configuration and its display snapshot are fixed at startup. Restart the server normally after changing them; `/km reload` does not update this configuration.
+
+A timed-out creation, server error or unconfirmed message ID remains UNKNOWN without automatic duplicate creation. An explicitly rejected rate-limited request may retry after its delay. Message delivery failure does not roll back completed game trades.
+
+## Sellers and rankings
+
+Seller profiles and rankings aggregate committed trades separately for each seller and currency. The 1-, 7- and 30-day choices use **UTC calendar days**, including the current day. They are not exact rolling 24-, 168- or 720-hour windows.
+
+Means, volume and net revenue use actual observations. Failed reads and absent data remain distinct. Switching currency changes the scope; it does not create an exchange rate or mixed-currency ranking.
+
+Rankings can switch between net income, completed trade count and quantity sold. Open a seller's statistics and orders from its ranking entry. Seller pages also include completed orders; historical quantities are not current stock, and trading availability follows the order state.
+
+The seller index supports up to 1,024 players. Beyond that limit, exact individual statistics continue while complete rankings become explicitly unavailable. Indexed sellers are not presented as a complete network ranking.
+
+## Public reference prices
+
+Reference prices group complete comparable items in one currency over rolling 24-hour, 7-day and 30-day windows.
+
+| Value | Meaning |
+| --- | --- |
+| Median | Median of committed trade unit prices |
+| Mean | Unit price weighted by actual traded quantity |
+| Volume | Genuine committed quantity and trade records in the window |
+
+Different properties, bundle compositions or currencies are not forcibly merged. Missing comparable data is not a zero valuation. References are neither executable quotes nor findings of cheating.
+
+See [administration and risk review](/en/kitemarket/v1-1/administration-risk) for use in review signals.

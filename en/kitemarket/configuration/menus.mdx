@@ -4,7 +4,7 @@ description: "Adjust titles, icons, help, and slots while preserving real items 
 canonical: "https://www.kitemc.com/en/kitemarket/configuration/menus"
 ---
 
-`menus` in `plugins/KiteMarket/config.yml` customizes all 35 pages, including `profile`, `ui`, `themes` and `result`. No resource pack or IA is required.
+In v1.0, `menus` in `plugins/KiteMarket/config.yml` customizes 35 existing pages, including `profile`, `ui`, `themes` and `result`. New v1.1 candidate pages use the same mechanism; see [candidate items and claims](/en/kitemarket/v1-1/items). No resource pack or IA is required.
 
 Edit the file, run `/km reload`, then reopen the page. Reload validates a candidate first; invalid settings preserve the previous working configuration.
 
@@ -103,6 +103,17 @@ Omitting `lore` preserves help; `lore: []` clears only additional help.
 
 Raw money fields use minor units, so prefer `{default}` to retain formatted amounts and asset destinations.
 
+The v1.1 candidate `lot-editor` and `lot-batch-item` pages expose read-only publication bounds for the current player:
+
+| Field | Meaning |
+| --- | --- |
+| `lot.policy.maximum-quantity` | Quantity limit for a complete single selection, each independent bulk group or one bundle lot |
+| `lot.policy.minimum-price` | Current lower price bound in currency minor units |
+| `lot.policy.maximum-price` | Upper price bound combining policy, currency limits and the selected quantity, in minor units |
+| `lot.policy.maximum-duration` | Maximum duration in seconds; publication requires at least 60 seconds |
+
+Single/bulk sales use a unit price; auctions/bundles use a lot total. Policy fields do not guarantee inventory quantity, space or final admission. Violations retain the draft, and each confirmation rechecks the original request without automatic repricing or minimum-quantity reduction.
+
 ## Real products and assets
 
 Functional controls may change material and name. Products, samples, selected inventory items and claim assets retain their actual material, name, enchantments and original Lore; `material`/`name` cannot disguise them as another item.
@@ -130,3 +141,18 @@ Unknown settings, invalid slots and incomplete swaps invalidate a candidate; `co
 On failure, fix the field path identified by the response and logs. If changes are missing, reopen the page and check source slots, layout and whether a third-party theme uses its own template.
 
 These settings do not install or download IA resources.
+
+## v1.1 candidate: bundle and claims pages {#v1-1-bundle-and-claims}
+
+These pages belong to the v1.1 candidate and do not imply a published runtime. Configure actual page IDs and **source slots**:
+
+| Page ID | Actual contents and controls |
+| --- | --- |
+| `order-contents` | `0..35` published bundle entries/quantities, `45/53` pages, `48` refresh, `49` back; verified containers open further read-only previews |
+| `claims-categories` | `10` all sources, `19..28` source categories, `49` back |
+| `claims-details` | `0..35` current-page selected assets/order/operation references, `49` back |
+| `claims-confirm` | `22` batch/quantity/capacity/uncertainty notice, `30` cancel, `32` confirm, `49` back |
+
+The existing `assets` page adds `46` categories, `50` select/clear the current page, `51` claim selected and `52` selected details. Sources `0..35` select current-page assets; `45/53` page, `48` refresh and `49` back. `claims` remains an IA template alias, not the `assets` page ID.
+
+`order-contents`, `claims-details` and `assets` use list remapping; `claims-categories` and `claims-confirm` retain their source positions. Manual claiming processes only the confirmed current page, at most 36 entries. Items that do not fit remain available; uncertain outcomes or changed sessions stop subsequent entries.

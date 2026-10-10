@@ -44,6 +44,21 @@ canonical: "https://www.kitemc.com/kitemarket/commands"
 
 也可在出售命令的秒数之后填写最低购买量，例如 `/km sell points 8 16 86400 3` 表示单价8、数量16、有效期86400秒、最低购买3件。出售的最后一个参数与拍卖的最低加价含义不同。
 
+## v1.1 候选入口
+
+以下命令属于 [v1.1 候选实现](/kitemarket/v1-1/overview)，不是 v1.0 已发布构件的新增命令声明。它们打开真实页面，仍检查基础 `kitemarket.use`、对应功能权限和会话。
+
+| 命令 | 用途与权限 |
+| --- | --- |
+| `/km community` | 收藏、保存搜索、订阅、通知、卖家与排行 |
+| `/km prices` | 公开价格参考，需要 `kitemarket.browse`；不会开放管理案件 |
+| `/km automation` | 个人自动化设置与收益预约，需要 `kitemarket.wallet` |
+| `/km lots` | 单品、整包和独立批量上架，需要 `kitemarket.create`；每单仍确认 |
+| `/km risk` | 学习状态、案件、证据和复核记录，需要 `kitemarket.audit.all`；写入另需管理权限 |
+| `/km tools` | 管理封禁、撤单、资金/实物操作、导出和保留策略，需要 `kitemarket.manage` |
+
+社区页提供公开价格入口。自动化默认关闭，管理资金/实物操作使用已有真实资产，风险及云端建议不自动执行处罚。具体行为见候选专题。
+
 ## 条件编辑输入 {#条件编辑输入}
 
 编辑器通过菜单选择材料、附魔和范围；需要精调数值或填写文本时再输入聊天。输入 `cancel` 或运行 `/km cancelinput` 取消聊天输入。
