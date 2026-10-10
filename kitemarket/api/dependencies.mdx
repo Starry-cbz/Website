@@ -8,7 +8,7 @@ canonical: "https://www.kitemc.com/kitemarket/api/dependencies"
 
 项目示例使用 GitHub Packages 的 Maven 坐标引用 SDK。GitHub Releases 的直接文件下载作为备用途径；两者提供同一套公开接口，不包含闭源交易核心。
 
-本页示例对应公开仓库 `main` 的 v1.1 候选 SDK。`1.1.0` 尚未正式发布；在对应包实际上传前，不能直接解析这些依赖。使用 v1.0.0 主插件时选择同版本 SDK；需要整包、费用及业务条件摘要的新接口时，主插件与 SDK 均需包含 v1.1 实现。
+本页示例对应公开仓库 `main` 的 v1.1 SDK。使用前确认所选 Packages 注册表已包含 `1.1.0`，或从对应 GitHub Release 获取匹配的 SDK。使用 v1.0.0 主插件时选择同版本 SDK；需要整包、费用及业务条件摘要的新接口时，主插件与 SDK 均需包含 v1.1 实现。
 
 ## GitHub Packages {#github-packages}
 
@@ -106,7 +106,7 @@ Maven 项目的 `pom.xml` 增加以下仓库和依赖：
 
 ## Release 下载备用 {#release-下载备用}
 
-离线开发或无法使用 Packages 认证时，可从 [GitHub Releases](https://github.com/KiteMC/KiteMarket/releases)直接下载实际已发布的对应版本 SDK，自行管理仅供编译的依赖。v1.1 正式发行后的文件名为 `KiteMarket-API-1.1.0.jar`；当前可用文件以 Release 为准。
+离线开发或无法使用 Packages 认证时，可从 [GitHub Releases](https://github.com/KiteMC/KiteMarket/releases)直接下载对应版本 SDK，自行管理仅供编译的依赖。v1.1 文件名为 `KiteMarket-API-1.1.0.jar`；选择版本时以 Release 列表中的实际资产为准。
 
 Release 文件下载不需要 Packages Token；公开仓库提供接口源码、Javadoc 与可运行示例。这里只是备用文件获取方式，不改变下述运行时约束。
 

@@ -51,7 +51,7 @@ GUI preferences use separate InnoDB tables `km_ui_preferences` and `km_ui_theme_
 
 Validate the restored environment in isolation, then add nodes gradually. Match the Minecraft version, market protocol, item profile, and currency definitions; keep node IDs unique. Ensure old nodes cannot keep writing before opening the new network.
 
-V1.0.0 uses database schema `1`, which startup validates along with InnoDB. The v1.1 candidate uses schema `2` and adds SQLite for one node; shared databases still require transactional engines. Inventory unfinished orders, claim assets and `PREPARED`/`UNKNOWN` operations before migration, then back up and verify an isolated copy. There is no defined automatic downgrade between schema versions. Do not bypass version checks with an older JAR or partial restore.
+V1.0.0 uses database schema `1`, which startup validates along with InnoDB. The v1.1 uses schema `2` and adds SQLite for one node; shared databases still require transactional engines. Inventory unfinished orders, claim assets and `PREPARED`/`UNKNOWN` operations before migration, then back up and verify an isolated copy. There is no defined automatic downgrade between schema versions. Do not bypass version checks with an older JAR or partial restore.
 Replacing a plugin JAR requires a normal full-network stop, complete backup and matching builds. An interface-only update does not require a protocol upgrade or clearing existing assets. The warm layout is the default; older custom slots select the compatible layout, and invalid candidates leave active settings intact. Automatic selection tries IA, then vanilla, with no default IA theme; saved preferences and settings are not rewritten. Third-party themes need no additional KiteMC theme license. See [compatibility](/en/kitemarket/compatibility) for the tested scope.
 
 If the database contains extension tables such as `km_dlc_proofs`, include them in full `km_*` backup/restoration. Back up installed theme resources, proofs or encrypted caches together with the matching build; do not automatically delete them or mix older loaders. Key caches are private operational data, not public downloads.
@@ -62,7 +62,7 @@ Do not restore only order tables, roll back a single node's configuration indepe
 
 ## V1.1 installation and existing-data preparation {#v1-0-to-v1-1}
 
-This section describes the [v1.1 candidate](/en/kitemarket/v1-1/overview). V1.1 targets fresh installations without promising direct JAR replacement or seamless upgrades from v1.0.0. New markets use independent directories and databases; see the [candidate overview](/en/kitemarket/v1-1/overview).
+This section describes the [v1.1](/en/kitemarket/v1-1/overview). V1.1 targets fresh installations without promising direct JAR replacement or seamless upgrades from v1.0.0. New markets use independent directories and databases; see the [v1.1 overview](/en/kitemarket/v1-1/overview).
 
 Prepare an independent copy of existing data first:
 
@@ -70,7 +70,7 @@ Prepare an independent copy of existing data first:
 2. Use a separate database, directory and ports for the copy, without connecting production economy data or changing production license bindings. Retain original network, currency, item profile, game version and licensing files. Inspect configuration, available/held wallets, orders, claim assets and unresolved operations in the copy.
 3. Check data before and after migration, actual claims and recovery before planning the original environment's switch and rollback. Successful startup alone is insufficient.
 
-The candidate retains a protocol `4`/schema `1` to protocol `5`/schema `2` migration mechanism. It checks the old schema, leases and identity, backs up all `km_*` data to `plugins/KiteMarket/backups/database-upgrade/` before writing, and preserves assets and old-node fencing. An existing MySQL/MariaDB connection is not replaced with empty SQLite. Inspect actual configuration, language and theme files. These protections do not certify complete migration of an existing environment.
+The release retains a protocol `4`/schema `1` to protocol `5`/schema `2` migration mechanism. It checks the old schema, leases and identity, backs up all `km_*` data to `plugins/KiteMarket/backups/database-upgrade/` before writing, and preserves assets and old-node fencing. An existing MySQL/MariaDB connection is not replaced with empty SQLite. Inspect actual configuration, language and theme files. These protections do not certify complete migration of an existing environment.
 
 Failed backups, missing old asset tables/columns or active old nodes stop migration while retaining the original data, without substituting empty tables or another database. Pending outcomes keep their review paths rather than being refunded or redelivered automatically. Rollback requires a full-network stop, reconciliation of changed assets and restoration of one complete backup with matching configuration and old builds; replacing the JAR alone is insufficient.
 

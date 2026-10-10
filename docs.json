@@ -106,7 +106,7 @@
                 ]
               },
               {
-                "group": "v1.1 候选",
+                "group": "v1.1 新功能",
                 "pages": [
                   "kitemarket/v1-1/overview",
                   "kitemarket/v1-1/items",
@@ -375,7 +375,7 @@
                 ]
               },
               {
-                "group": "v1.1 candidate",
+                "group": "v1.1 features",
                 "pages": [
                   "en/kitemarket/v1-1/overview",
                   "en/kitemarket/v1-1/items",

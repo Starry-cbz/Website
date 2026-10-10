@@ -4,7 +4,16 @@ description: "Confirmed administration, actual funds and assets, exports and loc
 canonical: "https://www.kitemc.com/en/kitemarket/v1-1/administration-risk"
 ---
 
-This page belongs to the [v1.1 candidate documentation](/en/kitemarket/v1-1/overview). Administration and risk signals retain their own permissions and confirmation without automatic punishment.
+import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
+import { V11FeatureMarker, V11PagePanel } from "/snippets/feature-marker.jsx";
+
+<V11FeatureMarker lang="en" title="Administration and risk review" summary="New reasoned actions and review cases" />
+
+<V11PagePanel lang="en" items={["Explicit targets and reasons", "Actual funds and asset operations", "Evidence and exports", "Local risk cases"]} />
+
+<ScreenshotPlaceholder title="Administration and risk review" description="A real gameplay screenshot can be added here later for confirmations, cases or evidence exports." lang="en" />
+
+This page belongs to the [v1.1 documentation](/en/kitemarket/v1-1/overview). Administration and risk signals retain their own permissions and confirmation without automatic punishment.
 
 ## Targets, reasons and outcomes
 
@@ -37,7 +46,7 @@ Before pruning, a bounded scan also validates the complete JSONL, its final summ
 
 ## Offline zAuctionHouse imports
 
-The candidate importer reads stopped source copies only: V3 split/combined JSON, the unified V3 `items` SQLite layout, and V4 **4.0.1.4** `items` plus `auction_items` SQLite. Source and target Minecraft versions must match. Other historical SQL layouts and future fields do not inherit support. See the [public import guide](https://github.com/KiteMC/KiteMarket/blob/main/docs/IMPORTING.en.md) for tools and complete mapping instructions.
+The v1.1 importer reads stopped source copies only: V3 split/combined JSON, the unified V3 `items` SQLite layout, and V4 **4.0.1.4** `items` plus `auction_items` SQLite. Source and target Minecraft versions must match. Other historical SQL layouts and future fields do not inherit support. See the [public import guide](https://github.com/KiteMC/KiteMarket/blob/main/docs/IMPORTING.en.md) for tools and complete mapping instructions.
 
 1. Keep source and target backups. Prepare the copy and its durable `origin`, then review currencies, price units, fees and actual owners. SQLite copies must be checkpointed without WAL/SHM; never delete sidecars to bypass the check.
 2. Enable `imports.offline-enabled: true` and restart normally. Stop other market nodes, disconnect all players, block new joins and wait for old leases to expire. Require one live node, no market sessions, no `PREPARED`/`UNKNOWN` operations and no `DELIVERING` assets.

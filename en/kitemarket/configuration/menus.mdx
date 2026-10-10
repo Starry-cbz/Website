@@ -4,7 +4,7 @@ description: "Adjust titles, icons, help, and slots while preserving real items 
 canonical: "https://www.kitemc.com/en/kitemarket/configuration/menus"
 ---
 
-In v1.0, `menus` in `plugins/KiteMarket/config.yml` customizes 35 existing pages, including `profile`, `ui`, `themes` and `result`. New v1.1 candidate pages use the same mechanism; see [candidate items and claims](/en/kitemarket/v1-1/items). No resource pack or IA is required.
+In v1.0, `menus` in `plugins/KiteMarket/config.yml` customizes 35 existing pages, including `profile`, `ui`, `themes` and `result`. New v1.1 pages use the same mechanism; see [v1.1 items and claims](/en/kitemarket/v1-1/items). No resource pack or IA is required.
 
 Edit the file, run `/km reload`, then reopen the page. Reload validates a candidate first; invalid settings preserve the previous working configuration.
 
@@ -103,7 +103,7 @@ Omitting `lore` preserves help; `lore: []` clears only additional help.
 
 Raw money fields use minor units, so prefer `{default}` to retain formatted amounts and asset destinations.
 
-The v1.1 candidate `lot-editor` and `lot-batch-item` pages expose read-only publication bounds for the current player:
+The v1.1 `lot-editor` and `lot-batch-item` pages expose read-only publication bounds for the current player:
 
 | Field | Meaning |
 | --- | --- |
@@ -142,9 +142,9 @@ On failure, fix the field path identified by the response and logs. If changes a
 
 These settings do not install or download IA resources.
 
-## v1.1 candidate: bundle and claims pages {#v1-1-bundle-and-claims}
+## v1.1: bundle and claims pages {#v1-1-bundle-and-claims}
 
-These pages belong to the v1.1 candidate and do not imply a published runtime. Configure actual page IDs and **source slots**:
+These pages belong to the v1.1 and do not imply a published runtime. Configure actual page IDs and **source slots**:
 
 | Page ID | Actual contents and controls |
 | --- | --- |

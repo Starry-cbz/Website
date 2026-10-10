@@ -8,7 +8,7 @@ For custom rendering logic, register your own provider through the public SDK an
 
 ## Java example: GitHub Packages {#java-example-github-packages}
 
-The v1.1 candidate Java example on public repository `main` references `com.kitemc:kitemarket-ui-api:1.1.0` with `compileOnly`, never bundling or relocating the SDK. Source is in `examples/ui-java`, without proprietary core dependencies. V1.1 packages have not been formally released; use matching examples and SDKs with a v1.0.0 host.
+The v1.1 Java example on public repository `main` references `com.kitemc:kitemarket-ui-api:1.1.0` with `compileOnly`, never bundling or relocating the SDK. Source is in `examples/ui-java`, without proprietary core dependencies. Select matching examples and SDKs for the host plugin version.
 
 First merge the [market API's Packages registry and authentication configuration](/en/kitemarket/api/dependencies#github-packages), then add these dependencies.
 
@@ -92,7 +92,7 @@ Opening only the internal inventory through Bukkit leaves IA's placeholder title
 
 ### Install the example bundle {#install-the-example-bundle}
 
-Example bundles combine query and IA examples, including runnable JARs, themes, MIT resources, bilingual instructions and source/build files. Published v1.0.0 uses `KiteMarket-Examples-1.0.0.zip`; v1.1 will use `KiteMarket-Examples-1.1.0.zip` after release. Candidate source availability does not mean that file is downloadable.
+Example bundles combine query and IA examples, including runnable JARs, themes, MIT resources, bilingual instructions and source/build files. Download `KiteMarket-Examples-<version>.zip` from the matching Release and keep it aligned with the host plugin and SDK.
 
 Install the IA example JAR, place `theme.yml` in `plugins/KiteMarket/themes/example-ia-java.yml`, and copy `itemsadder/` into `plugins/ItemsAdder/contents/km_example/`. Rebuild/send the pack using the installed IA instructions, register its identity and select `/km ui itemsadder example-ia-java`.
 
@@ -118,5 +118,5 @@ The examples' real publishing pages have been opened on the [representative envi
 | Reload retains old theme | Read the exact field path in logs; invalid candidates never replace valid configuration |
 
 <Card title="Pages, actions and lifecycle" href="/en/kitemarket/ui-development/pages">
-  Check templates, action tokens, input and provider contracts for base pages and candidate additions.
+  Check templates, action tokens, input and provider contracts for base pages and v1.1 additions.
 </Card>

@@ -4,7 +4,16 @@ description: "明确目标的管理操作、真实资金资产、导出和本地
 canonical: "https://www.kitemc.com/kitemarket/v1-1/administration-risk"
 ---
 
-本页属于 [v1.1 候选专题](/kitemarket/v1-1/overview)。管理操作与风险线索使用各自权限和确认，不自动处罚。
+import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
+import { V11FeatureMarker, V11PagePanel } from "/snippets/feature-marker.jsx";
+
+<V11FeatureMarker lang="zh" title="管理与风险复核" summary="v1.1 新增有原因的管理操作与案件" />
+
+<V11PagePanel lang="zh" items={["明确目标与原因", "真实资金和资产操作", "证据与导出", "本地风险案件"]} />
+
+<ScreenshotPlaceholder title="管理与风险复核页面" description="此处预留真实游戏截图，后续可补充管理确认、案件或证据导出。" lang="zh" />
+
+本页属于 [v1.1 专题](/kitemarket/v1-1/overview)。管理操作与风险线索使用各自权限和确认，不自动处罚。
 
 ## 管理目标、原因与结果
 
@@ -37,7 +46,7 @@ canonical: "https://www.kitemc.com/kitemarket/v1-1/administration-risk"
 
 ## 离线导入 zAuctionHouse
 
-候选导入器只读取正常停服的来源副本：V3 split/combined JSON、V3 统一 `items` SQLite，以及 V4 **4.0.1.4** 的 `items` + `auction_items` SQLite。来源和目标 Minecraft 版本必须一致；其他历史 SQL 布局或未来字段不能自动继承支持。工具和完整映射说明见[公开导入指南](https://github.com/KiteMC/KiteMarket/blob/main/docs/IMPORTING.md)。
+v1.1 导入器只读取正常停服的来源副本：V3 split/combined JSON、V3 统一 `items` SQLite，以及 V4 **4.0.1.4** 的 `items` + `auction_items` SQLite。来源和目标 Minecraft 版本必须一致；其他历史 SQL 布局或未来字段不能自动继承支持。工具和完整映射说明见[公开导入指南](https://github.com/KiteMC/KiteMarket/blob/main/docs/IMPORTING.md)。
 
 1. 保留来源和目标备份，用副本工具生成导入目录与持久 `origin`，明确审核币种、价格单位、费率和实际拥有者。SQLite 副本必须已 checkpoint 且没有 WAL/SHM，不能通过删除 sidecar 绕过检查。
 2. 启用 `imports.offline-enabled: true` 并正常重启。关闭其他市场节点，退出全部玩家并阻止新加入，等待旧租约失效；只有一个活节点且无市场会话、`PREPARED`/`UNKNOWN` 或 `DELIVERING` 时才开始。
