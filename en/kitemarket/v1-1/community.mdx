@@ -14,9 +14,11 @@ Searches preserve type, currency, material, readable text, business source, cate
 
 Material-name matching follows the main market. Saving “钻石” still finds and subscribes to diamond procurement without an exact sample. Editing the text updates material matches while preserving other filters.
 
+Material filters accept Chinese names, English material names or namespaced IDs, such as `钻石`, `DIAMOND` and `minecraft:diamond`, and store a normalized material ID. Invalid input leaves the previous filter intact.
+
 Name searches include readable text without color codes, so per-character gradients do not split keywords. Modern items without a custom display name use the public API's `item_name`; custom display names take priority. Search names do not replace business IDs or complete-property matching.
 
-Price bounds are non-negative integer minor units. `123` means 1.23 for a scale-2 currency. Equal integers in different currencies do not represent equal buying power.
+Price bounds are non-negative integer minor units. `123` means 1.23 for a scale-2 currency. Equal integers in different currencies do not represent equal buying power. Switching currency clears the previous minimum and maximum prices; enter new bounds for the selected currency. Other filters are retained.
 
 Subscriptions apply to future matching orders. Validated search edits do not automatically buy, supply or bid.
 
