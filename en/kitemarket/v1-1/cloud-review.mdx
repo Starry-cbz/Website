@@ -1,0 +1,58 @@
+---
+title: "v1.1 optional cloud review and privacy"
+description: "Endpoint configuration, evidence allowlists and constrained advice for manual cloud review."
+canonical: "https://www.kitemc.com/en/kitemarket/v1-1/cloud-review"
+---
+
+This page belongs to the [v1.1 candidate documentation](/en/kitemarket/v1-1/overview). Cloud review defaults off. Local analysis does not depend on a remote model.
+
+## Manual administrator opt-in
+
+Choose an HTTPS service with compatible chat-completions responses and configure its endpoint, authentication and model. Each specific case still requires confirmation after configuration is enabled. This is not continuous uploading of all trades.
+
+```yaml
+risk:
+  enabled: true
+  cloud:
+    enabled: false
+    endpoint: 'https://your-provider.example/v1/chat/completions'
+    api-key: ''
+    model: ''
+    daily-limit: 20
+    maximum-request-bytes: 16384
+    maximum-response-bytes: 32768
+    timeout-millis: 15000
+```
+
+The example stays disabled. Review the service, privacy terms and costs before enabling real settings. The example endpoint is not a KiteMC cloud service. The API key authenticates your configured HTTPS endpoint and is not included in model evidence.
+
+Defaults allow 20 requests per network per day, at most 16,384 request bytes and 32,768 response bytes, with a 15-second timeout. Redirects are not followed.
+
+The case request identity and daily quota commit together in shared storage before sending. Confirming the same case on multiple nodes creates one sending intent. Other nodes show in-progress status or reuse stored advice without another provider call.
+
+## Evidence boundary
+
+| Data | Handling |
+| --- | --- |
+| Participants | Purpose-separated network HMAC aliases, without real UUIDs or names |
+| Signals | Only allowed signal types, evidence references and numeric measurements from the case |
+| Network/item association | Controlled aliases and comparable summaries, without complete raw data |
+| IPs and original item names/lore/NBT | Excluded |
+| Administrator notes and raw events | Excluded |
+| Credentials | HTTP authentication fields only, not model evidence |
+
+Pseudonymization does not guarantee that a third party can never correlate information. Relationships and measurements can reveal patterns. Administrators should review the selected service's retention and processing terms.
+
+Local cases retain their audit evidence and notes. The outbound allowlist limits model summaries without deleting local audit data.
+
+## Response validation
+
+Responses must use defined advice fields and cite evidence from the current case. Foreign case references, unknown fields/actions, tool calls and invalid structures are rejected rather than accepted as advice.
+
+Advice cannot execute market actions, confirm external calls or punish players. A remote finding cannot replace operation evidence or bypass UNKNOWN handling.
+
+## Disabled or unsuccessful review
+
+Disabled cloud review, exhausted quota, timeout, service failure or rejected advice leaves local [case review](/en/kitemarket/v1-1/administration-risk) available. Ordinary trades and local rules do not require the remote service.
+
+Timeout, request failure, rejected advice or interruption leaves an unconfirmed record and consumed quota, blocking another request for that case even after restart or a node change. The case and evidence remain available for local review and provider investigation. The selected service determines charges and data processing.

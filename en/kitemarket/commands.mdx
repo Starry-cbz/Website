@@ -44,6 +44,21 @@ A sale uses a per-item unit price; the purchase total is that price multiplied b
 
 You may also set the minimum after the duration in the sale command. For example, `/km sell points 8 16 86400 3` lists 16 items at a unit price of 8 for 86400 seconds, with a minimum purchase of 3. This final sale parameter differs from an auction's minimum increment.
 
+## v1.1 candidate entrances
+
+These commands belong to the [v1.1 candidate implementation](/en/kitemarket/v1-1/overview), not released v1.0 artifacts. They open real pages and still require base `kitemarket.use`, feature permissions and a valid session.
+
+| Command | Purpose and permission |
+| --- | --- |
+| `/km community` | Favorites, saved searches, subscriptions, notices, sellers and rankings |
+| `/km prices` | Public reference prices with `kitemarket.browse`; does not expose management cases |
+| `/km automation` | Personal automation settings and income reservations with `kitemarket.wallet` |
+| `/km lots` | Single items, bundles and independent bulk publication with `kitemarket.create`; each order still needs confirmation |
+| `/km risk` | Learning status, cases, evidence and reviews with `kitemarket.audit.all`; writes require management permission |
+| `/km tools` | Trading bans, cancellations, real funds/items, exports and retention with `kitemarket.manage` |
+
+The community page also links public prices. Automation defaults off. Administrative transfers use actual existing funds/assets. Risk and cloud advice never automatically apply penalties.
+
 ## Condition input {#condition-input}
 
 Select materials, enchantments, and ranges in the editor. Chat is used when entering precise values or text. Type `cancel` or run `/km cancelinput` to cancel a chat prompt.

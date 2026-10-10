@@ -1,12 +1,14 @@
 ---
 title: "KiteMarket Market API Quick Start"
-description: "Independent Java 11/MIT read-only market SDK with immutable DTOs, asynchronous registration and safe trade notifications."
+description: "Java 11/MIT market SDK with immutable queries, trade notifications and restricted v1.1 extensions."
 canonical: "https://www.kitemc.com/en/kitemarket/api"
 ---
 
 <span id="market-api-quick-start" />
 
-`KiteMarket-API` is an independent Java 11/MIT SDK without a dependency on the proprietary `market-core`. It exposes read-only queries and post-commit notifications, not transaction writes. See [downloads](/en/kitemarket/download) for runtimes, public interfaces and examples.
+`KiteMarket-API` is an independent Java 11/MIT SDK without a dependency on the proprietary `market-core`. The original `KiteMarketApi` supplies read-only queries and post-commit notifications. The v1.1 candidate adds separate services for extension registration and restricted player-confirmed requests. See [downloads](/en/kitemarket/download) for runtimes, public interfaces and examples.
+
+Query signatures below remain applicable to v1.0.0. V1.1 DTOs and services need matching host and SDK versions; public candidate source does not mean version `1.1.0` has been formally released.
 
 ## Reference the SDK {#reference-the-sdk}
 
@@ -77,7 +79,7 @@ Pagination requires `offset >= 0` and `1 <= limit <= 100`, with at most 256 sear
 
 Amounts use `long` integer minor units. At `CurrencyView.getPrecision() == 2`, `128` means `1.28`; format with `currency.display(amount).toPlainString()`. Timestamps are Unix milliseconds and tax rates are basis points.
 
-For fixed-price `SELL` and procurement `BUY` orders, `getUnitPrice()` is the price per item; for `AUCTION`, it is the starting amount for the entire lot. Fixed-price sales allow partial purchases. Multiply the unit price by the quantity purchased with overflow checking, for example using `Math.multiplyExact`.
+For single-item fixed-price `SELL` and procurement `BUY`, `getUnitPrice()` is the price per item; for `AUCTION`, it is the starting amount for the entire lot. V1.1 additionally requires checking `getLotMode()`: `BUNDLE` uses a whole-bundle amount, quantity one and indivisible purchase. Single-item sales allow partial purchases. Multiply the unit price by the quantity purchased with overflow checking, for example using `Math.multiplyExact`.
 
 ### Minimum purchase quantity {#minimum-purchase-quantity}
 
@@ -89,11 +91,22 @@ The original constructor remains available with a default of 1; the new overload
 
 ### Immutable DTOs {#immutable-dtos}
 
-Standalone DTOs live under `com.kitemc.market.api.model`: `CurrencyView`, `OrderView`, `WalletView`, `ClaimAssetView`, `HistoryEntry`, `TradeSummary`, `ItemSummary` and enums. Fields and nested lists, sets and maps are immutable. Optional order samples expose only material, name, lore, enchantments and durability; they cannot recreate or claim assets.
+Standalone DTOs live under `com.kitemc.market.api.model`: `CurrencyView`, `OrderView`, `WalletView`, `ClaimAssetView`, `HistoryEntry`, `TradeSummary`, `ItemSummary` and enums. Fields and nested lists, sets and maps are immutable. Optional samples are display summaries and cannot recreate or claim assets.
 
 Results exclude raw audit JSON, serialized item bytes, exact-sample fingerprints, license credentials, execution tokens and recovery evidence.
 
 Missing historical amounts remain `null` rather than becoming zero. `RECORDED` does not prove an external side effect succeeded; `PENDING_REVIEW` needs investigation. Item matching and transaction submission are handled by the host plugin, outside the public query API.
+
+### V1.1 lot, fee and business-condition summaries
+
+| Data | Access |
+| --- | --- |
+| Lot mode and contents | `getLotMode()` separates `SINGLE` and `BUNDLE`; `getLotItems()` returns original `LotItemSummary` entries and actual counts, not remaining inventory |
+| Publication-time fees | `getFees()` returns immutable `FeeSummary`, possibly `null` for old orders retaining `getTaxBasisPoints()`; listing fees paid and cumulative gross/buyer/seller fees are separate |
+| Item identity | `ItemSummary` can include genuine `source`/`businessId`, model value, tag names and explicitly public configured business fields |
+| Procurement rules | `RuleSummary` adds corresponding conditions and bounded `anyOf`, without raw NBT/PDC, components, serialized bytes or exact fingerprints |
+
+Both older `OrderView` constructors remain available with `SINGLE` defaults. Do not recalculate old fees using current configuration or treat original lot quantities as available stock.
 
 ## Post-commit notifications {#post-commit-notifications}
 
@@ -119,6 +132,23 @@ public void onTrade(MarketCommittedEvent event) {
 Node polling can delay or miss a notification, historical entries before startup are not replayed, and multiple nodes may see the same event.
 
 Deduplicate by **network UUID plus event ID**; IDs need not be consecutive. Persist your own long-term deduplication when required. Notifications are not evidence for issuing replacement money or items; re-query authoritative state after downtime.
+
+## V1.1 extensions and player-confirmed requests
+
+Obtain two separate services through `ServicesManager`; the original `KiteMarketApi` remains read-only:
+
+| Service | Purpose and boundary |
+| --- | --- |
+| `KiteMarketExtensions` | Registers enabled-owner economy, real identity, auxiliary container preview, reject-only rule/review and committed-notification providers; owner disable unregisters them |
+| `KiteMarketRequests` | `quote(...)` obtains a host quote, `openConfirmation(...)` opens host player confirmation, and `discard(...)` drops only an unexecuted quote |
+
+Requests only support CREATE/BUY/SUPPLY/BID/CANCEL, bound to the player session, owner plugin, order and policy revisions, and expiry. There is no public `confirm()` or `commit()`, arbitrary minting, inventory mutation, administrator repair or unattended remote trading. Bundles describe real inventory slots and quantities; the host captures and rechecks actual items at confirmation.
+
+Only `WriteResult.Status.SUCCEEDED` denotes core success. Handle rejection, cancellation, expiry and review separately. Receiving a quote or completed future does not prove player confirmation, and unknown results must not be replayed automatically.
+
+<Card title="Complete v1.1 SDK and runnable examples" icon="code" href="https://github.com/KiteMC/KiteMarket/blob/main/docs/API.en.md">
+  Extension SPIs, restricted requests, fee quotes, lifecycle and actual example source.
+</Card>
 
 ## Extending the player interface? {#extending-the-player-interface}
 

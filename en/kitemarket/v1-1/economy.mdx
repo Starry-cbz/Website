@@ -1,0 +1,68 @@
+---
+title: "v1.1 fees, currencies and automation"
+description: "Fee snapshots and allocation, native currencies, shortfall deposits and income reservations."
+canonical: "https://www.kitemc.com/en/kitemarket/v1-1/economy"
+---
+
+This page belongs to the [v1.1 candidate documentation](/en/kitemarket/v1-1/overview). Persistent operation and outcome handling still governs funds, holds and external calls.
+
+## Fees and existing orders
+
+Existing `market.tax-bps` and `market.taxes` remain valid; 100 basis points equals 1%. Enabled `fees` selects the first matching rule in configuration order, with permission, currency, order type and declarative item conditions. With no enabled matching rule, legacy tax behavior applies.
+
+```yaml
+fees:
+  enabled: true
+  rules:
+    - id: sale-coins
+      type: SELL
+      currency: coins
+      listing-fixed: 100
+      listing-bps: 0
+      seller-fixed: 0
+      seller-bps: 500
+      buyer-fixed: 0
+      buyer-bps: 200
+```
+
+Fixed amounts are minor units. With `coins.scale: 2`, the listing fee is 1.00. For gross 800.00, the buyer pays 816.00 and the seller receives 760.00, excluding the separate listing fee. Minor amount `100` does not mean 100.00.
+
+Confirmation separates listing, buyer and seller fees. Publication saves a fee snapshot; reload does not rewrite old orders. Partial fills allocate fixed fees and rounding over cumulative order turnover, with the final fill taking the remainder. Splitting purchases does not repeatedly charge the whole fixed fee.
+
+New fee rules round the cumulative fixed share and percentage charge together, then subtract collected fees. Whole-order fees remain unchanged, and seller fees cannot exceed a fill's gross, allowing low-priced final items to settle.
+
+Cancellation or expiry returns unfilled escrow and holds. Already charged listing fees are not refunded. Old orders retain their fees and expiry without another listing charge or extended duration.
+
+## Trading restrictions
+
+`policy` can restrict worlds, players, items and creative mode. The first matching permission row in `policy.limits` controls order count, quantity, price, duration, cooldown and allowed currencies.
+
+Confirmation and database submission enforce restrictions for commands, GUI and constrained developer requests. Changing button positions or appearance does not alter them. Existing assets retain their permitted exit paths.
+
+## New currencies
+
+Existing Vault, PlayerPoints, CoinsEngine and ExcellentEconomy keep their IDs and gateways.
+
+| Provider | Requirements |
+| --- | --- |
+| `experience` | Vanilla experience points, `scale: 0` |
+| `experience-level` | Vanilla levels, `scale: 0`; mutually exclusive with points in one network |
+| `item` | Actual item currency, `scale: 0`, a real `item-sample` and positive integer `denomination` |
+
+Points and levels are not a linear exchange rate. Item currency compares the complete sample; a material name cannot replace a saved ItemStack. Changing the sample or denomination changes currency identity. Preserve the original definition while existing funds depend on it.
+
+Transfers still check the configured gateway, real balance, player state, receive capacity and inventory space. Unavailable external plugins disable affected transfers rather than reporting fake zero or substituting adapters. See [currency configuration](/en/kitemarket/configuration/currencies).
+
+## Shortfall top-up
+
+Insufficient-funds views read the real shortage. A confirmed successful deposit reloads order, quantity and fees before a new trade confirmation. Depositing is not proof of buying or supplying; the previous quote does not execute silently.
+
+Changed orders, unavailable gateways and unknown external outcomes have separate results. Preserve already deposited market funds instead of repeatedly depositing to conceal a failed follow-up trade.
+
+## Automatic withdrawal and claims
+
+Future-income withdrawal, login withdrawal and automatic claiming are separate opt-ins that default off. Bounded batches do not guarantee that one cycle completes all funds or assets.
+
+Future income creates distinct withdrawal reservations. Reservations, holds, available funds and claimable assets are shown separately. Turning the setting off does not release existing reservations. Inspect their status before executing or explicitly releasing them.
+
+Insufficient space, unavailable gateways, changed sessions or uncertain external effects pause the task. Automation never reexecutes UNKNOWN; inspect the original operation and evidence before resuming. See [operations](/en/kitemarket/operations).

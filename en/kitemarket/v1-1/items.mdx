@@ -1,0 +1,62 @@
+---
+title: "v1.1 bundles, bulk listings and containers"
+description: "Lot prices, independent bulk orders, read-only container previews and business item rules."
+canonical: "https://www.kitemc.com/en/kitemarket/v1-1/items"
+---
+
+This page belongs to the [v1.1 candidate documentation](/en/kitemarket/v1-1/overview). It explains semantics without certifying new live combinations.
+
+## Single items and bundles
+
+| Lot | Price and delivery |
+| --- | --- |
+| Fixed-price single item | Unit price multiplied by the purchased quantity; partial fills allowed |
+| Procurement | Unit price multiplied by actual supplied quantity; every item must satisfy the rule |
+| Auction | The bid covers the complete auction lot |
+| Mixed bundle | Multiple actual assets form one indivisible lot; one total price and one delivery for the full bundle |
+
+A bundle can contain different materials or properties. Inspect each saved entry and quantity. The display chest or icon count is not the actual asset. A bundle cannot be purchased one entry at a time.
+
+Published order details open the saved bundle contents and actual quantities. Verified container entries open further read-only previews.
+
+Single-item sales retain minimum purchase quantities. When the remainder is below that minimum, only the entire remainder can be purchased. Matching materials do not merge items with different names, durability, enchantments, business identities or complete properties.
+
+## Bulk publication
+
+Bulk publication creates independent orders, each retaining its own price, expiry, items, fees and result. It differs from one mixed bundle.
+
+Preview real inventory, quantity, currency, listing fee and transaction fees for each row. Inspect individual outcomes after submission: successful rows are published; skipped or paused rows still need review. Do not resubmit successful rows because a later row failed.
+
+Each order still requires manual confirmation. Unpublished selections and batch plans remain in the current session and do not automatically resume after logout or restart. Executed individual operations and financial state are durable.
+
+Current publication policy checks quantity for the complete single selection, each independent bulk group or one bundle lot. Quantity, price or duration violations explain the reason and retain the original draft without automatic repricing or minimum-quantity reduction. Each bulk confirmation rechecks current policy against the original request without silently changing previewed terms.
+
+Uncertain external effects, changed sessions, inventory changes or insufficient funds pause according to actual results. Keep operation references and reread the state. An unresolved outcome must not be replayed as a failure.
+
+## Container preview and fidelity
+
+Container previews show saved contents without allowing items to be removed. The container and each entry must survive storage, restoration and full-property comparison. Unsupported structures or nesting reject publication.
+
+Icons, titles, lore and themes cannot bypass admission. Damaged snapshots, lossy properties or unsupported contents do not become empty containers.
+
+Sold, returned and expired items enter claims as actual assets. Insufficient inventory space leaves them claimable. Make space and reread before claiming; items are not dropped into the world. See [escrow and claims](/en/kitemarket/trading/claims).
+
+Claims support source filtering and pages. Select individual entries or the current page, inspect details and confirm at most 36 entries. Items that do not fit remain available. Uncertain outcomes, session changes or disconnects stop subsequent entries without repeating confirmed deliveries or continuing into another page. Configure [actual bundle and claims page IDs](/en/kitemarket/configuration/menus#v1-1-bundle-and-claims).
+
+## Business identities and advanced procurement
+
+Advanced procurement adds provider source/business ID, CustomModelData, PDC keys and exposed scalar fields to material, readable text, enchantment and durability conditions.
+
+| Condition | Editing scope |
+| --- | --- |
+| Provider source and ID | Read from the held item through enabled ItemsAdder, Oraxen, Nexo or MMOItems public APIs; never guessed from names, lore or NBT |
+| CustomModelData | Explicit minimum/maximum or the real held item's value |
+| PDC tags | Up to 32 key names that must all be present |
+| Scalar fields | Only strings, numbers and booleans allowed by `items.exposed-fields`; literal equality or contains |
+| OR alternatives | Declarative administrator configuration; read-only in the player editor |
+
+Each edit validates a detached candidate before replacing the draft. Invalid ranges, unverified sources or unexposed fields leave the original condition intact.
+
+A business identity does not discard other real properties. Use a complete EXACT sample where a verified identity cannot safely scope opaque data. Complete comparison and item round-trip admission still apply. See [exact samples and custom items](/en/kitemarket/trading/items).
+
+The limited Oraxen check uses Paper 1.21.11, Java 21 and Oraxen 1.220.0. One actual custom pickaxe completed identity lookup, readable-name search, listing, purchase and claiming, with native properties and stack limits matching the original sample after delivery. This does not certify all Oraxen items or resource-pack appearance. Complete Nexo and MMOItems/MythicLib runtime combinations remain unverified.

@@ -40,6 +40,19 @@ gui:
 
 Use `gui.default-themes: {}` when no IA theme is installed. Third-party declarations may register a separate pack through `requires`; see the developer guide. Invalid candidates preserve the current valid configuration. Themes need no KiteMC product ID or download endpoint.
 
+### Automatic delivery after joining
+
+The v1.1 candidate's Paper 1.21.11 / Java 21 / ItemsAdder 4.0.16 combination uses delivery after joining. Set the following in `plugins/ItemsAdder/config.yml`:
+
+```yaml
+resource-pack:
+  auto_apply:
+    enabled: true
+    before_join: false
+```
+
+Run `/iareload`, wait for completion, then reconnect normally and successfully load the pack. Automatic delivery has opened the real configuration theme and Java page in this combination; full identity correlation for delivery before joining remains unverified. An unconfirmed pack preserves the theme preference and falls back to vanilla.
+
 ## Use and fallback {#use-and-fallback}
 
 | Player command | Behavior |

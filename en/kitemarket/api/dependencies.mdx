@@ -8,12 +8,14 @@ canonical: "https://www.kitemc.com/en/kitemarket/api/dependencies"
 
 Project examples reference SDK Maven coordinates on GitHub Packages. Direct GitHub Releases downloads remain a fallback. Both provide the same public interfaces without the proprietary trading core.
 
+Examples on this page target the v1.1 candidate SDK on public repository `main`. Version `1.1.0` has not been formally released and cannot be resolved until the matching package is uploaded. Use matching SDKs with a v1.0.0 host. New bundle, fee and business-condition summaries require both a host and SDK that include the v1.1 implementation.
+
 ## GitHub Packages {#github-packages}
 
 | SDK | Maven coordinates |
 |---|---|
-| Read-only market API | `com.kitemc:kitemarket-api:1.0.0` |
-| UI SDK | `com.kitemc:kitemarket-ui-api:1.0.0` |
+| Read-only market API | `com.kitemc:kitemarket-api:1.1.0` |
+| UI SDK | `com.kitemc:kitemarket-ui-api:1.1.0` |
 
 The registry is `https://maven.pkg.github.com/kitemc/KiteMarket`. The release workflow uploads both SDKs, sources, Javadoc and POM files after the corresponding stable release.
 
@@ -51,7 +53,7 @@ repositories {
     }
 }
 dependencies {
-    compileOnly("com.kitemc:kitemarket-api:1.0.0")
+    compileOnly("com.kitemc:kitemarket-api:1.1.0")
     compileOnly("com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT")
 }
 tasks.withType<JavaCompile>().configureEach {
@@ -76,7 +78,7 @@ In a Maven project's `pom.xml`, add the registry and dependency:
   <dependency>
     <groupId>com.kitemc</groupId>
     <artifactId>kitemarket-api</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
     <scope>provided</scope>
   </dependency>
 </dependencies>
@@ -104,7 +106,7 @@ GitHub's [Gradle](https://docs.github.com/en/packages/working-with-a-github-pack
 
 ## Release-download fallback {#release-download-fallback}
 
-For offline development or when Packages authentication is unavailable, download the matching `KiteMarket-API-1.0.0.jar` directly from [GitHub Releases](https://github.com/KiteMC/KiteMarket/releases) and manage it as a compile-only dependency.
+For offline development or when Packages authentication is unavailable, download an actually published SDK matching the host from [GitHub Releases](https://github.com/KiteMC/KiteMarket/releases) and manage it as a compile-only dependency. The v1.1 release filename will be `KiteMarket-API-1.1.0.jar`; current availability follows the release's actual assets.
 
 Release-file downloads do not require a Packages Token. The public repository provides interface sources, Javadoc and runnable examples. This fallback does not change the runtime requirements below.
 

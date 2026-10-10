@@ -1,6 +1,6 @@
 ---
 title: "Pages, actions and lifecycle"
-description: "Logical IDs, theme templates, actual actions and provider contracts across all 35 pages."
+description: "Logical IDs, templates, actions and lifecycle for base pages and v1.1 candidate additions."
 canonical: "https://www.kitemc.com/en/kitemarket/ui-development/pages"
 ---
 
@@ -10,7 +10,7 @@ Renderers read current page snapshots and registered actions. The server continu
 
 `UiPage.key()` identifies the logical page; `UiPage.template()` selects theme configuration. Vanilla `menus` uses page IDs, while IA `pages` uses template IDs.
 
-The complete 35 pages and their main actions follow; “Same” means the template equals the page ID.
+The 35 base pages in v1.0.0 and their main actions follow; “Same” means the template equals the page ID. Use the links below for v1.1 candidate additions, and always render actual current snapshots and actions.
 
 ### Market and publishing {#market-and-publishing}
 
@@ -56,6 +56,21 @@ Wizard templates follow the step: `wizard-type`, `wizard-item`, `wizard-terms` (
 | `inspect` / `evidence` | `inspect` | Structured evidence and permitted review entrances |
 | `ui` / `themes` | Same | Backend, theme or server-default selection |
 | `result` | Same | Status, receipt, wallet, claims and continue browsing |
+
+### V1.1 candidate additions
+
+New bundle/bulk, business-condition, community, notification, seller-statistics, automation, income-reservation and administration pages use the same `menus` and theme mechanisms. Never guess keys, templates or button positions from display text.
+
+<Columns cols={2}>
+  <Card title="Complete added page IDs and source slots" icon="table-cells-large" href="https://github.com/KiteMC/KiteMarket/blob/main/docs/GUI-CONFIGURATION.en.md">
+    Candidate GUI tables, list mapping, claims and actual confirmation actions.
+  </Card>
+  <Card title="V1.1 candidate topics" icon="book-open" href="/en/kitemarket/v1-1/overview">
+    Semantics for bundles, bulk listings, community, automation and administration.
+  </Card>
+</Columns>
+
+Vanilla `menus` uses source slots; SDK snapshots and IA `slot-icons` use final physical slots. Never apply the default list mapping twice. Entries without registered actions are informational and cannot gain transaction callbacks through themes.
 
 ## Home and profile slots {#home-and-profile-slots}
 

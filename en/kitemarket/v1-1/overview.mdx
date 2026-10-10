@@ -1,0 +1,74 @@
+---
+title: "v1.1 candidate overview"
+description: "Candidate features, fresh-install preparation and reading paths for KiteMarket v1.1."
+canonical: "https://www.kitemc.com/en/kitemarket/v1-1/overview"
+---
+
+These pages describe the **v1.1 candidate implementation**. V1.1 has not been formally released. Runtime, SDK and example availability depends on the actual files in the matching GitHub Release or Packages version. The [download page](/en/kitemarket/download) continues to show public releases. Compatibility follows actual verification of pinned builds.
+
+## Choose a topic
+
+| Topic | Contents |
+| --- | --- |
+| [Bundles, bulk listings and containers](/en/kitemarket/v1-1/items) | Indivisible lots, independent bulk orders, real container previews and business identities |
+| [Fees, currencies and automation](/en/kitemarket/v1-1/economy) | Fee snapshots, partial-fill allocation, experience/item currencies, top-up and income reservations |
+| [Community, notices and statistics](/en/kitemarket/v1-1/community) | Favorites, saved searches, subscriptions, durable notices, seller windows and reference prices |
+| [Administration and risk review](/en/kitemarket/v1-1/administration-risk) | Confirmed actions with reasons, existing funds/assets, evidence, models and cases |
+| [Optional cloud review and privacy](/en/kitemarket/v1-1/cloud-review) | Off by default, manual confirmation, pseudonymous evidence and constrained responses |
+
+Existing [getting started](/en/kitemarket/guide), [trading](/en/kitemarket/trading), [wallet](/en/kitemarket/wallet) and [GUI configuration](/en/kitemarket/configuration/gui) pages retain their version-specific instructions. Prepare a fresh v1.1 installation below; consult [backup and migration](/en/kitemarket/operations#v1-0-to-v1-1) before using existing data.
+
+## New and shared installations
+
+V1.1 primarily targets fresh installations, using market protocol `5`, database schema `2` and item snapshot format `2`. After obtaining matching release artifacts:
+
+1. Select one runtime JAR for the game's version and JVM, using an independent server and plugin data directory.
+2. Use a new SQLite file for one node or a dedicated empty MySQL/MariaDB database for a shared market. Retain existing directories and databases; do not clear an old market to install a new one.
+3. Start once to generate configuration, stop normally, then fill in your license, network, node and economy settings. Retain the release defaults for product ID, license endpoint and trusted public key.
+
+New installations use a durable SQLite file in the plugin directory for one market node. Shared markets use MySQL/MariaDB; multiple game nodes must not concurrently write the same SQLite file. New defaults do not replace an existing database connection with an empty database.
+
+Stop normally or use a consistent backup method for SQLite. Copying only `.db` from a running WAL database is insufficient.
+
+Each node keeps a unique `network.node-id`. Market identity, game version, item profile and currency identities must remain consistent. A failed database connection reports unavailability rather than substituting another market.
+
+## Existing v1.0 markets
+
+V1.1 does not promise a direct JAR replacement or seamless upgrade. Back up the full original database, plugin directories, original JARs, player/world data and economy-provider data. Check migration, assets and recovery on an independent copy before deciding to switch the original environment.
+
+The candidate retains legacy-schema checks, pre-migration backups, old-node fencing and asset-recovery protections. Those mechanisms do not replace complete verification of an existing environment. Do not mix builds, delete the database, change currency identities or overwrite an old market with fresh defaults. Keep original backups and evidence, and follow [migration and rollback guidance](/en/kitemarket/operations#v1-0-to-v1-1).
+
+## Interfaces and integrations
+
+The base plugin provides a complete vanilla GUI. Developers can build their own ItemsAdder interfaces through configuration and the public Java SDK. Those interfaces use the host's real items, protected actions, permissions and trading confirmations.
+
+ItemsAdder, Oraxen, Nexo and MMOItems identities come from real public APIs. Bridges and declarative rules do not relax item fidelity. Actual API availability and verification records govern compatibility.
+
+## Scoreboards, NPCs and permission plugins
+
+Optional integrations provide display values and entry points. Verification records govern specific supported builds. Missing or incompatible APIs disable only their integration; the base market remains usable.
+
+| Integration | Usage |
+| --- | --- |
+| PlaceholderAPI | `%kitemarket_state%`, `%kitemarket_network_id%`; wallets use `%kitemarket_wallet_coins_available%` and `%kitemarket_wallet_coins_frozen%`, replacing `coins` with the actual currency ID |
+| Citizens | Set actual NPC IDs in `integrations.citizens.npc-ids` and restart normally; right-click opens `/km` |
+| LuckPerms | `%kitemarket_luckperms_primary_group%` reads an already-loaded primary group; effective Bukkit permissions still govern trading |
+
+Wallet placeholders use a short-lived cache. Unready services, expired caches and failed queries return empty values rather than invented zeros. Displays must not authorize payments or prove success, and NPC entry retains permissions and confirmation.
+
+## Enable only the trading modes you need
+
+`market.enabled-types` defaults to `BUY`, `SELL` and `AUCTION`. To enable auctions alone:
+
+```yaml
+market:
+  enabled-types: [AUCTION]
+```
+
+The home page, publication, commands and SDK enforce the same setting. Any nonempty subset is valid; unknown types and an empty list are rejected. New trades follow the reloaded setting. Existing orders retain cancellation, expiry settlement and claims, so disabling auctions does not strand a winning bidder's held funds.
+
+## Uncertain outcomes
+
+Deposits, withdrawals, claims, bulk publication and administration have separate results. One successful operation does not prove that another succeeded, and a successful row does not make a whole batch successful.
+
+For `UNKNOWN`, retain the original operation and follow [outcome review](/en/kitemarket/operations#reconciling-unknown). A current balance or inventory screenshot alone cannot prove a historical external effect. Do not repeat debits or grants. Risk scores and cloud advice cannot confirm transaction outcomes.

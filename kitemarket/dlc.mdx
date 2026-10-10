@@ -40,6 +40,19 @@ gui:
 
 未安装 IA 主题时使用 `gui.default-themes: {}`。第三方主题也可通过 `requires` 登记自己的包身份，详见开发指南。无效候选保留当前有效配置，主题无需登记 KiteMC 商品 ID 或下载端点。
 
+### 入服后的自动下发
+
+v1.1 候选的 Paper 1.21.11／Java 21／ItemsAdder 4.0.16 代表组合采用入服后下发。在 `plugins/ItemsAdder/config.yml` 中设置：
+
+```yaml
+resource-pack:
+  auto_apply:
+    enabled: true
+    before_join: false
+```
+
+执行 `/iareload`，等待完成，再正常重新连接并成功加载资源包。此组合已确认自动下发后的配置主题和 Java 页面；入服前下发的完整身份关联尚未确认。未确认指定包时，KiteMarket 保留主题偏好并回退原版。
+
 ## 使用与回退 {#使用与回退}
 
 | 玩家入口 | 行为 |

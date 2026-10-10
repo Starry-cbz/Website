@@ -8,7 +8,7 @@ canonical: "https://www.kitemc.com/kitemarket/ui-development/java"
 
 ## Java 示例：GitHub Packages {#java-示例-github-packages}
 
-Java 项目使用 `com.kitemc:kitemarket-ui-api:1.0.0` 为 `compileOnly` 依赖，不得打包或重定位 SDK。完整可运行源码位于公开仓库 `examples/ui-java`，不需要私有市场核心。
+公开仓库 `main` 的 v1.1 候选 Java 示例使用 `com.kitemc:kitemarket-ui-api:1.1.0` 为 `compileOnly` 依赖，不得打包或重定位 SDK。源码位于 `examples/ui-java`，不需要私有市场核心。v1.1 包尚未正式发布；使用 v1.0.0 主插件时选择对应版本的示例和 SDK。
 
 先合并[市场 API 的 Packages 仓库和认证配置](/kitemarket/api/dependencies#github-packages)，再添加以下依赖。
 
@@ -16,7 +16,7 @@ Java 项目使用 `com.kitemc:kitemarket-ui-api:1.0.0` 为 `compileOnly` 依赖�
 
 ```kotlin
 dependencies {
-    compileOnly("com.kitemc:kitemarket-ui-api:1.0.0")
+    compileOnly("com.kitemc:kitemarket-ui-api:1.1.0")
     compileOnly("com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT")
     compileOnly("beer.devs:itemsadder-api:4.0.18-beta-10")
 }
@@ -31,14 +31,14 @@ Maven 使用相同的 `github-kitemarket` 仓库与 `settings.xml` 凭据，并�
 <dependency>
   <groupId>com.kitemc</groupId>
   <artifactId>kitemarket-ui-api</artifactId>
-  <version>1.0.0</version>
+  <version>1.1.0</version>
   <scope>provided</scope>
 </dependency>
 ```
 
 继续保留 Paper／Bukkit 和 IA API 的编译依赖及各自仓库；Packages 不包含厂商运行插件。两个 SDK 仍为 Java 11，真实 IA 示例适配代码仍为 Java 21。
 
-离线开发或无法使用 Packages 认证时，也可从 [GitHub Releases](https://github.com/KiteMC/KiteMarket/releases)直接下载 `KiteMarket-UI-API-1.0.0.jar` 作为备用编译依赖，下载无需 Packages Token。任何引用方式都不能打包、shade 或重定位 SDK。
+离线开发或无法使用 Packages 认证时，也可从 [GitHub Releases](https://github.com/KiteMC/KiteMarket/releases)下载实际已发布的匹配 SDK 作为备用编译依赖，下载无需 Packages Token。v1.1 正式发行后的文件名为 `KiteMarket-UI-API-1.1.0.jar`。任何引用方式都不能打包、shade 或重定位 SDK。
 
 ## 安装资源与实现提供者 {#安装资源与实现提供者}
 
@@ -92,7 +92,7 @@ IA 适配器先填充 `TexturedInventoryWrapper.getInternal()` 返回的受保�
 
 ### 安装示例包 {#安装示例包}
 
-`KiteMarket-Examples-1.0.0.zip` 示例包汇总查询例与 IA 例，包含可运行 JAR、主题、MIT 自有资源、双语说明及源码／构建文件。
+示例包汇总查询例与 IA 例，包含可运行 JAR、主题、MIT 自有资源、双语说明及源码／构建文件。已发布 v1.0.0 对应 `KiteMarket-Examples-1.0.0.zip`；v1.1 正式发行后使用 `KiteMarket-Examples-1.1.0.zip`，当前候选源码不等于该文件已可下载。
 
 将 IA 示例 JAR 放入 `plugins/`、`theme.yml` 放到 `plugins/KiteMarket/themes/example-ia-java.yml`、`itemsadder/` 内容放到 `plugins/ItemsAdder/contents/km_example/`；按实际 IA 指南重建和下发，登记真实包身份后通过 `/km ui itemsadder example-ia-java` 选择主题。
 
@@ -118,5 +118,5 @@ IA 适配器先填充 `TexturedInventoryWrapper.getInternal()` 返回的受保�
 | 重载后保持旧主题 | 查看日志的具体字段路径；无效候选不会替换现有配置 |
 
 <Card title="页面、动作与生命周期" href="/kitemarket/ui-development/pages">
-  核对35页的模板、动作令牌、输入约定及提供者生命周期。
+  核对基础页面及候选新增页的模板、动作令牌、输入约定和提供者生命周期。
 </Card>

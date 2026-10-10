@@ -168,6 +168,78 @@
       "file": "en/kitemarket/ui-development/pages.mdx",
       "locale": "en",
       "kind": "document"
+    },
+    {
+      "target": "/kitemarket/v1-1/overview",
+      "file": "kitemarket/v1-1/overview.mdx",
+      "locale": "zh",
+      "kind": "document"
+    },
+    {
+      "target": "/en/kitemarket/v1-1/overview",
+      "file": "en/kitemarket/v1-1/overview.mdx",
+      "locale": "en",
+      "kind": "document"
+    },
+    {
+      "target": "/kitemarket/v1-1/items",
+      "file": "kitemarket/v1-1/items.mdx",
+      "locale": "zh",
+      "kind": "document"
+    },
+    {
+      "target": "/en/kitemarket/v1-1/items",
+      "file": "en/kitemarket/v1-1/items.mdx",
+      "locale": "en",
+      "kind": "document"
+    },
+    {
+      "target": "/kitemarket/v1-1/economy",
+      "file": "kitemarket/v1-1/economy.mdx",
+      "locale": "zh",
+      "kind": "document"
+    },
+    {
+      "target": "/en/kitemarket/v1-1/economy",
+      "file": "en/kitemarket/v1-1/economy.mdx",
+      "locale": "en",
+      "kind": "document"
+    },
+    {
+      "target": "/kitemarket/v1-1/community",
+      "file": "kitemarket/v1-1/community.mdx",
+      "locale": "zh",
+      "kind": "document"
+    },
+    {
+      "target": "/en/kitemarket/v1-1/community",
+      "file": "en/kitemarket/v1-1/community.mdx",
+      "locale": "en",
+      "kind": "document"
+    },
+    {
+      "target": "/kitemarket/v1-1/administration-risk",
+      "file": "kitemarket/v1-1/administration-risk.mdx",
+      "locale": "zh",
+      "kind": "document"
+    },
+    {
+      "target": "/en/kitemarket/v1-1/administration-risk",
+      "file": "en/kitemarket/v1-1/administration-risk.mdx",
+      "locale": "en",
+      "kind": "document"
+    },
+    {
+      "target": "/kitemarket/v1-1/cloud-review",
+      "file": "kitemarket/v1-1/cloud-review.mdx",
+      "locale": "zh",
+      "kind": "document"
+    },
+    {
+      "target": "/en/kitemarket/v1-1/cloud-review",
+      "file": "en/kitemarket/v1-1/cloud-review.mdx",
+      "locale": "en",
+      "kind": "document"
     }
   ]
 }
