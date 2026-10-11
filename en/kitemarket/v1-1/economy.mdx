@@ -1,21 +1,18 @@
 ---
-title: "v1.1 fees, currencies and automation"
+title: "Fees, currencies and automation"
 description: "Fee snapshots and allocation, native currencies, shortfall deposits and income reservations."
 canonical: "https://www.kitemc.com/en/kitemarket/v1-1/economy"
 ---
 
 import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
-import { V11FeatureMarker, V11PagePanel } from "/snippets/feature-marker.jsx";
-
-<V11FeatureMarker lang="en" title="Fees and automation" summary="New fee snapshots, shortfalls and reservations" />
-
-<V11PagePanel lang="en" items={["Fee snapshots and partial-fill allocation", "Experience, level and item currencies", "Shortfall deposits", "Income reservations and auto-claims"]} />
 
 <ScreenshotPlaceholder title="Fees and automation" description="A real gameplay screenshot can be added here later for fee previews, shortfalls or reservations." lang="en" />
 
-This page belongs to the [v1.1 documentation](/en/kitemarket/v1-1/overview). Persistent operation and outcome handling still governs funds, holds and external calls.
+Fee rules determine publication and transaction charges; currency configuration selects the actual transfer gateway. See [wallets and automation](/en/kitemarket/wallet) for everyday use and [currency configuration](/en/kitemarket/configuration/currencies) for settings. Persistent operation and outcome handling continues to govern funds, holds and external calls.
 
-## Fees and existing orders
+<span id="fees-and-existing-orders" />
+
+## Fees and existing orders {#v11-fee-rules-and-existing-orders}
 
 Existing `market.tax-bps` and `market.taxes` remain valid; 100 basis points equals 1%. Enabled `fees` selects the first matching rule in configuration order, with permission, currency, order type and declarative item conditions. With no enabled matching rule, legacy tax behavior applies.
 
@@ -42,13 +39,17 @@ New fee rules round the cumulative fixed share and percentage charge together, t
 
 Cancellation or expiry returns unfilled escrow and holds. Already charged listing fees are not refunded. Old orders retain their fees and expiry without another listing charge or extended duration.
 
-## Trading restrictions
+<span id="trading-restrictions" />
+
+## Trading restrictions {#v11-trading-restrictions}
 
 `policy` can restrict worlds, players, items and creative mode. The first matching permission row in `policy.limits` controls order count, quantity, price, duration, cooldown and allowed currencies.
 
 Confirmation and database submission enforce restrictions for commands, GUI and constrained developer requests. Changing button positions or appearance does not alter them. Existing assets retain their permitted exit paths.
 
-## New currencies
+<span id="new-currencies" />
+
+## Experience points, levels and item currencies {#v11-native-currencies}
 
 Existing Vault, PlayerPoints, CoinsEngine and ExcellentEconomy keep their IDs and gateways.
 
@@ -62,13 +63,17 @@ Points and levels are not a linear exchange rate. Item currency compares the com
 
 Transfers still check the configured gateway, real balance, player state, receive capacity and inventory space. Unavailable external plugins disable affected transfers rather than reporting fake zero or substituting adapters. See [currency configuration](/en/kitemarket/configuration/currencies).
 
-## Shortfall top-up
+<span id="shortfall-top-up" />
+
+## Shortfall top-up {#v11-shortfall-top-up}
 
 Insufficient-funds views read the real shortage. A confirmed successful deposit reloads order, quantity and fees before a new trade confirmation. Depositing is not proof of buying or supplying; the previous quote does not execute silently.
 
 Changed orders, unavailable gateways and unknown external outcomes have separate results. Preserve already deposited market funds instead of repeatedly depositing to conceal a failed follow-up trade.
 
-## Automatic withdrawal and claims
+<span id="automatic-withdrawal-and-claims" />
+
+## Automatic withdrawal and claims {#v11-automatic-withdrawal-and-claims}
 
 Future-income withdrawal, login withdrawal and automatic claiming are separate opt-ins that default off. Bounded batches do not guarantee that one cycle completes all funds or assets.
 

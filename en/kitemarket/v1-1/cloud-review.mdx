@@ -1,21 +1,18 @@
 ---
-title: "v1.1 optional cloud review and privacy"
+title: "Optional cloud review and privacy"
 description: "Endpoint configuration, evidence allowlists and constrained advice for manual cloud review."
 canonical: "https://www.kitemc.com/en/kitemarket/v1-1/cloud-review"
 ---
 
 import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
-import { V11FeatureMarker, V11PagePanel } from "/snippets/feature-marker.jsx";
-
-<V11FeatureMarker lang="en" title="Optional cloud review" summary="New privacy boundary, off by default" />
-
-<V11PagePanel lang="en" items={["Manual administrator opt-in", "Evidence allowlists and pseudonyms", "Constrained responses", "Local cases retained on failure"]} />
 
 <ScreenshotPlaceholder title="Optional cloud review" description="A real gameplay screenshot can be added here later for review requests and result states." lang="en" />
 
-This page belongs to the [v1.1 documentation](/en/kitemarket/v1-1/overview). Cloud review defaults off. Local analysis does not depend on a remote model.
+Cloud review defaults off. Local analysis does not depend on a remote model. Administrators can configure and request constrained advice for a specific [risk case](/en/kitemarket/v1-1/administration-risk) after reviewing the evidence boundary, service terms and costs.
 
-## Manual administrator opt-in
+<span id="manual-administrator-opt-in" />
+
+## Manual administrator opt-in {#v11-manual-cloud-opt-in}
 
 Choose an HTTPS service with compatible chat-completions responses and configure its endpoint, authentication and model. Each specific case still requires confirmation after configuration is enabled. This is not continuous uploading of all trades.
 
@@ -39,7 +36,9 @@ Defaults allow 20 requests per network per day, at most 16,384 request bytes and
 
 The case request identity and daily quota commit together in shared storage before sending. Confirming the same case on multiple nodes creates one sending intent. Other nodes show in-progress status or reuse stored advice without another provider call.
 
-## Evidence boundary
+<span id="evidence-boundary" />
+
+## Evidence boundary {#v11-cloud-evidence-boundary}
 
 | Data | Handling |
 | --- | --- |
@@ -54,13 +53,17 @@ Pseudonymization does not guarantee that a third party can never correlate infor
 
 Local cases retain their audit evidence and notes. The outbound allowlist limits model summaries without deleting local audit data.
 
-## Response validation
+<span id="response-validation" />
+
+## Response validation {#v11-cloud-response-validation}
 
 Responses must use defined advice fields and cite evidence from the current case. Foreign case references, unknown fields/actions, tool calls and invalid structures are rejected rather than accepted as advice.
 
 Advice cannot execute market actions, confirm external calls or punish players. A remote finding cannot replace operation evidence or bypass UNKNOWN handling.
 
-## Disabled or unsuccessful review
+<span id="disabled-or-unsuccessful-review" />
+
+## Disabled or unsuccessful review {#v11-cloud-unavailable-and-failures}
 
 Disabled cloud review, exhausted quota, timeout, service failure or rejected advice leaves local [case review](/en/kitemarket/v1-1/administration-risk) available. Ordinary trades and local rules do not require the remote service.
 

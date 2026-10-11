@@ -1,6 +1,6 @@
 ---
 title: "托管与领取箱"
-description: "查看待领取物品与状态，了解堆叠上限、背包空间和异常处理。"
+description: "按来源分类待领物品，确认当前页批量领取，了解原生堆叠、自动领取与异常处理。"
 canonical: "https://www.kitemc.com/kitemarket/trading/claims"
 ---
 
@@ -22,6 +22,24 @@ import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
     <ScreenshotPlaceholder image="/images/kitemarket/screenshot-claims.png" title="待领取物品与领取状态" description="领取列表保留物品名称、附魔和原始 Lore，并显示数量与状态。" lang="zh" />
   </Tab>
 </Tabs>
+
+## 分类、详情与批量领取 {#v11-categorized-batch-claims}
+
+领取箱按资产来源分类并分页。先选择分类，再勾选本页条目或全选当前页；详情页保留真实名称、附魔、Lore、数量与领取状态。
+
+批量领取先打开明确确认，只处理当前页所选条目，**最多36项**。它不会自动翻页领取整个领取箱。混合整包成交后也按保存的真实内容领取，不以展示箱子代替资产。
+
+空间不足的项跳过并继续保留待领。已确认成功的项不重复执行；出现未确认结果、玩家离线或会话变化时停止后续条目，重新查看结果后再决定下一次领取。
+
+<ScreenshotPlaceholder title="领取分类与当前页批量确认" description="此处预留真实游戏截图：来源分类、当前页勾选、数量和领取确认。" lang="zh" />
+
+## 自动领取 {#v11-automatic-claims}
+
+个人自动领取默认关闭，需在自动化页面明确开启。任务按有界批次处理，遵守原生堆叠、背包空间、会话和领取结果校验，不承诺一轮领完所有资产。
+
+空间不足时保留待领；结果为 `UNKNOWN` 时暂停后续任务，不自动重复执行。自动领取与未来收益提现、登录提现是独立设置，开启其中一项不意味着其他项已开启。
+
+<ScreenshotPlaceholder title="自动领取设置与结果" description="此处预留真实游戏截图：自动领取开关、待领状态和空间不足提示。" lang="zh" />
 
 ## 结果不确定时
 

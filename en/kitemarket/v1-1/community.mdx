@@ -1,21 +1,18 @@
 ---
-title: "v1.1 community, notices and statistics"
+title: "Community, notices and statistics"
 description: "Favorites, saved searches, durable notices, Discord lifecycle and currency-specific statistics."
 canonical: "https://www.kitemc.com/en/kitemarket/v1-1/community"
 ---
 
 import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
-import { V11FeatureMarker, V11PagePanel } from "/snippets/feature-marker.jsx";
-
-<V11FeatureMarker lang="en" title="Community and notices" summary="New favorites, subscriptions and statistics" />
-
-<V11PagePanel lang="en" items={["Favorites and saved searches", "Durable notices and Discord lifecycle", "Seller windows", "Currency-specific statistics and references"]} />
 
 <ScreenshotPlaceholder title="Community and notices" description="A real gameplay screenshot can be added here later for favorites, subscriptions or the notice center." lang="en" />
 
-This page belongs to the [v1.1 documentation](/en/kitemarket/v1-1/overview). Preferences and notices persist; statistics use observed committed trades.
+Use `/km community` to manage favorites, saved searches, subscriptions and notices. Use `/km prices` for comparable price references. Preferences and notices persist in the market network; statistics use observed committed trades.
 
-## Favorites and saved searches
+<span id="favorites-and-saved-searches" />
+
+## Favorites and saved searches {#v11-favorites-and-saved-searches}
 
 Favorite an order and manage it in the community area. Each player can retain 256 favorites and 20 searches. Unavailable orders remain removable without appearing as valid merchandise.
 
@@ -33,7 +30,9 @@ Subscriptions apply to future matching orders. Validated search edits do not aut
 
 The favorite/subscription discovery index supports up to 1,024 players. A full index rejects new registrations before saving preferences. Unsubscribed manual saved searches remain available.
 
-## Personal notices
+<span id="personal-notices" />
+
+## Personal notices {#v11-personal-notices}
 
 Notices cover matching new orders, terminal favorites, purchases, sales and auction outbids. Same-type events merge by minute, deduplicate replay and retain up to 100 entries.
 
@@ -43,7 +42,9 @@ Login reports actual unread entries. Online polling combines changes into at mos
 
 Delivery does not mark notices read. Opening details or explicitly marking all read updates durable status. Chat shows only a few short order references; details retain targets. Failed reads never appear as zero unread.
 
-## Public broadcasts and Discord
+<span id="public-broadcasts-and-discord" />
+
+## Public broadcasts and Discord {#v11-public-broadcasts-and-discord}
 
 Both default off and require administrator configuration.
 
@@ -61,7 +62,9 @@ Discord configuration and its display snapshot are fixed at startup. Restart the
 
 A timed-out creation, server error or unconfirmed message ID remains UNKNOWN without automatic duplicate creation. An explicitly rejected rate-limited request may retry after its delay. Message delivery failure does not roll back completed game trades.
 
-## Sellers and rankings
+<span id="sellers-and-rankings" />
+
+## Sellers and rankings {#v11-sellers-and-rankings}
 
 Seller profiles and rankings aggregate committed trades separately for each seller and currency. The 1-, 7- and 30-day choices use **UTC calendar days**, including the current day. They are not exact rolling 24-, 168- or 720-hour windows.
 
@@ -71,7 +74,9 @@ Rankings can switch between net income, completed trade count and quantity sold.
 
 The seller index supports up to 1,024 players. Beyond that limit, exact individual statistics continue while complete rankings become explicitly unavailable. Indexed sellers are not presented as a complete network ranking.
 
-## Public reference prices
+<span id="public-reference-prices" />
+
+## Public reference prices {#v11-public-reference-prices}
 
 Reference prices group complete comparable items in one currency over rolling 24-hour, 7-day and 30-day windows.
 

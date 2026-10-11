@@ -40,9 +40,11 @@ gui:
 
 Use `gui.default-themes: {}` when no IA theme is installed. Third-party declarations may register a separate pack through `requires`; see the developer guide. Invalid candidates preserve the current valid configuration. Themes need no KiteMC product ID or download endpoint.
 
-### Automatic delivery after joining
+<span id="automatic-delivery-after-joining" />
 
-The v1.1's Paper 1.21.11 / Java 21 / ItemsAdder 4.0.16 combination uses delivery after joining. Set the following in `plugins/ItemsAdder/config.yml`:
+### Automatic delivery after joining {#v11-ia-automatic-delivery}
+
+The v1.1 Paper 1.21.11 / Java 21 / ItemsAdder 4.0.16 combination uses delivery after joining. Set the following in `plugins/ItemsAdder/config.yml`:
 
 ```yaml
 resource-pack:
@@ -68,6 +70,14 @@ Registered resources, the adapter and **successful loading of the specific pack 
 
 ## Develop your own interface {#develop-your-own-interface}
 
-The base inventory layout, shared pages and amount input remain. Developers may use their own font images, button-item icons and page configuration. SDK actions and input retain server validation; a theme cannot bypass confirmation or debit funds directly. See [interface development](/en/kitemarket/ui-development) for working examples, the 35 page keys and lifecycle.
+The base inventory layout, shared pages and amount input remain. Developers may use their own font images, button-item icons and page configuration. SDK actions and input retain server validation; a theme cannot bypass confirmation or debit funds directly. See [interface development](/en/kitemarket/ui-development) for working examples, page/template lists and lifecycle.
+
+### Cover complete pages and result states {#v11-ia-workflow-coverage}
+
+Own themes can supply separate backgrounds for bundles, batches, containers, claim categories, business conditions, saved searches and favorites, subscriptions and notifications, risk review, automation and administration tools. Single-item sales display a unit price and purchase quantity; bundles show a total price and complete contents. Batches display independent orders. Fees and asset destinations come from actual host snapshots rather than theme calculations or overrides.
+
+The 54-slot container and default 36-item list remain, with genuine names, enchantments, lore and quantities. Themes change functional icons and backgrounds. In `schema: 1`, `pages.<template ID>.state-font-images` can choose a background from the host result state, falling back to this page's background when unmatched.
+
+Install and check additions against the [page and action list](/en/kitemarket/ui-development/pages). Missing resources, unavailable pages and Java provider unload fall back to vanilla, preserving preferences and drafts. Reload validates candidates: invalid templates keep the last valid configuration. Page availability, actual engine compatibility and resource-pack readiness require separate confirmation.
 
 Preserve theme declarations, resources and player preferences during migration, backing them up before updates; see [operations](/en/kitemarket/operations). The public examples' MIT license covers only the source and resources identified in those examples. Other themes retain their own licenses.

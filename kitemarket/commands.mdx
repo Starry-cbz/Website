@@ -24,6 +24,7 @@ canonical: "https://www.kitemc.com/kitemarket/commands"
 | `/km history [all]` | 查看自己的历史；`all` 需要全局只读审计或管理权限 |
 | `/km orders` 或 `/km mine` | 查看自己的订单 |
 | `/km create` 或 `/km rule` | 编辑本次挂单与物品条件 |
+| `/km lots` | 选择单品、混合整包或独立批量上架；需要 `kitemarket.create` |
 | `/km preview` | 检查背包中哪些物品符合当前条件 |
 | `/km cancelinput` | 取消聊天输入并返回原页面，保留草稿与选择 |
 | `/km order <订单ID>` | 打开指定订单 |
@@ -31,7 +32,8 @@ canonical: "https://www.kitemc.com/kitemarket/commands"
 | `/km inspect <操作ID>` | 查看自己的操作和结构化证据；全局审计者或管理者可核查他人的操作 |
 | `/km deposit <币种> <金额>` | 外部经济转入市场钱包，需位于对应网关 |
 | `/km withdraw <币种> <金额>` | 市场钱包转回外部经济，需位于对应网关 |
-| `/km buy <订单ID> [数量]` | 按单价购买指定数量，遵守该订单最低购买量 |
+| `/km automation` | 个人自动化与收益预约；需要 `kitemarket.wallet`，默认关闭 |
+| `/km buy <订单ID> [数量]` | 单品按单价购买指定数量并遵守最低量；整包须整体购买 |
 | `/km supply <订单ID> <数量>` | 向收购单供货 |
 | `/km bid <订单ID> <金额>` | 对整份拍卖提交总出价 |
 | `/km sell <币种> <每件单价> <数量> [秒数] [最低购买量]` | 托管与主手样品匹配的物品，创建一口价订单 |
@@ -40,24 +42,34 @@ canonical: "https://www.kitemc.com/kitemarket/commands"
 
 有效期单位为秒，最短 60 秒，最长受 `market.maximum-duration-seconds` 限制。创建命令会沿用当前 GUI 草稿中未重新指定的参数；发布前检查确认页。收购建议先 `/km create` 设置并预览条件。也可从自己的订单详情撤单；有有效出价的拍卖不能由卖家撤销。
 
-一口价金额是每件单价，本次总额为单价×购买数量。最低购买量在出售发布条款页设置，默认1，可设为1至发布数量；当余量不足最低量时，只允许买完全部余量。建议购买时填写数量，或从订单详情打开数量页，核对金额后确认。收购也是单价，竞拍起价与出价则为整标总价。
+单品一口价金额是每件单价，本次总额为单价×购买数量。最低购买量在出售发布条款页设置，默认1，可设为1至发布数量；当余量不足最低量时，只允许买完全部余量。建议购买时填写数量，或从订单详情打开数量页，核对金额后确认。收购也是单价，整包出售、竞拍起价与出价则为整标总价。
 
 也可在出售命令的秒数之后填写最低购买量，例如 `/km sell points 8 16 86400 3` 表示单价8、数量16、有效期86400秒、最低购买3件。出售的最后一个参数与拍卖的最低加价含义不同。
 
-## v1.1 新功能入口
+### 整包与批量发布 {#v11-lot-commands}
 
-以下命令属于 [v1.1 新功能](/kitemarket/v1-1/overview)。它们打开对应页面，仍检查基础 `kitemarket.use`、对应功能权限和会话。
+`/km lots` 打开标的模式与内容选择。单品使用原每件单价；混合整包以一个不可拆分订单出售或竞拍；批量发布将选择的物品整理成多份独立订单，逐单显示条款并确认。
+
+独立批量不是一份整包，也不是输入命令后整批立即成功；各单分别保留结果，未知结果停止后续重复执行。步骤见[一口价出售](/kitemarket/trading/sales)及[物品与容器](/kitemarket/trading/items)。
+
+### 钱包与自动化 {#v11-automation-commands}
+
+`/km automation` 打开个人未来收益提现、登录提现和自动领取开关，以及独立提现预约。各项默认关闭并分别确认；关闭设置不自动释放已建立的预约。网关、空间、会话或外部结果不可用时暂停，不把 `UNKNOWN` 当失败自动重试。
+
+交易缺口补款先明确确认外部扣款，充值成功后重新读取报价并再次确认交易。充值和成交是两条独立结果。操作说明见[钱包](/kitemarket/wallet)。
+
+<span id="v1-1-新功能入口" />
+
+### 社区与价格参考 {#v11-community-commands}
 
 | 命令 | 用途与权限 |
 | --- | --- |
-| `/km community` | 收藏、保存搜索、订阅、通知、卖家与排行 |
-| `/km prices` | 公开价格参考，需要 `kitemarket.browse`；不会开放管理案件 |
-| `/km automation` | 个人自动化设置与收益预约，需要 `kitemarket.wallet` |
-| `/km lots` | 单品、整包和独立批量上架，需要 `kitemarket.create`；每单仍确认 |
-| `/km risk` | 学习状态、案件、证据和复核记录，需要 `kitemarket.audit.all`；写入另需管理权限 |
-| `/km tools` | 管理封禁、撤单、资金/实物操作、导出和保留策略，需要 `kitemarket.manage` |
+| `/km community` | 收藏、保存搜索、订阅、持久通知、卖家与排行；仍检查基础使用权限和对应页面权限 |
+| `/km prices` | 同币种公开价格参考，需要 `kitemarket.browse`；不开放管理案件 |
 
-社区页提供公开价格入口。自动化默认关闭，管理资金/实物操作使用已有真实资产，风险及云端建议不自动执行处罚。具体行为见 v1.1 专题。
+社区页可管理最多256个收藏和20个保存搜索。订阅只通知，不自动购买、供货或竞拍。通知离线保存，打开详情或明确全部已读才更新状态。
+
+卖家排行按币种和 UTC 日历日窗口统计，参考价格使用可比物品的滚动窗口；不混加不同货币或将参考价当保证成交价。详细行为及广播、Discord 配置见[社区与通知](/kitemarket/v1-1/community)。
 
 ## 条件编辑输入 {#条件编辑输入}
 
@@ -81,6 +93,8 @@ canonical: "https://www.kitemc.com/kitemarket/commands"
 |---|---|
 | `/km admin` | 查看待核对操作；只读审计者只能查看证据，管理者可以进入核对流程 |
 | `/km admin <玩家UUID或在线名>` | 查看指定玩家的钱包、全部资产状态、订单和历史；支持离线 UUID，名字只解析本服在线玩家 |
+| `/km tools` | 管理封禁、批量撤单、真实资金与实物操作、导出和保留策略；需要 `kitemarket.manage` |
+| `/km risk` | 学习状态、案件、证据和复核记录；读取需 `kitemarket.audit.all` 或管理权限，写入另需管理权限 |
 | `/km doctor` | 查看数据库初始化、网络、许可、节点和 provider 准入状态；支持只读审计权限 |
 | `/km doctor items` | 在实际服务器执行物品规则/序列化诊断，逐样本结果写入日志；不改变玩家资产 |
 | `/km license` | 请求下一轮维护立即刷新许可；不是绕过验证或延长到期 |
@@ -88,13 +102,21 @@ canonical: "https://www.kitemc.com/kitemarket/commands"
 | `/km inspect <操作ID>` | 核查节点、执行阶段、金额与物品摘要，并查看该操作的管理修复前后证据 |
 | `/km cancel <订单ID>` | 强制取消未完成订单，必须输入至少 5 个字符的原因并确认 |
 | `/km resolve <操作ID> <SUCCEEDED/FAILED> <原因>` | 核实外部结果后登记成功/失败，仍需界面确认 |
-| `/km reload` | 校验并更新语言、界面布局/图标与新单费率 |
+| `/km reload` | 校验更新语言、界面、新单费用、交易策略和启用模式 |
 
 核对原因至少 5 个字符，并应具体描述证据。不要为了清空列表随便选择结果；后果见[运维指南](/kitemarket/operations)。管理员可在订单详情撤销订单，但仍留下审计记录。
 
 第三方 IA 主题使用配置文件、自己的资源和 `/km reload`，不需要额外的 KiteMC 主题授权。安装步骤见[ItemsAdder 接入](/kitemarket/dlc)。
 
 玩家审计入口固定查询指定 UUID；资产页可筛选待领、托管、交付中、已领和已消耗状态，并分页查看。它不会替该玩家领取、充提或改余额。`inspect` 的 `PREPARED` 只能查看和刷新，只有 `UNKNOWN` 才能进入管理核对；未结束的外部调用仍会阻止登记结果。
+
+### 管理工具与风险复核 {#v11-administration-commands}
+
+`/km tools` 的资金与实物操作使用真实已有余额和资产，明确展示来源、对象及结果，不能凭截图造币或补发。代上架、批量撤单及其他写操作仍需原因和受保护确认，管理者的操作进入审计。
+
+`/km risk` 展示本地学习状态、异常线索与人工案件。分数不是作弊概率，不会自动封禁或处罚。自配云端默认关闭，发送前由管理员明确确认，返回内容也不替代人工判断。
+
+导出、保留和各项动作边界见[管理与风险复核](/kitemarket/v1-1/administration-risk)；云端字段与隐私范围见[自配云端](/kitemarket/v1-1/cloud-review)。
 
 | 权限 | 默认值 | 范围 |
 |---|---|---|
@@ -116,4 +138,6 @@ canonical: "https://www.kitemc.com/kitemarket/commands"
 
 物品诊断构造本地样本并检查指纹、数量、元数据和规则原因，容器样本明确排除；它不会创建世界方块或物品资产。结果只证明当前服务器的诊断样本，不自动取得交易、经济后端或整个版本矩阵的认证。
 
-`/km reload` 是 KiteMarket 的配置校验入口，不是服务端 `/reload`。它只更新显示配置和新单费率；无效语言、图标、槽位或费率不会替换当前有效设置。`network`、`database`、`currencies`、`license` 及订单数量/时长限制的变更要求完整重启。bStats 开关也在重启后生效。具体示例见[安装与配置](/kitemarket/guide)。
+`/km reload` 是 KiteMarket 的配置校验入口，不是服务端 `/reload`。它可更新显示配置、新单费用、`policy` 和 `market.enabled-types`；无效候选不会替换当前有效设置。共享市场各节点均需更新并重载。
+
+`network`、`database`、`currencies`、`license`、订单数量/时长限制，以及 `risk`、`notifications`、`developer`、`automation`、`integrations`、`imports` 和 `items` 配置变更要求完整重启。bStats 开关也在重启后生效。具体示例见[安装与配置](/kitemarket/guide)。

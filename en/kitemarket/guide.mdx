@@ -6,21 +6,21 @@ canonical: "https://www.kitemc.com/en/kitemarket/guide"
 
 <span id="installation-and-configuration" />
 
-This guide covers the `1.0.0` configuration. Choose a matching runtime on the [download page](/en/kitemarket/download), then follow these steps without obtaining proprietary source or building the plugin yourself.
+This guide is organized around v1.1 installation and configuration. Runtime, SDK and configuration files depend on the actual public versions shown on the [download page](/en/kitemarket/download). Choose a matching build without obtaining proprietary source or compiling the plugin yourself.
 
-<Card title="V1.1 installation preparation" icon="rocket" href="/en/kitemarket/v1-1/overview">
-  New installs support SQLite for one node or shared MySQL/MariaDB. V1.1 is intended for a fresh installation; inspect backups and an independent copy before using existing data.
+<Card title="Preparing existing market data" icon="database" href="/en/kitemarket/operations#v1-0-to-v1-1">
+  Back up and check migration in an independent copy before switching an existing environment. Do not mix builds or overwrite currency identities.
 </Card>
 
 ## 1. Prepare the environment {#_1-prepare-the-environment}
 
-Prepare a [target server and Java runtime](/en/kitemarket/compatibility), MySQL 8 or MariaDB 10.11, and real network-license credentials. A market network shares one database, Minecraft version, currency definition, and item profile. Node IDs must be unique.
+Prepare a [target server and Java runtime](/en/kitemarket/compatibility) and real network-license credentials. One server can use bundled SQLite; a shared market needs MySQL 8 or MariaDB 10.11. A market network shares one database, Minecraft version, currency definition, and item profile. Node IDs must be unique.
 
 Place one appropriate KiteMarket distribution JAR in `plugins/`; do not install multiple distributions together. Start once to generate `plugins/KiteMarket/config.yml`, then stop before editing.
 
 ## 2. Network and database {#_2-network-and-database}
 
-These `config.yml` fields must match your actual deployment. Secrets below are placeholders:
+This `config.yml` example is for a new single-server installation. The database file is stored in the plugin directory:
 
 ```yaml
 language: en_US
@@ -29,16 +29,14 @@ network:
   name: survival
   node-id: survival-1
   item-profile: default
-  # New markets omit the upgrade source; the installed build defines the protocol.
-  # Upgrading protocol 1/2/3 to 4 requires EXIT_ONLY settlement, a full stop, backup and expired leases.
-  # upgrade-from-protocol: '3' # Actual source protocol, temporarily set on the first node only.
 
 database:
-  url: "jdbc:mysql://127.0.0.1:3306/kitemarket"
-  username: "kitemarket"
-  password: "REPLACE_ME"
+  url: "jdbc:sqlite:market.db"
+  username: ""
+  password: ""
 
 market:
+  enabled-types: [BUY, SELL, AUCTION]
   order-limit: 10
   minimum-purchase-quantity: 1
   maximum-quantity: 1000000
@@ -46,34 +44,56 @@ market:
   tax-bps: 0
 ```
 
-Create a dedicated database with the required permissions. An unavailable database, mismatched network definition, or incomplete initialization must prevent trading. Changing the network, currencies, or database requires a planned stop rather than routine hot reload.
+New markets omit the upgrade source. For a shared market, replace the database block with the actual MySQL/MariaDB connection; the password below is a placeholder:
+
+```yaml
+database:
+  url: "jdbc:mysql://127.0.0.1:3306/kitemarket"
+  username: "kitemarket"
+  password: "REPLACE_ME"
+```
+
+Create a dedicated shared database with the required permissions. Multiple game nodes must not write the same SQLite file. An unavailable database, mismatched network definition or incomplete initialization blocks trading; it never opens an empty replacement market.
+
+Stop normally or use a consistent backup method for SQLite. Copying only the `.db` file of an active WAL database is insufficient. Changing the network, currencies or database requires a planned stop rather than routine hot reload.
+
+### Enable only the trading modes you need {#v11-enabled-trading-modes}
+
+`market.enabled-types` accepts any nonempty subset. For an auction-only market:
+
+```yaml
+market:
+  enabled-types: [AUCTION]
+```
+
+Home pages, publication, commands and restricted SDK requests share this restriction. Empty lists and unknown types are rejected. After `/km reload` on each node, new trades follow the updated modes; existing orders can still be cancelled, expire, settle and deliver their assets.
 
 ### Quantities and prices
 
 `market.minimum-purchase-quantity` is the default minimum for sale drafts, initially 1. Sellers can set it from 1 to the listed quantity on the terms page.
 
-Sales and buy orders use per-item prices; auctions use whole-lot starting totals. A remainder below the purchase minimum must be bought together.
+Single-item sales and buy orders use per-item prices; indivisible bundle sales use whole-lot prices, and auctions use whole-lot starting totals. Single-sale remainders below the purchase minimum must be bought together; bundles do not support partial purchases.
 
-Before attaching a protocol 4 build to an existing network, follow the exit, backup and full-stop gates in the [upgrade guide](/en/kitemarket/operations). New markets omit the upgrade source.
+Bulk publication produces independent orders, each confirmed separately. A mixed bundle is one order traded as a whole. See [sales](/en/kitemarket/trading/sales) and [auctions](/en/kitemarket/trading/auctions).
 
 ### Language and fees
 
 `language` accepts `zh_CN`, `en_US`, or `auto`; language files are in `plugins/KiteMarket/lang/`.
 
-`tax-bps` uses basis points, so 100 is 1%. Fees are deducted from the recipient's income, with no listing fee.
+`tax-bps` uses basis points, so 100 is 1%. Without an enabled matching new fee rule, fees are deducted from the recipient's income and listing fees default to zero.
 
 `market.taxes.<buy/sell/auction>.<currency-id>` overrides that type's `default`, then falls back to `market.tax-bps`. Values range from 0 to 9999 basis points.
 
-Orders retain the fee settings captured at creation.
+Orders retain their fee settings captured at creation. New rules can configure listing, buyer and seller fees separately, allocating fixed charges and rounding over cumulative partial fills. A charged listing fee is not refunded on ordinary cancellation. See [fees and restrictions](/en/kitemarket/v1-1/economy).
 
 ## 3. Currencies {#_3-currencies}
 
-Set the provider, precision, gateway, and safe limit for your economy plugin under `currencies`. Currency definitions must match throughout a network; do not expose the same external currency twice.
+Set the provider, precision, gateway and safe limit under `currencies`. Choose Vault, PlayerPoints, CoinsEngine, ExcellentEconomy, vanilla experience points, levels or a complete item-currency sample. Currency definitions must match throughout a network; do not expose the same external currency twice.
 
-Keep `certified-versions` empty until you have tested a specific version in isolation; an empty list disables transfers.
+For external economy adapters, keep `certified-versions` empty until the specific version is verified; an empty list disables transfers. Choose either experience points or levels in one network. Item currencies require an actual serialized sample and positive integer denomination, not just a material name.
 
 <Card title="Currency configuration" icon="coins" href="/en/kitemarket/configuration/currencies">
-  See the full PlayerPoints example, provider requirements, display names, and restart rules.
+  Configure PlayerPoints, experience or item currencies, including minor units, complete identities and display names.
 </Card>
 
 ## 4. Network license {#_4-network-license}
@@ -101,13 +121,13 @@ Purchase a license on the [product page](https://license.kitemc.com/en/products/
 
 Restart and verify plugin initialization, database, sessions, and licensing.
 
-With isolated test players, exercise a deposit, fixed-price purchase, buy-order fulfillment, auction, withdrawal, and item claim. Then test concurrent operations on two nodes. Validate every enabled provider; a loaded JAR does not prove transfers work.
+Use isolated test players to check the enabled trade modes, transfers and claims. For a shared deployment, also check competing operations on two nodes. Verify each enabled provider; a loaded JAR does not prove transfers work. Confirm amounts, fees and asset destinations, preserving real failure or reconciliation states.
 
 ### Restarts and reloads
 
-Restart fully after changing network, database, currency, license, or quantity/duration limits.
+Restart fully after changing network, database, currency, license or quantity/duration limits. The `risk`, `notifications`, `developer`, `automation`, `integrations`, `imports` and `items` configurations are also fixed at startup and require a normal restart.
 
-`/km reload` validates and updates presentation settings and new-order fees; invalid candidates leave current settings intact. Server `/reload` and hot plugin unloading are unsupported.
+`/km reload` validates and updates presentation settings, new-order fees, `policy` and `market.enabled-types`; invalid candidates leave current settings intact. Update and reload every node in a shared market. Server `/reload` and hot plugin unloading are unsupported.
 
 See [commands](/en/kitemarket/commands) and [operations](/en/kitemarket/operations).
 
@@ -123,7 +143,7 @@ Players choose a backend and installed theme from their profile or `/km ui`. An 
 
 ### Customize the vanilla GUI {#customize-the-vanilla-gui}
 
-Server owners use `menus` in `config.yml` to customize all 35 pages. Edit the file, run `/km reload`, and reopen the page; invalid candidates preserve the previous working configuration.
+Server owners use `menus` in `config.yml` to customize market, publication, community, automation and management pages. Edit the file, run `/km reload`, and reopen the page; invalid candidates preserve the previous working configuration.
 
 Appearance and placement do not change existing actions, permissions, trading rules or assets, and cannot add trading buttons.
 
@@ -150,7 +170,7 @@ Either disabled switch prevents the corresponding collection. Restart fully afte
 
 ## 8. Runtime, configuration and SDKs {#_8-runtime-configuration-and-sdks}
 
-Choose **one** matching Legacy, Modern or Current JAR on the [download page](/en/kitemarket/download). The `1.0.0` filenames are `KiteMarket-legacy-1.0.0.jar`, `KiteMarket-modern-1.0.0.jar` and `KiteMarket-current-1.0.0.jar`. API, sources and Javadoc JARs are not server plugins.
+Choose **one** matching Legacy, Modern or Current JAR on the [download page](/en/kitemarket/download), named `KiteMarket-legacy-<version>.jar`, `KiteMarket-modern-<version>.jar` or `KiteMarket-current-<version>.jar`. API, sources and Javadoc JARs are not server plugins. The download component lists actual public assets without substituting another JAR for a missing file.
 
 Chinese and English configuration packages are labeled `zh_CN` and `en_US`. Retain their production product ID, license endpoint and trusted public key, filling in your license, database and economy configuration.
 
@@ -159,3 +179,22 @@ Back up and merge changes into an existing configuration rather than overwriting
 Verify files using `SHA256SUMS.txt` and record the installed version. Isolated test signing keys and credentials are not production configuration.
 
 The public repository also provides SDKs and runnable examples; see [market API](/en/kitemarket/api), [interface development](/en/kitemarket/ui-development), and the [compatibility scope](/en/kitemarket/compatibility).
+
+## 9. Configure by task {#v11-configuration-tasks}
+
+<CardGroup cols={2}>
+  <Card title="Trading and items" icon="boxes-stacked" href="/en/kitemarket/trading">
+    Set advanced buy conditions, publish single items or bundles and inspect real contents before delivery.
+  </Card>
+  <Card title="Wallets and automation" icon="wallet" href="/en/kitemarket/wallet">
+    Check actual limits, shortfall top-ups, income reservations and opt-in automation.
+  </Card>
+  <Card title="Community and discovery" icon="magnifying-glass" href="/en/kitemarket/v1-1/community">
+    Favorites, saved searches, subscriptions, notices, sellers and same-currency reference prices.
+  </Card>
+  <Card title="Administration and risk review" icon="shield-halved" href="/en/kitemarket/v1-1/administration-risk">
+    Confirm reasoned management actions, exports, actual asset operations and human-reviewed risk signals.
+  </Card>
+</CardGroup>
+
+Public broadcasts and Discord default off, as do personal income withdrawals, login withdrawals and automatic claiming. Configure the capabilities you plan to use and check their resources, gateways, permissions and privacy boundaries.

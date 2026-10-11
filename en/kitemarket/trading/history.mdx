@@ -1,6 +1,6 @@
 ---
 title: "Search, history and transaction receipts"
-description: "Filter market orders and review individual amounts, tax, income recipients and operation states."
+description: "Search and favorite orders, manage notifications, view same-currency statistics and price references, and review receipts."
 canonical: "https://www.kitemc.com/en/kitemarket/trading/history"
 ---
 
@@ -8,17 +8,55 @@ import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
 
 ## Search and filters {#search-and-transaction-receipts}
 
-Filter by type, currency, or material, then sort by ending time, newest first, or price.
+Filter by type, currency or material, then sort by ending time, newest first or price. Business source, category, price range, single-item/bundle form and display slot can narrow the selection further.
 
 Search covers order IDs, material IDs, real names, lore, and active advanced-condition text. `%` and `_` are literal characters; serialized bytes and fingerprints are excluded.
 
 Database filtering happens before pagination, and pages retain your filters.
 
-Price sorting uses sale and buy-order unit prices and the current highest auction bid, or the starting price when there are no bids. Filter to the same type and currency first; no exchange rates or cross-currency valuation are applied.
+Price sorting uses single-item sale and buy-order unit prices, bundle totals, and the current highest auction bid or starting price. Filter to the same lot form and currency first; no exchange rates or cross-currency valuation are applied.
+
+### Text, materials and price ranges {#v11-search-fields}
+
+Material filters accept Chinese names, English material names or namespaced IDs, such as `钻石`, `DIAMOND` and `minecraft:diamond`, normalized to a material ID when saved. Invalid input preserves the current filter.
+
+Name search uses readable text without color codes, keeping keywords intact through per-character gradients. Modern items without a custom display name use the public API's `item_name`. Name matching never replaces business IDs or complete-property comparisons.
+
+Saved-search price ranges use nonnegative integer minor units: `123` is 1.23 for a currency with two decimal places. Switching currency clears the price bounds; enter them again for the new currency. Other filters remain.
+
+## Favorites, saved searches and subscriptions {#v11-favorites-saved-searches}
+
+Favorite an order from its page and manage it from the community page. Each player can retain up to 256 favorites and 20 saved searches. Unavailable orders remain removable rather than appearing as tradable stock.
+
+Saved searches retain type, currency, material, readable text, business source, category, price range, single-item/bundle form, display slot and sorting. Running one reads current real orders. Editing its text updates material matching while retaining the other filters, including material buy orders without exact samples.
+
+Subscriptions only notify about new matching orders; they never purchase, fulfill or bid automatically. Candidate conditions are validated before replacing saved ones. The discovery index supports up to 1,024 players. New favorites or subscriptions are explicitly rejected at capacity without partial saves; unsubscribed manual saved searches remain usable.
+
+<ScreenshotPlaceholder title="Favorites and saved searches" description="Reserved for a real gameplay screenshot of favoriting an order, saving filters and enabling a subscription." lang="en" />
+
+## Persistent notifications and unread reminders {#v11-persistent-notifications}
+
+Notifications cover new matches, favorite terminal states, purchases, sales and outbid auctions, retaining up to 100 entries. Same-type events are merged by minute and deduplicated, with network-persistent storage even when offline chat cannot be delivered.
+
+Login shows the real unread count. Online chat merges reminders at most once every 15 seconds. Opening details or explicitly marking all as read updates the stored state. Disabling later reminders does not delete existing notifications or assets; failed reads never display a false zero.
+
+Administrators can separately enable game broadcasts and Discord, both disabled by default. Game broadcasts summarize per node every 60 seconds. Discord creates a real order message, updates remaining quantity or highest bids, and deletes it on terminal state. Delivery failure never rolls back a trade. An unconfirmed create remains `UNKNOWN` without automatic duplication. See [notifications and Discord](/en/kitemarket/v1-1/community#public-broadcasts-and-discord) for configuration and privacy scope.
+
+<ScreenshotPlaceholder title="Notification center and unread states" description="Reserved for a real gameplay screenshot of persistent notifications, merged reminders and read controls." lang="en" />
+
+## Seller windows, rankings and price references {#v11-seller-statistics-and-prices}
+
+Seller profiles and rankings accumulate committed trades separately by seller and currency, using 1, 7 or 30 **UTC calendar days**, including today. Switch between net income, transaction count and quantity sold, then open seller statistics and orders. Historical quantities are not current stock.
+
+The seller index supports up to 1,024 players. Beyond capacity, exact personal statistics continue, but the full ranking is explicitly unavailable rather than presenting an indexed subset as the whole network. Failed reads and no data are distinguished, without mixing amounts across currencies.
+
+Price references group complete comparable items within the same currency, using rolling 24-hour, 7-day and 30-day windows. They show median unit price, quantity-weighted mean and real traded volume. Different properties, bundle combinations or currencies are not forcibly combined. Missing comparable data does not become a zero valuation. References guarantee neither a sale price nor a cheating conclusion.
+
+<ScreenshotPlaceholder title="Seller statistics and public price references" description="Reserved for a real gameplay screenshot of UTC seller windows, same-currency rankings and rolling price references." lang="en" />
 
 ## Individual transaction receipts
 
-Click a history entry for a read-only receipt showing the individual trade's quantity, currency, gross amount, fixed tax, net-income recipient, and confirmed refunds or returned items.
+Click a history entry for a read-only receipt showing the individual trade's quantity, currency, gross amount, fees calculated from its publication snapshot, net-income recipient, and confirmed refunds or returned items.
 
 Seller proceeds come from the linked transaction, never cumulative order quantities. Your proceeds receipt does not expose the buyer's original operation evidence.
 

@@ -1,0 +1,118 @@
+---
+title: "离线导入与存储迁移"
+description: "审核停服副本与预检报告，导入 zAuctionHouse，或将 SQLite 市场迁到空共享数据库。"
+canonical: "https://www.kitemc.com/kitemarket/operations/importing"
+---
+
+import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
+
+v1.1 提供两条独立路径：从 zAuctionHouse 的停服副本导入订单与物品，或将已有 v1.1 SQLite 市场迁到空的 MySQL／MariaDB 数据库。两者都需要完整备份和明确确认，不读取运行中的第三方数据库。
+
+<Warning>
+来源与目标 Minecraft 版本必须一致。保留原副本、报告和来源身份文件；不能删除未决操作、SQLite sidecar 或导入去重记录来绕过检查。
+</Warning>
+
+## 获取同版本工具 {#v11-import-tools}
+
+从[下载页](/kitemarket/download)获取 `KiteMarket-Examples-1.1.0.zip`、同版本运行 JAR 和 `SHA256SUMS.txt`。校验摘要后解压，在工具根目录执行命令。
+
+| 工具 | 用途与运行环境 |
+| --- | --- |
+| `tools/importing/prepare_zah_copy.py` | 生成来源副本和映射；Python 3.11+，只使用标准库 |
+| `tools/importing/sqlite-to-shared.ps1` | 启动离线存储迁移；PowerShell 5.1+，Java 与所选运行包匹配 |
+| `docs/IMPORTING.md`／`docs/IMPORTING.en.md` | 完整映射、参数、隔离原因与恢复说明 |
+
+工具源码也在[公开仓库](https://github.com/KiteMC/KiteMarket)，不需要访问私有实现。工具不代替运行 JAR，v1.0.0 运行包不能执行这些命令。
+
+## zAuctionHouse 副本与映射 {#v11-zah-copy-and-mapping}
+
+解析范围固定为 V3 split／combined JSON、V3 统一 `items` SQLite，以及 V4 **4.0.1.4** 的 `items`＋`auction_items` SQLite。其他历史 SQL 布局或未来字段不自动继承支持。
+
+先正常停止来源，取得已 checkpoint 且没有 `-wal`／`-shm` 的一致副本。准备工具不写入原数据目录，逐文件核对 SHA-256，并拒绝链接或 reparse point。
+
+```powershell
+python tools/importing/prepare_zah_copy.py `
+  --source-dir 'D:\StoppedCopies\zAuctionHouse' `
+  --copy-dir 'D:\Paper\plugins\KiteMarket\imports\zah-copy' `
+  --origin-file 'D:\MigrationEvidence\zah-origin.json' `
+  --format v3-json --game-version 1.21.11 --source-stopped
+```
+
+SQLite 来源改用 `--format v3-sqlite` 或 `--format v4-sqlite`，并填写真实 `--database-file`。V4 无时区 SQL 时间还需来源 JVM 的真实 `--timestamp-zone`，不能猜测。
+
+`origin` 中的安装 UUID 首次生成后持续复用。不要为了重试换一个来源身份。工具生成 `mapping.json` 后，明确审核目标币种、价格换算、精度和费率；小数最小单位损失或溢出会隔离，不自动取整。
+
+## 进入导入维护并预检 {#v11-import-maintenance}
+
+1. 设置 `imports.offline-enabled: true`，正常重启导入节点。
+2. 停止其他市场节点，退出所有玩家并阻止新加入，等待旧节点和玩家租约失效。
+3. 先依据真实证据解决 `PREPARED`／`UNKNOWN` 和 `DELIVERING`。主授权仍需有效，不能直接删除记录。
+4. 在控制台暂停并预检，**先停在报告**：
+
+```text
+km import pause confirm
+km import dry-run zah-copy
+```
+
+`MAINTENANCE` 是持久导入暂停：授权刷新或重启不会自动恢复。订单、冻结和托管保留，暂停到期处理但不延长原期限。主授权的退出规则优先，`EXIT_ONLY` 不能当作导入暂停。
+
+预检用目标服务端原生接口解码真实物品并检查准入和往返属性，不改变钱包、订单或背包。报告包含原始隔离记录，属于私有运维证据，不要公开上传。
+
+## 审核归属后逐项应用 {#v11-import-report-and-ownership}
+
+| 来源内容 | 目标处理 |
+| --- | --- |
+| 已确认的一口价挂单 | 保留原总价，成为不可拆分出售整包 |
+| 已购买物品 | 归实际买家领取 |
+| 到期物品 | 归实际卖家领取 |
+| 竞拍、租赁、已删除、未确认发布、缺失归属、重复或不安全记录 | 完整隔离，保留原因 |
+| 历史收益或金融历史 | 不变成钱包资金，原经济结算另行核对 |
+
+确认数量、原总价、真实内容和拥有者后，使用预检报告的**准确64位摘要**：
+
+```text
+km import apply <报告的64位SHA-256> confirm
+```
+
+每项在市场事务中提交并记录去重。重跑同一报告返回原操作／订单／资产编号；同一来源键改变记录或业务映射会拒绝。某项失败会停止后续项，已提交项继续保留，不通过删除 `km_imports` 重新导入。
+
+<ScreenshotPlaceholder title="导入后的订单与领取资产" description="此处预留真实游戏截图：核对导入整包的内容、数量、总价及实际领取拥有者。" lang="zh" />
+
+核对完成后从控制台运行 `km import resume confirm`，再关闭临时导入开关并正常重启。恢复后已经超过原期限的订单按原规则处理。
+
+## SQLite 迁到共享数据库 {#v11-sqlite-to-shared}
+
+适用于**已经运行 v1.1** 的单网络 SQLite 副本。目标必须为空且使用 InnoDB，不合并另一个市场。
+
+先进入 `EXIT_ONLY`，正常停止来源全部节点，保留同一检查点的数据库和配置。准备无 sidecar 的一致副本，保持目标全部节点停止，然后只读检查：
+
+```powershell
+tools/importing/sqlite-to-shared.ps1 -Action inspect `
+  -KiteMarketJar '.\KiteMarket-modern-1.1.0.jar' `
+  -SourceCopy 'D:\MigrationEvidence\market-copy.sqlite' `
+  -Network '原网络UUID' -Report 'D:\MigrationEvidence\inspect.json' -SourceStopped
+```
+
+在私有目标配置文件中填写 `jdbcUrl`、`user` 和 `passwordEnvironment`，不要把凭据放到 Git 或命令参数。审核行数、表摘要、资金合计与来源摘要后执行：
+
+```powershell
+tools/importing/sqlite-to-shared.ps1 -Action apply `
+  -KiteMarketJar '.\KiteMarket-modern-1.1.0.jar' `
+  -SourceCopy 'D:\MigrationEvidence\market-copy.sqlite' `
+  -Network '原网络UUID' -Report 'D:\MigrationEvidence\migration.json' `
+  -TargetConfig 'D:\MigrationEvidence\target.json' `
+  -ExpectedSourceSha256 '<inspect中的SHA-256>' `
+  -SourceStopped -TargetStopped -TargetEmpty
+```
+
+迁移保留网络 UUID、授权、订单、费用、期限、钱包、资产、事件编号与消费游标。旧节点／会话代次失效；`PREPARED` 转为 `UNKNOWN` 时仍保留原执行证据，不重放外部副作用。完整数据、迁移标记与审计在目标同一事务中提交。
+
+## 恢复、重试与切换 {#v11-import-recovery}
+
+SQLite 迁移的同来源重试返回 `ALREADY_MIGRATED`；来源摘要变化或目标已有内容会拒绝。失败回滚数据，但可能保留空结构。
+
+成功后才修改存储连接，保持市场、币种和其他网络身份配置一致。先启动一个节点核查资产与授权，再加入其他节点；原 SQLite 保持离线，不能让两个同 UUID 数据库同时运行。
+
+导入后的玩家领取仍遵守原生堆叠与背包容量。预检解码成功不能代替领取后的完整属性核对；限定布局也不代表所有历史物品编码均已认证。
+
+新交易开始后，不可直接切回旧快照覆盖资产。回滚先全网停服并核对新增变化，保留来源副本、`origin` 和报告。完整选项见[公开导入指南](https://github.com/KiteMC/KiteMarket/blob/main/docs/IMPORTING.md)，未知操作处理见[故障与迁移](/kitemarket/operations)。

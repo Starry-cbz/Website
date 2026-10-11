@@ -97,7 +97,10 @@ api.orders(null, null, "", 0, 36).whenComplete((orders, failure) -> {
 
 缺失历史金额保持 `null`，不猜成零；`RECORDED` 不表示外部副作用已经成功，`PENDING_REVIEW` 表示需要核对。物品匹配和交易提交由主插件处理，不属于公开查询接口。
 
-### v1.1 整包、费用与业务条件摘要
+<span id="v11-整包费用与业务条件摘要" />
+<span id="v1-1-整包费用与业务条件摘要" />
+
+### v1.1 整包、费用与业务条件摘要 {#v11-api-lot-fee-business-data}
 
 | 数据 | 读取方式 |
 | --- | --- |
@@ -133,7 +136,10 @@ public void onTrade(MarketCommittedEvent event) {
 
 按**网络 UUID＋事件 ID**去重；事件 ID 不保证连续。需要长期去重时自行持久化，不能把通知用作补发资金或物品的依据。重启后重新查询权威状态。
 
-## v1.1 扩展与玩家确认请求
+<span id="v11-扩展与玩家确认请求" />
+<span id="v1-1-扩展与玩家确认请求" />
+
+## v1.1 扩展与玩家确认请求 {#v11-api-extensions-and-requests}
 
 两个独立服务通过 `ServicesManager` 获取，原 `KiteMarketApi` 保持只读：
 
@@ -144,7 +150,46 @@ public void onTrade(MarketCommittedEvent event) {
 
 请求限于 `CREATE`／`BUY`／`SUPPLY`／`BID`／`CANCEL`，绑定玩家会话、插件拥有者、订单与策略版本及有效期。没有公开 `confirm()`／`commit()`，不能发币、任意扣物、管理修复或远程无人交易。整包使用真实背包槽和数量，确认时仍由核心重新采集和校验。
 
-只有 `WriteResult.Status.SUCCEEDED` 表示核心成功；拒绝、取消、过期和待核对分别处理。扩展收到报价或 future 完成不等于玩家已确认，也不能自动重放未知结果。
+### 扩展提供者与所属插件 {#v11-api-provider-lifecycle}
+
+扩展通过实际启用的 `Plugin owner` 登记。拥有者停用后自动注销，关闭旧登记句柄不会误删同 ID 的新注册；规则热更新后调用 `changed(owner)`，使基于旧修订的报价失效。
+
+| SPI | 可扩展内容 |
+| --- | --- |
+| `EconomyProvider` | 已配置币种网关的只读外部余额，以及受核心执行许可约束的充提 |
+| `ItemIdentityProvider` | 从克隆的真实物品读取公开业务 ID，返回与注册扩展 ID 一致的 `source` |
+| `ContainerPreviewProvider` | 辅助只读容器摘要；原生实际内容清单优先 |
+| `TradeRuleProvider` | 在核心约束之外增加拒绝规则 |
+| `TradeReviewProvider` | 在锁外检查不可变、脱敏的报价 |
+| `MarketNotificationListener` | 接收已提交摘要，按网络与事件 ID 去重 |
+
+规则与复核在数据库／市场锁外执行，接收 `QUOTE` 或 `PLAYER_CONFIRM` 阶段。只能允许继续或拒绝，不能重写价格、费用、收款人或扣物选择，也不能放宽核心规则；异常会拒绝当前交易并禁用故障提供者。
+
+身份回调异步读取克隆后的原生物品，每批最多识别128个不同属性指纹，含嵌套内容。超过范围须减少选择，不能从名称或 Lore 猜测厂商 ID。容器扩展结果标注为辅助摘要，不改变真实托管、准入或领取内容。
+
+### 从玩家操作打开核心确认 {#v11-api-player-confirmation}
+
+```java
+MarketRequest intent = MarketRequest.buy(
+    order.getId(), order.getRevision(), 16);
+requests.quote(this, player, intent)
+    .thenCompose(quote ->
+        requests.openConfirmation(this, player, quote.getId()))
+    .thenAccept(result ->
+        getLogger().info(result.getStatus() + " " + result.getCode()));
+```
+
+从玩家明确操作发起请求；主插件在正确玩家调度上下文打开确认页。报价绑定拥有者、玩家会话、订单／策略修订和短有效期。离线、换服、拥有者停用、过期、规则变化或重复使用都要求重新报价，不能修改旧报价继续提交。
+
+出售、竞拍与供货只引用真实背包格 `0..35` 及数量，不接受序列化物品、伪造资产 ID 或扣物回调。整包用 `MarketRequest.createBundle(...)` 和 `RequestLot` 描述各部分；跨部分不能重复槽位，每部分同属性，部分之间可以混合，标的数量固定1。批量上架逐单获得保护确认，逐项处理结果。
+
+### 费用与完成状态 {#v11-api-quote-fees-and-results}
+
+`RequestQuote.getListingFee()`、`getBuyerFee()` 与 `getChargedAmount()` 使用宿主的实际费用快照和最小货币单位。gross 为成交总额，tax 为卖方总费，net 为卖方净收入；买方预算包含买方费用。竞拍 charged 可能仅为新增冻结差额，不能根据 gross 再扣一次款。
+
+只有 `WriteResult.Status.SUCCEEDED` 表示核心成功。`REJECTED`、`CANCELLED`、`EXPIRED` 和 `PENDING_REVIEW` 分别表示拒绝、取消、过期与待核对；报价生成或 future 完成不等于玩家已确认。提交开始后 `discard(...)` 不能撤销事务，未知结果不自动重放。
+
+经济扩展已经进入外部调用时，慢响应不会被取消或当作失败丢弃；宿主保留 `UNKNOWN` 和迟到证据。提供者按 `operationId` 幂等，登记扩展不赋予任意发币能力。
 
 <Card title="完整 v1.1 SDK 与可运行示例" icon="code" href="https://github.com/KiteMC/KiteMarket/blob/main/docs/API.md">
   查看扩展 SPI、受限请求、费用报价、生命周期与真实示例源码。

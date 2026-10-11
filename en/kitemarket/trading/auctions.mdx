@@ -14,7 +14,17 @@ There is no proxy bidding, buyout, or hidden reserve price. Use the order's star
 
 The starting price is the total price for the whole auction lot, not a price multiplied by item quantity. The listing confirmation estimates tax and net income at the starting price; settlement uses the final highest accepted bid.
 
+Listing, buyer and seller fees follow the snapshot retained at publication; reloads never change it. Confirmations and settlement receipts identify final amounts and asset destinations. See [fee snapshots and cumulative allocation](/en/kitemarket/trading/sales#v11-fee-snapshot-and-allocation) for calculation rules.
+
 <ScreenshotPlaceholder image="/images/kitemarket/screenshot-market.png" title="Real item details in the auction list" description="Before bidding, inspect the name, enchantments, current price, quantity and expiry." lang="en" />
+
+### Mixed bundle auctions {#v11-bundle-auctions}
+
+Sellers can also combine real items with different materials or properties into one indivisible bundle. The starting price, every bid and the settlement amount are **totals for the complete bundle**. The winner receives all contents; individual entries cannot be auctioned separately within that order.
+
+The contents page shows the real items and quantities. Admitted containers can open read-only internal previews. Inspect the contents before confirming a bid; display icons are not auction assets.
+
+<ScreenshotPlaceholder title="Bundle contents and bid confirmation" description="Reserved for a real gameplay screenshot of a bundle contents list, total bid and reserved funds." lang="en" />
 
 ## Bid confirmation
 
@@ -25,6 +35,12 @@ Details show the minimum accepted bid, increment, whether you are leading, and a
 Another bid changes the revision and rejects an old confirmation, requiring a refresh; bids are never automatically increased. If the next minimum exceeds the currency limit, further bidding is disabled while the existing highest bid still settles normally.
 
 <ScreenshotPlaceholder image="/images/kitemarket/screenshot-auction-confirm.png" title="Auction confirmation" description="Real gameplay screenshot coming later: the actual lot, total bid, reserved funds and final confirmation." lang="en" />
+
+### Funding a shortfall {#v11-auction-funding-shortfall}
+
+When funds are insufficient, confirm a deposit for the actual shortfall shown. After a successful deposit, the order, minimum accepted bid and fees are read again before opening a new bid confirmation. Depositing does not automatically bid against the earlier quote.
+
+Deposited funds remain in the wallet. If the order changes, the gateway is unavailable or a transfer remains unconfirmed, inspect that state before depositing again or retrying an unknown operation.
 
 ## Late bids and extensions
 

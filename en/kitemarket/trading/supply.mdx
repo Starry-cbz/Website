@@ -31,7 +31,7 @@ Previewing does not move or modify inventory items. Fulfillment transfers snapsh
     **Refresh** reads the order and inventory again for the latest available quantity.
   </Step>
   <Step title="Review items and proceeds">
-    Review the quantity from each slot, gross proceeds, tax, and net income.
+    Review the quantity from each slot, the trade amount, supplier fees and net income. The procurement owner bears buyer fees, while the supplier bears seller fees; both are shown separately.
 
     The confirmation also lists source slots and quantities so you can catch a selected tool or collectible before submitting.
   </Step>
@@ -43,3 +43,13 @@ Previewing does not move or modify inventory items. Fulfillment transfers snapsh
 </Steps>
 
 For items that do not match, see [advanced buy orders and conditions](/en/kitemarket/trading/buy-orders). After a trade or item return, open [claims](/en/kitemarket/trading/claims).
+
+## Fulfillment fees and asset destinations {#v11-supply-fees-and-destination}
+
+Publication stores the buy order's fee snapshot. The trade amount is the unit price multiplied by the actual supplied quantity. The procurement owner pays that amount plus buyer fees, while the supplier receives it minus seller fees. Net income enters the supplier's market wallet; the actual supplied items enter the buyer's claims. Listing fees are separate charges at publication.
+
+Partial fulfillment by multiple suppliers allocates fixed and percentage fees against cumulative order turnover. The combined cumulative fees are rounded before subtracting fees already collected, and the final fulfillment settles the remainder. Suppliers are not each charged the whole-order fixed fee, and a fulfillment's seller fee cannot exceed its trade amount.
+
+Preview and final confirmation use the same stored fee snapshot rather than recalculating fees in a theme. Changed order revisions, quantities, inventory or quotes require a fresh preview and confirmation. Changing server fee settings does not rewrite published orders. See [fee snapshots and cumulative allocation](/en/kitemarket/trading/sales#v11-fee-snapshot-and-allocation).
+
+<ScreenshotPlaceholder title="Fulfillment fee and net-income confirmation" description="Reserved for a real gameplay screenshot showing quantity, buyer fees, supplier fees and net proceeds." lang="en" />

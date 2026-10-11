@@ -110,8 +110,24 @@ Functional buttons may use your own registered IA items. Actual `subject()` trad
 Vanilla `menus` uses logical page IDs; IA `pages` uses template IDs. Renderers read the current snapshot, action tokens and input ranges.
 
 <Card title="Page and action list" href="/en/kitemarket/ui-development/pages#pages-actions-and-lifecycle">
-  35 base pages, v1.1 additions, home slots, input and lifecycle contracts.
+  Complete page and template IDs, home slots, inputs, actions and lifecycle contracts.
 </Card>
+
+### Theme the complete trading workflows {#v11-complete-theme-workflows}
+
+Themes can cover single items, bundles, individually confirmed batches, container contents, source-based claims, business conditions, community, risk, automation and administration pages. Read page and template IDs from the current snapshot rather than guessing them from titles or button labels. Home has a direct publishing entry; the profile groups favorites, subscriptions, history, review and permission-filtered administration entries.
+
+Configuration themes retain `schema: 1`. `pages.'*'` supplies a general background; individual templates can override font images, offsets and functional icons. Results may use `state-font-images` selected by the host's `result.status`. Quantities, fees, asset destinations and genuine goods remain host data, not static balances or completion messages baked into textures.
+
+IA renderers reuse the protected 54-slot inventory and registered actions. Item slots in `UiPage` are final physical positions: do not shift list slots again. Actual `subject()` goods retain their complete properties. Themes replace functional icons and backgrounds; input continues to use host ranges and chat fallback.
+
+### New pages, updates and safe fallback {#v11-theme-page-lifecycle}
+
+An update replaces the token, pageVersion, actions and all callbacks together. Same-page countdown refresh retains page identity. Theme changes, return and refresh preserve session drafts; late results cannot overwrite a newer page and old actions cannot submit again.
+
+Own Java renderers may call read-only `itemsAdderUnavailable(player, page, theme)` to check this page's resources; only `null` means ready. It neither sends packs nor changes preferences or checks an additional theme license. Missing resources, unavailable pages and unloaded providers fall back to vanilla while retaining the player's backend and theme choice.
+
+When updating a theme, check the [complete page and action list](/en/kitemarket/ui-development/pages), including confirmation and cancellation positions on different pages. Invalid theme or configuration candidates preserve the existing valid configuration. Third-party providers remain responsible for their actual engine compatibility; declarations and SDK registration do not certify real-server behavior.
 
 ## Troubleshooting {#troubleshooting}
 

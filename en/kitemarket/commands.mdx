@@ -24,6 +24,7 @@ The default home separates fixed-price sales, buy-order fulfillment and auctions
 | `/km history [all]` | View personal history; `all` requires global read-only audit or management permission |
 | `/km orders` or `/km mine` | View personal orders |
 | `/km create` or `/km rule` | Edit a listing draft and its conditions |
+| `/km lots` | Select single items, mixed bundles or independent bulk publication with `kitemarket.create` |
 | `/km preview` | Check inventory matches for the current rule |
 | `/km cancelinput` | Cancel a chat prompt and return to the previous page, retaining the draft and selections |
 | `/km order <order-id>` | Open an order |
@@ -31,7 +32,8 @@ The default home separates fixed-price sales, buy-order fulfillment and auctions
 | `/km inspect <operation-id>` | Inspect a personal operation and structured evidence; global auditors and managers can inspect other players' operations |
 | `/km deposit <currency> <amount>` | Move external funds into the market on the configured gateway |
 | `/km withdraw <currency> <amount>` | Move market funds back to the external backend on its gateway |
-| `/km buy <order-id> [quantity]` | Buy a quantity at the unit price, subject to the order's purchase minimum |
+| `/km automation` | Personal automation and income reservations with `kitemarket.wallet`; defaults off |
+| `/km buy <order-id> [quantity]` | Buy single items at the unit price and purchase minimum; buy a bundle as a whole |
 | `/km supply <order-id> <quantity>` | Fulfill a buy order |
 | `/km bid <order-id> <amount>` | Bid a total amount for the entire auction lot |
 | `/km sell <currency> <unit-price> <quantity> [seconds] [minimum-quantity]` | Escrow matching items and create a fixed-price listing |
@@ -40,24 +42,34 @@ The default home separates fixed-price sales, buy-order fulfillment and auctions
 
 Durations are seconds, with a minimum of 60 and the configured `market.maximum-duration-seconds` as the maximum. Unspecified arguments retain values from the GUI draft; inspect the confirmation before publishing. Use `/km create` to set and preview buy-order conditions first. Cancellation is also available from an order's detail screen. Sellers cannot cancel an auction with an accepted bid.
 
-A sale uses a per-item unit price; the purchase total is that price multiplied by the chosen quantity. Set a minimum on the sale terms page, defaulting to 1 and ranging from 1 to the listed quantity. If the remainder is below the minimum, all remaining items must be bought together. Specify a quantity when buying or use the order's quantity page, then review the amount before confirming. Buy orders also use unit prices; auction starting prices and bids apply to the whole lot.
+A single-item sale uses a per-item unit price; the purchase total is that price multiplied by the chosen quantity. Set a minimum on the sale terms page, defaulting to 1 and ranging from 1 to the listed quantity. If the remainder is below the minimum, all remaining items must be bought together. Specify a quantity when buying or use the order's quantity page, then review the amount before confirming. Buy orders use unit prices; bundle sales, auction starting prices and bids apply to the whole lot.
 
 You may also set the minimum after the duration in the sale command. For example, `/km sell points 8 16 86400 3` lists 16 items at a unit price of 8 for 86400 seconds, with a minimum purchase of 3. This final sale parameter differs from an auction's minimum increment.
 
-## v1.1 entrances
+### Bundles and bulk publication {#v11-lot-commands}
 
-These commands belong to [v1.1](/en/kitemarket/v1-1/overview). They open real pages and still require base `kitemarket.use`, feature permissions and a valid session.
+`/km lots` opens lot selection and contents. Single items keep per-item pricing. Mixed bundles sell or auction as one indivisible order. Bulk publication arranges selected items into independent orders and presents each order's terms for separate confirmation.
+
+Bulk publication is not one bundle, and entering a command does not make the whole batch succeed. Results belong to individual orders; uncertain outcomes stop subsequent duplicate execution. See [fixed-price sales](/en/kitemarket/trading/sales) and [items and containers](/en/kitemarket/trading/items).
+
+### Wallets and automation {#v11-automation-commands}
+
+`/km automation` opens future-income withdrawal, login withdrawal and automatic claiming settings, together with distinct withdrawal reservations. Each setting defaults off and requires its own confirmation. Disabling a setting does not release existing reservations. Tasks pause for unavailable gateways, space, sessions or unresolved results without retrying `UNKNOWN` as a failure.
+
+A transaction top-up first confirms the exact external debit. After a deposit succeeds, the quote is read again before a fresh transaction confirmation. Deposits and trades have separate results. See [wallets](/en/kitemarket/wallet).
+
+<span id="v1-1-entrances" />
+
+### Community and reference prices {#v11-community-commands}
 
 | Command | Purpose and permission |
 | --- | --- |
-| `/km community` | Favorites, saved searches, subscriptions, notices, sellers and rankings |
-| `/km prices` | Public reference prices with `kitemarket.browse`; does not expose management cases |
-| `/km automation` | Personal automation settings and income reservations with `kitemarket.wallet` |
-| `/km lots` | Single items, bundles and independent bulk publication with `kitemarket.create`; each order still needs confirmation |
-| `/km risk` | Learning status, cases, evidence and reviews with `kitemarket.audit.all`; writes require management permission |
-| `/km tools` | Trading bans, cancellations, real funds/items, exports and retention with `kitemarket.manage` |
+| `/km community` | Favorites, saved searches, subscriptions, durable notices, sellers and rankings; base and page-specific permissions still apply |
+| `/km prices` | Same-currency public reference prices with `kitemarket.browse`; does not expose administrative cases |
 
-The community page also links public prices. Automation defaults off. Administrative transfers use actual existing funds/assets. Risk and cloud advice never automatically apply penalties.
+The community page manages up to 256 favorites and 20 saved searches. Subscriptions notify without buying, fulfilling or bidding. Notices persist offline; opening details or explicitly marking all read updates their state.
+
+Seller rankings use currency-specific UTC calendar-day windows, while reference prices use rolling windows for comparable items. Different currencies are not summed and reference prices are not guaranteed trade quotes. See [community and notifications](/en/kitemarket/v1-1/community) for details, broadcasts and Discord configuration.
 
 ## Condition input {#condition-input}
 
@@ -81,6 +93,8 @@ Result messages link to details. The receipt's “View / copy operation ID” co
 |---|---|
 | `/km admin` | Inspect pending operations; read-only auditors view evidence while managers can reconcile |
 | `/km admin <player-UUID-or-online-name>` | Audit the player's wallets, all asset states, orders, and history; UUIDs work offline, names resolve only players online on this server |
+| `/km tools` | Trading bans, batch cancellation, actual funds/items, exports and retention with `kitemarket.manage` |
+| `/km risk` | Learning status, cases, evidence and reviews; reads require `kitemarket.audit.all` or management permission, while writes require management permission |
 | `/km doctor` | Inspect initialization, network, license, node, and provider status with audit or management permission |
 | `/km doctor items` | Run real-server item-rule/codec diagnostics with per-sample logs; does not change player assets |
 | `/km license` | Request a refresh on the next maintenance pass; does not bypass verification or extend expiry |
@@ -88,13 +102,21 @@ Result messages link to details. The receipt's “View / copy operation ID” co
 | `/km inspect <operation-id>` | Inspect the node, execution stage, amounts/items, and before/after evidence for administrative repairs to this operation |
 | `/km cancel <order-id>` | Force-cancel an unfinished order after a reason of at least 5 characters and confirmation |
 | `/km resolve <operation-id> <SUCCEEDED/FAILED> <reason>` | Record a verified external outcome after GUI confirmation |
-| `/km reload` | Validate and update language, menu layouts/icons, and fees for new orders |
+| `/km reload` | Validate language, menus, new-order fees, trading policies and enabled modes |
 
 Reasons must contain at least 5 characters and should describe the evidence. Never pick an outcome merely to empty the queue; see [operations](/en/kitemarket/operations). Administrators can cancel orders from their detail screen with an audit record.
 
 Third-party IA themes use configuration files, their own resources and `/km reload`, without an additional KiteMC theme license. See [ItemsAdder integration](/en/kitemarket/dlc) for installation.
 
 Player audit pages retain the selected UUID. Assets can be filtered and paged by available, escrowed, delivering, claimed, and spent states. These pages cannot claim items, transfer funds, or edit balances on the player's behalf. A `PREPARED` operation is read-only and can be refreshed; only `UNKNOWN` permits reconciliation, and an unfinished external call still blocks recording an outcome.
+
+### Management tools and risk review {#v11-administration-commands}
+
+Funds and item actions under `/km tools` use actual existing balances and assets, displaying their source, target and outcome. They do not mint funds or issue replacement items based on a screenshot. Proxy publication, batch cancellation and other writes still require a reason and protected confirmation, with an audit record.
+
+`/km risk` displays local learning status, unusual-trade signals and human-reviewed cases. Scores are not cheating probabilities and never automatically ban or punish. Custom cloud review defaults off; administrators explicitly confirm sending, and returned advice does not replace human judgment.
+
+See [administration and risk review](/en/kitemarket/v1-1/administration-risk) for exports, retention and action boundaries, and [custom cloud review](/en/kitemarket/v1-1/cloud-review) for payload and privacy limits.
 
 | Permission | Default | Scope |
 |---|---|---|
@@ -116,4 +138,6 @@ The server console and RCON support `km doctor`, `km doctor items`, `km license`
 
 Item diagnostics construct local samples and check fingerprints, quantities, metadata, and matching reasons, with container samples explicitly excluded. They do not create world blocks or item assets. Results cover diagnostic samples on that server; they do not automatically certify trading, economy providers, or the entire version matrix.
 
-`/km reload` validates KiteMarket presentation settings; it is not the server's `/reload`. It updates display settings and new-order fees only. Invalid language, icons, slots, or fees leave the current valid configuration in effect. Changes to `network`, `database`, `currencies`, `license`, or quantity/duration limits require a full restart. bStats switches also take effect after restarting. See [installation and configuration](/en/kitemarket/guide).
+`/km reload` validates KiteMarket settings; it is not the server's `/reload`. It can update presentation, new-order fees, `policy` and `market.enabled-types`; invalid candidates preserve the current valid configuration. Update and reload every node in a shared market.
+
+Changes to `network`, `database`, `currencies`, `license`, quantity/duration limits, or the `risk`, `notifications`, `developer`, `automation`, `integrations`, `imports` and `items` configurations require a full restart. bStats switches also take effect after restarting. See [installation and configuration](/en/kitemarket/guide).

@@ -4,23 +4,25 @@ description: "Logical IDs, templates, actions and lifecycle for base pages and v
 canonical: "https://www.kitemc.com/en/kitemarket/ui-development/pages"
 ---
 
+import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
+
 Renderers read current page snapshots and registered actions. The server continues to control page identity, quantity ranges, quotes and transaction results.
 
 ## Pages, actions and lifecycle {#pages-actions-and-lifecycle}
 
 `UiPage.key()` identifies the logical page; `UiPage.template()` selects theme configuration. Vanilla `menus` uses page IDs, while IA `pages` uses template IDs.
 
-The 35 base pages in v1.0.0 and their main actions follow; “Same” means the template equals the page ID. Use the links below for v1.1 additions, and always render actual current snapshots and actions.
+This list covers common flows and specialized pages. “Same” means the template equals the page ID. Always render actual current snapshots and registered actions.
 
 ### Market and publishing {#market-and-publishing}
 
 | Page ID | Template ID | Main actions |
 |---|---|---|
-| `home` | Same | Compact home: three trading categories, player head, wallet, claims and my orders; legacy home retains its entrances |
-| `profile` | Same | Interface preferences, personal review queue, history, permission-dependent administration and back |
-| `browse` | `browse` / `orders` | Search, filters, pagination, details; personal orders use `orders` |
-| `browse-filters` | Same | Type, currency, material, sort and search |
-| `order` | `detail` | Purchase, supply, bid and cancellation confirmation |
+| `home` | Same | Trading categories, create/edit draft, player head, wallet, claims and my orders; disabled types are hidden |
+| `profile` | Same | Interface, review queue, history, community, automation and permission-dependent risk/administration |
+| `browse` | `browse` / `orders` | Search, filters, pagination, details and saved search; personal orders use `orders` |
+| `browse-filters` | Same | Type, currency, material, sort, search and save current criteria |
+| `order` | `detail` | Purchase, supply, bid, cancellation confirmation, favorite, seller and actual contents |
 | `details` | Same | Long text and conditions |
 | `editor` | Wizard templates below | Type, item/conditions, quantity, price and duration |
 | `confirm` | `confirm` / `wizard-confirm` | Final confirmation and return |
@@ -46,9 +48,9 @@ Wizard templates follow the step: `wizard-type`, `wizard-item`, `wizard-terms` (
 | Page ID | Template ID | Main actions |
 |---|---|---|
 | `wallet` / `wallet-currency` | `wallet` | Balances and transfer confirmation |
-| `assets` | `claims` | View and claim assets |
+| `assets` | `claims` | Source categories, paginated selection, current-page details and claim confirmation |
 | `history` / `receipt` | `history` | Pagination, read-only receipts and on-demand operation ID viewing/copying |
-| `admin` / `admin-player` | Same | Review queue and player audit entrances |
+| `admin` / `admin-player` | Same | Review queue, player audit and permission-dependent administration tools |
 | `admin-wallet` / `admin-assets` | Same | Read-only player balances and all asset states |
 | `admin-orders` / `admin-player-history` | Same | Read-only player orders and history |
 | `resolve-source` | `resolve` | Source-quiescence declaration and confirmation |
@@ -59,24 +61,112 @@ Wizard templates follow the step: `wizard-type`, `wizard-item`, `wizard-terms` (
 
 ### V1.1 additions
 
-New bundle/bulk, business-condition, community, notification, seller-statistics, automation, income-reservation and administration pages use the same `menus` and theme mechanisms. Never guess keys, templates or button positions from display text.
+These specialized pages use their page IDs as template IDs and share `menus`, snapshots and action handling. Never guess keys, templates or button positions from display text.
 
-<Columns cols={2}>
-  <Card title="Complete added page IDs and source slots" icon="table-cells-large" href="https://github.com/KiteMC/KiteMarket/blob/main/docs/GUI-CONFIGURATION.en.md">
-    V1.1 GUI tables, list mapping, claims and actual confirmation actions.
-  </Card>
-  <Card title="V1.1 topics" icon="book-open" href="/en/kitemarket/v1-1/overview">
-    Semantics for bundles, bulk listings, community, automation and administration.
-  </Card>
-</Columns>
+#### Bundles, bulk listings and containers {#v11-bundle-and-bulk-pages}
+
+| Page ID | Contents and main actions |
+|---|---|
+| `lot-editor` | Actual items, single/bundle/bulk mode, sale/auction, currency, price, duration and minimum/increment; contents and preview |
+| `lot-select` | Actual inventory selection, refresh, selection summary and completion |
+| `lot-contents` | Paginated read-only contents and further previews for verified containers |
+| `lot-batch-plan` | Separate orders, per-order editing and individual confirmation |
+| `lot-batch-item` | Actual item, sale unit price/auction total, minimum or increment |
+| `lot-batch-results` | Individual results, pause reason and original operation; request the next manual confirmation |
+| `container-preview` | Actual saved container contents, pagination, refresh and back; no extraction |
+| `order-contents` | Published bundle entries and actual quantities, pagination, refresh and container preview |
+
+Single items, mixed bundles and separate orders require distinct displays. Unpublished bulk plans persist only in the current session, without automatic continuation after restart.
+
+#### Claim sources and current-page confirmation {#v11-claims-pages}
+
+| Page ID | Contents and main actions |
+|---|---|
+| `claims-categories` | All sources and actual source categories |
+| `claims-details` | Current-page selected assets, quantities and asset/order/operation references |
+| `claims-confirm` | Current-page entries, quantities, inventory capacity and uncertainty notice; cancel or confirm |
+
+The existing `assets` page uses source `46` for categories, `50` for select/clear current page, `51` for claim selected and `52` for details; `0..35` selects entries. Confirmation covers at most 36 current-page assets. Items that do not fit remain available; uncertainty, changed sessions or disconnects stop subsequent entries.
+
+#### Business-item rules {#v11-business-rule-pages}
+
+| Page ID | Contents and main actions |
+|---|---|
+| `rule-business` | Source/business ID, model, tags, exposed-field overview and admission notice |
+| `rule-source` | Actual main-hand identity, vanilla source, clear identity or business ID only |
+| `rule-model` | Minimum/maximum model values, import and separate bound removal |
+| `rule-tags` | Paginated tags, collection input, main-hand import, remove or clear |
+| `rule-fields` | Actual administrator-exposed fields and clear all |
+| `rule-field` | Exact/contains, text input, main-hand scalar import and clear this field |
+
+Validate each independent candidate before updating the draft. Fields come only from `items.exposed-fields`; OR and EXACT notices are read-only. Themes cannot add arbitrary scripts or rewrite actual matching values.
+
+#### Community, notifications and sellers {#v11-community-pages}
+
+| Page ID | Contents and main actions |
+|---|---|
+| `community` | Favorites, saved searches, notifications, subscriptions, seller, leaderboard, public prices and notification preference |
+| `favorites` / `favorite` | Favorites pages, actual order/unavailable notice, open order/seller or remove |
+| `saved-searches` / `subscriptions` | Saved-search and subscription pages, create |
+| `saved-search` | Type, currency, material, text, source, category, price bounds, lot, display slot, sort, subscription, run, rename and delete |
+| `saved-search-results` | Actual matching orders and pagination |
+| `seller` | Seller statistics, their orders, currency and UTC calendar-day window |
+| `leaderboard` | Same-currency rankings, UTC calendar-day window, metric and pagination |
+| `notifications` / `notification` | Persistent notices, related orders and explicit mark-all-read; details update read status |
+
+Chat delivery does not automatically mark notifications read. Sellers use 1/7/30 UTC calendar days; public prices use rolling 24-hour/7-day/30-day windows. Keep these distinct.
+
+#### Prices and risk review {#v11-risk-pages}
+
+| Page ID | Contents and main actions |
+|---|---|
+| `risk` | Local learning/capacity status, cases, prices, model and permitted manual training |
+| `risk-cases` / `risk-case` | Case pages, buyer/seller audit, evidence, review history, status/notes and cloud confirmation |
+| `risk-evidence` / `risk-review` | Paginated case evidence/review history |
+| `risk-prices` / `risk-price` | Same-currency comparable items, rolling window and full comparison group |
+| `risk-cloud-confirm` | Privacy/quota summary, send confirmation, cancel or shared in-progress/unconfirmed/existing-advice status |
+
+Public prices require browse permission; other risk pages require audit permission, with administration additionally required for state, training and cloud writes. Case states do not punish players. Themes cannot resend in-progress or unknown requests.
+
+#### Automation and income reservations {#v11-automation-pages}
+
+| Page ID | Contents and main actions |
+|---|---|
+| `automation` / `automation-confirm` | Future-income withdrawals, login withdrawals, automatic claims, reservations and setting confirmation |
+| `automation-income` | Actual reservation pages, refresh and release current-page releasable entries |
+| `automation-income-detail` | Reservation status, withdrawal or release for `RESERVED` only; review notice for other states |
+| `automation-income-confirm` / `automation-release-confirm` | Specific reservation/batch summary, cancel and confirm |
+
+Disabling future-income withdrawals does not release existing reservations. Externally executing or unknown entries differ from ordinary available balances; preserve host status and pause notices.
+
+#### Administration write tools {#v11-admin-tools-pages}
+
+| Page ID | Contents and main actions |
+|---|---|
+| `admin-tools` / `admin-tools-player` | Target player, audit, ban/unban, cancellation, actual funds/assets, main-hand items, listing for a player and export |
+| `admin-tools-orders` | Target player's orders, refresh, pagination and process current page |
+| `admin-tools-money` / `admin-tools-assets` | Administrator's actual available wallets/assets and explicit transfer |
+| `admin-tools-listing` | Actual sample, type, currency, price, quantity, duration, increment and preview |
+| `admin-tools-export` / `admin-tools-retention` | Bounded export and retention of generated exports |
+| `admin-tools-confirm` | Actual target, assets, reason and consequences for administrator confirmation |
+
+Tools use actual existing money and items. Export retention removes only this network's expired generated exports, preserving financial records and unresolved operations.
+
+<ScreenshotPlaceholder title="Added pages and actions in an independent theme" description="Reserved for a real game screenshot showing bundle contents, favorites or current-page claim confirmation in a custom IA theme with the same vanilla action semantics." lang="en" />
+
+<Card title="Complete source-slot reference" icon="table-cells-large" href="https://github.com/KiteMC/KiteMarket/blob/main/docs/GUI-CONFIGURATION.en.md">
+  Individual source slots, list mapping and functional configuration examples.
+</Card>
 
 Vanilla `menus` uses source slots; SDK snapshots and IA `slot-icons` use final physical slots. Never apply the default list mapping twice. Entries without registered actions are informational and cannot gain transaction callbacks through themes.
 
 ## Home and profile slots {#home-and-profile-slots}
 
-Default compact home source slots are `0` player head, `4` help, `8` claims, `20/22/24` trading categories, `45` wallet and `53` my orders.
+Default compact home source slots are `0` player head, `4` help, `8` claims, `20/22/24` trading categories, `31` create/edit draft, `45` wallet and `53` my orders.
 
-`profile` uses `20` interface preferences, `22` review queue, `24` history, `31` administration and `49` back; the administration entrance depends on permissions. The review list reuses `history`.
+`profile` uses `20` interface preferences, `22` review queue, `24` history, `29` community, `31` administration, `33` automation, `35` risk and `49` back. Administration/risk entrances depend on permissions. The review list reuses `history`.
+
+Disabled `market.enabled-types` are hidden from home and publishing without rearranging source slots. Themes render only registered available actions and cannot re-enable modes.
 
 Select home content with `gui.home-layout: auto|compact|legacy`; an existing `menus.home` preserves the legacy home under `auto`. See [vanilla GUI customization](/en/kitemarket/guide#customize-the-vanilla-gui) for migration.
 
@@ -84,7 +174,7 @@ Read current snapshots and actions instead of assuming all home layouts share on
 
 ## Quantities, amounts and results {#quantities-amounts-and-results}
 
-Quantity maxima use actual wallet funds, available inventory items and currency limits; auctions use only the main-hand stack. Transfers use real balances and any known backend receive capacity.
+Quantity maxima use actual wallet funds, available inventory items, policy and currency limits. The basic main-hand single-item auction uses that stack; multi-slot publishing reads the explicitly selected complete single lot, mixed bundle or independent groups. Transfers use actual balances and known backend receive capacity.
 
 Changed quotes require another choice, and final submission rechecks limits; a theme must not raise them independently.
 
@@ -92,11 +182,13 @@ Receipts provide a separate “View / copy operation ID” action that sends the
 
 ### Transaction display {#transaction-display}
 
-Sales support partial purchases at a per-item unit price. Their per-order minimum defaults to 1 and can be set from 1 to the listed quantity; a remainder below the minimum must be purchased together. Buy orders use unit prices for partial fulfillment, and auction starting prices apply to the whole lot.
+Single-item sales support partial purchases at a per-item unit price. Their per-order minimum defaults to 1 and can be set from 1 to the listed quantity; a remainder below the minimum must be bought together. Buy orders use unit prices for partial fulfillment. Both single and bundle auctions use whole-lot starting prices. Bundle sales use a whole-bundle price without partial purchase; bulk sales remain separate unit-price orders.
 
-Render host amounts, input ranges and item descriptions. Remaining, total and traded quantities are separate, and real item properties remain intact.
+Render host amounts, input ranges, publication-time fees and item descriptions. Quantity, total and traded amounts are separate, with real item properties intact. Bundles also distinguish lot count, entry count and actual total item quantity.
 
 Display timestamps and countdowns do not replace database deadline checks. Claims use actual item stack limits, leaving assets in claims when inventory space is insufficient.
+
+Bundle `confirm` uses source `30` to confirm and `32` to cancel. Claims, automation and administration confirmations use `30` to cancel and `32` to confirm; `risk-cloud-confirm` uses `30` to send and `32` to cancel. Dispatch actual page tokens instead of assuming one slot always means confirmation.
 
 ## Actions and input {#actions-and-input}
 

@@ -4,7 +4,7 @@ description: "在 menus 中调整页面标题、图标、说明和槽位，并�
 canonical: "https://www.kitemc.com/kitemarket/configuration/menus"
 ---
 
-v1.0 在 `plugins/KiteMarket/config.yml` 的 `menus` 中可个性化35个既有页面，包括 `profile`、`ui`、`themes` 和 `result`。v1.1 新增页继续使用相同配置机制，见[v1.1 物品与领取说明](/kitemarket/v1-1/items)。无需资源包或 IA。
+在 `plugins/KiteMarket/config.yml` 的 `menus` 中个性化首页、市场、发布、条件、钱包、领取、社区、自动化和管理页面。所有页面使用同一配置机制，无需资源包或 IA。
 
 编辑后执行 `/km reload`，再重新打开页面；重载先校验候选，无效配置保留上一份有效配置。
 
@@ -103,7 +103,9 @@ menus:
 
 金额原值为最小单位，优先保留 `{default}` 中的格式化金额与资产去向。
 
-v1.1 的 `lot-editor`、`lot-batch-item` 提供当前玩家的只读发布策略：
+### 发布策略与整包字段 {#v11-publishing-policy-fields}
+
+`lot-editor`、`lot-batch-item` 提供当前玩家的只读发布策略：
 
 | 字段 | 含义 |
 | --- | --- |
@@ -114,6 +116,10 @@ v1.1 的 `lot-editor`、`lot-batch-item` 提供当前玩家的只读发布策略
 
 出售单品/批量的价格为每件单价，拍卖/整包为标的总价。策略字段不保证实际背包数量、空间或最终准入；超限保留草稿，逐单确认重查原请求，不自动调价或降低最低购买量。
 
+整包确认页还提供 `lot.mode`、`lot.entries`、`lot.quantity`、`goods.quantity` 只读字段。它们分别表示标的模式、商品项数、标的份数与物品总量；整包份数为1，不能当作只有1件物品。
+
+保留默认确认摘要可同时显示总价、费用、净收入和钱与物品去向，不用主题当前配置重算旧订单费用。
+
 ## 真实商品与资产
 
 功能按钮可改材料和名称；商品、样品、供货背包物品及领取资产仍保留真实材料、名称、附魔和原 Lore，`material`／`name` 不能把它们伪装成另一种物品。
@@ -121,6 +127,8 @@ v1.1 的 `lot-editor`、`lot-batch-item` 提供当前玩家的只读发布策略
 只能调整其位置及附加市场说明，不改变背包、托管快照或交易标的。
 
 ## 全部页面 ID
+
+以下为通用页面，后面的分组列出其余配置页。所有键都可以在 `menus` 中使用：
 
 ```text
 home, profile, browse, browse-filters, order, details, editor, confirm, preview,
@@ -131,6 +139,64 @@ admin-player-history, resolve-source, doctor, inspect, evidence, ui, themes, res
 ```
 
 使用页面 ID，不使用窗口标题、语言键或 IA 模板别名；例如 `claims`／`wizard-confirm` 应分别使用 `assets`／`confirm`。
+
+### 整包、批量与容器页面 {#v11-bundle-menu-ids}
+
+```text
+lot-editor, lot-select, lot-contents, lot-batch-plan, lot-batch-item,
+lot-batch-results, container-preview, order-contents
+```
+
+`lot-editor` 源 `12` 选择单品／整包／批量，`14` 选择出售／拍卖，`32` 打开预览或批量计划。批量计划的 `52` 开始逐单确认，结果页的 `52` 请求下一份人工确认；这些按钮不会自动完成整批。
+
+`confirm` 的整包摘要在源 `22`，真实清单在 `24`，`30` 确认、`32` 取消；`lot-contents`、`container-preview` 和 `order-contents` 只读展示真实内容。
+
+### 业务物品条件页面 {#v11-business-menu-ids}
+
+```text
+rule-business, rule-source, rule-model, rule-tags, rule-fields, rule-field
+```
+
+依次配置业务条件概览、来源身份、模型范围、标签集合、开放字段列表和单字段编辑。业务字段仅来自 `items.exposed-fields` 白名单；OR 与精确样品提示保持只读，外观配置不赋予任意脚本编辑能力。
+
+### 社区与通知页面 {#v11-community-menu-ids}
+
+```text
+community, favorites, favorite, saved-searches, subscriptions, saved-search,
+saved-search-results, seller, leaderboard, notifications, notification
+```
+
+个人页源 `29` 打开社区。收藏和搜索结果仍显示真实订单；保存搜索编辑页分别配置币种、价格范围、来源、分类、排序和订阅开关。卖家日窗口与价格滚动窗口使用服务端各自的说明，不合并成一个时间范围。
+
+### 价格与风险页面 {#v11-risk-menu-ids}
+
+```text
+risk, risk-cases, risk-case, risk-evidence, risk-review,
+risk-prices, risk-price, risk-cloud-confirm
+```
+
+公开价格页需要浏览权限，其余风险页需要审计权限，状态／训练／云端操作另需管理权限。`risk-cloud-confirm` 的源 `30` 是发送确认、`32` 是取消，与普通领取确认方向不同；共享进行中或未确认状态没有重复发送动作。
+
+### 自动化与预约页面 {#v11-automation-menu-ids}
+
+```text
+automation, automation-confirm, automation-income, automation-income-detail,
+automation-income-confirm, automation-release-confirm
+```
+
+个人页源 `33` 打开自动化。`automation` 的 `20/22/24` 分别为未来收益提现、登录提现、自动领取，`40` 为收益预约。关闭未来收益提现不会自动释放已有预约；确认页的 `30` 取消、`32` 确认，不能把待核对项显示成完成。
+
+### 管理写入工具页面 {#v11-admin-tools-menu-ids}
+
+```text
+admin-tools, admin-tools-player, admin-tools-orders, admin-tools-money,
+admin-tools-assets, admin-tools-listing, admin-tools-export,
+admin-tools-retention, admin-tools-confirm
+```
+
+管理页源 `52` 按权限打开工具。转账、物品移交和代上架使用实际已有资产，具体目标、原因和后果由 `admin-tools-confirm` 展示；`30` 取消、`32` 确认。配置不能新增处罚或生成资产动作。
+
+完整逐页源槽位及 SDK 动作语义见[页面、动作与生命周期](/kitemarket/ui-development/pages)。
 
 ## 配置校验与排查
 
@@ -144,7 +210,9 @@ admin-player-history, resolve-source, doctor, inspect, evidence, ui, themes, res
 
 ## v1.1：整包与领取页 {#v1-1-bundle-and-claims}
 
-以下页面属于 v1.1，不表示构件已正式发布。按实际页面 ID 与**源槽位**配置：
+### 领取分类与批次确认 {#v11-claims-menu-controls}
+
+领取页面按实际页面 ID 与**源槽位**配置：
 
 | 页面 ID | 真实内容和按钮 |
 | --- | --- |
@@ -156,3 +224,5 @@ admin-player-history, resolve-source, doctor, inspect, evidence, ui, themes, res
 原 `assets` 页增加 `46`分类、`50`全选/取消本页、`51`领取所选、`52`所选详情；`0..35`为本页资产勾选，`45/53`分页、`48`刷新、`49`返回。`claims` 仍是 IA 模板别名，不能替代 `assets` 页面 ID。
 
 `order-contents`、`claims-details` 和 `assets` 使用列表布局移位；`claims-categories`、`claims-confirm` 使用原源位置。手动领取只处理明确确认的当前页，最多36项；空间不足项保留，未确认结果或会话变更时停止后续项。
+
+所有列表的源 `0..35` 默认移到物理 `9..44`；工具源 `37/46/47/48/50/51/52` 分别移到物理 `5/0/1/7/2/3/4`。非列表页保留源位置。SDK 和 IA 已取得最终物理槽位，不再次移位。

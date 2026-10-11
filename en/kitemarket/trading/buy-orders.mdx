@@ -1,6 +1,6 @@
 ---
 title: "Advanced buy orders and conditions"
-description: "Reserve a buy-order budget and configure materials, enchantments, durability, name and lore."
+description: "Reserve a buy-order budget and configure materials, enchantments, durability, text, business identity and exposed fields."
 canonical: "https://www.kitemc.com/en/kitemarket/trading/buy-orders"
 ---
 
@@ -22,7 +22,7 @@ Order details and listing confirmations explain which conditions apply in the se
 
 ## Advanced conditions
 
-Advanced conditions use **AND**: an item must satisfy every configured condition, while any material in the selected set is accepted.
+Player-edited advanced conditions use **AND**: an item must satisfy every configured condition, while any material in the selected set is accepted. Administrator-declared OR conditions are described below.
 
 Extra enchantments are disabled by default and require an explicit toggle. Name and lore support exact and contains matching, without regular expressions.
 
@@ -34,7 +34,7 @@ Extra enchantments are disabled by default and require an explicit toggle. Name 
 | Name / lore | Use the editor's exact or contains rule; unset fields impose no restriction |
 | Exact sample | Compare the fingerprint of an item normalized to a quantity of one; trading quantity is separate |
 
-Advanced vanilla rules inspect only properties the editor explicitly understands. Admitted custom data that advanced rules cannot interpret requires an [exact sample](/en/kitemarket/trading/items). Exact mode does not lift item admission restrictions.
+Advanced conditions inspect only supported properties that are actually set. Admitted custom data that a confirmed business identity cannot safely constrain still requires an [exact sample](/en/kitemarket/trading/items). Exact mode does not lift item admission restrictions.
 
 <ScreenshotPlaceholder image="/images/kitemarket/screenshot-rule-editor.png" title="Advanced conditions" description="Editor entrances for materials, enchantments, durability, name, lore and exact samples." lang="en" />
 
@@ -76,5 +76,21 @@ Name and lore have dedicated pages for **Exact** and **Contains** matching. Chat
 Importing from the main hand uses the complete original text, including formatting and line breaks, for exact matching.
 
 Clearing removes the restriction; importing empty text with exact matching requires that field to be empty.
+
+### Business identity and exposed fields {#v11-business-identity-and-fields}
+
+Alongside material, text, enchantment and durability conditions, advanced rules can constrain business source/ID, CustomModelData, PDC tags and administrator-exposed scalar fields.
+
+| Condition | Configuration and scope |
+|---|---|
+| Business source/ID | Read from the held real item through enabled ItemsAdder, Oraxen, Nexo or MMOItems public APIs; never inferred from names, lore or guessed NBT |
+| CustomModelData | Set a minimum/maximum range or import the held value |
+| PDC tags | Require a set of keys to exist together, up to 32 keys |
+| Scalar fields | Only string, number or boolean fields exposed through `items.exposed-fields`, using exact original-value equality or contains matching |
+| OR conditions | Declared by administrators; read-only in the player editor, without free-form scripts |
+
+An independent candidate is validated before replacing the draft. Invalid ranges, unconfirmed sources and unexposed fields preserve the existing conditions. Matching a business identity still requires every other configured condition and does not bypass complete item fidelity checks.
+
+<ScreenshotPlaceholder title="Business identity and advanced fields" description="Reserved for a real gameplay screenshot of held-item identity import, CustomModelData, PDC or exposed-field editing." lang="en" />
 
 See [listing quantities and maximum values](/en/kitemarket/trading/sales#listing-quantities-and-maximum-values), or continue to [fulfillment preview and confirmation](/en/kitemarket/trading/supply).

@@ -1,21 +1,19 @@
 ---
-title: "v1.1 管理与风险复核"
+title: "管理与风险复核"
 description: "明确目标的管理操作、真实资金资产、导出和本地风险案件。"
 canonical: "https://www.kitemc.com/kitemarket/v1-1/administration-risk"
 ---
 
 import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
-import { V11FeatureMarker, V11PagePanel } from "/snippets/feature-marker.jsx";
-
-<V11FeatureMarker lang="zh" title="管理与风险复核" summary="v1.1 新增有原因的管理操作与案件" />
-
-<V11PagePanel lang="zh" items={["明确目标与原因", "真实资金和资产操作", "证据与导出", "本地风险案件"]} />
 
 <ScreenshotPlaceholder title="管理与风险复核页面" description="此处预留真实游戏截图，后续可补充管理确认、案件或证据导出。" lang="zh" />
 
-本页属于 [v1.1 专题](/kitemarket/v1-1/overview)。管理操作与风险线索使用各自权限和确认，不自动处罚。
+使用 `/km tools` 进入管理工具，使用 `/km risk` 查看风险案件。管理操作与风险线索使用各自权限和确认；风险分数与建议不自动处罚玩家。
 
-## 管理目标、原因与结果
+<span id="管理目标原因与结果" />
+<span id="管理目标、原因与结果" />
+
+## 管理目标、原因与结果 {#v11-administration-targets-and-outcomes}
 
 `kitemarket.audit.all` 提供只读审计，`kitemarket.manage` 允许管理写入。先选择明确玩家、订单或资产，填写原因，再确认页面展示的实际操作。
 
@@ -34,7 +32,9 @@ import { V11FeatureMarker, V11PagePanel } from "/snippets/feature-marker.jsx";
 
 `PREPARED`、`UNKNOWN` 和仍在执行的来源需要分别核查，详见[核对 UNKNOWN](/kitemarket/operations#核对-unknown)。不要用另一笔补偿掩盖未解决的原操作。
 
-## 导出与保留策略
+<span id="导出与保留策略" />
+
+## 导出与保留策略 {#v11-exports-and-retention}
 
 管理导出为插件 `exports/` 中的有界 JSONL，包含记录数、截断说明和 SHA-256 摘要。导出上限并不代表数据库只有这些记录。
 
@@ -44,24 +44,19 @@ import { V11FeatureMarker, V11PagePanel } from "/snippets/feature-marker.jsx";
 
 清理前还会有界扫描完整 JSONL，核对记录、最后一行摘要及记录数。缺少摘要、截断、坏 JSON、计数不符、摘要后追加内容或超过扫描预算的文件继续保留，避免删除尚待核查的导出。
 
-## 离线导入 zAuctionHouse
+<span id="离线导入-zauctionhouse" />
 
-v1.1 导入器只读取正常停服的来源副本：V3 split/combined JSON、V3 统一 `items` SQLite，以及 V4 **4.0.1.4** 的 `items` + `auction_items` SQLite。来源和目标 Minecraft 版本必须一致；其他历史 SQL 布局或未来字段不能自动继承支持。工具和完整映射说明见[公开导入指南](https://github.com/KiteMC/KiteMarket/blob/main/docs/IMPORTING.md)。
+## 离线导入 zAuctionHouse {#v11-offline-imports}
 
-1. 保留来源和目标备份，用副本工具生成导入目录与持久 `origin`，明确审核币种、价格单位、费率和实际拥有者。SQLite 副本必须已 checkpoint 且没有 WAL/SHM，不能通过删除 sidecar 绕过检查。
-2. 启用 `imports.offline-enabled: true` 并正常重启。关闭其他市场节点，退出全部玩家并阻止新加入，等待旧租约失效；只有一个活节点且无市场会话、`PREPARED`/`UNKNOWN` 或 `DELIVERING` 时才开始。
-3. 控制台运行 `km import pause confirm`，再运行 `km import dry-run zah-copy`。**先停在预检报告**，核对可导入项、隔离原因、真实物品和归属。
-4. 确认报告后运行 `km import apply <报告的64位SHA-256> confirm`。再次核对订单、实物、数量和领取拥有者，再运行 `km import resume confirm`。最后关闭临时导入开关并正常重启。
+导入器只读取正常停服的来源副本，支持 V3 split/combined JSON、V3 统一 `items` SQLite，以及 V4 **4.0.1.4** 的 `items` + `auction_items` SQLite。来源与目标必须使用同一 Minecraft 版本，其他历史布局不能自动继承支持。
 
-`MAINTENANCE` 是持久导入暂停：授权刷新和重启不自动恢复，原订单、冻结及托管保留。暂停不延长原期限，恢复后已到期的订单按原规则处理。主许可证的吊销、到期及离线期限始终优先；`EXIT_ONLY` 是资产退出状态，不能用作导入暂停。
+先备份并暂停目标市场，再审核预检报告和内容归属，按报告摘要明确确认。挂单映射为原总价的不可拆分出售整包，已购资产归买家，到期资产归卖家；无法映射、竞拍／租赁、未确认发布及金融历史保持隔离，不生成历史钱包收益。
 
-挂单映射为原总价的不可拆分出售整包；已购资产归买家，到期资产归卖家。无法映射、竞拍/租赁、未确认发布和金融历史完整隔离，不把历史收益变成钱包资金。重跑同一审核报告返回原编号；某项失败后已提交项保留，不能删除去重记录或更换 `origin` 重试。
+完整准备条件、暂停／恢复命令、重复执行处理及限定验证记录见[离线导入指南](/kitemarket/operations/importing)。预检解码不能代替实际来源物品在交付后的完整属性核对。
 
-Paper 1.21.11／Java 21 的限定验证已完成合成 V3 split JSON 与 V4 固定 SQLite 副本的预检、导入、重复执行去重、购买和领取。样本由真实 Bukkit 物品独立编码，涵盖数量、名称、附魔、耐久、Lore 与潜影盒内容，并在领取后核对原生属性。
+<span id="本地风险分析" />
 
-这些副本不是运行中的 zAuctionHouse 导出，不认证所有历史布局或 V3 NMS-NBT 物品组合。预检解码成功仍不能代替你的实际来源资产在领取后的完整属性核对。
-
-## 本地风险分析
+## 本地风险分析 {#v11-local-risk-analysis}
 
 分析只消费真实已提交成交。出价、冻结、失败请求或 UNKNOWN 不被当成成交样本。
 
@@ -75,7 +70,9 @@ Isolation Forest 本地模型同时满足以下条件后训练：
 
 默认100棵树、子样本256，使用30天训练历史。冷启动显示学习进度，规则线索仍可工作。关系图使用有界7天记录；历史不足不会伪造已训练状态。
 
-## 信号与误报
+<span id="信号与误报" />
+
+## 信号与误报 {#v11-signals-and-false-positives}
 
 | 信号 | 人工应核对 |
 | --- | --- |
@@ -87,7 +84,9 @@ Isolation Forest 本地模型同时满足以下条件后训练：
 
 价格规则需足够可比样本；没有基线不会仅因绝对价格高而认定异常。朋友、公会、稀有高价和低样本市场都可能正常。分数是复核线索，不是作弊概率。
 
-## 案件与人工反馈
+<span id="案件与人工反馈" />
+
+## 案件与人工反馈 {#v11-cases-and-feedback}
 
 案件展示交易线索、参与者假名、证据、模型状态和复核历史。管理员可标记待观察、误报、正常或人工确认可疑，并记录原因和备注。
 
