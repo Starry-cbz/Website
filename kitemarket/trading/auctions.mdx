@@ -14,7 +14,17 @@ import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
 
 起拍价是整个拍卖标的的总价，不乘以物品数量。发布确认页的税额和净收入按起拍价预估，最终使用成交时的最高有效出价结算。
 
+上架费、买方费和卖方费按发布时保存的费用快照处理，后续重载不会改动旧单。最终金额与资产去向以确认、结算收据为准；详细计算见[费用快照与累计分摊](/kitemarket/trading/sales#v11-fee-snapshot-and-allocation)。
+
 <ScreenshotPlaceholder image="/images/kitemarket/screenshot-market.png" title="竞拍列表中的真实物品说明" description="出价前查看名称、附魔、当前价格、数量及结束时间。" lang="zh" />
+
+### 混合整包拍卖 {#v11-bundle-auctions}
+
+卖家也可把多项材料或属性不同的真实物品组成一个不可拆分的整包。起拍价、每次出价和成交价均是**整包总价**，最高价胜出者领取全部内容，不能单独竞拍其中一项。
+
+详情的整包内容页展示真实物品和数量；通过准入的容器条目可继续查看只读内部预览。先核对内容，再确认出价，不把展示图标当作实际拍卖资产。
+
+<ScreenshotPlaceholder title="整包拍卖内容与出价确认" description="此处预留真实游戏截图：整包内容清单、总出价和资金冻结说明。" lang="zh" />
 
 ## 出价确认
 
@@ -25,6 +35,12 @@ import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
 其它玩家出价改变订单版本后，旧确认会被拒绝，需要刷新；不会自动追价。最低有效价超过币种上限时不能再加价，已有最高价仍按规则结算。
 
 <ScreenshotPlaceholder image="/images/kitemarket/screenshot-auction-confirm.png" title="竞拍确认" description="真实游戏截图待补充：展示实际标的、总出价、冻结金额和最终确认。" lang="zh" />
+
+### 资金不足与补款 {#v11-auction-funding-shortfall}
+
+资金不足时，可按页面显示的真实缺口确认充值。充值成功后重新读取订单、最低有效价及费用，再打开新的出价确认；不会凭充值前的报价自动竞拍。
+
+已充值资金留在钱包。订单变化、网关不可用或充提结果未确认时，先检查具体状态，不反复充值或重放未知操作。
 
 ## 末秒出价与延时
 

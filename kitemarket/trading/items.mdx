@@ -1,8 +1,10 @@
 ---
 title: "精确样品与物品准入"
-description: "了解完整物品指纹、自定义数据、节点一致性和特殊物品限制。"
+description: "了解业务身份、完整物品指纹、只读容器预览、节点一致性和准入边界。"
 canonical: "https://www.kitemc.com/kitemarket/trading/items"
 ---
+
+import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
 
 ## 精确匹配 {#精确样品与自定义物品}
 
@@ -20,16 +22,38 @@ canonical: "https://www.kitemc.com/kitemarket/trading/items"
 
 ## 自定义物品与节点一致性
 
-KiteMarket 不解析第三方物品 ID，也不承诺两个外观相同物品等价。
+外观相同不代表物品等价。名称、Lore、耐久、附魔、自定义数据和业务身份都可能影响匹配或完整属性比较。
 
 所有节点的 Minecraft 版本和物品配置必须一致。先用目标插件生成的真实样品验证，再开放给玩家。
+
+### 公共 API 业务身份桥接 {#v11-item-identity-bridges}
+
+启用对应插件后，可通过 ItemsAdder、Oraxen、Nexo、MMOItems 的公共 API 读取真实业务来源与 ID，用于高级收购和筛选。读取失败或身份未确认时，不从外观、名称、Lore 或猜测 NBT 补造 ID。
+
+业务身份只增加明确的语义条件，不放宽托管保真、完整 EXACT 比较或其他已设置规则。无法由已确认身份安全限定的未知数据，继续使用完整精确样品。
+
+高级编辑还支持 CustomModelData 范围、最多32个必须存在的 PDC 键名，以及 `items.exposed-fields` 开放的字符串、数字和布尔字段。设置方式见[业务身份与开放字段](/kitemarket/trading/buy-orders#v11-business-identity-and-fields)。
+
+<Note>
+公开 API 桥接不代表所有物品组合都已认证。目前固定验证组合为 Paper 1.21.11、Java 21、Oraxen 1.220.0：一个实际自定义镐完成身份读取、名称搜索、上架、购买与领取，原生属性与堆叠量一致。此结果不覆盖全部 Oraxen 物品或资源包外观；Nexo、MMOItems/MythicLib 的完整运行组合尚未认证。
+</Note>
 
 ## 物品准入
 
 精确样品仍须通过物品准入和序列化往返保真检查，不能用来绕过限制。
 
-`1.0.0` 不开放潜影盒、收纳袋等具有嵌套存储结构的物品的新交易，空潜影盒也不在支持范围。其他特殊物品或数据只有通过当前构件的准入检查后才能交易。
+特殊物品和嵌套数据只有通过当前构件的准入检查后才能交易。物品来源插件、SDK 或界面主题不能代替准入结论。
 
 看到 `UNVERIFIED_SPECIAL_ITEM`、`UNVERIFIED_ITEM_DATA` 或 `ITEM_ROUNDTRIP_UNSAFE` 时，应停止发布该物品，而不是切换精确模式重试。
+
+### 只读容器预览与往返保真 {#v11-container-preview-and-fidelity}
+
+已通过准入的容器可以在订单内容页打开只读预览，展示实际保存的内部物品。点击预览不能取出物品，也不会改变容器内容。
+
+容器本身及内部每一项都要经过保存、还原和完整属性比较。嵌套或结构超过支持范围、损坏快照或属性无法完整往返时拒绝发布，不替换为空容器，也不删除不认识的内容来强行通过。
+
+成交、撤回或到期后的实际物品进入领取箱。背包不足时继续待领，物品数量与原生堆叠规则保持不变。
+
+<ScreenshotPlaceholder title="容器内容的只读预览" description="此处预留真实游戏截图：订单内容页进入容器预览，展示真实内部物品与数量。" lang="zh" />
 
 已有托管资产的安全退出按[故障与迁移说明](/kitemarket/operations)处理。高级规则的具体设置见[收购条件编辑](/kitemarket/trading/buy-orders#条件编辑)。

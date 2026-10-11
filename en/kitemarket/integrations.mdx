@@ -1,0 +1,74 @@
+---
+title: "Scoreboards, NPCs and permissions"
+description: "Display market status and wallets on scoreboards, open the market through Citizens NPCs and read LuckPerms primary groups."
+canonical: "https://www.kitemc.com/en/kitemarket/integrations"
+---
+
+import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
+
+These optional integrations provide displays and entry points. The base market does not depend on them. A missing plugin or incompatible API makes its integration unavailable while the vanilla GUI, wallets and trading retain their normal rules.
+
+## Installation and activation {#v11-integration-setup}
+
+1. Install builds of PlaceholderAPI, Citizens or LuckPerms that match your server. Choose only the integrations you need.
+2. For Citizens, register the permitted NPC IDs in `config.yml`.
+3. Restart normally, confirm the corresponding plugins are enabled and check the display or entry point.
+
+`integrations` configuration is read at startup. Changes require a normal restart; `/km reload` does not update it. See [compatibility](/en/kitemarket/compatibility) for specific builds and verified combinations. Successful installation does not certify every version combination.
+
+## PlaceholderAPI scoreboard displays {#v11-placeholderapi}
+
+KiteMarket registers the `kitemarket` expansion when PlaceholderAPI is available. Add these placeholders to a scoreboard, hologram or other display plugin that supports PlaceholderAPI:
+
+| Placeholder | Content |
+|---|---|
+| `%kitemarket_state%` | Current market initialization state |
+| `%kitemarket_network_id%` | Current market network UUID |
+| `%kitemarket_wallet_coins_available%` | Available balance in the `coins` wallet |
+| `%kitemarket_wallet_coins_frozen%` | Frozen balance in the `coins` wallet |
+| `%kitemarket_luckperms_primary_group%` | The primary group of an already-loaded LuckPerms user |
+
+Replace `coins` in wallet placeholders with your currency ID. For example, `points` uses `%kitemarket_wallet_points_available%`. Balances use the currency's actual precision without appending its display name; add a label in the display plugin.
+
+Wallet values come from an asynchronously refreshed read-only cache with a 15-second lifetime, without blocking the placeholder thread. Unready services, expired caches and failed queries return an empty value instead of a fabricated zero balance. An unloaded LuckPerms user or unavailable LuckPerms provider also returns an empty group.
+
+<Note>
+Placeholders are for display. Do not use cached values to authorize a debit, grant permissions or prove a trade succeeded. Wallet records and trade receipts contain the actual result.
+</Note>
+
+<ScreenshotPlaceholder title="Market scoreboard information" description="Reserved for a real gameplay screenshot showing market status, wallet balances and the player's primary group." lang="en" />
+
+## Citizens NPC market entry {#v11-citizens}
+
+Register specific NPC IDs in `config.yml`:
+
+```yaml
+integrations:
+  citizens:
+    npc-ids: [12, 27]
+```
+
+Replace `12` and `27` with actual NPC IDs on your server. The default empty list enables no NPC entry points. IDs must be non-negative integers.
+
+Right-clicking a registered NPC opens the same market home as `/km`. Other NPCs do not trigger the market, and clicks already cancelled by another plugin are ignored. KiteMarket still checks player permissions, sessions, quotes and final trade confirmation.
+
+NPCs only open the interface; they never automatically deposit funds, buy, supply or bid.
+
+<ScreenshotPlaceholder title="NPC market entry" description="Reserved for a real gameplay screenshot of a player right-clicking a configured NPC to open the normal market home." lang="en" />
+
+## LuckPerms primary groups and trading permissions {#v11-luckperms}
+
+The LuckPerms integration reads the primary group of an already-loaded user through its public API, for displays such as `%kitemarket_luckperms_primary_group%`. It does not load offline users or grant permissions.
+
+Trading modes, quantities, prices, fees and publication limits use effective Bukkit permissions rather than the displayed primary-group name. Configure the relevant permission nodes in LuckPerms, then verify the result against [commands and permissions](/en/kitemarket/commands) and [fees and restrictions](/en/kitemarket/v1-1/economy).
+
+## Unavailable displays or entry points {#v11-integration-troubleshooting}
+
+| Symptom | What to check |
+|---|---|
+| The original placeholder text is displayed | Confirm the display plugin supports and enables PlaceholderAPI, and PlaceholderAPI loaded successfully |
+| Wallet or group value is empty | Check market readiness, player data and cache state; do not interpret an empty value as zero |
+| Right-clicking the NPC does not open the market | Check the actual NPC ID, restarted configuration, Citizens status and player permissions |
+| A permission edit does not have the expected effect | Check effective permissions and the first matching policy, not just the primary-group name |
+
+Interface themes and item identity are separate capabilities. See [ItemsAdder integration](/en/kitemarket/dlc) for interfaces and [items and containers](/en/kitemarket/trading/items) for real business IDs and advanced conditions.

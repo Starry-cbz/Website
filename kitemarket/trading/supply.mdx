@@ -31,7 +31,7 @@ import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
     点击「刷新」重新读取订单和背包，查看最新余量。
   </Step>
   <Step title="核对物品与收入">
-    查看每格的扣取数量，以及本次成交总额、税额和净收入。
+    查看每格的扣取数量，以及本次成交总额、供应者费用和净收入。采购方承担买方费用，供应者承担卖方费用；两者分别展示。
 
     确认页继续列出供货来源格和数量，便于发现误选的工具或收藏品。
   </Step>
@@ -43,3 +43,13 @@ import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
 </Steps>
 
 条件不匹配时，查看[高级收购与条件编辑](/kitemarket/trading/buy-orders)。成交或物品返还后，前往[领取箱](/kitemarket/trading/claims)。
+
+## 供货费用与资产去向 {#v11-supply-fees-and-destination}
+
+收购订单发布时保存费用快照。本次成交金额为单价乘以实际供货量；采购方支付成交金额加买方费，供应者取得成交金额减卖方费，净收入进入供应者的市场钱包，实际交出的物品进入采购方领取箱。上架费属于发布时的单独支出。
+
+多人分批供货时，固定费用与比例费用按整单累计成交金额分摊，合并取整后减去已收费用，最后一笔结清余数。不会向每位供应者重复收取整单固定费用，本次卖方费用也不会超过本次成交金额。
+
+预览和最终确认使用同一订单费用快照，不由界面主题重新计算。订单版本、数量、背包或报价变化后重新预览并确认；修改服务器费用配置不会改变已发布订单。完整收费说明见[费用快照与累计分摊](/kitemarket/trading/sales#v11-fee-snapshot-and-allocation)。
+
+<ScreenshotPlaceholder title="供货费用与净收入确认" description="此处预留真实游戏截图，展示交货数量、采购方费用、供应者费用与净收入。" lang="zh" />

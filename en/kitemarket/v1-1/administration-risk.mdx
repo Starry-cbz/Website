@@ -1,21 +1,18 @@
 ---
-title: "v1.1 administration and risk review"
+title: "Administration and risk review"
 description: "Confirmed administration, actual funds and assets, exports and local review cases."
 canonical: "https://www.kitemc.com/en/kitemarket/v1-1/administration-risk"
 ---
 
 import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
-import { V11FeatureMarker, V11PagePanel } from "/snippets/feature-marker.jsx";
-
-<V11FeatureMarker lang="en" title="Administration and risk review" summary="New reasoned actions and review cases" />
-
-<V11PagePanel lang="en" items={["Explicit targets and reasons", "Actual funds and asset operations", "Evidence and exports", "Local risk cases"]} />
 
 <ScreenshotPlaceholder title="Administration and risk review" description="A real gameplay screenshot can be added here later for confirmations, cases or evidence exports." lang="en" />
 
-This page belongs to the [v1.1 documentation](/en/kitemarket/v1-1/overview). Administration and risk signals retain their own permissions and confirmation without automatic punishment.
+Open `/km tools` for administration and `/km risk` for review cases. Administration and risk signals retain separate permissions and confirmation. Scores and advice do not automatically punish players.
 
-## Targets, reasons and outcomes
+<span id="targets-reasons-and-outcomes" />
+
+## Targets, reasons and outcomes {#v11-administration-targets-and-outcomes}
 
 `kitemarket.audit.all` grants read-only audit. `kitemarket.manage` permits management writes. Select a specific player, order or asset, supply a reason and confirm the actual action shown.
 
@@ -34,7 +31,9 @@ Financial and item actions still enforce sessions, permissions, real state and d
 
 Review `PREPARED`, `UNKNOWN` and active source execution separately. See [reviewing UNKNOWN](/en/kitemarket/operations#reconciling-unknown). Another compensation must not conceal an unresolved original operation.
 
-## Exports and retention
+<span id="exports-and-retention" />
+
+## Exports and retention {#v11-exports-and-retention}
 
 Bounded JSONL exports in the plugin's `exports/` directory contain record count, truncation status and SHA-256 digest. An export limit does not imply the database contains only those rows.
 
@@ -44,24 +43,19 @@ Exports remain indefinitely by default; zero days disables pruning. With a durat
 
 Before pruning, a bounded scan also validates the complete JSONL, its final summary and record count. Missing summaries, truncated or malformed JSON, mismatched counts, trailing records and files beyond the scan budget remain available for review.
 
-## Offline zAuctionHouse imports
+<span id="offline-zauctionhouse-imports" />
 
-The v1.1 importer reads stopped source copies only: V3 split/combined JSON, the unified V3 `items` SQLite layout, and V4 **4.0.1.4** `items` plus `auction_items` SQLite. Source and target Minecraft versions must match. Other historical SQL layouts and future fields do not inherit support. See the [public import guide](https://github.com/KiteMC/KiteMarket/blob/main/docs/IMPORTING.en.md) for tools and complete mapping instructions.
+## Offline zAuctionHouse imports {#v11-offline-imports}
 
-1. Keep source and target backups. Prepare the copy and its durable `origin`, then review currencies, price units, fees and actual owners. SQLite copies must be checkpointed without WAL/SHM; never delete sidecars to bypass the check.
-2. Enable `imports.offline-enabled: true` and restart normally. Stop other market nodes, disconnect all players, block new joins and wait for old leases to expire. Require one live node, no market sessions, no `PREPARED`/`UNKNOWN` operations and no `DELIVERING` assets.
-3. From the console, run `km import pause confirm`, then `km import dry-run zah-copy`. **Stop to review the report**: inspect eligible records, quarantine reasons, real items and ownership.
-4. After review, run `km import apply <64-character report SHA-256> confirm`. Verify orders, items, quantities and claim owners, then run `km import resume confirm`. Finally disable the temporary import option and restart normally.
+The importer reads normally stopped source copies: V3 split/combined JSON, the unified V3 `items` SQLite layout, and V4 **4.0.1.4** `items` plus `auction_items` SQLite. Source and target Minecraft versions must match. Other historical layouts do not inherit support.
 
-`MAINTENANCE` persists as an explicit import pause. License refreshes and restarts do not resume it; original orders, frozen funds and escrow remain. Original deadlines are not extended, and expired orders follow their normal rules after resume. Main-license revocation, expiry and offline deadlines always take priority. `EXIT_ONLY` is asset exit, not an import pause.
+Back up and pause the target market, review the dry-run report and actual ownership, then confirm the report's digest. Listings become indivisible sale bundles at their original total prices. Purchased assets belong to buyers and expired assets to sellers. Unmapped records, bid/rental listings, unconfirmed publication and financial history remain quarantined without creating past wallet revenue.
 
-Listings become indivisible sale bundles at their original total prices. Purchased assets belong to buyers; expired assets belong to sellers. Unmapped records, bid/rental listings, unconfirmed publication and financial history quarantine intact without minting past revenue into wallets. Replaying the same reviewed report returns original IDs. Earlier commits remain after a later failure; never delete deduplication records or replace `origin` to retry.
+See [offline imports](/en/kitemarket/operations/importing) for prerequisites, pause/resume commands, replay handling and limited verification records. Successful decoding cannot replace complete-property checks of your source assets after delivery.
 
-A limited Paper 1.21.11/Java 21 check completed preflight, import, replay deduplication, purchase and claiming for synthetic V3 split JSON and fixed V4 SQLite copies. Independently encoded native Bukkit items covered quantities, names, enchantments, durability, lore and shulker contents, with native properties checked after delivery.
+<span id="local-analysis" />
 
-These copies were not exports from a running zAuctionHouse installation. They do not certify every historical layout or V3 NMS-NBT item combination. Successful dry-run decoding still cannot replace complete-property checks of your actual source assets after delivery.
-
-## Local analysis
+## Local analysis {#v11-local-risk-analysis}
 
 Analysis consumes genuine committed trades. Bids, holds, failed requests and UNKNOWN outcomes do not count as completed samples.
 
@@ -75,7 +69,9 @@ Isolation Forest training requires all three thresholds:
 
 The default model uses 100 trees, subsamples of 256 and 30 days of training history. Learning progress remains visible while rules can still produce signals. The relationship graph uses bounded 7-day history. Sparse history never appears as a trained model.
 
-## Signals and false positives
+<span id="signals-and-false-positives" />
+
+## Signals and false positives {#v11-signals-and-false-positives}
 
 | Signal | Review context |
 | --- | --- |
@@ -87,7 +83,9 @@ The default model uses 100 trees, subsamples of 256 and 30 days of training hist
 
 Price rules need adequate comparable samples. Without a baseline, absolute high price alone is not a price finding. Friends, guilds, rare expensive items and sparse markets can be normal. Scores are review signals, not probabilities of cheating.
 
-## Cases and feedback
+<span id="cases-and-feedback" />
+
+## Cases and feedback {#v11-cases-and-feedback}
 
 Cases display trade signals, participant aliases, evidence, model state and review history. Administrators can mark watch, false positive, normal or manually confirmed suspicious, retaining reasons and notes.
 

@@ -1,6 +1,6 @@
 ---
 title: "高级收购与条件编辑"
-description: "冻结收购预算，设置材料、附魔、耐久、名称与 Lore 条件。"
+description: "冻结收购预算，设置材料、附魔、耐久、文字、业务身份与开放字段条件。"
 canonical: "https://www.kitemc.com/kitemarket/trading/buy-orders"
 ---
 
@@ -22,7 +22,7 @@ import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
 
 ## 高级条件
 
-高级条件采用 **AND**：设置了材料、附魔、耐久和名称时，交货物品必须同时满足它们。材料集合内部任选一种即可。
+玩家编辑的高级条件按 **AND** 组合：设置了材料、附魔、耐久和名称时，交货物品必须同时满足它们。材料集合内部任选一种即可；管理员声明式 OR 条件的范围见下文。
 
 额外附魔默认禁止，需要在编辑器中明确开启。名称/Lore 只有精确和包含两种匹配，不接受正则表达式。
 
@@ -34,7 +34,7 @@ import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
 | 名称 / Lore | 根据编辑器指定的精确或包含规则匹配；未设置的字段不增加限制 |
 | 精确样品 | 匹配数量归一后的真实物品指纹；交易数量独立计算 |
 
-原版高级条件只检查编辑器明确支持的属性。已通过物品准入、但高级条件无法解释的自定义数据需使用[精确样品](/kitemarket/trading/items)；精确模式不解除物品准入限制。
+高级条件只检查编辑器明确支持且实际设置的属性。已通过物品准入、但无法由已确认业务身份安全限定的自定义数据，继续使用[精确样品](/kitemarket/trading/items)；精确模式不解除物品准入限制。
 
 <ScreenshotPlaceholder image="/images/kitemarket/screenshot-rule-editor.png" title="高级条件编辑" description="材料、附魔、耐久、名称、Lore 和精确样品的编辑入口。" lang="zh" />
 
@@ -76,5 +76,21 @@ import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
 主手导入使用物品的完整原文本，包括格式和换行，适合保留颜色格式的精确匹配。
 
 清空表示不限制；导入空文本并精确匹配则要求该字段为空。
+
+### 业务身份与开放字段 {#v11-business-identity-and-fields}
+
+高级条件可在材料、文字、附魔和耐久之外，指定业务来源／ID、CustomModelData、PDC 标签和管理员开放的标量字段。
+
+| 条件 | 设置方式与范围 |
+|---|---|
+| 业务来源／ID | 从主手真实物品及已启用的 ItemsAdder、Oraxen、Nexo、MMOItems 公共 API 读取，不从名称、Lore 或猜测 NBT 推导 |
+| CustomModelData | 指定最小、最大范围，或导入主手值 |
+| PDC 标签 | 指定必须同时存在的键名集合，最多32个 |
+| 标量字段 | 只使用 `items.exposed-fields` 开放的字符串、数字、布尔字段，按原值精确相等或包含 |
+| OR 条件 | 由管理员声明式配置；玩家页面只读，不接受自由脚本 |
+
+先校验独立候选副本，成功后才更新草稿。无效范围、未确认来源或未开放字段不会覆盖原条件。业务身份匹配仍需满足其他已设置规则，不等于只看 ID 或忽略完整物品保真检查。
+
+<ScreenshotPlaceholder title="业务身份与高级字段条件" description="此处预留真实游戏截图：主手业务身份导入、CustomModelData、PDC 或开放字段编辑。" lang="zh" />
 
 查看[发布数量与最大值](/kitemarket/trading/sales#发布数量与最大值)，或继续阅读[供货预览与确认](/kitemarket/trading/supply)。

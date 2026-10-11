@@ -97,7 +97,10 @@ Results exclude raw audit JSON, serialized item bytes, exact-sample fingerprints
 
 Missing historical amounts remain `null` rather than becoming zero. `RECORDED` does not prove an external side effect succeeded; `PENDING_REVIEW` needs investigation. Item matching and transaction submission are handled by the host plugin, outside the public query API.
 
-### V1.1 lot, fee and business-condition summaries
+<span id="v11-lot-fee-and-business-condition-summaries" />
+<span id="v1-1-lot-fee-and-business-condition-summaries" />
+
+### V1.1 lot, fee and business-condition summaries {#v11-api-lot-fee-business-data}
 
 | Data | Access |
 | --- | --- |
@@ -133,7 +136,10 @@ Node polling can delay or miss a notification, historical entries before startup
 
 Deduplicate by **network UUID plus event ID**; IDs need not be consecutive. Persist your own long-term deduplication when required. Notifications are not evidence for issuing replacement money or items; re-query authoritative state after downtime.
 
-## V1.1 extensions and player-confirmed requests
+<span id="v11-extensions-and-player-confirmed-requests" />
+<span id="v1-1-extensions-and-player-confirmed-requests" />
+
+## V1.1 extensions and player-confirmed requests {#v11-api-extensions-and-requests}
 
 Obtain two separate services through `ServicesManager`; the original `KiteMarketApi` remains read-only:
 
@@ -144,7 +150,46 @@ Obtain two separate services through `ServicesManager`; the original `KiteMarket
 
 Requests only support CREATE/BUY/SUPPLY/BID/CANCEL, bound to the player session, owner plugin, order and policy revisions, and expiry. There is no public `confirm()` or `commit()`, arbitrary minting, inventory mutation, administrator repair or unattended remote trading. Bundles describe real inventory slots and quantities; the host captures and rechecks actual items at confirmation.
 
-Only `WriteResult.Status.SUCCEEDED` denotes core success. Handle rejection, cancellation, expiry and review separately. Receiving a quote or completed future does not prove player confirmation, and unknown results must not be replayed automatically.
+### Extension providers and their owner {#v11-api-provider-lifecycle}
+
+Register extensions with an actually enabled `Plugin owner`. Owner disable unregisters them automatically. Closing an old registration handle cannot remove a newer registration with the same ID; call `changed(owner)` after rule changes to invalidate quotes based on the old revision.
+
+| SPI | Extension scope |
+| --- | --- |
+| `EconomyProvider` | Read-only external balances and core-authorized deposits/withdrawals for configured currency gateways |
+| `ItemIdentityProvider` | Public business IDs read from cloned actual items; `source` must match the registered extension ID |
+| `ContainerPreviewProvider` | Auxiliary read-only summaries, with native actual contents taking precedence |
+| `TradeRuleProvider` | Additional reject rules alongside core constraints |
+| `TradeReviewProvider` | Lock-free review of immutable, sanitized quotes |
+| `MarketNotificationListener` | Committed summaries deduplicated by network and event ID |
+
+Rules and reviews run outside database/market locks at `QUOTE` or `PLAYER_CONFIRM`. They can allow continuation or reject, but cannot rewrite prices, fees, recipients or selected inventory, or loosen core rules. Exceptions reject the current transaction and disable the failing provider.
+
+Identity callbacks asynchronously read cloned native items. A batch identifies at most 128 distinct property fingerprints, including nested contents. Reduce the selection beyond that boundary; do not guess vendor IDs from names or lore. Container extension results are labeled auxiliary summaries and cannot change actual escrow, admission or claim contents.
+
+### Open host confirmation from a player action {#v11-api-player-confirmation}
+
+```java
+MarketRequest intent = MarketRequest.buy(
+    order.getId(), order.getRevision(), 16);
+requests.quote(this, player, intent)
+    .thenCompose(quote ->
+        requests.openConfirmation(this, player, quote.getId()))
+    .thenAccept(result ->
+        getLogger().info(result.getStatus() + " " + result.getCode()));
+```
+
+Start from an explicit player action. The host opens its confirmation page in the proper player scheduling context. Quotes bind the owner, player session, order/policy revisions and short expiry. Disconnects, node changes, owner disable, expiry, changed rules and reuse require a new quote rather than edited old fields.
+
+Sales, bids and supply reference only real inventory slots `0..35` and quantities, never serialized items, fabricated asset IDs or item-removal callbacks. Bundles use `MarketRequest.createBundle(...)` with `RequestLot` parts. Slots cannot repeat across parts; each part has identical properties, different parts may mix, and the lot quantity is one. Batch listings obtain protected confirmation individually and handle each result.
+
+### Fees and completion states {#v11-api-quote-fees-and-results}
+
+`RequestQuote.getListingFee()`, `getBuyerFee()` and `getChargedAmount()` use the host's actual fee snapshot and currency minor units. Gross is the transaction total, tax is total seller fees, and net is seller income. Buyer budgets include buyer fees. A bid's charged amount may be only additional reserved funds: do not debit gross again.
+
+Only `WriteResult.Status.SUCCEEDED` denotes core success. `REJECTED`, `CANCELLED`, `EXPIRED` and `PENDING_REVIEW` mean rejection, cancellation, expiry and review respectively. A generated quote or completed future does not prove player confirmation. Once submission begins, `discard(...)` cannot reverse the transaction; never replay unknown results automatically.
+
+Once an economy extension has entered an external call, a slow response is neither cancelled nor discarded as failure. The host retains `UNKNOWN` and late evidence. Providers are idempotent by `operationId`; extension registration supplies no arbitrary minting ability.
 
 <Card title="Complete v1.1 SDK and runnable examples" icon="code" href="https://github.com/KiteMC/KiteMarket/blob/main/docs/API.en.md">
   Extension SPIs, restricted requests, fee quotes, lifecycle and actual example source.

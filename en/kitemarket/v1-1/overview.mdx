@@ -1,21 +1,18 @@
 ---
-title: "v1.1 overview"
+title: "Update overview"
 description: "V1.1 features, fresh-install preparation and reading paths for KiteMarket v1.1."
 canonical: "https://www.kitemc.com/en/kitemarket/v1-1/overview"
 ---
 
 import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
-import { V11FeatureMarker, V11PagePanel } from "/snippets/feature-marker.jsx";
-
-<V11FeatureMarker lang="en" title="New in v1.1" summary="Bundles, automation and administration review" />
-
-<V11PagePanel lang="en" items={["Bundles, bulk listings and containers", "Fees, currencies and automation", "Community, notices and statistics", "Administration and risk review", "Optional cloud review and privacy"]} />
 
 <ScreenshotPlaceholder title="V1.1 feature overview" description="A real gameplay screenshot can be added here later for bundles, bulk listings or automation." lang="en" />
 
-These pages describe **v1.1** features, installation and reading paths. Runtime, SDK and example availability depends on the actual files in the matching GitHub Release or Packages version. The [download page](/en/kitemarket/download) continues to show public releases. Compatibility follows actual verification of pinned builds.
+**v1.1** adds bundles, bulk listings, fee rules, native currencies, trading automation, community notices and administrative review. These capabilities are integrated into the trading, wallet, configuration and developer documentation; this overview provides reading paths by task. Runtime, SDK and example availability depends on the files in the matching GitHub Release or Packages version. The [download page](/en/kitemarket/download) shows public releases. Compatibility follows actual verification of pinned builds.
 
-## Choose a topic
+<span id="choose-a-topic" />
+
+## Choose a topic {#v11-reading-paths}
 
 | Topic | Contents |
 | --- | --- |
@@ -25,9 +22,11 @@ These pages describe **v1.1** features, installation and reading paths. Runtime,
 | [Administration and risk review](/en/kitemarket/v1-1/administration-risk) | Confirmed actions with reasons, existing funds/assets, evidence, models and cases |
 | [Optional cloud review and privacy](/en/kitemarket/v1-1/cloud-review) | Off by default, manual confirmation, pseudonymous evidence and constrained responses |
 
-Existing [getting started](/en/kitemarket/guide), [trading](/en/kitemarket/trading), [wallet](/en/kitemarket/wallet) and [GUI configuration](/en/kitemarket/configuration/gui) pages retain their version-specific instructions. Prepare a fresh v1.1 installation below; consult [backup and migration](/en/kitemarket/operations#v1-0-to-v1-1) before using existing data.
+Choose an everyday task from [getting started](/en/kitemarket/guide). [Fixed-price sales and bundles](/en/kitemarket/trading/sales), [advanced buy orders](/en/kitemarket/trading/buy-orders), [claims](/en/kitemarket/trading/claims), [wallets and automation](/en/kitemarket/wallet) and [GUI configuration](/en/kitemarket/configuration/gui) include the relevant features. Follow [getting started](/en/kitemarket/guide) for a new market and [backup and migration](/en/kitemarket/operations#v1-0-to-v1-1) before using existing data.
 
-## New and shared installations
+<span id="new-and-shared-installations" />
+
+## New and shared installations {#v11-new-and-shared-installations}
 
 V1.1 primarily targets fresh installations, using market protocol `5`, database schema `2` and item snapshot format `2`. After obtaining matching release artifacts:
 
@@ -41,19 +40,28 @@ Stop normally or use a consistent backup method for SQLite. Copying only `.db` f
 
 Each node keeps a unique `network.node-id`. Market identity, game version, item profile and currency identities must remain consistent. A failed database connection reports unavailability rather than substituting another market.
 
-## Existing v1.0 markets
+<span id="existing-v10-markets" />
+<span id="existing-v1-0-markets" />
+
+## Existing v1.0 markets {#v11-existing-market-preparation}
 
 V1.1 does not promise a direct JAR replacement or seamless upgrade. Back up the full original database, plugin directories, original JARs, player/world data and economy-provider data. Check migration, assets and recovery on an independent copy before deciding to switch the original environment.
 
 The release retains legacy-schema checks, pre-migration backups, old-node fencing and asset-recovery protections. Those mechanisms do not replace complete verification of an existing environment. Do not mix builds, delete the database, change currency identities or overwrite an old market with fresh defaults. Keep original backups and evidence, and follow [migration and rollback guidance](/en/kitemarket/operations#v1-0-to-v1-1).
 
-## Interfaces and integrations
+<span id="interfaces-and-integrations" />
+
+## Interfaces and integrations {#v11-interfaces-and-integrations}
 
 The base plugin provides a complete vanilla GUI. Developers can build their own ItemsAdder interfaces through configuration and the public Java SDK. Those interfaces use the host's real items, protected actions, permissions and trading confirmations.
 
 ItemsAdder, Oraxen, Nexo and MMOItems identities come from real public APIs. Bridges and declarative rules do not relax item fidelity. Actual API availability and verification records govern compatibility.
 
-## Scoreboards, NPCs and permission plugins
+See [ItemsAdder interfaces](/en/kitemarket/dlc) and [item identity conditions](/en/kitemarket/trading/items) for installation and usage.
+
+<span id="scoreboards-npcs-and-permission-plugins" />
+
+## Scoreboards, NPCs and permission plugins {#v11-integration-entry-points}
 
 Optional integrations provide display values and entry points. Verification records govern specific supported builds. Missing or incompatible APIs disable only their integration; the base market remains usable.
 
@@ -65,7 +73,9 @@ Optional integrations provide display values and entry points. Verification reco
 
 Wallet placeholders use a short-lived cache. Unready services, expired caches and failed queries return empty values rather than invented zeros. Displays must not authorize payments or prove success, and NPC entry retains permissions and confirmation.
 
-## Enable only the trading modes you need
+<span id="enable-only-the-trading-modes-you-need" />
+
+## Enable only the trading modes you need {#v11-enabled-trading-modes}
 
 `market.enabled-types` defaults to `BUY`, `SELL` and `AUCTION`. To enable auctions alone:
 
@@ -76,7 +86,9 @@ market:
 
 The home page, publication, commands and SDK enforce the same setting. Any nonempty subset is valid; unknown types and an empty list are rejected. New trades follow the reloaded setting. Existing orders retain cancellation, expiry settlement and claims, so disabling auctions does not strand a winning bidder's held funds.
 
-## Uncertain outcomes
+<span id="uncertain-outcomes" />
+
+## Uncertain outcomes {#v11-uncertain-outcomes}
 
 Deposits, withdrawals, claims, bulk publication and administration have separate results. One successful operation does not prove that another succeeded, and a successful row does not make a whole batch successful.
 

@@ -74,6 +74,19 @@ Orders, claims and review reminders use actual queries; failed queries show unav
 
 “My market” uses the separate `profile` page. Returning home or switching interfaces retains the current publishing draft.
 
+### Show enabled trading modes {#v11-visible-market-modes}
+
+`market.enabled-types` controls actual trading modes and defaults to `BUY`, `SELL` and `AUCTION`. To offer auctions only:
+
+```yaml
+market:
+  enabled-types: [AUCTION]
+```
+
+Home, the publishing wizard and multi-slot listings hide disabled types while retaining their source slots; other entrances do not shift. Keep at least one valid type. Themes and `menus` cannot re-enable disabled transaction actions.
+
+Existing orders of disabled types remain viewable, cancellable and eligible for normal expiry settlement. Their buyer-facing details explain that the mode is disabled.
+
 ### Publishing entrances
 
 “Create / edit draft” at home slot `31` opens the wizard directly and continues the current draft.
@@ -82,6 +95,21 @@ Each market and “My orders” list retains that entrance at the top center: so
 
 To change a published order, cancel it and publish a new one; its published price and conditions cannot be edited in place.
 
+### Profile and discovery entrances {#v11-profile-shortcuts}
+
+The profile retains its original entrances and exposes community, automation and risk review according to permissions:
+
+| `profile` source slot | Entrance |
+|---|---|
+| `20` / `22` / `24` | Interface selection / personal review queue / history |
+| `29` | Community: favorites, saved searches, subscriptions, notifications and sellers |
+| `31` | Permission-dependent administration |
+| `33` | Automation and income reservations |
+| `35` | Risk review, requiring audit permission |
+| `49` | Back to home |
+
+Market-list source `37` saves a search at physical slot `5` in the warm layout; filter-page source `33` saves current criteria. Order-detail source `20` opens favorites, `24` opens the seller, and `22` opens bundle contents or a verified single-container preview.
+
 ## Item help and quantities
 
 Default listing help separates item information from purchase, supply or bidding guidance, retaining the original name, enchantments and Lore.
@@ -89,6 +117,14 @@ Default listing help separates item information from purchase, supply or bidding
 Quantity is one value; details show total and traded quantities separately. Auction quantities represent the entire lot.
 
 Count badges show the real quantity only within the item's native stack limit, capped at 99. Larger quantities use a single icon; the exact Lore quantity is always authoritative. Real item quantities stay unchanged.
+
+### Singles, bundles and fee display {#v11-lot-display}
+
+Single-item sales retain per-item prices and minimum quantities; a single-item auction's starting price covers the whole selected lot. Mixed bundles display the whole-bundle price, entry count and total item quantity, with no partial purchase. Bulk listing presents separate orders, each requiring player confirmation.
+
+Bundle publishing, buying and bidding share `confirm`: source `22` displays quantities, total price, buyer/seller fees and asset destinations; `24` opens actual contents, `30` confirms and `32` cancels. Viewing contents and returning retains the same quote and operation without repricing.
+
+Preserving formatted default help avoids displaying raw currency minor units as prices. See [vanilla menu customization](/en/kitemarket/configuration/menus) for full page keys, fees and policy fields.
 
 ### Dates and countdowns
 

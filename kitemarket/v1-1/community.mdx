@@ -1,21 +1,18 @@
 ---
-title: "v1.1 社区、通知与统计"
+title: "社区、通知与统计"
 description: "收藏、保存搜索、持久通知、Discord 生命周期与同币种统计。"
 canonical: "https://www.kitemc.com/kitemarket/v1-1/community"
 ---
 
 import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
-import { V11FeatureMarker, V11PagePanel } from "/snippets/feature-marker.jsx";
-
-<V11FeatureMarker lang="zh" title="社区与通知" summary="v1.1 新增收藏、订阅与统计" />
-
-<V11PagePanel lang="zh" items={["收藏与保存搜索", "持久通知与 Discord 生命周期", "卖家窗口", "同币种统计与价格参考"]} />
 
 <ScreenshotPlaceholder title="社区与通知页面" description="此处预留真实游戏截图，后续可补充收藏、订阅或通知中心。" lang="zh" />
 
-本页属于 [v1.1 专题](/kitemarket/v1-1/overview)。个人资料和通知持久保存，统计只使用已观察的已提交成交。
+使用 `/km community` 管理收藏、保存搜索、订阅和通知；使用 `/km prices` 查看可比价格。个人资料和通知在市场网络中持久保存，统计只使用已观察的已提交成交。
 
-## 收藏与保存搜索
+<span id="收藏与保存搜索" />
+
+## 收藏与保存搜索 {#v11-favorites-and-saved-searches}
 
 在订单页收藏，再从社区页管理；每人最多256个收藏和20个保存搜索。订单不可用时仍可移除收藏，不把它伪装成有效商品。
 
@@ -33,7 +30,9 @@ import { V11FeatureMarker, V11PagePanel } from "/snippets/feature-marker.jsx";
 
 收藏/订阅发现索引最多1024人。索引满时新增收藏或订阅明确拒绝，不留下半保存的偏好；未订阅的手动保存搜索仍可使用。
 
-## 个人通知
+<span id="个人通知" />
+
+## 个人通知 {#v11-personal-notices}
 
 通知包括新匹配订单、收藏终态、购买/售出成交及拍卖被超价。同类型事件按一分钟合并，重放去重，最多保留100条。
 
@@ -43,7 +42,9 @@ import { V11FeatureMarker, V11PagePanel } from "/snippets/feature-marker.jsx";
 
 提醒不自动标为已读；打开详情或明确“全部已读”才更新持久状态。聊天只展示少量短订单引用，完整目标在详情页。失败读取不会冒充零未读。
 
-## 公开广播和 Discord
+<span id="公开广播和-discord" />
+
+## 公开广播和 Discord {#v11-public-broadcasts-and-discord}
 
 两者默认关闭，管理员自行启用。
 
@@ -61,7 +62,9 @@ Discord 配置与展示快照在启动时固定。修改后正常重启服务器
 
 创建请求超时、服务端错误或无法确认消息 ID 时保留 UNKNOWN，不自动重复创建；明确被限流拒绝才按等待时间重试。消息发送失败不回滚已完成游戏成交。
 
-## 卖家与排行榜
+<span id="卖家与排行榜" />
+
+## 卖家与排行榜 {#v11-sellers-and-rankings}
 
 卖家资料、排行按卖家与币种独立累计已提交成交，可选择1、7、30个 **UTC 日历日**。这是包含当天的日桶窗口，不是精确滚动24、168或720小时。
 
@@ -71,7 +74,9 @@ Discord 配置与展示快照在启动时固定。修改后正常重启服务器
 
 卖家索引最多1024人。超过索引容量后个人精确成交统计继续保存，完整排行榜明确不可用，不把已索引的一部分卖家展示为全网络排行。
 
-## 公开价格参考
+<span id="公开价格参考" />
+
+## 公开价格参考 {#v11-public-reference-prices}
 
 价格参考按同币种及完整可比物品分组，提供滚动24小时、7天、30天窗口。
 

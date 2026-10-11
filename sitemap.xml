@@ -505,6 +505,30 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kitemc.com/" />
   </url>
   <url>
+    <loc>https://www.kitemc.com/kitemarket/integrations</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.kitemc.com/kitemarket/integrations" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kitemc.com/en/kitemarket/integrations" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kitemc.com/kitemarket/integrations" />
+  </url>
+  <url>
+    <loc>https://www.kitemc.com/en/kitemarket/integrations</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.kitemc.com/kitemarket/integrations" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kitemc.com/en/kitemarket/integrations" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kitemc.com/kitemarket/integrations" />
+  </url>
+  <url>
+    <loc>https://www.kitemc.com/kitemarket/operations/importing</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.kitemc.com/kitemarket/operations/importing" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kitemc.com/en/kitemarket/operations/importing" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kitemc.com/kitemarket/operations/importing" />
+  </url>
+  <url>
+    <loc>https://www.kitemc.com/en/kitemarket/operations/importing</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.kitemc.com/kitemarket/operations/importing" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.kitemc.com/en/kitemarket/operations/importing" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kitemc.com/kitemarket/operations/importing" />
+  </url>
+  <url>
     <loc>https://www.kitemc.com/kitemarket/configuration/currencies</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.kitemc.com/kitemarket/configuration/currencies" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.kitemc.com/en/kitemarket/configuration/currencies" />

@@ -1,0 +1,118 @@
+---
+title: "Offline imports and storage migration"
+description: "Review stopped copies and preflight reports, import zAuctionHouse, or move SQLite into an empty shared database."
+canonical: "https://www.kitemc.com/en/kitemarket/operations/importing"
+---
+
+import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
+
+V1.1 provides two separate paths: import orders/items from a stopped zAuctionHouse copy, or move an existing v1.1 SQLite market into empty MySQL/MariaDB storage. Both require complete backups and explicit confirmation; neither reads a live third-party database.
+
+<Warning>
+Source and target Minecraft versions must match. Retain original copies, reports and origin identity files. Do not remove unresolved operations, SQLite sidecars or import deduplication records to bypass checks.
+</Warning>
+
+## Obtain matching tools {#v11-import-tools}
+
+Get `KiteMarket-Examples-1.1.0.zip`, a matching runtime JAR and `SHA256SUMS.txt` from [downloads](/en/kitemarket/download). Verify digests, extract the archive and run commands from its root.
+
+| Tool | Purpose and requirements |
+| --- | --- |
+| `tools/importing/prepare_zah_copy.py` | Prepares a source copy and mappings; Python 3.11+, standard library only |
+| `tools/importing/sqlite-to-shared.ps1` | Launches offline storage migration; PowerShell 5.1+, Java matching the selected runtime |
+| `docs/IMPORTING.md` / `docs/IMPORTING.en.md` | Full mappings, arguments, quarantine reasons and recovery guidance |
+
+Tool source is also in the [public repository](https://github.com/KiteMC/KiteMarket), without private implementation access. Tools do not replace the runtime JAR, and v1.0.0 cannot execute these commands.
+
+## zAuctionHouse copies and mappings {#v11-zah-copy-and-mapping}
+
+Fixed parsing covers V3 split/combined JSON, unified V3 `items` SQLite and V4 **4.0.1.4** `items` plus `auction_items` SQLite. Other historical SQL layouts or future fields are not automatically supported.
+
+Stop the source normally and obtain a consistent, checkpointed copy without `-wal`/`-shm`. Preparation never writes to the original data directory, checks each file's SHA-256 and rejects links/reparse points.
+
+```powershell
+python tools/importing/prepare_zah_copy.py `
+  --source-dir 'D:\StoppedCopies\zAuctionHouse' `
+  --copy-dir 'D:\Paper\plugins\KiteMarket\imports\zah-copy' `
+  --origin-file 'D:\MigrationEvidence\zah-origin.json' `
+  --format v3-json --game-version 1.21.11 --source-stopped
+```
+
+For SQLite, use `--format v3-sqlite` or `--format v4-sqlite` with the actual `--database-file`. Offset-free V4 SQL timestamps also require the original JVM's actual `--timestamp-zone`; do not guess.
+
+Reuse the installation UUID in `origin` after its first creation. Do not change origin identity for retries. Review generated `mapping.json` for destination currencies, price conversion, precision and fees. Fractional minor-unit losses and overflow quarantine instead of rounding.
+
+## Enter maintenance and run preflight {#v11-import-maintenance}
+
+1. Set `imports.offline-enabled: true` and restart the importing node normally.
+2. Stop other market nodes, disconnect all players, prevent new joins and wait for old node/player leases to expire.
+3. Resolve `PREPARED`/`UNKNOWN` and `DELIVERING` from actual evidence first. The main license must remain valid; do not delete records.
+4. Pause and preflight from the console, then **stop at the report**:
+
+```text
+km import pause confirm
+km import dry-run zah-copy
+```
+
+`MAINTENANCE` is a persistent import pause. License refreshes or restarts do not lift it. Orders, holds and escrow remain; expiration processing pauses without extending original deadlines. Main-license exit rules take priority, and `EXIT_ONLY` is not an import pause.
+
+Preflight uses native target-server APIs to decode actual items and check admission/round-trip properties without changing wallets, orders or inventories. Reports include original quarantined records and belong in private operational evidence.
+
+## Review ownership and apply records {#v11-import-report-and-ownership}
+
+| Source content | Destination |
+| --- | --- |
+| Confirmed fixed-price listing | Indivisible sale bundle at the original total price |
+| Purchased items | Claims for the actual buyer |
+| Expired items | Claims for the actual seller |
+| Bids, rentals, deleted/unconfirmed publication, missing owners, duplicates or unsafe records | Preserved in quarantine with reasons |
+| Historical income or financial records | No wallet issuance; reconcile the original economy separately |
+
+Review quantities, original total prices, real contents and owners, then use the preflight report's **exact 64-character digest**:
+
+```text
+km import apply <64-character report SHA-256> confirm
+```
+
+Each record commits and deduplicates in a market transaction. Replaying the same report returns its original operation/order/asset IDs. Changed records or business mappings for an existing origin key are rejected. Failure stops subsequent records while prior commits remain; never delete `km_imports` to reimport.
+
+<ScreenshotPlaceholder title="Imported orders and claim assets" description="Reserved for real gameplay: verify imported bundle contents, quantities, total price and actual claim owners." lang="en" />
+
+After verification, run `km import resume confirm` from the console, disable the temporary import setting and restart normally. Orders beyond their original deadlines are processed normally after resume.
+
+## Move SQLite to shared storage {#v11-sqlite-to-shared}
+
+This requires an **existing v1.1** single-network SQLite copy. The destination must be empty and use InnoDB; another market is never merged.
+
+Enter `EXIT_ONLY`, stop every source node normally and retain database/configuration backups from one checkpoint. Prepare a consistent copy without sidecars, keep all destination nodes stopped, then inspect:
+
+```powershell
+tools/importing/sqlite-to-shared.ps1 -Action inspect `
+  -KiteMarketJar '.\KiteMarket-modern-1.1.0.jar' `
+  -SourceCopy 'D:\MigrationEvidence\market-copy.sqlite' `
+  -Network 'original network UUID' -Report 'D:\MigrationEvidence\inspect.json' -SourceStopped
+```
+
+Put `jdbcUrl`, `user` and `passwordEnvironment` in a private target configuration file. Keep credentials out of Git and command arguments. Review row counts, table digests, balance totals and source digest before applying:
+
+```powershell
+tools/importing/sqlite-to-shared.ps1 -Action apply `
+  -KiteMarketJar '.\KiteMarket-modern-1.1.0.jar' `
+  -SourceCopy 'D:\MigrationEvidence\market-copy.sqlite' `
+  -Network 'original network UUID' -Report 'D:\MigrationEvidence\migration.json' `
+  -TargetConfig 'D:\MigrationEvidence\target.json' `
+  -ExpectedSourceSha256 '<SHA-256 from inspect>' `
+  -SourceStopped -TargetStopped -TargetEmpty
+```
+
+Migration retains network UUID, authorization, orders, fees, deadlines, wallets, assets, event IDs and consumer cursors. Old node/session epochs are fenced. `PREPARED` becomes `UNKNOWN` with its execution evidence intact and no external-effect replay. Complete data, the migration marker and audit commit in one destination transaction.
+
+## Recovery, retries and cutover {#v11-import-recovery}
+
+A same-source SQLite migration retry returns `ALREADY_MIGRATED`; changed source digests or populated targets are rejected. Failure rolls back data but may leave an empty schema.
+
+Change the storage connection only after success, retaining market, currency and other identity settings. Start one node to inspect assets/authorization before adding others. Keep original SQLite offline; two databases with the same UUID must never run together.
+
+Imported claims retain native stacking and inventory-capacity rules. Successful preflight decoding does not replace full-property checks after delivery; fixed layouts do not certify every historical item encoding.
+
+After new trades begin, do not switch directly to an old snapshot and overwrite assets. Rollback requires a full-network stop and reconciliation of later changes. Retain source copies, `origin` and reports. See the [complete public guide](https://github.com/KiteMC/KiteMarket/blob/main/docs/IMPORTING.en.md) for options, and [recovery](/en/kitemarket/operations) for uncertain operations.

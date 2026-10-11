@@ -5,7 +5,7 @@ canonical: "https://www.kitemc.com/en/kitemarket/compatibility"
 
 <span id="versions-and-certification" />
 
-This page separates `1.0.0` target coverage from existing real verification records. See [downloads](/en/kitemarket/download) to choose a runtime. Combinations without a complete report remain **not fully verified**. Each record applies only to its listed artifacts and scenarios, not other JARs, game versions or economy backends.
+This page separates v1.1 targets, current feature verification and historical records. See [downloads](/en/kitemarket/download) to choose a runtime. Combinations without a complete report remain **not fully verified**. Each record applies only to its listed artifacts and scenarios, not other JARs, game versions or economy backends.
 
 | Component | Target or constraint | Status |
 |---|---|---|
@@ -13,12 +13,15 @@ This page separates `1.0.0` target coverage from existing real verification reco
 | Folia | Only actual Folia releases; no claim that Folia 1.16.5 exists | 1.21.11 startup-only record; no player-trading or IA certification |
 | legacy / modern / current | Java bytecode targets 11 / 21 / 25; server requirements also apply | Build and live-server verification are separate |
 | Same-version network | Matching Minecraft version, market protocol, item profile, and currencies | Selected two-node Paper 1.21.11 flows tested; full certification incomplete |
+| SQLite | Independent single-node market; default storage, not a shared multi-node database | Selected v1.1 trading, claims, experience and item-currency flows tested |
 | MySQL 8 | Shared authoritative ledger | Real integration and targeted UI-preference checks; not certification of every failure scenario |
 | MariaDB 10.11 | Shared authoritative ledger | Separate real integration and targeted UI-preference checks; not certification of every failure scenario |
 | Vault | Vault API plus an actual economy implementation | Certify each implementation, thread model, and precision |
 | PlayerPoints | Integer currency within the backend's balance and amount range | Normal 3.3.5 transfers tested; full backend certification incomplete |
 | CoinsEngine | Separate legacy API adapter; no blanket old-version or Folia support | Uncertified |
 | ExcellentEconomy | Separate renamed API; certification does not cover CoinsEngine | Uncertified |
+| Vanilla experience and item currencies | Points and levels are separate definitions; item currencies use configured real items and denominations | Targeted point trades/fees, level bundle auctions and emerald-denomination transfers tested |
+| Custom-item identity | Public APIs for ItemsAdder, Oraxen, Nexo and MMOItems read genuine business IDs without bypassing admission | One actual pickaxe on Oraxen 1.220.0 completed listing, search, purchase and claim; full Nexo/MMOItems combinations uncertified |
 | ItemsAdder v4 compatibility | Server-owner or developer resources/themes without official DLC; public SDK targets Java 11, working IA example Java 21, runtime obtained separately | White-frame configuration theme and Java market page opened on pinned Paper 1.21.11 / IA 4.0.16; validate other packs and runtimes separately |
 | Other UI providers | Developer-registered through the public SDK; compatibility enums do not imply bundled adapters | Actual runtime combinations are maintained and verified by the provider |
 
@@ -27,6 +30,25 @@ Official requirements for some CoinsEngine and ExcellentEconomy releases exclude
 Proxy protocol translation does not change the item-storage contract. Client connectivity is a network concern; **server nodes sharing one market must run the same Minecraft version**.
 
 Current IA evidence is limited to the representative environment below and does not certify Folia, Legacy, 1.20.5, or 26.x. Unverified nodes or unavailable resources retain the complete vanilla GUI. Theme availability does not block base trading or asset exit, nor third parties developing and validating other themes. See the [UI SDK](/en/kitemarket/ui-development) and [ItemsAdder integration/fallback](/en/kitemarket/dlc).
+
+## V1.1 feature verification scope {#v11-verification-scope}
+
+The records below use Paper 1.21.11 build 132 and Temurin 21.0.7+6. Each binds its actual plugin artifact and isolated environment; a matching version label does not extend it to other files.
+
+| Date | Environment and observed results | Boundary |
+| --- | --- | --- |
+| October 7, 2026 | SQLite; automatic point top-up, trade fees, a three-part bundle, duplicate-confirmation deduplication, real claims and an SDK committed event | Selected delivered properties were compared; not certification of all items or financial failures |
+| October 8, 2026 | SQLite; independent batch listings, emerald-denomination transfers, level-currency bundle auctions, natural settlement, automatic claims and income withdrawal | Limited samples; not certification of all economies or notification channels |
+| October 9, 2026 | SQLite, Oraxen 1.220.0; identity/name search, listing, purchase, claim and native-property checks for `example_efficient_pickaxe` | One real item only; pack upload/dispatch disabled, with no texture/model certification |
+| October 10, 2026 | MariaDB 10.11, two nodes; orderly takeover, recovered old node respecting the live lease, notification/statistics deduplication for two committed purchases | Purchases actually occurred on the takeover node; not crash, database/Redis outage or full fault-matrix certification |
+
+Pinned Oraxen file SHA-256:
+
+```text
+724e51ad90bd4b85eb9cb0c45945fa2ccac4ee1375ed83e04d90d82cf8537e35
+```
+
+The low-sample environment did not meet risk-model training thresholds. Notification/statistics results do not certify a trained model or a cloud-review service. Full ExcellentEconomy, Nexo and MMOItems combinations, Folia player trading and complete v1.0.0 migration remain outside these records.
 
 ## Pinned IA environment {#pinned-ia-environment}
 
@@ -46,6 +68,8 @@ ProtocolLib: bdd7c55799ea625e66992c89f7746be6d25e5adacb6aaf173316bebd493bf834
 ```
 
 ProtocolLib's movable `dev-build` tag cannot identify a future same-named download as this artifact. This records only these files, does not redistribute third-party plugins, and provides no Folia or other-version certification. KiteMarket JARs, SDKs and examples have separate digests; older screenshots cannot automatically certify a new JAR.
+
+Client records include opening real pages with the white-frame configuration theme and Java example, and recovering themes after a cached pack with matching UUID/digest loaded. These results do not automatically certify first-time downloads, every page/window scale or other resource packs.
 
 ## What a certification record contains {#what-a-certification-record-contains}
 

@@ -1,10 +1,10 @@
 ---
 title: "币种配置"
-description: "设置经济适配器、充提版本范围与币种显示名称。"
+description: "设置经济插件、经验与物品币、网关、精度和币种显示名称。"
 canonical: "https://www.kitemc.com/kitemarket/configuration/currencies"
 ---
 
-本页说明 `config.yml` 的 `currencies` 配置。首次安装按[安装与配置](/kitemarket/guide#_3-配置币种)完成各步，再按实际经济插件填写币种。
+本页说明 `config.yml` 的 `currencies` 配置。首次安装按[安装与配置](/kitemarket/guide#_3-配置币种)完成各步，再按实际币种来源填写配置。
 
 ## 配置示例
 
@@ -24,15 +24,62 @@ currencies:
 
 ## 经济适配器与安全范围
 
-可选 provider 为 `vault`、`playerpoints`、`coinsengine`、`excellenteconomy`。
+外部经济插件 provider 为 `vault`、`playerpoints`、`coinsengine`、`excellenteconomy`；原生经验与物品币见下节。
 
 Vault 需要 `vault-provider` 与实际 Economy 服务名称一致；后两者需要正确的 `native-id`。不要复制别人的版本号，也不要为同一个实际币种创建两个重复入口。
 
 `maximum` 使用最小货币单位，不能超过实际后端安全范围。
 
-`certified-versions` 默认留空，充提保持关闭；在隔离环境测试过具体版本后，才登记实际版本号。该列表不是官方认证报告。
+外部适配器的 `certified-versions` 默认留空，充提保持关闭；在隔离环境测试过具体版本后，才登记实际版本号。该列表不是官方认证报告。
 
 [钱包说明](/kitemarket/wallet)包含网关和失败处理。
+
+## 原生经验与物品币配置 {#v11-native-currency-configuration}
+
+原生 provider 不依赖第三方经济插件。三个模式均要求 `scale: 0`，网关仍需匹配实际节点：
+
+| Provider | 配置与币种身份 |
+| --- | --- |
+| `experience` | 计量原版经验点，`native-id: points` |
+| `experience-level` | 计量原版等级；一个网络只能选择经验点或等级中的一种 |
+| `item` | 保存实际 `item-sample`，使用正整数 `denomination`；身份由完整样品指纹与面额确定 |
+
+经验点示例：
+
+```yaml
+currencies:
+  xp:
+    provider: experience
+    native-id: points
+    scale: 0
+    maximum: 2147483647
+    gateway: survival-1
+    display-name:
+      zh_CN: '经验点'
+      en_US: 'Experience points'
+```
+
+合并到已有 `currencies` 下，并将网关改为实际节点。若选等级模式，使用 `experience-level` 并按实际等级安全范围设置 `maximum`，不要同时保留经验点模式。经验点和等级不按线性汇率兑换。
+
+物品币的 `item-sample` 必须是 Bukkit 序列化的真实 ItemStack，保留名称、Lore、附魔及其他属性；不能用 `item-sample: EMERALD` 或仅填材料名代替样品。`denomination` 必须是正整数且不超过该币种的 `maximum`。插件按完整样品指纹和面额确定 `native-id`，不自行猜测指纹。
+
+例如 `denomination: 10` 表示一枚匹配样品对应10个最小单位。8枚可充值80，提现30返还3枚；充值和提现金额都必须是面额的整数倍。背包中不匹配的同材料物品不会被当作货币，提现仍受原堆叠量与背包空间限制。
+
+原生网关没有第三方经济插件版本号可登记；部署时核对目标服务器上的真实充提结果。玩家离线或死亡、样品丢失、身份变化或空间不足会阻止相关操作，不切换到其他 provider。
+
+<Warning>
+  活跃币种的 ID、provider、精度、样品和面额不能通过普通配置更新互换。已有资金依赖原定义时，先规划迁移与对账；显示名称则可独立个性化。
+</Warning>
+
+## 费用与允许币种 {#v11-currency-fees-and-policy}
+
+`fees.rules` 可按币种、交易类型、权限和声明式物品条件选择费用，固定金额使用该币种最小单位。`scale: 2` 时100表示1.00，`scale: 0` 时100表示100，不能只改显示小数。
+
+`policy.limits` 可限制某权限组允许使用的币种，以及数量、价格、期限、挂单数和冷却。GUI、命令和受限开发者请求共用这些检查；界面隐藏某币种不等于完成交易限制。
+
+<Card title="费用、限制与资金去向" icon="receipt" href="/kitemarket/v1-1/economy">
+  查看费用快照、部分成交分摊、权限规则和补款后的重新确认。
+</Card>
 
 ## 币种显示名称
 

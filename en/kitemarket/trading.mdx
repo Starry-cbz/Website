@@ -19,11 +19,11 @@ Refresh an expired view instead of relying on an old screenshot.
   </Card>
   <Card title="Fixed-price sales" icon="box" href="/en/kitemarket/trading/sales">
     <span id="fixed-price-sales" />
-    Sell real items at a unit price, set listing and minimum purchase quantities, and review expected proceeds.
+    Sell partial quantities at a unit price or mixed bundles at a total price; confirm batch listings individually.
   </Card>
   <Card title="Public auctions" icon="gavel" href="/en/kitemarket/trading/auctions">
     <span id="public-auctions" />
-    Bid manually for the whole lot and understand reservations, late-bid extensions and settlement.
+    Bid manually for a single item lot or mixed bundle, with total prices, reservations, extensions and settlement.
   </Card>
 </Columns>
 
@@ -36,6 +36,18 @@ Returning, refreshing or switching interfaces retains unpublished conditions. Pu
 Listing, purchase, and bid confirmations retain the real sale/auction item's name, enchantments, and lore. Exact-sample buy orders also show their saved sample.
 
 Use the confirmation text for quantity, total, reserved funds, and tax; display items never become the assets removed or settled.
+
+### Single items, bundles and batches {#v11-lots-and-batch-listings}
+
+A single-item fixed-price sale uses a unit price and can set a minimum purchase quantity. A bundle combines real items into one indivisible lot sold at a total price. Auctions can also use bundles; the winning bid covers their complete contents.
+
+Batch listing creates separate orders, each reviewed and confirmed individually. It is different from a bundle. An unpublished plan exists only in the current session and never resumes automatically after leaving or restarting. Do not resubmit orders that have already succeeded.
+
+### Fees and listing policy {#v11-fees-and-listing-policy}
+
+Confirmations show listing, buyer and seller fees separately, together with asset destinations. Each order retains its fee snapshot. Partial trades allocate fees against cumulative amounts, with the final trade settling the remainder; reloading configuration never recalculates existing orders.
+
+Administrators can restrict worlds, players, items and creative mode, and set permission-based listing quotas, quantities, prices, durations, cooldowns and currencies. A rejected draft remains available with a reason. Final submission rechecks policy without silently changing prices or quantities.
 
 <Note>
 All modes forbid self-purchasing, self-fulfillment, and self-bidding. Published prices, conditions, and fees are fixed; cancel and recreate to change them. Administrators cannot directly reverse completed trades.
@@ -54,14 +66,14 @@ The wizard calculates the maximum from what is actually available and rechecks i
   </Card>
   <Card title="Exact samples and item admission" icon="fingerprint" href="/en/kitemarket/trading/items">
     <span id="exact-samples-and-custom-items" />
-    Understand complete fingerprints, custom data, node consistency and special-item restrictions.
+    Understand business identities, advanced fields, complete fingerprints, read-only container previews and node consistency.
   </Card>
   <Card title="Escrow and item claims" icon="box-open" href="/en/kitemarket/trading/claims">
     <span id="escrow-and-claims" />
-    Inspect claimable items and their status, with stack limits, inventory space and uncertain results.
+    Filter claims by source, confirm a selected page batch, and understand insufficient space and uncertain results.
   </Card>
   <Card title="Search, history and transaction receipts" icon="clock" href="/en/kitemarket/trading/history">
     <span id="search-and-transaction-receipts" />
-    Filter market orders and review individual amounts, tax, income recipients and operation states.
+    Filter and save searches, favorite orders, inspect notifications and price references, and review receipts.
   </Card>
 </Columns>

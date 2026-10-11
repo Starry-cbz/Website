@@ -1,6 +1,6 @@
 ---
 title: "Publishing and buying fixed-price sales"
-description: "Set unit price, listing quantity and minimum purchase quantity, then review tax and expected proceeds."
+description: "Sell single items at unit prices or mixed bundles at total prices; confirm batch orders and fees individually."
 canonical: "https://www.kitemc.com/en/kitemarket/trading/sales"
 ---
 
@@ -8,15 +8,35 @@ import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
 
 ## Publishing and buying {#fixed-price-sales}
 
-The seller escrows real items with the same properties as the main-hand sample and chooses a **per-item unit price** and duration. One listing cannot mix differing item properties.
+For a single-item sale, the seller escrows real items matching the main-hand sample and chooses a **per-item unit price** and duration. A single-item listing cannot mix differing properties; use a bundle for mixed contents.
 
 Buyers can choose a partial quantity. For example, 16 items at a unit price of 8 cost 128 in total. Buyers review the unit price, quantity, currency and purchase total before confirming.
 
 Items enter the buyer's claims, and the seller receives income after the order's tax. Unsold items can be withdrawn to the seller's claims; a full inventory does not cause items to be dropped on the ground.
 
+### Mixed bundle sales {#v11-bundle-sales}
+
+A bundle combines real items with different materials or properties into one indivisible lot. Its price is the **total for the bundle**, and one purchase delivers all contents.
+
+Listing and purchase confirmations show each stored item and quantity. The order's contents page lists the real assets; admitted container entries can also open a read-only internal preview. Display boxes, count badges and theme icons are not settlement assets.
+
+Bundles do not allow partial purchases or selecting only one entry. Cancellation or expiry returns their real contents to the seller's claims.
+
+<ScreenshotPlaceholder title="Bundle sale and contents confirmation" description="Reserved for a real gameplay screenshot of mixed contents, the bundle total and delivery summary." lang="en" />
+
+### Batch listings {#v11-batch-listings}
+
+A batch creates independent orders from the selection, each retaining its items, price, currency, duration and fees. It does not combine the whole selection into one bundle.
+
+Preview the real inventory and per-order fees, then confirm each order manually. Successful entries are already published; do not resubmit them because later entries were skipped, failed or paused.
+
+Unpublished selections and plans exist only in the current session and never resume automatically after leaving or restarting. Inventory or balance changes, a changed session or an unknown external effect pause execution. Inspect the individual results before continuing.
+
+<ScreenshotPlaceholder title="Batch preview and individual results" description="Reserved for a real gameplay screenshot of separate-order previews, individual confirmation and completed or paused results." lang="en" />
+
 ## Minimum purchase quantity
 
-Set a **minimum purchase quantity** on the sale terms page. It defaults to 1 and ranges from 1 to the listed quantity.
+Set a **minimum purchase quantity** on the single-item sale terms page. It defaults to 1 and ranges from 1 to the listed quantity. Bundles always sell all contents together.
 
 A purchase must reach the minimum; when fewer items remain, the entire remainder must be purchased together. For example, a minimum of 3 with only 2 remaining permits a purchase of 2, but not 1.
 
@@ -26,9 +46,19 @@ The published minimum is fixed; cancel and recreate to change it.
 
 The listing confirmation estimates gross proceeds, tax and net income for selling all items in one purchase.
 
-Partial purchases calculate tax separately, so accumulated net income can differ through minor-unit rounding; use [individual transaction records](/en/kitemarket/trading/history) for the actual amounts. Buy orders use unit prices for partial fulfillment, and auction bids remain whole-lot totals.
+Buy orders use unit prices for partial fulfillment; auctions and mixed bundles settle the whole lot's total. Review the current payment and net proceeds on each confirmation. [Individual transaction records](/en/kitemarket/trading/history) show the actual amounts.
 
 <ScreenshotPlaceholder image="/images/kitemarket/screenshot-publish-terms.png" title="Sale terms and income preview" description="Review quantity, minimum purchase quantity, tax and estimated net income before publishing." lang="en" />
+
+### Fee snapshots and cumulative allocation {#v11-fee-snapshot-and-allocation}
+
+Administrators can define listing, buyer and seller fees as fixed amounts, percentages or both. `fees` selects the first rule matching permissions, currency, order type and item conditions. When no enabled new rule matches, the original `market.tax-bps` / `market.taxes` rates apply.
+
+Confirmations show all three fees separately. Listing fees are separate charges; buyers pay the trade amount plus buyer fees, and sellers receive it minus seller fees. Fixed amounts use currency minor units: `100` is 1.00 for a currency with two decimal places.
+
+Published orders retain a fee snapshot unaffected by reloads. Partial trades allocate fixed and percentage fees against cumulative order amounts. The combined cumulative fixed share and percentage fee is rounded before subtracting fees already collected; the final trade settles the remainder without charging the whole-order fixed fee repeatedly.
+
+The seller fee for a trade never exceeds that trade's amount. Cancellation or expiry returns untraded escrow and reservations; listing fees already collected are not refunded.
 
 ## Listing quantities and maximum values {#listing-quantities-and-maximum-values}
 
@@ -38,13 +68,19 @@ The publishing wizard calculates **Maximum** for all three modes from what is ac
 |---|---|
 | Buy order | Minimum whole quantity allowed by the configured limit, currency amount limit ÷ unit price, and available market funds ÷ unit price |
 | Fixed-price sale | Minimum of the configured quantity limit, currency amount limit ÷ unit price, and actual inventory quantity matching the main-hand sample's complete properties |
-| Auction | Minimum of the configured quantity limit and the current main-hand stack; the starting price is for the entire lot |
+| Single-item auction | Minimum of the configured quantity limit and the current main-hand stack; the starting price is for the entire lot |
 
 External economy funds are not automatically included in a buy-order budget. Insufficient market funds offer a deposit entrance while retaining the draft; missing sale or auction items show a shortfall.
 
 Applying a quantity and confirming publication recheck it. Reduced funds or items require another choice; a GUI quote does not reserve future capacity.
 
 [Fulfillment](/en/kitemarket/trading/supply)'s **Maximum available** separately uses remaining demand and the selected matching items.
+
+### Listing policy and mixed selections {#v11-listing-policy}
+
+`policy` can restrict worlds, players, items and creative mode. `policy.limits` uses the first matching permission rule for listing counts, quantities, price ranges, durations, cooldowns and allowed currencies.
+
+Quantity checks apply to a complete single-item selection, each independent batch group or one bundle lot. Invalid prices or durations preserve the draft with a reason rather than silently adjusting prices or reducing the minimum purchase quantity. Every confirmation rechecks current policy, the original request, real inventory and funds.
 
 ## Item information in listings
 

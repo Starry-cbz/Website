@@ -7,7 +7,7 @@ import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
 
 <span id="shared-wallet-and-transfers" />
 
-Market funds and economy-plugin funds are separate balances. A deposit debits the external backend and credits the market; a withdrawal does the reverse. Purchases, bids, and fulfillment settle inside the market ledger instead of calling each node's economy plugin for every trade.
+Market funds and external funds are recorded separately. External funds may come from an economy plugin, vanilla experience or matching physical currency. A deposit debits that source and credits the market; a withdrawal does the reverse. Purchases, bids and fulfillment settle inside the market ledger without calling each node's external economy interface for every trade.
 
 | Provider | Configuration and certification |
 |---|---|
@@ -22,6 +22,22 @@ Player interfaces use display names such as “Coins” or “Points” without 
 
 <ScreenshotPlaceholder image="/images/kitemarket/screenshot-wallet.png" title="Market wallet: available and reserved funds" description="View each currency's balances, reserved funds and current transfer-gateway status." lang="en" />
 
+## Experience and item currencies {#v11-native-currencies}
+
+Besides economy plugins, transfers can use vanilla experience or actual items:
+
+| `provider` | Unit and requirements |
+| --- | --- |
+| `experience` | Experience points with `scale: 0` |
+| `experience-level` | Experience levels with `scale: 0`; choose either levels or points across the entire market network |
+| `item` | Physical item currency with `scale: 0`, a complete `item-sample` and positive integer `denomination` |
+
+Points and levels do not have a linear exchange rate; a network can enable only one of these modes. Transfers check the player's real experience, online and living state, and still run on the selected gateway.
+
+Item currency compares complete sample properties, not just the material. With a denomination of 10, eight matching items deposit 80; withdrawing 30 returns three items. Transfer amounts must be multiples of the denomination. Withdrawals respect original item stack limits and actual inventory capacity instead of forcing oversized stacks into a full inventory.
+
+The sample, denomination, provider and scale all contribute to currency identity. Do not replace them while existing balances depend on that identity. See [currency configuration](/en/kitemarket/configuration/currencies#v11-native-currency-configuration).
+
 ## Amount input and actual limits {#amount-input-and-actual-limits}
 
 The currency page queries both the market wallet and the local economy backend's actual balance. Amount input offers increments, presets, a maximum button and custom chat input. The maximum is the minimum of these limits, calculated in the currency's minor units:
@@ -35,6 +51,34 @@ Reserved funds cannot be withdrawn. When a backend cannot quote its receive capa
 
 Opening amount input, entering confirmation and executing the transfer query again. If changed funds or receive capacity make the amount too large, choose it again. After depositing funds, refresh and reconfirm the original trade as well. Only the compatible local gateway handles external balances; changing nodes does not silently call another server.
 
+## Transaction shortfall top-up {#v11-shortfall-top-up}
+
+When market funds are insufficient for a purchase or bid, the top-up page shows the actual shortage, selected currency and exact external debit. A confirmed deposit credits the market wallet first.
+
+**A successful deposit does not complete the original trade.** The order, quantity, fees and funds are read again before a fresh transaction confirmation opens. If the order has changed or ended, deposited funds remain in the wallet and the current state determines the next step. An old quote never silently buys the item, and a failed purchase does not trigger another deposit.
+
+An unavailable gateway or `UNKNOWN` deposit must be handled before the trade can proceed. Transfer results and transaction receipts remain separate.
+
+<ScreenshotPlaceholder title="Shortfall top-up and fresh confirmation" description="Reserved for a real gameplay screenshot showing the shortage, deposit amount and refreshed transaction confirmation." lang="en" />
+
+## Income reservations and personal automation {#v11-wallet-automation}
+
+Open the wallet entrance or `/km automation` for personal settings. Each setting requires its own confirmation and defaults off:
+
+| Setting | Behavior |
+| --- | --- |
+| Future-income withdrawal | Creates distinct withdrawal reservations for subsequent trade income |
+| Login withdrawal | Processes eligible funds on login according to the current gateway, balance and session |
+| Automatic claiming | Processes claimable items according to actual inventory space |
+
+Reservations, frozen funds, ordinary available funds and claimable items are shown separately. Disabling future-income withdrawals stops new reservations; **it does not release existing ones**. Review their states on the reservation page, then explicitly execute or release them.
+
+Tasks use bounded batches rather than promising to empty every balance or claim in one pass. They pause for unavailable gateways, insufficient space, changed sessions or unresolved external results. Claims retain original item stack limits.
+
+`UNKNOWN` is never automatically retried as a failure. Inspect the original operation and evidence, follow [reconciliation](/en/kitemarket/operations#reconciling-unknown), then resume affected tasks. See [claiming assets](/en/kitemarket/trading/claims) for manual, categorized and current-page batch claiming.
+
+<ScreenshotPlaceholder title="Personal automation and withdrawal reservations" description="Reserved for a real gameplay screenshot of the separate settings, reservation states and inventory-space warning." lang="en" />
+
 ## Gateway node {#gateway-node}
 
 Assign a `gateway` to each currency, matching the target node's `network.node-id`. **Players must switch to that node to deposit or withdraw.** There is no automatic remote RPC forwarding. Another node returns `GATEWAY_NODE`; market funds and internal trading remain shared.
@@ -43,7 +87,7 @@ A Folia node without a certified economy backend can still participate in intern
 
 ## Enabling an adapter {#enabling-an-adapter}
 
-`certified-versions` must contain the target plugin versions you have actually validated. An empty list blocks transfers. For `vault`, list the Vault version itself, pin the actual Economy service name with `vault-provider`, and independently test that economy implementation. This is an operator allowlist; **entering a version does not create official KiteMC certification**. Folia providers are blocked by default unless verified; do not set `certified-folia: true` merely to bypass checks.
+For external economy plugins, `certified-versions` must contain the target plugin versions you have actually validated. An empty list blocks that adapter's transfers. For `vault`, list the Vault version itself, pin the actual Economy service name with `vault-provider`, and independently test that economy implementation. Experience and item currencies use native gateways without an economy-plugin version entry; check the actual target build and behavior. This is an operator allowlist; **entering a version does not create official KiteMC certification**. External Folia providers are blocked by default unless verified; do not set `certified-folia: true` merely to bypass checks.
 
 Test deposits, withdrawals, insufficient funds, precision and amount limits, backend cancellation/failure, disconnects, restarts, and concurrent external changes. See the [configuration example](/en/kitemarket/guide) and [certification matrix](/en/kitemarket/compatibility).
 

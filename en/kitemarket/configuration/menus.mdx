@@ -4,7 +4,7 @@ description: "Adjust titles, icons, help, and slots while preserving real items 
 canonical: "https://www.kitemc.com/en/kitemarket/configuration/menus"
 ---
 
-In v1.0, `menus` in `plugins/KiteMarket/config.yml` customizes 35 existing pages, including `profile`, `ui`, `themes` and `result`. New v1.1 pages use the same mechanism; see [v1.1 items and claims](/en/kitemarket/v1-1/items). No resource pack or IA is required.
+Use `menus` in `plugins/KiteMarket/config.yml` to customize home, market, publishing, condition, wallet, claims, community, automation and administration pages. Every page uses the same configuration mechanism, without a resource pack or IA.
 
 Edit the file, run `/km reload`, then reopen the page. Reload validates a candidate first; invalid settings preserve the previous working configuration.
 
@@ -103,7 +103,9 @@ Omitting `lore` preserves help; `lore: []` clears only additional help.
 
 Raw money fields use minor units, so prefer `{default}` to retain formatted amounts and asset destinations.
 
-The v1.1 `lot-editor` and `lot-batch-item` pages expose read-only publication bounds for the current player:
+### Publishing policies and bundle fields {#v11-publishing-policy-fields}
+
+`lot-editor` and `lot-batch-item` expose read-only publication bounds for the current player:
 
 | Field | Meaning |
 | --- | --- |
@@ -114,6 +116,10 @@ The v1.1 `lot-editor` and `lot-batch-item` pages expose read-only publication bo
 
 Single/bulk sales use a unit price; auctions/bundles use a lot total. Policy fields do not guarantee inventory quantity, space or final admission. Violations retain the draft, and each confirmation rechecks the original request without automatic repricing or minimum-quantity reduction.
 
+Bundle confirmations also expose `lot.mode`, `lot.entries`, `lot.quantity` and `goods.quantity`: mode, entry count, number of lots and total item count. A bundle has one lot, which does not mean it contains only one item.
+
+Preserve default confirmation help to show totals, fees, net income and asset destinations together. Do not recalculate published-order fees from current theme settings.
+
 ## Real products and assets
 
 Functional controls may change material and name. Products, samples, selected inventory items and claim assets retain their actual material, name, enchantments and original Lore; `material`/`name` cannot disguise them as another item.
@@ -121,6 +127,8 @@ Functional controls may change material and name. Products, samples, selected in
 Only their placement and additional market help can change, without altering inventories, escrow snapshots or transaction subjects.
 
 ## All page IDs
+
+These are the common pages; the groups below list the remaining configuration pages. Every key may be used in `menus`:
 
 ```text
 home, profile, browse, browse-filters, order, details, editor, confirm, preview,
@@ -131,6 +139,64 @@ admin-player-history, resolve-source, doctor, inspect, evidence, ui, themes, res
 ```
 
 Use page IDs rather than titles, translation keys or IA template aliases; for example, use `assets`/`confirm` for `claims`/`wizard-confirm`.
+
+### Bundle, bulk and container pages {#v11-bundle-menu-ids}
+
+```text
+lot-editor, lot-select, lot-contents, lot-batch-plan, lot-batch-item,
+lot-batch-results, container-preview, order-contents
+```
+
+`lot-editor` source `12` selects single/bundle/bulk mode, `14` selects sale/auction, and `32` opens a preview or bulk plan. Source `52` starts individual confirmation in the bulk plan and requests the next manual confirmation in results; neither completes the whole batch automatically.
+
+Bundle `confirm` uses `22` for the summary, `24` for actual contents, `30` to confirm and `32` to cancel. `lot-contents`, `container-preview` and `order-contents` display real contents read-only.
+
+### Business-item condition pages {#v11-business-menu-ids}
+
+```text
+rule-business, rule-source, rule-model, rule-tags, rule-fields, rule-field
+```
+
+Customize the business-rule overview, identity source, model range, tag collection, exposed-field list and individual-field editor. Business fields come only from `items.exposed-fields`. OR and exact-sample notices remain read-only; appearance settings do not grant arbitrary script editing.
+
+### Community and notification pages {#v11-community-menu-ids}
+
+```text
+community, favorites, favorite, saved-searches, subscriptions, saved-search,
+saved-search-results, seller, leaderboard, notifications, notification
+```
+
+Profile source `29` opens community. Favorites and search results retain real orders. The saved-search editor has separate currency, price-range, source, category, sorting and subscription controls. Seller day windows and price rolling windows retain their distinct server-provided descriptions.
+
+### Price and risk pages {#v11-risk-menu-ids}
+
+```text
+risk, risk-cases, risk-case, risk-evidence, risk-review,
+risk-prices, risk-price, risk-cloud-confirm
+```
+
+Public prices require browse permission; other risk pages require audit permission, with administration additionally required for state, training and cloud operations. In `risk-cloud-confirm`, source `30` sends the request and `32` cancels, unlike ordinary claim confirmation. Shared in-progress or unconfirmed requests expose no resend action.
+
+### Automation and reservation pages {#v11-automation-menu-ids}
+
+```text
+automation, automation-confirm, automation-income, automation-income-detail,
+automation-income-confirm, automation-release-confirm
+```
+
+Profile source `33` opens automation. `automation` uses `20/22/24` for future-income withdrawals, login withdrawals and automatic claims, and `40` for income reservations. Disabling future-income withdrawals does not release existing reservations. Confirmation uses `30` to cancel and `32` to confirm; review-required entries must not appear completed.
+
+### Administration write-tool pages {#v11-admin-tools-menu-ids}
+
+```text
+admin-tools, admin-tools-player, admin-tools-orders, admin-tools-money,
+admin-tools-assets, admin-tools-listing, admin-tools-export,
+admin-tools-retention, admin-tools-confirm
+```
+
+Administration source `52` opens the permission-dependent tools. Money transfers, item transfers and listings on behalf of a player use actual existing assets. `admin-tools-confirm` shows the target, reason and consequences; `30` cancels and `32` confirms. Configuration cannot add punishment or asset-creation actions.
+
+See [pages, actions and lifecycle](/en/kitemarket/ui-development/pages) for individual source slots and SDK action semantics.
 
 ## Validation and troubleshooting
 
@@ -144,7 +210,9 @@ These settings do not install or download IA resources.
 
 ## v1.1: bundle and claims pages {#v1-1-bundle-and-claims}
 
-These pages belong to the v1.1 and do not imply a published runtime. Configure actual page IDs and **source slots**:
+### Claim categories and batch confirmation {#v11-claims-menu-controls}
+
+Configure claims using actual page IDs and **source slots**:
 
 | Page ID | Actual contents and controls |
 | --- | --- |
@@ -156,3 +224,5 @@ These pages belong to the v1.1 and do not imply a published runtime. Configure a
 The existing `assets` page adds `46` categories, `50` select/clear the current page, `51` claim selected and `52` selected details. Sources `0..35` select current-page assets; `45/53` page, `48` refresh and `49` back. `claims` remains an IA template alias, not the `assets` page ID.
 
 `order-contents`, `claims-details` and `assets` use list remapping; `claims-categories` and `claims-confirm` retain their source positions. Manual claiming processes only the confirmed current page, at most 36 entries. Items that do not fit remain available; uncertain outcomes or changed sessions stop subsequent entries.
+
+List sources `0..35` default to physical `9..44`; tool sources `37/46/47/48/50/51/52` map to `5/0/1/7/2/3/4`. Non-list pages retain their source positions. SDK and IA snapshots already contain final physical slots; never remap them again.

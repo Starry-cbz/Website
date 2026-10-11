@@ -1,21 +1,18 @@
 ---
-title: "v1.1 bundles, bulk listings and containers"
+title: "Bundles, bulk listings and containers"
 description: "Lot prices, independent bulk orders, read-only container previews and business item rules."
 canonical: "https://www.kitemc.com/en/kitemarket/v1-1/items"
 ---
 
 import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
-import { V11FeatureMarker, V11PagePanel } from "/snippets/feature-marker.jsx";
-
-<V11FeatureMarker lang="en" title="Bundles and bulk listings" summary="New v1.1 lot types and container previews" />
-
-<V11PagePanel lang="en" items={["Indivisible bundle totals", "Independent bulk orders", "Read-only container previews", "Advanced item identity and fidelity"]} />
 
 <ScreenshotPlaceholder title="Bundles and bulk listings" description="A real gameplay screenshot can be added here later for bundle contents or bulk publication." lang="en" />
 
-This page belongs to the [v1.1 documentation](/en/kitemarket/v1-1/overview). It explains semantics without certifying new live combinations.
+Bundles sell multiple real items as one lot; bulk publication creates independent orders. See [fixed-price sales, bundles and batches](/en/kitemarket/trading/sales) for publication and [advanced buy orders](/en/kitemarket/trading/buy-orders) for condition editing. This page explains lot, container and item-identity boundaries.
 
-## Single items and bundles
+<span id="single-items-and-bundles" />
+
+## Single items and bundles {#v11-single-items-and-bundles}
 
 | Lot | Price and delivery |
 | --- | --- |
@@ -30,7 +27,9 @@ Published order details open the saved bundle contents and actual quantities. Ve
 
 Single-item sales retain minimum purchase quantities. When the remainder is below that minimum, only the entire remainder can be purchased. Matching materials do not merge items with different names, durability, enchantments, business identities or complete properties.
 
-## Bulk publication
+<span id="bulk-publication" />
+
+## Bulk publication {#v11-bulk-publication}
 
 Bulk publication creates independent orders, each retaining its own price, expiry, items, fees and result. It differs from one mixed bundle.
 
@@ -42,7 +41,9 @@ Current publication policy checks quantity for the complete single selection, ea
 
 Uncertain external effects, changed sessions, inventory changes or insufficient funds pause according to actual results. Keep operation references and reread the state. An unresolved outcome must not be replayed as a failure.
 
-## Container preview and fidelity
+<span id="container-preview-and-fidelity" />
+
+## Container preview and fidelity {#v11-container-preview-and-fidelity}
 
 Container previews show saved contents without allowing items to be removed. The container and each entry must survive storage, restoration and full-property comparison. Unsupported structures or nesting reject publication.
 
@@ -52,7 +53,9 @@ Sold, returned and expired items enter claims as actual assets. Insufficient inv
 
 Claims support source filtering and pages. Select individual entries or the current page, inspect details and confirm at most 36 entries. Items that do not fit remain available. Uncertain outcomes, session changes or disconnects stop subsequent entries without repeating confirmed deliveries or continuing into another page. Configure [actual bundle and claims page IDs](/en/kitemarket/configuration/menus#v1-1-bundle-and-claims).
 
-## Business identities and advanced procurement
+<span id="business-identities-and-advanced-procurement" />
+
+## Business identities and advanced procurement {#v11-business-identities-and-procurement}
 
 Advanced procurement adds provider source/business ID, CustomModelData, PDC keys and exposed scalar fields to material, readable text, enchantment and durability conditions.
 

@@ -19,11 +19,11 @@ canonical: "https://www.kitemc.com/kitemarket/trading"
   </Card>
   <Card title="一口价出售" icon="box" href="/kitemarket/trading/sales">
     <span id="一口价" />
-    按每件单价出售真实物品，设置发布数量、最低购买量并核对预计收入。
+    按每件单价部分出售，或按整包总价出售混合物品；批量上架逐单确认。
   </Card>
   <Card title="公开竞拍" icon="gavel" href="/kitemarket/trading/auctions">
     <span id="公开竞拍" />
-    按整标总价手动出价，了解冻结资金、末秒延时和到期结算。
+    为单品或混合整包手动出价，了解整标总价、资金冻结、末秒延时和结算。
   </Card>
 </Columns>
 
@@ -36,6 +36,18 @@ canonical: "https://www.kitemc.com/kitemarket/trading"
 出售／拍卖发布、购买和出价确认页展示真实标的的名称、附魔与 Lore；精确样品收购也展示保存的样品。
 
 数量、总价、冻结金额及税费以确认说明为准，展示物品不会参与实际扣物或结算。
+
+### 单品、整包与批量 {#v11-lots-and-batch-listings}
+
+单品一口价按每件单价计算，可设置最低购买量；整包一口价将多项真实物品组成一个不可拆分标的，以整包总价成交。拍卖也可选择整包，最高出价覆盖全部内容。
+
+批量上架生成多个独立订单，每单单独核对并确认，不等同于一份整包。未发布计划只保留在当前会话，退出或重启不会自动执行；已经成功的订单不要再次提交。
+
+### 费用与发布限制 {#v11-fees-and-listing-policy}
+
+确认页分别列出上架费、买方费、卖方费及资产去向。订单保存发布时的费用快照，部分成交按累计金额分摊，最后一笔结清余数；后续配置重载不会重算旧单。
+
+管理员可按世界、玩家、物品、创造模式及权限设置准入、挂单额度、数量、价格、期限、冷却和币种限制。向导保留被拒绝的草稿并显示原因，最终提交重新检查，不静默调整价格或数量。
 
 <Note>
 三种交易均禁止自己购买、供货或竞拍。发布后的价格、条件和费率不能直接改写，修改需撤单重建；管理员不能直接撤销已经完成的成交。
@@ -54,14 +66,14 @@ canonical: "https://www.kitemc.com/kitemarket/trading"
   </Card>
   <Card title="精确样品与物品准入" icon="fingerprint" href="/kitemarket/trading/items">
     <span id="精确样品与自定义物品" />
-    了解完整指纹、自定义数据、节点一致性及特殊物品限制。
+    了解业务身份、高级字段、完整指纹、只读容器预览及节点一致性。
   </Card>
   <Card title="托管与领取箱" icon="box-open" href="/kitemarket/trading/claims">
     <span id="托管与领取" />
-    查看待领取物品与状态，了解堆叠上限、背包空间和异常处理。
+    按来源查看待领资产，勾选当前页批量确认，并了解空间不足和未知结果。
   </Card>
   <Card title="搜索、历史与交易收据" icon="clock" href="/kitemarket/trading/history">
     <span id="搜索与交易收据" />
-    筛选市场订单，核对单笔金额、税费、收入归属与操作状态。
+    筛选和保存搜索，收藏订单、查看通知与价格参考，并核对每笔收据。
   </Card>
 </Columns>

@@ -1,6 +1,6 @@
 ---
 title: "KiteMarket - Minecraft 交易集市"
-description: "高级收购、一口价、公开竞拍与共享钱包。完整原版 GUI、ItemsAdder 兼容和公开 SDK。¥68 买断，一个市场网络不限节点。"
+description: "高级收购、一口价与公开竞拍，支持整包、批量发布、多币钱包、自动化、社区通知和风险复核。完整原版 GUI、ItemsAdder 与公开 SDK。"
 mode: "custom"
 canonical: "https://www.kitemc.com/kitemarket"
 "og:image": "https://www.kitemc.com/images/kitemarket/kitemarket-icon-512.png"
@@ -24,29 +24,43 @@ import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
   />
 
   <section className="km-section">
+    <h2 id="功能特性">功能特性</h2>
+    <p>从第一次发布到跨服经营，交易、资产和管理入口使用同一套清楚的确认流程。</p>
     <Columns cols={3}>
-      <Card title="高级收购" icon="cart-shopping">全额冻结预算，按材料、附魔、耐久、名称、Lore 或精确样品收货，支持多人部分供货。</Card>
-      <Card title="一口价出售" icon="box">先托管真实物品，按单价部分购买。卖家可设置最低购买量，成交商品进入领取箱。</Card>
-      <Card title="公开竞拍" icon="gavel">手动出价，冻结最高有效报价；被超价立即释放，末秒有效出价延长结束时间。</Card>
-      <Card title="个性化原版 GUI" icon="sliders">无需资源包，在文件中配置全部35页的标题、功能物品、Lore、位置与背景。</Card>
-      <Card title="同版本共享市场" icon="globe">同一 Minecraft 版本的节点共享钱包、订单与领取资产，一个网络不限节点。</Card>
-      <Card title="公开开发接口" icon="code">Java 11 / MIT 查询与界面 SDK，支持 ItemsAdder 自有主题和独立开发插件。</Card>
+      <Card title="高级收购" icon="cart-shopping" href="/kitemarket/trading/buy-orders">可视化设置材料、附魔、耐久、名称、Lore 或精确样品；多人部分供货，交货前看清交出与保留的物品。</Card>
+      <Card title="一口价出售" icon="box" href="/kitemarket/trading/sales">按件单价出售，允许部分购买并设置单次最低购买量。先托管真实物品，成交后进入领取箱。</Card>
+      <Card title="公开竞拍" icon="gavel" href="/kitemarket/trading/auctions">起拍价、最低加价与时长清楚可见；超价即解冻，末秒有效出价自动延时。</Card>
+      <Card title="整包与批量上架" icon="boxes-stacked" href="/kitemarket/v1-1/items" className="km-versioned-card">混合物品整包按总价出售或竞拍；批量创建独立订单，逐单确认数量、价格与费用。</Card>
+      <Card title="自定义物品与容器" icon="fingerprint" href="/kitemarket/trading/items" className="km-versioned-card">业务身份、CustomModelData、PDC 和管理员开放字段参与条件匹配；容器内容只读预览，交付保真。</Card>
+      <Card title="多币钱包与补款" icon="wallet" href="/kitemarket/wallet" className="km-versioned-card">经济插件、经验点、等级与物品币各自记账；可用和冻结分开，交易缺口补款后重新确认。</Card>
+      <Card title="费用与资产自动化" icon="arrows-rotate" href="/kitemarket/v1-1/economy" className="km-versioned-card">按币种和交易类型配置固定与比例费用；收益预约、登录提现、自动领取及本页批量领取。</Card>
+      <Card title="收藏、订阅与通知" icon="bell" href="/kitemarket/v1-1/community" className="km-versioned-card">收藏订单、保存搜索、订阅匹配结果；通知持久保存，还可选用游戏广播与 Discord 推送。</Card>
+      <Card title="卖家统计与价格参考" icon="chart-line" href="/kitemarket/trading/history" className="km-versioned-card">卖家窗口和成交记录帮助查看经营情况；同币种、可比物品的价格参考辅助定价。</Card>
+      <Card title="管理与风险复核" icon="shield" href="/kitemarket/v1-1/administration-risk" className="km-versioned-card">带原因的资金与资产操作、代上架及证据导出；本地风险案件和默认关闭的云端人工复核。</Card>
+      <Card title="个性化原版 GUI" icon="sliders" href="/kitemarket/configuration/gui">无需资源包，全部页面可在文件中调整标题、图标、Lore、槽位与背景；支持 ItemsAdder 自有主题。</Card>
+      <Card title="开放接口与插件集成" icon="code" href="/kitemarket/api" className="km-versioned-card">Java 11 / MIT SDK 提供异步查询、界面扩展与受限请求；可接入 PlaceholderAPI、Citizens 和 LuckPerms。</Card>
     </Columns>
   </section>
 
   <section className="km-section">
+    <h2 id="v11-新能力实拍">v1.1 新能力实拍</h2>
+    <p>整包、批量、费用、通知和管理页面沿用原版容器与真实物品显示。</p>
+    <ScreenshotPlaceholder title="v1.1 新能力" description="预留整包内容、批量发布、自动领取或风险复核的真实游戏截图。" lang="zh" />
+  </section>
+
+  <section className="km-section">
     <h2 id="看清交易-再放心确认">看清交易，再放心确认</h2>
-    <p>买、卖、交货和竞拍使用统一流程。确认前查看数量、总额、税额与净收入；供货时能看到实际交出和保留的物品。收入进入钱包，商品进入领取箱，背包满时仍保留资产，不掉落或删除。</p>
-    <p>发布后价格、条件和费率固定，管理员干预必须填写原因。结果不确定时进入待核对，保留可查询的操作编号。<a href="/kitemarket/trading">查看交易与物品条件</a>。</p>
+    <p>买、卖、交货和竞拍使用统一流程。确认前查看数量、总额、税额与净收入；整包逐项展开，批量逐单确认，供货时能看到实际交出和保留的物品。收入进入钱包，商品进入领取箱，背包满时仍保留资产，不掉落或删除。</p>
+    <p>发布后价格、条件和费率固定，费用按发布时快照执行；收藏、订阅和通知只帮助发现，不会代替玩家确认。管理员干预必须填写原因，结果不确定时进入待核对，保留可查询的操作编号。<a href="/kitemarket/trading">查看交易与物品条件</a>。</p>
     <ScreenshotPlaceholder image="/images/kitemarket/screenshot-market.png" title="竞拍市场与物品说明" description="查看真实物品的名称、附魔、当前价格和剩余时间。" lang="zh" />
   </section>
 
   <section className="km-section">
     <h2 id="原版就能用-外观由你决定">原版就能用，外观由你决定</h2>
-    <p>完整原版 GUI 无需资源包。默认54槽布局、36格商品列表、分步发布和金额按钮，让玩家知道当前步骤与操作后果。首页区分一口价、收购供货和竞拍，四角连接我的集市、领取箱、钱包与我的挂单；资产及待核对提醒查询失败时明确显示暂不可用。</p>
-    <p>服主在配置文件中调整全部35页的标题、功能物品、Lore、位置和背景，支持双语内容及旧首页配置。无效重载保留上一份有效配置，不提供游戏内样式编辑器。真实商品名称、附魔及 Lore 始终保留，不能用外观配置伪装交易标的。</p>
+    <p>完整原版 GUI 无需资源包。默认54槽布局、36格商品列表、分步发布和金额按钮，让玩家知道当前步骤与操作后果。首页区分一口价、收购供货和竞拍，四角连接个人中心、领取箱、钱包与我的挂单；收藏、通知、批量领取和待核对入口都从相应页面进入，查询失败时明确显示暂不可用。</p>
+    <p>服主在配置文件中调整全部页面的标题、功能物品、Lore、位置和背景，支持双语内容、v1.1 新页面及旧首页配置。无效重载保留上一份有效配置，不提供游戏内样式编辑器。真实商品名称、附魔及 Lore 始终保留，不能用外观配置伪装交易标的。</p>
     <ScreenshotPlaceholder image="/images/kitemarket/screenshot-home.png" title="集市首页" description="三类交易、发布草稿及个人资产入口。" lang="zh" />
-    <p>ItemsAdder v4 兼容属于基础能力。安装自有或第三方主题后使用资源包界面；资源未就绪时说明原因并回退原版，切换保留草稿。开发者可通过配置或 Java SDK 自用、免费分发或独立销售主题，无需额外的 KiteMC 主题授权。插件不内置 IA 主题资源。</p>
+    <p>ItemsAdder v4 兼容属于基础能力。安装自有或第三方主题后使用资源包界面；资源未就绪时说明原因并回退原版，切换保留草稿。开发者可通过配置或 Java SDK 自用、免费分发或独立销售主题，无需额外的 KiteMC 主题授权。插件不内置 IA 主题资源，v1.1 新页面仍复用同一套服务端动作和安全校验。</p>
     <Columns cols={2}>
       <Card title="ItemsAdder 接入" icon="puzzle-piece" href="/kitemarket/dlc">安装自己的主题，登记资源并检查就绪状态。</Card>
       <Card title="界面 SDK 与主题开发" icon="code" href="/kitemarket/ui-development">配置主题、Java 呈现器与实际页面示例。</Card>
@@ -66,8 +80,8 @@ import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
 
   <section className="km-section">
     <h2 id="共享账本-明确边界">共享账本，明确边界</h2>
-    <p>MySQL 8 或 MariaDB 10.11 是市场权威账本，每种货币使用固定精度的整数最小单位。Vault、PlayerPoints、CoinsEngine 与 ExcellentEconomy 使用独立充提适配器；网关不可用时，已有钱包余额仍可交易。外部结果不确定时进入待核对，不盲目重复扣款或补发。</p>
-    <p>基础目标从 Minecraft 1.16.5 起，按版本提供三个运行包。同一市场网络的节点使用相同 Minecraft 版本；目标范围、已有实测及仅启动检查见<a href="/kitemarket/compatibility">兼容说明</a>。首版不提供以物易物、网页市场、混版本市场或第三方物品 ID 语义适配；精确样品仍受特殊物品名单与保真检查约束。</p>
+    <p>默认 SQLite 适合单节点开服；MySQL 8 或 MariaDB 10.11 用于同版本跨节点共享订单、钱包与领取资产，不能通过共享 SQLite 文件搭建跨服市场。每种货币使用固定精度的整数最小单位，Vault、PlayerPoints、CoinsEngine 与 ExcellentEconomy 通过公开接口充提；网关不可用时已有钱包余额仍可交易。不确定结果进入待核对，不盲目重复扣款或补发。</p>
+    <p>基础目标从 Minecraft 1.16.5 起，按版本提供三个运行包。目标范围、已有实测及仅启动检查见<a href="/kitemarket/compatibility">兼容说明</a>。不提供以物易物、网页市场或混版本网络；自定义物品桥接的实际验证组合单独列明，所有物品仍受准入与保真检查约束。</p>
     <p>标准 bStats 基础统计（ID 34434）默认开启，可在插件或 bStats 全局配置中关闭。没有自定义玩家、交易、许可证或数据库统计项。</p>
   </section>
 
@@ -80,7 +94,9 @@ import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
       <Card title="命令与权限" icon="terminal" href="/kitemarket/commands">玩家入口、管理和只读审计。</Card>
       <Card title="市场 API" icon="code" href="/kitemarket/api">异步查询、不可变数据及成交通知。</Card>
       <Card title="故障与升级" icon="shield" href="/kitemarket/operations">核对操作，备份资产并安全升级。</Card>
-      <Card title="v1.1 新功能导读" icon="book-open" href="/kitemarket/v1-1/overview">整包与批量、社区通知、自动化及管理复核，按专题快速了解新增能力。</Card>
+      <Card title="更新概览" icon="book-open" href="/kitemarket/v1-1/overview">查看 v1.1 变化，并进入对应的日常使用文档。</Card>
+      <Card title="插件集成" icon="puzzle-piece" href="/kitemarket/integrations">占位符、NPC 入口与权限组限制。</Card>
+      <Card title="迁移与导入" icon="file-import" href="/kitemarket/operations/importing">停服副本预检、归属映射与存储迁移。</Card>
     </Columns>
   </section>
   <LandingFooter lang="zh" />

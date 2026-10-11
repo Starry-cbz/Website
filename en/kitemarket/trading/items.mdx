@@ -1,8 +1,10 @@
 ---
 title: "Exact samples and item admission"
-description: "Understand complete item fingerprints, custom data, node consistency and special-item restrictions."
+description: "Understand business identity, complete fingerprints, read-only container previews, node consistency and admission boundaries."
 canonical: "https://www.kitemc.com/en/kitemarket/trading/items"
 ---
+
+import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
 
 ## Exact matching {#exact-samples-and-custom-items}
 
@@ -20,16 +22,38 @@ Historical orders containing only a fingerprint identify the missing display sam
 
 ## Custom items and node consistency
 
-KiteMarket does not interpret third-party item IDs or equate items solely by appearance.
+Matching appearances do not make items equivalent. Names, lore, durability, enchantments, custom data and business identity can affect matching or complete-property comparisons.
 
 Nodes must have matching Minecraft versions and item profiles. Validate real samples created by your item plugin before enabling player trading.
+
+### Business identity bridges through public APIs {#v11-item-identity-bridges}
+
+With the corresponding plugin enabled, KiteMarket can read real business sources and IDs through ItemsAdder, Oraxen, Nexo and MMOItems public APIs for advanced buy orders and filtering. Failed or unconfirmed identities are never invented from appearance, names, lore or guessed NBT.
+
+A business identity adds an explicit semantic condition; it does not relax escrow fidelity, complete EXACT comparisons or other configured rules. Unknown data that a confirmed identity cannot safely constrain still requires a complete exact sample.
+
+The advanced editor also supports CustomModelData ranges, up to 32 required PDC keys, and string, number or boolean fields opened through `items.exposed-fields`. See [business identity and exposed fields](/en/kitemarket/trading/buy-orders#v11-business-identity-and-fields).
+
+<Note>
+Public API bridges do not certify every item combination. The fixed verified combination is Paper 1.21.11, Java 21 and Oraxen 1.220.0: one real custom pickaxe completed identity lookup, name search, listing, purchase and claims with matching native properties and stack size. This does not certify all Oraxen items or resource-pack appearance. Complete Nexo and MMOItems/MythicLib runtime combinations remain unverified.
+</Note>
 
 ## Item admission
 
 Exact samples still must pass item admission and serialization round-trip checks. Exact mode cannot bypass these restrictions.
 
-`1.0.0` does not accept new trades in items with nested storage structures, such as shulker boxes and bundles; empty shulker boxes are also excluded. Other special items or data can be traded only if admitted by the current build.
+Special items and nested data can be traded only if admitted by the current build. An item plugin, SDK or interface theme cannot replace an admission result.
 
 If you see `UNVERIFIED_SPECIAL_ITEM`, `UNVERIFIED_ITEM_DATA`, or `ITEM_ROUNDTRIP_UNSAFE`, stop listing that item instead of retrying in exact mode.
+
+### Read-only container previews and round-trip fidelity {#v11-container-preview-and-fidelity}
+
+Admitted containers can open read-only previews from the order contents page, showing the actual stored contents. Clicking a preview cannot remove items or change the container.
+
+The container and every internal entry must pass storage, restoration and complete-property comparison. Unsupported nesting or structures, damaged snapshots and properties that cannot safely round-trip are rejected rather than converted into empty containers or stripped of unknown contents.
+
+Real items from trades, cancellations and expiry enter claims. Insufficient inventory space leaves them claimable without changing quantities or native stack limits.
+
+<ScreenshotPlaceholder title="Read-only container contents" description="Reserved for a real gameplay screenshot of opening a container preview from an order and viewing its actual contents and quantities." lang="en" />
 
 Follow the [operations and migration guide](/en/kitemarket/operations) for safe withdrawal of assets already in escrow. See [buy-order condition editing](/en/kitemarket/trading/buy-orders#editing-conditions) for advanced rules.

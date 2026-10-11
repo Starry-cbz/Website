@@ -1,6 +1,6 @@
 ---
 title: "Escrow and item claims"
-description: "Inspect claimable items and their status, with stack limits, inventory space and uncertain results."
+description: "Filter claims by source, confirm the current page batch, and understand native stacking, automatic claims and uncertain results."
 canonical: "https://www.kitemc.com/en/kitemarket/trading/claims"
 ---
 
@@ -22,6 +22,24 @@ Insufficient inventory space leaves items in claims and asks the player to make 
     <ScreenshotPlaceholder image="/images/kitemarket/screenshot-claims.png" title="Claimable items and claim status" description="The claims list retains the item name, enchantments and original lore, alongside its quantity and status." lang="en" />
   </Tab>
 </Tabs>
+
+## Categories, details and batch claims {#v11-categorized-batch-claims}
+
+Claims are categorized by asset source and paginated. Select a category, then select individual entries or the current page. Details retain real names, enchantments, lore, quantities and claim states.
+
+A batch opens an explicit confirmation and processes only the selected entries on the current page, **up to 36 entries**. It does not automatically continue across the whole claim box. Purchased mixed bundles are claimed from their actual stored contents, never from the display box.
+
+Entries without sufficient space are skipped and remain claimable. Confirmed successes are never repeated. An unconfirmed result, disconnection or changed session stops later entries; inspect results before starting another batch.
+
+<ScreenshotPlaceholder title="Claim categories and current-page confirmation" description="Reserved for a real gameplay screenshot of source categories, selected page entries, quantities and batch confirmation." lang="en" />
+
+## Automatic claims {#v11-automatic-claims}
+
+Personal automatic claims are disabled by default and require explicit opt-in on the automation page. Tasks process bounded batches while respecting native stack limits, inventory space, sessions and claim result checks. One pass is not guaranteed to claim every asset.
+
+Insufficient space leaves assets claimable. An `UNKNOWN` result pauses subsequent tasks without automatic retries. Automatic claims, future-proceeds withdrawals and login withdrawals are independent settings; enabling one does not enable the others.
+
+<ScreenshotPlaceholder title="Automatic claim settings and results" description="Reserved for a real gameplay screenshot of the automatic-claim toggle, claim status and insufficient-space feedback." lang="en" />
 
 ## Uncertain results
 

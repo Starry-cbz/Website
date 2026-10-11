@@ -2,6 +2,30 @@
   "schema": 1,
   "pages": [
     {
+      "target": "/kitemarket/integrations",
+      "file": "kitemarket/integrations.mdx",
+      "locale": "zh",
+      "kind": "document"
+    },
+    {
+      "target": "/en/kitemarket/integrations",
+      "file": "en/kitemarket/integrations.mdx",
+      "locale": "en",
+      "kind": "document"
+    },
+    {
+      "target": "/kitemarket/operations/importing",
+      "file": "kitemarket/operations/importing.mdx",
+      "locale": "zh",
+      "kind": "document"
+    },
+    {
+      "target": "/en/kitemarket/operations/importing",
+      "file": "en/kitemarket/operations/importing.mdx",
+      "locale": "en",
+      "kind": "document"
+    },
+    {
       "target": "/kitemarket/configuration/currencies",
       "file": "kitemarket/configuration/currencies.mdx",
       "locale": "zh",

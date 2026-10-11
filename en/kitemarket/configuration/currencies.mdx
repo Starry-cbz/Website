@@ -1,10 +1,10 @@
 ---
 title: "Currency configuration"
-description: "Configure economy providers, transfer version gates, and currency display names."
+description: "Configure economy plugins, experience and item currencies, gateways, precision and display names."
 canonical: "https://www.kitemc.com/en/kitemarket/configuration/currencies"
 ---
 
-This page covers `currencies` in `config.yml`. For a first installation, follow [installation and configuration](/en/kitemarket/guide#_3-currencies), then supply the settings for your economy plugin.
+This page covers `currencies` in `config.yml`. For a first installation, follow [installation and configuration](/en/kitemarket/guide#_3-currencies), then configure the actual source of each currency.
 
 ## Configuration example
 
@@ -24,15 +24,62 @@ currencies:
 
 ## Providers and safe ranges
 
-Providers are `vault`, `playerpoints`, `coinsengine`, and `excellenteconomy`.
+External economy providers are `vault`, `playerpoints`, `coinsengine`, and `excellenteconomy`. Native experience and item currencies are covered below.
 
 Vault requires `vault-provider` to match the actual Economy service name; the latter two need their native currency ID. Do not copy unverified version numbers or expose the same external currency twice.
 
 `maximum` is in minor units and must fit the backend's safe range.
 
-Keep `certified-versions` empty until you have tested a specific version in isolation; an empty list disables transfers. This allowlist is not an official certification report.
+For external adapters, keep `certified-versions` empty until you have tested a specific version in isolation; an empty list disables transfers. This allowlist is not an official certification report.
 
 See [wallets](/en/kitemarket/wallet) for gateway and recovery behavior.
+
+## Native experience and item configuration {#v11-native-currency-configuration}
+
+Native providers do not require a third-party economy plugin. All three require `scale: 0`, and the gateway must still match an actual node:
+
+| Provider | Configuration and currency identity |
+| --- | --- |
+| `experience` | Measures vanilla experience points with `native-id: points` |
+| `experience-level` | Measures vanilla levels; a network must choose either points or levels |
+| `item` | Stores a real `item-sample` and positive integer `denomination`; identity combines the full sample fingerprint and denomination |
+
+Experience-points example:
+
+```yaml
+currencies:
+  xp:
+    provider: experience
+    native-id: points
+    scale: 0
+    maximum: 2147483647
+    gateway: survival-1
+    display-name:
+      zh_CN: '经验点'
+      en_US: 'Experience points'
+```
+
+Merge this under the existing `currencies` key and select the actual gateway node. For levels, use `experience-level` and set `maximum` within the actual safe level range, removing the points mode. Points and levels do not have a linear exchange rate.
+
+An item currency's `item-sample` must be a Bukkit-serialized real ItemStack retaining its name, Lore, enchantments and other properties. A material name or `item-sample: EMERALD` cannot replace that sample. `denomination` must be a positive integer no greater than the currency's `maximum`. The plugin derives `native-id` from the complete sample fingerprint and denomination; do not invent a fingerprint.
+
+With `denomination: 10`, one matching sample represents ten minor units. Eight items deposit 80 and withdrawing 30 returns three items. Deposits and withdrawals must both be multiples of the denomination. Same-material items with different properties do not count, and withdrawals respect normal stack limits and actual inventory space.
+
+Native gateways have no third-party economy-plugin version to list. Check actual transfers on the target server. Offline or dead players, missing samples, changed identities and insufficient space block affected operations without switching providers.
+
+<Warning>
+  Active currency IDs, providers, precision, samples and denominations are not interchangeable configuration labels. Plan migration and reconciliation before replacing an identity that existing funds depend on. Display names can be customized separately.
+</Warning>
+
+## Fees and permitted currencies {#v11-currency-fees-and-policy}
+
+`fees.rules` selects fees by currency, trade type, permission and declarative item conditions. Fixed amounts use the currency's minor units: 100 means 1.00 with `scale: 2` and 100 with `scale: 0`. Display formatting does not change this meaning.
+
+`policy.limits` can restrict currencies, quantity, prices, duration, order count and cooldown by permission. GUI, commands and restricted developer requests share these checks; hiding a currency in a theme is not a trading restriction.
+
+<Card title="Fees, restrictions and funds" icon="receipt" href="/en/kitemarket/v1-1/economy">
+  See fee snapshots, partial-fill allocation, permission rules and fresh confirmation after top-up.
+</Card>
 
 ## Currency display names
 

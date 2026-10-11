@@ -6,21 +6,21 @@ canonical: "https://www.kitemc.com/kitemarket/guide"
 
 <span id="安装与配置" />
 
-本指南对应 `1.0.0` 的配置。从[下载页](/kitemarket/download)选择与服务器匹配的运行包，按以下步骤安装，无需取得闭源源码或自行构建插件。
+本指南按 v1.1 的安装与配置组织。运行包、SDK 和配置包以[下载页](/kitemarket/download)显示的实际公开版本为准；选择与服务器匹配的构件，无需取得闭源源码或自行构建插件。
 
-<Card title="v1.1 安装" icon="rocket" href="/kitemarket/v1-1/overview">
-  新安装支持单服 SQLite 或共享 MySQL/MariaDB；已有数据先检查备份与独立副本。
+<Card title="已有市场的数据准备" icon="database" href="/kitemarket/operations#v1-0-to-v1-1">
+  切换已有环境前先备份并在独立副本核对迁移。不要混跑新旧构件或覆盖原币种身份。
 </Card>
 
 ## 1. 准备环境 {#_1-准备环境}
 
-准备[目标服务器与 Java](/kitemarket/compatibility)、MySQL 8 或 MariaDB 10.11，以及实际可用的网络许可证配置。每个市场网络使用同一数据库、Minecraft 版本、币种定义和物品配置；节点 ID 不能重复。
+准备[目标服务器与 Java](/kitemarket/compatibility)及实际可用的网络许可证。单服可使用内置 SQLite；多服共享市场准备 MySQL 8 或 MariaDB 10.11。每个市场网络使用同一数据库、Minecraft 版本、币种定义和物品配置；节点 ID 不能重复。
 
 将与服务器版本匹配的一个 KiteMarket 分发 JAR 放入 `plugins/`，不要同时安装多个分发包。首次启动生成 `plugins/KiteMarket/config.yml` 后停止服务器，编辑配置。
 
 ## 2. 配置网络与数据库 {#_2-配置网络与数据库}
 
-以下为 `config.yml` 中需要按实际部署填写的字段，密码等值仅为占位示例：
+以下为单服新安装的 `config.yml` 示例；数据库文件保存在插件目录：
 
 ```yaml
 language: zh_CN
@@ -29,16 +29,14 @@ network:
   name: survival
   node-id: survival-1
   item-profile: default
-  # 新市场不填写升级来源；协议由安装包确定。
-  # 已有协议1/2/3升级到4前须完成EXIT_ONLY清退，停全网、备份并等待租约失效。
-  # upgrade-from-protocol: '3' # 仅首节点临时填写实际来源协议。
 
 database:
-  url: "jdbc:mysql://127.0.0.1:3306/kitemarket"
-  username: "kitemarket"
-  password: "REPLACE_ME"
+  url: "jdbc:sqlite:market.db"
+  username: ""
+  password: ""
 
 market:
+  enabled-types: [BUY, SELL, AUCTION]
   order-limit: 10
   minimum-purchase-quantity: 1
   maximum-quantity: 1000000
@@ -46,34 +44,56 @@ market:
   tax-bps: 0
 ```
 
-创建独立数据库并授予插件账户所需权限。数据库不通、网络定义不一致或插件尚未初始化时，不应允许交易。运行中变更网络、币种或数据库需要停服规划，不能当作普通热重载。
+新市场无需填写升级来源。共享市场将数据库块替换为实际 MySQL/MariaDB 连接，密码仅为占位：
+
+```yaml
+database:
+  url: "jdbc:mysql://127.0.0.1:3306/kitemarket"
+  username: "kitemarket"
+  password: "REPLACE_ME"
+```
+
+为共享市场创建独立数据库并授予插件账户所需权限。不能让多个游戏节点并发写同一 SQLite 文件。数据库不通、网络定义不一致或插件尚未初始化时不允许交易，也不会新建空市场冒充原数据。
+
+SQLite 备份先正常停服或使用一致备份方式；运行中的 WAL 数据库不能只复制 `.db` 文件。运行中变更网络、币种或数据库需要停服规划，不能当作普通热重载。
+
+### 只启用需要的交易模式 {#v11-enabled-trading-modes}
+
+`market.enabled-types` 可配置任意非空子集。只启用竞拍时填写：
+
+```yaml
+market:
+  enabled-types: [AUCTION]
+```
+
+首页、发布、命令和受限 SDK 请求共享同一模式限制；空列表或未知类型不会生效。各节点执行 `/km reload` 后，新交易按新配置处理，已有订单仍可撤回、到期结算和领取。
 
 ### 数量与价格
 
 `market.minimum-purchase-quantity` 为出售草稿的默认最低购买量，默认1；卖家在发布条款页可设为1至发布数量。
 
-出售和收购输入每件单价，拍卖输入整标起拍总价。余量不足最低购买量时须一次买完全部余量。
+单品出售和收购输入每件单价，整包出售输入不可拆分标的的总价，拍卖输入整标起拍总价。单品出售余量不足最低购买量时须一次买完全部余量；整包不支持部分购买。
 
-已有网络使用协议4构件前，遵守[升级说明](/kitemarket/operations)的清退、备份及停网门禁；新市场无需填写升级来源。
+批量上架产生独立订单，每一单都单独确认；混合整包则作为一个订单整体交易。具体步骤见[出售](/kitemarket/trading/sales)和[竞拍](/kitemarket/trading/auctions)。
 
 ### 语言与成交税
 
 `language` 可选 `zh_CN`、`en_US` 或 `auto`；语言文件在 `plugins/KiteMarket/lang/`。
 
-`tax-bps` 使用基点，100 表示 1%；费用从收款方收入扣除，不收上架费。
+`tax-bps` 使用基点，100 表示 1%；未启用匹配的新费用规则时，费用从收款方收入扣除，默认不收上架费。
 
 `market.taxes.<buy/sell/auction>.<币种ID>` 可覆盖该类型的 `default`，未设置则使用 `market.tax-bps`；可配置范围为 0–9999 基点。
 
-费用按订单创建时的设置结算，修改配置不改写旧单。
+费用按订单创建时的设置结算，修改配置不改写旧单。新费用规则可分别配置上架、买方和卖方费用，部分成交累计分摊固定费用与舍入；已收上架费不会随正常撤单退回。完整示例见[费用与限制](/kitemarket/v1-1/economy)。
 
 ## 3. 配置币种 {#_3-配置币种}
 
-在 `currencies` 中为实际经济插件设置 provider、精度、网关和安全上限。同网络的币种定义必须一致，不要为同一个实际币种创建两个重复入口。
+在 `currencies` 中设置 provider、精度、网关和安全上限。可使用 Vault、PlayerPoints、CoinsEngine、ExcellentEconomy，或原版经验点、等级及完整样品物品币。同网络的币种定义必须一致，不要为同一个实际币种创建两个重复入口。
 
-`certified-versions` 默认留空，充提保持关闭；在隔离环境测试过具体版本后，才登记实际版本号。
+外部经济适配器的 `certified-versions` 默认留空，充提保持关闭；验证具体版本后登记真实版本号。经验点和等级在网络中二选一；物品币需要实际序列化样品和正整数面额，不能只填材料名。
 
 <Card title="币种配置" icon="coins" href="/kitemarket/configuration/currencies">
-  查看完整 PlayerPoints 示例、各经济适配器要求、显示名称与重启规则。
+  查看 PlayerPoints、经验点和物品币配置，了解最小单位、完整身份与显示名称。
 </Card>
 
 ## 4. 配置网络授权 {#_4-配置网络授权}
@@ -101,13 +121,13 @@ license:
 
 重新启动，检查插件、数据库、网络会话和许可证状态。
 
-先用隔离测试玩家完成一笔充值、一口价、收购供货、竞拍与提现，再验证领取和双节点并发。必须逐个测试实际开启的 provider；仅有 JAR 成功加载不代表充提可用。
+使用隔离测试玩家检查实际启用的交易模式、充提和领取；共享部署再检查双节点竞争。逐个核对启用的 provider，仅有 JAR 成功加载不代表充提可用。确认金额、税费与资产去向，保留真实失败或待核对状态。
 
 ### 重启还是重载
 
-网络、数据库、币种、授权和市场数量/时长限制变更后使用完整重启。
+网络、数据库、币种、授权和市场数量/时长限制变更后使用完整重启。`risk`、`notifications`、`developer`、`automation`、`integrations`、`imports` 和 `items` 配置也在启动时固定，修改后正常重启。
 
-显示配置与新单费率可使用 `/km reload` 校验更新；无效配置会被拒绝并保留当前设置。不使用服务端 `/reload` 或插件热卸载。
+显示配置、新单费用、`policy` 和 `market.enabled-types` 可使用 `/km reload` 校验更新；无效配置会被拒绝并保留当前设置。共享市场各节点均需更新并重载。不使用服务端 `/reload` 或插件热卸载。
 
 管理命令见[命令与权限](/kitemarket/commands)，异常处理见[运维指南](/kitemarket/operations)。
 
@@ -123,7 +143,7 @@ license:
 
 ### 原版 GUI 个性化 {#原版-gui-个性化}
 
-服主在 `config.yml` 的 `menus` 中个性化全部35个页面。编辑后执行 `/km reload` 并重新开页；无效候选保留上一份有效配置。
+服主在 `config.yml` 的 `menus` 中个性化市场、发布、社区、自动化及管理等页面。编辑后执行 `/km reload` 并重新开页；无效候选保留上一份有效配置。
 
 显示设置只改变外观与位置，不改变原有动作、权限、交易规则或资产处理，也不能新增交易按钮。
 
@@ -150,7 +170,7 @@ metrics:
 
 ## 8. 运行包、配置与 SDK {#_8-运行包、配置与-sdk}
 
-从[下载页](/kitemarket/download)选择与服务器匹配的**一份** Legacy、Modern 或 Current JAR。`1.0.0` 文件名为 `KiteMarket-legacy-1.0.0.jar`、`KiteMarket-modern-1.0.0.jar`、`KiteMarket-current-1.0.0.jar`；API、sources、Javadoc JAR 均不是服务器运行插件。
+从[下载页](/kitemarket/download)选择与服务器匹配的**一份** Legacy、Modern 或 Current JAR。对应命名为 `KiteMarket-legacy-<版本>.jar`、`KiteMarket-modern-<版本>.jar`、`KiteMarket-current-<版本>.jar`；API、sources、Javadoc JAR 均不是服务器运行插件。下载组件只展示实际公开资产，不用其他 JAR 替代缺失文件。
 
 下载的中英文配置包按 `zh_CN`／`en_US` 区分，保留正式默认产品 ID、授权端点和可信公钥，只替换自己的许可证、数据库和经济配置。
 
@@ -159,3 +179,22 @@ metrics:
 按 `SHA256SUMS.txt` 核对文件并保存使用版本。不能使用隔离测试签发公钥或凭据作为正式配置。
 
 公开 SDK 与可运行示例在同一公开仓库提供，见[市场 API](/kitemarket/api)和[界面开发](/kitemarket/ui-development)；[兼容说明](/kitemarket/compatibility)区分目标范围与已验证结果。
+
+## 9. 按任务完成配置 {#v11-configuration-tasks}
+
+<CardGroup cols={2}>
+  <Card title="交易与物品" icon="boxes-stacked" href="/kitemarket/trading">
+    设置高级收购，发布单品或整包，预览真实内容并完成交付。
+  </Card>
+  <Card title="钱包与自动化" icon="wallet" href="/kitemarket/wallet">
+    查看真实上限、缺口补款、收益预约和默认关闭的自动任务。
+  </Card>
+  <Card title="社区与发现" icon="magnifying-glass" href="/kitemarket/v1-1/community">
+    收藏、保存搜索、订阅、通知、卖家排行与同币种价格参考。
+  </Card>
+  <Card title="管理与风险复核" icon="shield-halved" href="/kitemarket/v1-1/administration-risk">
+    带原因的管理确认、导出、真实资产操作和人工复核线索。
+  </Card>
+</CardGroup>
+
+公开广播和 Discord 默认关闭；个人收益提现、登录提现与自动领取也各自默认关闭。只配置准备使用的能力，按页面说明核对资源、网关、权限和隐私范围。

@@ -1,21 +1,18 @@
 ---
-title: "v1.1 导读"
+title: "更新概览"
 description: "KiteMarket v1.1 功能、新安装准备与专题入口。"
 canonical: "https://www.kitemc.com/kitemarket/v1-1/overview"
 ---
 
 import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
-import { V11FeatureMarker, V11PagePanel } from "/snippets/feature-marker.jsx";
-
-<V11FeatureMarker lang="zh" title="v1.1 新增功能" summary="整包、批量、自动化与管理复核" />
-
-<V11PagePanel lang="zh" items={["整包、批量与容器", "费用、货币与自动化", "社区、通知与统计", "管理与风险复核", "自配云端与隐私"]} />
 
 <ScreenshotPlaceholder title="v1.1 功能总览" description="此处预留真实游戏截图，后续可替换为整包、批量或自动化页面。" lang="zh" />
 
-本文介绍 **v1.1** 的功能、安装路径与专题入口。运行包、SDK 和示例以对应 GitHub Release／Packages 实际提供的文件为准；[下载页](/kitemarket/download)继续展示公开版本。兼容范围以固定构件的实际验证记录为准。
+**v1.1** 增加整包和批量上架、费用规则、原生币种、交易自动化、社区通知及管理复核。各项能力已经融入交易、钱包、配置和开发文档，本页提供按任务阅读的入口。运行包、SDK 和示例以对应 GitHub Release／Packages 实际提供的文件为准；[下载页](/kitemarket/download)展示公开版本。兼容范围以固定构件的实际验证记录为准。
 
-## 按任务阅读
+<span id="按任务阅读" />
+
+## 按任务阅读 {#v11-reading-paths}
 
 | 专题 | 内容 |
 | --- | --- |
@@ -25,9 +22,11 @@ import { V11FeatureMarker, V11PagePanel } from "/snippets/feature-marker.jsx";
 | [管理与风险复核](/kitemarket/v1-1/administration-risk) | 有原因的管理确认、真实资金/资产操作、证据、模型和案件 |
 | [自配云端与隐私](/kitemarket/v1-1/cloud-review) | 默认关闭、管理员手动发送、假名白名单和受限响应 |
 
-基础交易、钱包和界面配置仍可从[使用导读](/kitemarket/guide)、[交易流程](/kitemarket/trading)、[钱包](/kitemarket/wallet)和[GUI 配置](/kitemarket/configuration/gui)进入。已有页面保留其对应版本的说明；v1.1 新安装按本页准备，已有数据先参考[备份与迁移](/kitemarket/operations#v1-0-to-v1-1)。
+从[使用导读](/kitemarket/guide)选择日常任务：[一口价与整包](/kitemarket/trading/sales)、[高级收购](/kitemarket/trading/buy-orders)、[领取箱](/kitemarket/trading/claims)、[钱包与自动化](/kitemarket/wallet)及[GUI 配置](/kitemarket/configuration/gui)均包含相应功能说明。新安装按[安装指南](/kitemarket/guide)准备，已有数据先参考[备份与迁移](/kitemarket/operations#v1-0-to-v1-1)。
 
-## 新安装与共享市场
+<span id="新安装与共享市场" />
+
+## 新安装与共享市场 {#v11-new-and-shared-installations}
 
 v1.1 以全新安装为主要交付方式，使用交易协议 `5`、数据库结构版本 `2`、物品快照格式 `2`。取得对应发行构件后：
 
@@ -41,19 +40,29 @@ v1.1 以全新安装为主要交付方式，使用交易协议 `5`、数据库�
 
 每个节点保留唯一 `network.node-id`；同一市场的网络身份、游戏版本、物品配置和币种身份必须一致。数据库连接失败会显示不可用，不创建另一个市场冒充原数据。
 
-## 已有 v1.0 市场
+<span id="已有-v10-市场" />
+<span id="已有-v1-0-市场" />
+
+## 已有 v1.0 市场 {#v11-existing-market-preparation}
 
 v1.1 不承诺直接换包或无缝升级。先完整备份原数据库、插件目录、原 JAR、玩家／世界及经济插件数据，在独立副本核对迁移、资产及恢复流程，再决定是否切换原环境。
 
 v1.1 构件保留旧结构检查、迁移前备份、旧节点围栏和资产恢复保护；这些机制不能代替完整旧环境的实际验证。不要混跑新旧构件、删除数据库、改写币种身份或用新安装配置覆盖旧市场。保留原备份和操作证据，按[迁移与回滚说明](/kitemarket/operations#v1-0-to-v1-1)处理。
 
-## 界面与集成范围
+<span id="界面与集成范围" />
+
+## 界面与集成范围 {#v11-interfaces-and-integrations}
 
 基础插件提供完整原版 GUI。开发者可通过配置与公开 Java SDK 制作自己的 ItemsAdder 界面；界面沿用服务端的真实物品、受保护动作、权限和交易确认。
 
 ItemsAdder、Oraxen、Nexo、MMOItems 的物品身份桥接读取真实公共 API。可用桥接和声明式规则不会放宽物品保真，支持范围应以实际 API 与验证记录为准。
 
-## 计分板、NPC 与权限插件
+完整安装与使用说明见 [ItemsAdder 界面](/kitemarket/dlc)和[物品身份条件](/kitemarket/trading/items)。
+
+<span id="计分板npc-与权限插件" />
+<span id="计分板、npc-与权限插件" />
+
+## 计分板、NPC 与权限插件 {#v11-integration-entry-points}
 
 可选集成提供显示与入口，具体构件支持仍以验证记录为准。未安装或 API 不兼容时只停用对应集成，基础市场可独立使用。
 
@@ -65,7 +74,9 @@ ItemsAdder、Oraxen、Nexo、MMOItems 的物品身份桥接读取真实公共 AP
 
 钱包占位符使用短时缓存；未就绪、过期或查询失败返回空值，不显示假零。显示值不用于扣款或判断交易成功，NPC 入口也不会绕过权限和确认。
 
-## 只开放需要的交易模式
+<span id="只开放需要的交易模式" />
+
+## 只开放需要的交易模式 {#v11-enabled-trading-modes}
 
 `market.enabled-types` 默认包含 `BUY`、`SELL` 和 `AUCTION`。例如只开放竞拍：
 
@@ -76,7 +87,9 @@ market:
 
 首页、发布、命令和 SDK 使用同一限制。可配置任意非空子集；未知类型或空列表会被拒绝。重载后的新交易按新设置执行，已有订单仍可撤回、到期结算和领取，已冻结的竞拍资金不会因为关闭竞拍而被遗留。
 
-## 结果不明确时
+<span id="结果不明确时" />
+
+## 结果不明确时 {#v11-uncertain-outcomes}
 
 充值、提现、领取、批量上架与管理操作都有各自结果。页面成功提示不能替代另一笔操作的成功；批量中有成功项也不等于整批完成。
 
