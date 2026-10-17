@@ -16,7 +16,7 @@ import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
 
 <Tabs>
   <Tab title="领取箱入口">
-    <ScreenshotPlaceholder image="/images/kitemarket/screenshot-claims-entrance.png" title="首页的待领取资产提醒" description="首页显示待领取物品的条目数，点击进入领取箱。" lang="zh" />
+    <ScreenshotPlaceholder image="/images/kitemarket/v1-1/home-v11.png" title="首页的领取箱入口" description="右上角的末影箱进入待领取资产；中央保留三类交易和发布入口。" lang="zh" />
   </Tab>
   <Tab title="待领取物品">
     <ScreenshotPlaceholder image="/images/kitemarket/screenshot-claims.png" title="待领取物品与领取状态" description="领取列表保留物品名称、附魔和原始 Lore，并显示数量与状态。" lang="zh" />
@@ -31,7 +31,17 @@ import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
 
 空间不足的项跳过并继续保留待领。已确认成功的项不重复执行；出现未确认结果、玩家离线或会话变化时停止后续条目，重新查看结果后再决定下一次领取。
 
-<ScreenshotPlaceholder title="领取分类与当前页批量确认" description="此处预留真实游戏截图：来源分类、当前页勾选、数量和领取确认。" lang="zh" />
+<Tabs>
+  <Tab title="来源分类">
+    <ScreenshotPlaceholder image="/images/kitemarket/v1-1/claims-batch-confirm.png" title="按资产来源进入领取箱" description="来源分类页提供全部资产和各来源的入口，便于分别查找待领取物品。" lang="zh" />
+  </Tab>
+  <Tab title="选择条目">
+    <ScreenshotPlaceholder image="/images/kitemarket/v1-1/claims-categories.png" title="选择当前页的待领取资产" description="本例已选择2笔资产；点击“领取所选资产”后继续核对数量，再逐笔检查背包并领取。" lang="zh" />
+  </Tab>
+  <Tab title="最终确认">
+    <ScreenshotPlaceholder title="当前页批量领取的最终确认" description="此处预留真实游戏截图：提交前汇总已选条目、数量和逐笔领取说明。" lang="zh" />
+  </Tab>
+</Tabs>
 
 ## 自动领取 {#v11-automatic-claims}
 
@@ -39,7 +49,7 @@ import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
 
 空间不足时保留待领；结果为 `UNKNOWN` 时暂停后续任务，不自动重复执行。自动领取与未来收益提现、登录提现是独立设置，开启其中一项不意味着其他项已开启。
 
-<ScreenshotPlaceholder title="自动领取设置与结果" description="此处预留真实游戏截图：自动领取开关、待领状态和空间不足提示。" lang="zh" />
+<ScreenshotPlaceholder image="/images/kitemarket/v1-1/automation.png" title="个人自动化设置入口" description="收益提现、登录提现和自动领取各自独立设置；从箱子入口管理自动领取。" lang="zh" />
 
 ## 结果不确定时
 

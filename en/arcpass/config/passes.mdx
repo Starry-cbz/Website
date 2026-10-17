@@ -236,6 +236,12 @@ level-templates:
       - reward_bonus_premium
 ```
 
+### Overlapping Reward Rules {#arcpass-v1-9-3-overlapping-reward-rules}
+
+When multiple `level-reward-rules` or legacy `level-templates` match the same level and tier, rewards accumulate in configuration order. For example, every-5-level and every-10-level rules both apply at level 10.
+
+An explicit `levels.<level>.rewards.<tier>` entry replaces that tier's inherited batch rewards. An empty list `[]` clears its inherited result.
+
 ### Conditional Tiers {#conditional-tiers}
 
 ```yaml

@@ -32,7 +32,17 @@ Saved searches retain type, currency, material, readable text, business source, 
 
 Subscriptions only notify about new matching orders; they never purchase, fulfill or bid automatically. Candidate conditions are validated before replacing saved ones. The discovery index supports up to 1,024 players. New favorites or subscriptions are explicitly rejected at capacity without partial saves; unsubscribed manual saved searches remain usable.
 
-<ScreenshotPlaceholder title="Favorites and saved searches" description="Reserved for a real gameplay screenshot of favoriting an order, saving filters and enabling a subscription." lang="en" />
+<Tabs>
+  <Tab title="Favorite state">
+    <ScreenshotPlaceholder image="/images/kitemarket/v1-1/favorites.png" title="An order's saved favorite state" description="The nether star explicitly says the order is favorited and offers removal, making its current state clear." lang="en" />
+  </Tab>
+  <Tab title="Favorite list">
+    <ScreenshotPlaceholder image="/images/kitemarket/v1-1/saved-search.png" title="Favorites and order summaries" description="The favorite list shows a golden-carrot order's open state, quantity, unit price and seller, with access to its details." lang="en" />
+  </Tab>
+  <Tab title="Saved searches">
+    <ScreenshotPlaceholder title="Saved-search and subscription settings" description="Reserved for a real gameplay screenshot of saved filters, running a search and the subscription controls." lang="en" />
+  </Tab>
+</Tabs>
 
 ## Persistent notifications and unread reminders {#v11-persistent-notifications}
 
@@ -42,7 +52,7 @@ Login shows the real unread count. Online chat merges reminders at most once eve
 
 Administrators can separately enable game broadcasts and Discord, both disabled by default. Game broadcasts summarize per node every 60 seconds. Discord creates a real order message, updates remaining quantity or highest bids, and deletes it on terminal state. Delivery failure never rolls back a trade. An unconfirmed create remains `UNKNOWN` without automatic duplication. See [notifications and Discord](/en/kitemarket/v1-1/community#public-broadcasts-and-discord) for configuration and privacy scope.
 
-<ScreenshotPlaceholder title="Notification center and unread states" description="Reserved for a real gameplay screenshot of persistent notifications, merged reminders and read controls." lang="en" />
+<ScreenshotPlaceholder image="/images/kitemarket/v1-1/notifications.png" title="Notification center: unread trade reminders" description="This example combines two completed purchases into one unread reminder, retaining the event count and time." lang="en" />
 
 ## Seller windows, rankings and price references {#v11-seller-statistics-and-prices}
 
@@ -52,7 +62,14 @@ The seller index supports up to 1,024 players. Beyond capacity, exact personal s
 
 Price references group complete comparable items within the same currency, using rolling 24-hour, 7-day and 30-day windows. They show median unit price, quantity-weighted mean and real traded volume. Different properties, bundle combinations or currencies are not forcibly combined. Missing comparable data does not become a zero valuation. References guarantee neither a sale price nor a cheating conclusion.
 
-<ScreenshotPlaceholder title="Seller statistics and public price references" description="Reserved for a real gameplay screenshot of UTC seller windows, same-currency rankings and rolling price references." lang="en" />
+<Tabs>
+  <Tab title="Seller rankings">
+    <ScreenshotPlaceholder image="/images/kitemarket/v1-1/seller-statistics.png" title="Seller ranking and actual trade statistics" description="The example shows committed trade count, quantity sold and net coin income. Historical sales are not current stock." lang="en" />
+  </Tab>
+  <Tab title="Price references">
+    <ScreenshotPlaceholder image="/images/kitemarket/v1-1/price-reference.png" title="Comparable trade-price statistics" description="The oak-log coin statistics show median unit price, quantity-weighted mean, traded quantity and trade count separately." lang="en" />
+  </Tab>
+</Tabs>
 
 ## Individual transaction receipts
 

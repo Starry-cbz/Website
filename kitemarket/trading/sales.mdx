@@ -22,7 +22,14 @@ import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
 
 整包不提供部分购买，也不能只挑其中一件。与单品相同，取消或到期后的真实内容进入卖家领取箱。
 
-<ScreenshotPlaceholder title="整包出售与内容确认" description="此处预留真实游戏截图：混合物品的整包内容、整包总价与交付摘要。" lang="zh" />
+<Tabs>
+  <Tab title="完整内容">
+    <ScreenshotPlaceholder image="/images/kitemarket/v1-1/bundle-contents.png" title="核对整包的完整内容" description="本例将钻石、铁锭和绿宝石组成一个标的，确认前可逐项查看真实数量。" lang="zh" />
+  </Tab>
+  <Tab title="发布确认">
+    <ScreenshotPlaceholder image="/images/kitemarket/v1-1/bundle-confirm.png" title="整包发布确认与收入预览" description="本例共3项、42件物品，整包总价100金币，收款方费用5金币，预计净收入95金币。" lang="zh" />
+  </Tab>
+</Tabs>
 
 ### 批量上架 {#v11-batch-listings}
 
@@ -32,7 +39,14 @@ import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
 
 未发布选择和批量计划只保留在当前会话，退出或重启后不会自动继续。库存或余额变化、会话变化、外部副作用未知时暂停；重新查看具体结果再处理。
 
-<ScreenshotPlaceholder title="批量上架预览与逐单结果" description="此处预留真实游戏截图：独立订单预览、每单确认及已完成／暂停结果。" lang="zh" />
+<Tabs>
+  <Tab title="发布计划">
+    <ScreenshotPlaceholder image="/images/kitemarket/v1-1/batch-plan.png" title="独立批量发布计划" description="钻石、铁锭和绿宝石分成独立组，可分别设置价格和最低购买量，再逐单确认。" lang="zh" />
+  </Tab>
+  <Tab title="逐单反馈">
+    <ScreenshotPlaceholder image="/images/kitemarket/v1-1/batch-results.png" title="三份订单的发布成功反馈" description="聊天分别显示第1、2、3单发布成功，并提供各自的查看详情入口。" lang="zh" />
+  </Tab>
+</Tabs>
 
 ## 最低购买量
 

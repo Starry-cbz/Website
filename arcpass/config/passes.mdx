@@ -251,6 +251,12 @@ level-templates:
       - reward_milestone_premium
 ```
 
+### 重叠奖励规则 {#arcpass-v1-9-3-overlapping-reward-rules}
+
+多个 `level-reward-rules` 或旧 `level-templates` 命中同一等级与档位时，奖励按配置声明顺序累加。例如，每 5 级奖励与每 10 级奖励在第 10 级同时生效。
+
+显式的 `levels.<等级>.rewards.<档位>` 覆盖该档位继承的批量奖励，空列表 `[]` 可以清空该档位的继承结果。
+
 ### 条件档位 {#条件档位}
 
 设置档位解锁条件：

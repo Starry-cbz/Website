@@ -6,7 +6,7 @@ canonical: "https://www.kitemc.com/en/kitemarket/v1-1/economy"
 
 import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
 
-<ScreenshotPlaceholder title="Fees and automation" description="A real gameplay screenshot can be added here later for fee previews, shortfalls or reservations." lang="en" />
+<ScreenshotPlaceholder image="/images/kitemarket/v1-1/supply-fees-confirm.png" title="Fees and asset destinations at confirmation" description="The fulfillment example separately displays the trade total, recipient and payer fees, listing fee, wallet change and net income." lang="en" />
 
 Fee rules determine publication and transaction charges; currency configuration selects the actual transfer gateway. See [wallets and automation](/en/kitemarket/wallet) for everyday use and [currency configuration](/en/kitemarket/configuration/currencies) for settings. Persistent operation and outcome handling continues to govern funds, holds and external calls.
 
@@ -71,6 +71,8 @@ Insufficient-funds views read the real shortage. A confirmed successful deposit 
 
 Changed orders, unavailable gateways and unknown external outcomes have separate results. Preserve already deposited market funds instead of repeatedly depositing to conceal a failed follow-up trade.
 
+<ScreenshotPlaceholder image="/images/kitemarket/v1-1/shortfall-top-up.png" title="Cover the actual shortfall before bidding" description="This 60,000-coin bid requires a 192-coin deposit first. Confirmation also explains reserved funds and fees." lang="en" />
+
 <span id="automatic-withdrawal-and-claims" />
 
 ## Automatic withdrawal and claims {#v11-automatic-withdrawal-and-claims}
@@ -80,3 +82,5 @@ Future-income withdrawal, login withdrawal and automatic claiming are separate o
 Future income creates distinct withdrawal reservations. Reservations, holds, available funds and claimable assets are shown separately. Turning the setting off does not release existing reservations. Inspect their status before executing or explicitly releasing them.
 
 Insufficient space, unavailable gateways, changed sessions or uncertain external effects pause the task. Automation never reexecutes UNKNOWN; inspect the original operation and evidence before resuming. See [operations](/en/kitemarket/operations).
+
+<ScreenshotPlaceholder image="/images/kitemarket/v1-1/automation.png" title="Independent personal automation entrances" description="Income withdrawals, login withdrawals and automatic claims have separate settings, with another entrance for reservations. Enabling one does not enable the others." lang="en" />

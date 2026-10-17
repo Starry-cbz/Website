@@ -6,7 +6,14 @@ canonical: "https://www.kitemc.com/en/kitemarket/v1-1/administration-risk"
 
 import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
 
-<ScreenshotPlaceholder title="Administration and risk review" description="A real gameplay screenshot can be added here later for confirmations, cases or evidence exports." lang="en" />
+<Tabs>
+  <Tab title="Administration">
+    <ScreenshotPlaceholder image="/images/kitemarket/v1-1/administration.png" title="Administration tool entrances" description="The management page groups player, record and order entrances. Actual writes still require a specific target, reason and confirmation." lang="en" />
+  </Tab>
+  <Tab title="Risk review">
+    <ScreenshotPlaceholder image="/images/kitemarket/v1-1/risk-review.png" title="Risk analysis and manual-review entrances" description="The risk page provides model, case and review entrances. Viewing signals never automatically punishes a player." lang="en" />
+  </Tab>
+</Tabs>
 
 Open `/km tools` for administration and `/km risk` for review cases. Administration and risk signals retain separate permissions and confirmation. Scores and advice do not automatically punish players.
 

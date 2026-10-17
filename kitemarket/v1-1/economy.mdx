@@ -6,7 +6,7 @@ canonical: "https://www.kitemc.com/kitemarket/v1-1/economy"
 
 import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
 
-<ScreenshotPlaceholder title="费用与自动化页面" description="此处预留真实游戏截图，后续可补充费用预览、补款或预约结果。" lang="zh" />
+<ScreenshotPlaceholder image="/images/kitemarket/v1-1/supply-fees-confirm.png" title="确认页中的费用与资产去向" description="供货示例分别显示成交总额、收付款方费用、上架费、钱包变化与税后收入。" lang="zh" />
 
 费用规则决定发布和成交时的收费；币种配置决定充提所使用的真实网关。日常操作见[钱包与自动化](/kitemarket/wallet)，具体配置见[币种配置](/kitemarket/configuration/currencies)。金额、冻结和外部调用继续由持久操作与结果处理约束。
 
@@ -71,6 +71,8 @@ fees:
 
 订单已变化、币种网关不可用或外部结果未知时，按各自结果处理。保留已经充值的市场钱包余额，不反复充值来掩盖后续交易失败。
 
+<ScreenshotPlaceholder image="/images/kitemarket/v1-1/shortfall-top-up.png" title="出价前补足真实缺口" description="本例60000金币出价需先充值192金币，确认页同时展示资金冻结与费用说明。" lang="zh" />
+
 <span id="自动提现与领取" />
 
 ## 自动提现与领取 {#v11-automatic-withdrawal-and-claims}
@@ -80,3 +82,5 @@ fees:
 未来收益建立独立提现预约，预约、冻结、普通余额和待领资产分别展示。关闭设置不会自动释放已经建立的预约；到预约页查看具体状态，再选择执行或明确释放。
 
 空间不足、网关不可用、会话变更或存在未知外部结果时暂停。自动任务不重复执行 UNKNOWN；先检查原操作和证据，再恢复相关任务。处理步骤见[故障处理](/kitemarket/operations)。
+
+<ScreenshotPlaceholder image="/images/kitemarket/v1-1/automation.png" title="个人自动化的独立入口" description="分别进入收益提现、登录提现和自动领取设置，提现预约另有入口，不因开启一项而自动开启其他项。" lang="zh" />

@@ -110,7 +110,9 @@ reward_custom_item:
   amount: 1
 ```
 
-## 自定义图标 v1.1.5 {#自定义图标}
+<span id="自定义图标" />
+
+## 自定义图标 {#arcpass-v1-1-5-custom-icons}
 
 默认情况下，`icon` 字段接受原版材料名（如 `DIAMOND`）。从 v1.1.5 起，你可以使用 **CustomModelData**、**ItemsAdder** 或 **Oraxen** 物品作为 GUI 图标。
 
@@ -154,7 +156,9 @@ reward_oraxen_gem:
 
 </Tip>
 
-### 捕获任意物品作为图标 v1.9.2 {#捕获任意物品作为图标}
+<span id="捕获任意物品作为图标" />
+
+### 捕获任意物品作为图标 {#arcpass-v1-9-0-capture-item-icons}
 
 奖励编辑 GUI 可以将玩家主手中的任意物品捕获为奖励图标：
 
@@ -164,7 +168,9 @@ reward_oraxen_gem:
 
 捕获的图标会保留物品名称、Lore、附魔、CustomModelData 和其他自定义数据。右键点击图标槽位可以恢复该奖励类型的默认图标。图标只影响 GUI 显示，不会改变玩家实际获得的奖励。
 
-## 物品预览槽位 v1.8.2 {#物品预览槽位}
+<span id="物品预览槽位" />
+
+## 物品预览槽位 {#arcpass-v1-7-0-item-preview-slot}
 
 在管理 GUI（`/arcpass admin rewards`）中编辑物品奖励时，你可以通过将物品点击到预览槽位来设置奖励的展示物品：
 
@@ -221,6 +227,10 @@ reward_vip_package:
     eco give %player% 10000
     lp user %player% permission set vip.access true
 ```
+
+### 中文与颜色命令 {#arcpass-v1-9-3-command-text}
+
+命令奖励保留命令中的中文与 `&` 颜色代码，并替换 `%player%`、`%uuid%`。例如，`broadcast &6恭喜 %player% 完成通行证！` 会交给目标命令处理；最终的文字与颜色效果由该命令所属插件决定。
 
 ## 权限奖励 {#权限奖励}
 

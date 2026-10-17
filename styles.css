@@ -73,18 +73,18 @@
 .km-screenshot-placeholder { display: flex; min-height: 220px; padding: 28px; align-items: center; justify-content: center; flex-direction: column; gap: 12px; text-align: center; color: var(--km-muted); }
 .km-screenshot-placeholder strong { color: var(--km-text); font-size: 16px; }
 .km-screenshot-placeholder p { margin: 0; max-width: 500px; font-size: 14px; line-height: 1.75; }
-#content :is(h2, h3, h4)[id^="v11-"],
-#table-of-contents a[href*="#v11-"],
+#content :is(h2, h3, h4):is([id^="v11-"], [id^="arcpass-v"]),
+#table-of-contents a:is([href*="#v11-"], [href*="#arcpass-v"]),
 .km-versioned-card {
   position: relative;
 }
-#content :is(h2, h3, h4)[id^="v11-"] {
+#content :is(h2, h3, h4):is([id^="v11-"], [id^="arcpass-v"]) {
   padding-right: 78px;
 }
-#content :is(h2, h3, h4)[id^="v11-"]::after,
-#table-of-contents a[href*="#v11-"]::after,
+#content :is(h2, h3, h4):is([id^="v11-"], [id^="arcpass-v"])::after,
+#table-of-contents a:is([href*="#v11-"], [href*="#arcpass-v"])::after,
 .km-versioned-card::after {
-  content: "✦ v1.1";
+  content: var(--km-feature-version, "✦ v1.1");
   position: absolute;
   right: 0;
   bottom: 3px;
@@ -103,12 +103,39 @@
   white-space: nowrap;
   pointer-events: none;
 }
-#table-of-contents a[href*="#v11-"] {
+#table-of-contents a:is([href*="#v11-"], [href*="#arcpass-v"]) {
   padding-right: 62px;
 }
-#table-of-contents a[href*="#v11-"]::after {
+#table-of-contents a:is([href*="#v11-"], [href*="#arcpass-v"])::after {
   padding: 1px 5px;
   font-size: 10px;
+}
+#content :is(h2, h3, h4)[id^="arcpass-v"] {
+  padding-right: 90px;
+}
+#table-of-contents a[href*="#arcpass-v"] {
+  padding-right: 76px;
+}
+:is([id^="arcpass-v1-1-0-"], a[href*="#arcpass-v1-1-0-"], .ap-version-1-1-0) {
+  --km-feature-version: "✦ v1.1.0";
+}
+:is([id^="arcpass-v1-1-5-"], a[href*="#arcpass-v1-1-5-"], .ap-version-1-1-5) {
+  --km-feature-version: "✦ v1.1.5";
+}
+:is([id^="arcpass-v1-6-0-"], a[href*="#arcpass-v1-6-0-"], .ap-version-1-6-0) {
+  --km-feature-version: "✦ v1.6.0";
+}
+:is([id^="arcpass-v1-7-0-"], a[href*="#arcpass-v1-7-0-"], .ap-version-1-7-0) {
+  --km-feature-version: "✦ v1.7.0";
+}
+:is([id^="arcpass-v1-8-2-"], a[href*="#arcpass-v1-8-2-"], .ap-version-1-8-2) {
+  --km-feature-version: "✦ v1.8.2";
+}
+:is([id^="arcpass-v1-9-0-"], a[href*="#arcpass-v1-9-0-"], .ap-version-1-9-0) {
+  --km-feature-version: "✦ v1.9.0";
+}
+:is([id^="arcpass-v1-9-3-"], a[href*="#arcpass-v1-9-3-"], .ap-version-1-9-3) {
+  --km-feature-version: "✦ v1.9.3";
 }
 .km-landing .km-versioned-card {
   padding-bottom: 0;

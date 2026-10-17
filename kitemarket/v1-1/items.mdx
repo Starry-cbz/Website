@@ -6,7 +6,7 @@ canonical: "https://www.kitemc.com/kitemarket/v1-1/items"
 
 import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
 
-<ScreenshotPlaceholder title="整包与批量页面" description="此处预留真实游戏截图，后续可补充整包内容和批量上架预览。" lang="zh" />
+<ScreenshotPlaceholder image="/images/kitemarket/v1-1/bundle-contents.png" title="整包的完整物品清单" description="钻石、铁锭和绿宝石保留各自真实数量，作为同一个不可拆分标的发布。" lang="zh" />
 
 整包把多项真实物品作为一个标的出售，批量上架则生成多个独立订单。发布操作见[一口价、整包与批量](/kitemarket/trading/sales)，条件编辑见[高级收购](/kitemarket/trading/buy-orders)；本页说明标的、容器和物品身份的完整边界。
 
@@ -41,6 +41,15 @@ import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
 
 外部副作用未知、会话变化、库存变化或余额不足时，按实际结果暂停。保留操作引用并重新查看；未确认结果不能自动当作失败重放。
 
+<Tabs>
+  <Tab title="独立发布计划">
+    <ScreenshotPlaceholder image="/images/kitemarket/v1-1/batch-plan.png" title="分别设置每组的发布条款" description="本例按钻石、铁锭和绿宝石分组，各组可单独设置价格与最低购买量。" lang="zh" />
+  </Tab>
+  <Tab title="逐单成功反馈">
+    <ScreenshotPlaceholder image="/images/kitemarket/v1-1/batch-results.png" title="查看每份订单的实际结果" description="聊天为三份成功订单分别显示结果与详情入口，不将整个批量过程合并成一笔成交。" lang="zh" />
+  </Tab>
+</Tabs>
+
 <span id="容器预览与物品保真" />
 
 ## 容器预览与物品保真 {#v11-container-preview-and-fidelity}
@@ -52,6 +61,8 @@ import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
 成交、撤回、到期后的真实物品进入领取箱。背包空间不足时继续保留待领，重新查看并腾出空间后领取；不会直接丢在地上。基础说明见[托管与领取](/kitemarket/trading/claims)。
 
 领取箱按来源分类并分页，勾选或全选当前页后查看详情、明确确认，最多36项。空间不足的项跳过保留；结果未确认、会话变化或离线时停止后续项，不重复已确认领取，也不自动继续下一页。文件配置使用[实际整包与领取页面 ID](/kitemarket/configuration/menus#v1-1-bundle-and-claims)。
+
+<ScreenshotPlaceholder image="/images/kitemarket/v1-1/container-preview.png" title="潜影盒内容的只读预览" description="实际保存的钻石、铁锭和金胡萝卜按原数量展示，预览不能取出或改变内容。" lang="zh" />
 
 <span id="业务身份和高级收购" />
 
@@ -68,6 +79,8 @@ import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
 | OR | 声明式管理员配置；玩家页面只读，不提供自由脚本 |
 
 每次编辑先校验独立候选副本，再更新原草稿。无效范围、未确认来源或未开放字段不会改坏原条件。
+
+<ScreenshotPlaceholder image="/images/kitemarket/v1-1/advanced-fields.png" title="高级物品条件总览" description="集中查看业务来源、业务 ID、模型范围、标签和开放字段；本例未设置额外条件。" lang="zh" />
 
 业务身份不等于忽略其他真实属性。未知数据不能由已确认身份安全限定时，继续使用完整 EXACT 样品；完整比较和物品往返准入仍生效。更多基础条件见[精确样品与自定义物品](/kitemarket/trading/items)。
 

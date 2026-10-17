@@ -6,7 +6,7 @@ canonical: "https://www.kitemc.com/en/kitemarket/v1-1/items"
 
 import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
 
-<ScreenshotPlaceholder title="Bundles and bulk listings" description="A real gameplay screenshot can be added here later for bundle contents or bulk publication." lang="en" />
+<ScreenshotPlaceholder image="/images/kitemarket/v1-1/bundle-contents.png" title="A bundle's complete item list" description="Diamonds, iron ingots and emeralds retain their actual quantities while forming one indivisible lot." lang="en" />
 
 Bundles sell multiple real items as one lot; bulk publication creates independent orders. See [fixed-price sales, bundles and batches](/en/kitemarket/trading/sales) for publication and [advanced buy orders](/en/kitemarket/trading/buy-orders) for condition editing. This page explains lot, container and item-identity boundaries.
 
@@ -41,6 +41,15 @@ Current publication policy checks quantity for the complete single selection, ea
 
 Uncertain external effects, changed sessions, inventory changes or insufficient funds pause according to actual results. Keep operation references and reread the state. An unresolved outcome must not be replayed as a failure.
 
+<Tabs>
+  <Tab title="Independent listing plan">
+    <ScreenshotPlaceholder image="/images/kitemarket/v1-1/batch-plan.png" title="Set each group's listing terms separately" description="This example groups diamonds, iron ingots and emeralds, each with its own price and minimum purchase quantity." lang="en" />
+  </Tab>
+  <Tab title="Individual success feedback">
+    <ScreenshotPlaceholder image="/images/kitemarket/v1-1/batch-results.png" title="Inspect each order's actual outcome" description="Chat shows separate results and detail links for three successful orders, rather than treating the batch as one trade." lang="en" />
+  </Tab>
+</Tabs>
+
 <span id="container-preview-and-fidelity" />
 
 ## Container preview and fidelity {#v11-container-preview-and-fidelity}
@@ -52,6 +61,8 @@ Icons, titles, lore and themes cannot bypass admission. Damaged snapshots, lossy
 Sold, returned and expired items enter claims as actual assets. Insufficient inventory space leaves them claimable. Make space and reread before claiming; items are not dropped into the world. See [escrow and claims](/en/kitemarket/trading/claims).
 
 Claims support source filtering and pages. Select individual entries or the current page, inspect details and confirm at most 36 entries. Items that do not fit remain available. Uncertain outcomes, session changes or disconnects stop subsequent entries without repeating confirmed deliveries or continuing into another page. Configure [actual bundle and claims page IDs](/en/kitemarket/configuration/menus#v1-1-bundle-and-claims).
+
+<ScreenshotPlaceholder image="/images/kitemarket/v1-1/container-preview.png" title="Read-only shulker-box contents" description="Saved diamonds, iron ingots and golden carrots retain their actual quantities. The preview cannot remove or change contents." lang="en" />
 
 <span id="business-identities-and-advanced-procurement" />
 
@@ -68,6 +79,8 @@ Advanced procurement adds provider source/business ID, CustomModelData, PDC keys
 | OR alternatives | Declarative administrator configuration; read-only in the player editor |
 
 Each edit validates a detached candidate before replacing the draft. Invalid ranges, unverified sources or unexposed fields leave the original condition intact.
+
+<ScreenshotPlaceholder image="/images/kitemarket/v1-1/advanced-fields.png" title="Advanced item-condition summary" description="Source, business ID, model range, tags and exposed fields appear together. This example has no additional conditions set." lang="en" />
 
 A business identity does not discard other real properties. Use a complete EXACT sample where a verified identity cannot safely scope opaque data. Complete comparison and item round-trip admission still apply. See [exact samples and custom items](/en/kitemarket/trading/items).
 
