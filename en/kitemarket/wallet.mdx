@@ -20,7 +20,7 @@ Each currency has a stable ID, scale, native mapping, and transfer gateway. Chan
 
 Player interfaces use display names such as “Coins” or “Points” without appending internal IDs. Customize each locale's `currency-names.<currency-id>` or an explicit shared/bilingual `currencies.<currency-id>.display-name`. Labels do not change balances or economy identity; see the [configuration guide](/en/kitemarket/guide#_3-currencies) for precedence and reload behavior.
 
-<ScreenshotPlaceholder image="/images/kitemarket/screenshot-wallet.png" title="Market wallet: available and reserved funds" description="View each currency's balances, reserved funds and current transfer-gateway status." lang="en" />
+<ScreenshotPlaceholder image="/images/kitemarket/v1-1/wallet.png" title="Shared wallet: emerald currency and transfer gateway" description="This example shows 100 available emerald-currency units, zero reserved and the configured gateway. Coins, experience and item currency have separate balances." lang="en" />
 
 ## Experience and item currencies {#v11-native-currencies}
 
@@ -59,7 +59,7 @@ When market funds are insufficient for a purchase or bid, the top-up page shows 
 
 An unavailable gateway or `UNKNOWN` deposit must be handled before the trade can proceed. Transfer results and transaction receipts remain separate.
 
-<ScreenshotPlaceholder title="Shortfall top-up and fresh confirmation" description="Reserved for a real gameplay screenshot showing the shortage, deposit amount and refreshed transaction confirmation." lang="en" />
+<ScreenshotPlaceholder image="/images/kitemarket/v1-1/shortfall-top-up.png" title="Funding-shortfall explanation before bidding" description="For a 60,000-coin bid, the page explicitly requires a 192-coin external deposit first, alongside fees and instructions for changed quotes." lang="en" />
 
 ## Income reservations and personal automation {#v11-wallet-automation}
 
@@ -77,7 +77,7 @@ Tasks use bounded batches rather than promising to empty every balance or claim 
 
 `UNKNOWN` is never automatically retried as a failure. Inspect the original operation and evidence, follow [reconciliation](/en/kitemarket/operations#reconciling-unknown), then resume affected tasks. See [claiming assets](/en/kitemarket/trading/claims) for manual, categorized and current-page batch claiming.
 
-<ScreenshotPlaceholder title="Personal automation and withdrawal reservations" description="Reserved for a real gameplay screenshot of the separate settings, reservation states and inventory-space warning." lang="en" />
+<ScreenshotPlaceholder image="/images/kitemarket/v1-1/automation.png" title="Separate income, login-withdrawal and claim entrances" description="The automation page offers three independent personal settings and a withdrawal-reservation entrance below. Enabling a setting still requires its own confirmation." lang="en" />
 
 ## Gateway node {#gateway-node}
 

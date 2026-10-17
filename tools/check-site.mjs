@@ -79,7 +79,6 @@ for (const page of headings) {
 function anchors(text) {
   return new Set([...text.matchAll(/\{#([^}]+)\}|id=["']([^"']+)["']/g)].map(m => m[1] || m[2]));
 }
-const permittedPlaceholder = /^\/images\/kitemarket\/screenshot-auction-confirm\.png$/;
 let localLinks = 0;
 for (const [file, body] of texts) {
   const text = body.replace(/```[\s\S]*?```/g, '').replace(/`[^`\n]*`/g, '');
@@ -87,7 +86,7 @@ for (const [file, body] of texts) {
     const href = m[1] || m[2];
     if (/^(https?:|mailto:|data:)/.test(href)) continue;
     if (href.startsWith('/images/')) {
-      assert.ok(existsSync(resolve(root, `.${href}`)) || permittedPlaceholder.test(href), `Missing media ${file}: ${href}`);
+      assert.ok(existsSync(resolve(root, `.${href}`)), `Missing media ${file}: ${href}`);
       continue;
     }
     const [path, fragment] = href.split('#');
@@ -125,8 +124,18 @@ for (const asset of media) {
 }
 for (const locale of ['', 'en/']) {
   const text = [...texts.entries()].filter(([file]) => locale ? file === 'en.mdx' || file.startsWith(locale) : file !== 'en.mdx' && !file.startsWith('en/')).map(([, text]) => text).join('\n');
+  const currentScreenshots = {
+    home: '/images/kitemarket/v1-1/home-v11.png',
+    'auction-confirm': '/images/kitemarket/v1-1/auction-confirm.png',
+    'claims-entrance': '/images/kitemarket/v1-1/home-v11.png',
+    wallet: '/images/kitemarket/v1-1/wallet.png'
+  };
   for (const name of ['home', 'market', 'rule-editor', 'supply-preview', 'auction-confirm', 'wallet', 'publish-terms', 'claims-entrance', 'claims', 'receipt']) {
-    assert.ok(text.includes(`/images/kitemarket/screenshot-${name}.png`), `Missing ${locale} screenshot slot ${name}`);
+    const image = currentScreenshots[name] || `/images/kitemarket/screenshot-${name}.png`;
+    assert.ok(text.includes(image), `Missing ${locale} screenshot slot ${name}`);
+  }
+  for (const file of readdirSync(resolve(root, 'images/kitemarket/v1-1')).filter(name => name.endsWith('.png'))) {
+    assert.ok(text.includes(`/images/kitemarket/v1-1/${file}`), `Unreferenced ${locale} gameplay screenshot ${file}`);
   }
 }
 console.log(`Static checks passed: ${routes.length} bilingual pages, ${anchorCount} preserved heading IDs, ${redirects.size} redirects and ${localLinks} local links.`);

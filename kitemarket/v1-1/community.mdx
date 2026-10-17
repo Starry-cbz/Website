@@ -6,7 +6,14 @@ canonical: "https://www.kitemc.com/kitemarket/v1-1/community"
 
 import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
 
-<ScreenshotPlaceholder title="社区与通知页面" description="此处预留真实游戏截图，后续可补充收藏、订阅或通知中心。" lang="zh" />
+<Tabs>
+  <Tab title="当前收藏状态">
+    <ScreenshotPlaceholder image="/images/kitemarket/v1-1/favorites.png" title="已收藏状态与取消入口" description="订单详情以明确图标和文字显示已收藏，点击可取消，不用猜测按钮是否生效。" lang="zh" />
+  </Tab>
+  <Tab title="我的收藏">
+    <ScreenshotPlaceholder image="/images/kitemarket/v1-1/saved-search.png" title="收藏订单的真实状态" description="列表显示金胡萝卜订单当前开放、数量32、单价18金币及卖家摘要。" lang="zh" />
+  </Tab>
+</Tabs>
 
 使用 `/km community` 管理收藏、保存搜索、订阅和通知；使用 `/km prices` 查看可比价格。个人资料和通知在市场网络中持久保存，统计只使用已观察的已提交成交。
 
@@ -30,6 +37,8 @@ import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
 
 收藏/订阅发现索引最多1024人。索引满时新增收藏或订阅明确拒绝，不留下半保存的偏好；未订阅的手动保存搜索仍可使用。
 
+<ScreenshotPlaceholder title="保存搜索与订阅设置" description="此处预留真实游戏截图：保存的筛选条件、运行入口及订阅开关。" lang="zh" />
+
 <span id="个人通知" />
 
 ## 个人通知 {#v11-personal-notices}
@@ -41,6 +50,8 @@ import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
 登录提示真实未读数量，在线每15秒最多合并一条聊天提醒。同一分钟通知继续增加时提示增长，不逐笔刷屏。
 
 提醒不自动标为已读；打开详情或明确“全部已读”才更新持久状态。聊天只展示少量短订单引用，完整目标在详情页。失败读取不会冒充零未读。
+
+<ScreenshotPlaceholder image="/images/kitemarket/v1-1/notifications.png" title="未读通知与合并事件" description="本例一条购买成交通知合并2个事件，同时显示未读状态和记录时间。" lang="zh" />
 
 <span id="公开广播和-discord" />
 
@@ -74,6 +85,8 @@ Discord 配置与展示快照在启动时固定。修改后正常重启服务器
 
 卖家索引最多1024人。超过索引容量后个人精确成交统计继续保存，完整排行榜明确不可用，不把已索引的一部分卖家展示为全网络排行。
 
+<ScreenshotPlaceholder image="/images/kitemarket/v1-1/seller-statistics.png" title="同币种卖家排行榜" description="悬浮说明分别列出成交笔数、已售数量和净收入，金额保持在同一币种范围内。" lang="zh" />
+
 <span id="公开价格参考" />
 
 ## 公开价格参考 {#v11-public-reference-prices}
@@ -87,5 +100,7 @@ Discord 配置与展示快照在启动时固定。修改后正常重启服务器
 | 成交量 | 窗口内真实已提交数量和成交记录 |
 
 不同属性的稀有物品、不同整包组合或币种不能强行合并。无可比基线显示缺少数据，不把零作为估值。参考价不是保证成交的报价，也不是作弊结论。
+
+<ScreenshotPlaceholder image="/images/kitemarket/v1-1/price-reference.png" title="橡木原木的成交价格参考" description="本例基于真实成交显示单价中位数、数量加权均价、数量及成交笔数。" lang="zh" />
 
 风险规则如何使用参考数据见[管理与风险复核](/kitemarket/v1-1/administration-risk)。

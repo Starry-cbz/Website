@@ -45,7 +45,17 @@ import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
   <section className="km-section">
     <h2 id="v11-新能力实拍">v1.1 新能力实拍</h2>
     <p>整包、批量、费用、通知和管理页面沿用原版容器与真实物品显示。</p>
-    <ScreenshotPlaceholder title="v1.1 新能力" description="预留整包内容、批量发布、自动领取或风险复核的真实游戏截图。" lang="zh" />
+    <Tabs>
+      <Tab title="整包内容">
+        <ScreenshotPlaceholder image="/images/kitemarket/v1-1/bundle-contents.png" title="整包内容预览" description="逐项查看同一标的内的钻石、铁锭和绿宝石。" lang="zh" />
+      </Tab>
+      <Tab title="批量上架">
+        <ScreenshotPlaceholder image="/images/kitemarket/v1-1/batch-plan.png" title="批量发布计划" description="每种物品分别设置数量和单价，再逐单确认发布。" lang="zh" />
+      </Tab>
+      <Tab title="供货与费用">
+        <ScreenshotPlaceholder image="/images/kitemarket/v1-1/supply-fees-confirm.png" title="供货确认与费用明细" description="确认交货数量、总额、手续费与本次钱包收入。" lang="zh" />
+      </Tab>
+    </Tabs>
   </section>
 
   <section className="km-section">
@@ -59,7 +69,7 @@ import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
     <h2 id="原版就能用-外观由你决定">原版就能用，外观由你决定</h2>
     <p>完整原版 GUI 无需资源包。默认54槽布局、36格商品列表、分步发布和金额按钮，让玩家知道当前步骤与操作后果。首页区分一口价、收购供货和竞拍，四角连接个人中心、领取箱、钱包与我的挂单；收藏、通知、批量领取和待核对入口都从相应页面进入，查询失败时明确显示暂不可用。</p>
     <p>服主在配置文件中调整全部页面的标题、功能物品、Lore、位置和背景，支持双语内容、v1.1 新页面及旧首页配置。无效重载保留上一份有效配置，不提供游戏内样式编辑器。真实商品名称、附魔及 Lore 始终保留，不能用外观配置伪装交易标的。</p>
-    <ScreenshotPlaceholder image="/images/kitemarket/screenshot-home.png" title="集市首页" description="三类交易、发布草稿及个人资产入口。" lang="zh" />
+    <ScreenshotPlaceholder image="/images/kitemarket/v1-1/home-v11.png" title="集市首页" description="三类交易、发布草稿及个人资产入口。" lang="zh" />
     <p>ItemsAdder v4 兼容属于基础能力。安装自有或第三方主题后使用资源包界面；资源未就绪时说明原因并回退原版，切换保留草稿。开发者可通过配置或 Java SDK 自用、免费分发或独立销售主题，无需额外的 KiteMC 主题授权。插件不内置 IA 主题资源，v1.1 新页面仍复用同一套服务端动作和安全校验。</p>
     <Columns cols={2}>
       <Card title="ItemsAdder 接入" icon="puzzle-piece" href="/kitemarket/dlc">安装自己的主题，登记资源并检查就绪状态。</Card>

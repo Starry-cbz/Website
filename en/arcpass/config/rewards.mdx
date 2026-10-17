@@ -98,7 +98,9 @@ reward_magic_gem:
   amount: 5
 ```
 
-## Custom Icons v1.1.5 {#custom-icons}
+<span id="custom-icons" />
+
+## Custom Icons {#arcpass-v1-1-5-custom-icons}
 
 By default, the `icon` field accepts a vanilla material name (e.g., `DIAMOND`). Starting from v1.1.5, you can use **CustomModelData**, **ItemsAdder**, or **Oraxen** items as GUI icons.
 
@@ -142,7 +144,9 @@ The `icon` field controls what is displayed in the GUI. The `value` field contro
 
 </Tip>
 
-### Capture Any Item as an Icon v1.9.2 {#capture-any-item-as-an-icon}
+<span id="capture-any-item-as-an-icon" />
+
+### Capture Any Item as an Icon {#arcpass-v1-9-0-capture-item-icons}
 
 The reward editor can capture any item from the player's main hand as the reward icon:
 
@@ -152,7 +156,9 @@ The reward editor can capture any item from the player's main hand as the reward
 
 Captured icons preserve the item's name, lore, enchantments, CustomModelData, and other custom data. Right-click the Icon slot to restore the default icon for that reward type. The icon only affects GUI display and does not change the reward delivered to the player.
 
-## Item Preview Slot v1.8.2 {#item-preview-slot}
+<span id="item-preview-slot" />
+
+## Item Preview Slot {#arcpass-v1-7-0-item-preview-slot}
 
 When editing item rewards in the admin GUI (`/arcpass admin rewards`), you can set the reward's display item by clicking an item from your inventory onto the preview slot:
 
@@ -205,6 +211,10 @@ reward_vip_package:
     eco give %player% 10000
     lp user %player% permission set vip.access true
 ```
+
+### Unicode and Colored Command Text {#arcpass-v1-9-3-command-text}
+
+Command rewards preserve Unicode text and `&` color codes while replacing `%player%` and `%uuid%`. For example, `broadcast &6Congratulations %player%!` is passed to the target command; its plugin determines the final text and color rendering.
 
 ## Permission Rewards {#permission-rewards}
 

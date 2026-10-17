@@ -20,7 +20,7 @@ import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
 
 玩家界面使用币种显示名称，例如“金币”“点券”，不附加内部 ID。可在中英语言文件的 `currency-names.<币种ID>` 个性化名称，或使用 `currencies.<币种ID>.display-name` 字符串／双语映射；显示名称不改变余额归属或经济身份。具体优先级和重载方式见[配置指南](/kitemarket/guide#_3-配置币种)。
 
-<ScreenshotPlaceholder image="/images/kitemarket/screenshot-wallet.png" title="市场钱包：可用余额与冻结资金" description="按币种查看余额、冻结资金及当前充提网关状态。" lang="zh" />
+<ScreenshotPlaceholder image="/images/kitemarket/v1-1/wallet.png" title="共享钱包：绿宝石币与充提网关" description="本例显示100绿宝石币可用、0冻结，以及配置的充提网关；金币、经验点和物品币分别记账。" lang="zh" />
 
 ## 经验与物品币 {#v11-native-currencies}
 
@@ -59,7 +59,7 @@ import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
 
 网关不可用或充值结果为 `UNKNOWN` 时先处理该笔充提，不继续提交交易。操作结果与交易收据分别查看。
 
-<ScreenshotPlaceholder title="缺口补款与重新确认" description="此处预留真实游戏截图，展示缺口、充值金额与重新读取后的交易确认。" lang="zh" />
+<ScreenshotPlaceholder image="/images/kitemarket/v1-1/shortfall-top-up.png" title="竞拍前的缺口补款说明" description="本例出价60000金币，页面明确提示需先从外部账户充值192金币，并展示费用和报价变化时的处理说明。" lang="zh" />
 
 ## 收益预约与个人自动化 {#v11-wallet-automation}
 
@@ -77,7 +77,7 @@ import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
 
 `UNKNOWN` 不作为失败自动重试。先查看原操作及证据，按[异常核对](/kitemarket/operations#核对-unknown)处理，再恢复相关任务。手动领取、分类和当前页批量确认见[领取资产](/kitemarket/trading/claims)。
 
-<ScreenshotPlaceholder title="个人自动化与提现预约" description="此处预留真实游戏截图，展示独立开关、预约状态及空间不足时的提示。" lang="zh" />
+<ScreenshotPlaceholder image="/images/kitemarket/v1-1/automation.png" title="收益、登录提现与自动领取的独立入口" description="自动化页分别提供三项个人设置，底部另有提现预约入口；启用前仍需进入对应页面确认。" lang="zh" />
 
 ## 网关节点 {#网关节点}
 

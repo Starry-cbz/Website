@@ -6,7 +6,14 @@ canonical: "https://www.kitemc.com/kitemarket/v1-1/administration-risk"
 
 import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
 
-<ScreenshotPlaceholder title="管理与风险复核页面" description="此处预留真实游戏截图，后续可补充管理确认、案件或证据导出。" lang="zh" />
+<Tabs>
+  <Tab title="管理工具">
+    <ScreenshotPlaceholder image="/images/kitemarket/v1-1/administration.png" title="管理工具入口" description="管理页集中提供玩家、记录与订单等入口；实际写入仍需明确目标、原因和确认。" lang="zh" />
+  </Tab>
+  <Tab title="风险复核">
+    <ScreenshotPlaceholder image="/images/kitemarket/v1-1/risk-review.png" title="风险分析与人工复核入口" description="风险页提供模型、案件和复核相关入口，查看线索不会自动处罚玩家。" lang="zh" />
+  </Tab>
+</Tabs>
 
 使用 `/km tools` 进入管理工具，使用 `/km risk` 查看风险案件。管理操作与风险线索使用各自权限和确认；风险分数与建议不自动处罚玩家。
 

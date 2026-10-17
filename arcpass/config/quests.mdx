@@ -46,7 +46,7 @@ description: "&7开采各类矿石，成为矿场之星！"
 
 # 任务图标 (支持: 原版材料名, "itemsadder:命名空间:ID", "oraxen:ID")
 icon: IRON_PICKAXE
-# custom-model-data: 0    # 可选 CustomModelData (v1.1.5+)
+# custom-model-data: 0    # 可选 CustomModelData
 
 # 任务分类
 category: mining
@@ -84,6 +84,10 @@ conditions: []
 rewards:
   - "economy_100"
 ```
+
+### 自定义任务图标 {#arcpass-v1-1-5-quest-icons}
+
+任务的 `icon` 支持原版材质、`itemsadder:命名空间:ID` 和 `oraxen:ID`。使用原版材质时，可配合 `custom-model-data` 指定自定义模型；ItemsAdder 与 Oraxen 图标需要安装对应插件并注册物品。
 
 ## 任务目标类型 {#任务目标类型}
 
@@ -148,7 +152,14 @@ objectives:
   # 行走距离
   - type: walk
     amount: 1000  # 格
+```
 
+### 在线时长 {#arcpass-v1-8-2-playtime-quests}
+
+使用 `playtime` 按在线分钟累计进度，玩家每在线 1 分钟推进 1 点。以下目标需要在线 60 分钟：
+
+```yaml
+objectives:
   # 在线时长
   - type: playtime
     amount: 60  # 分钟

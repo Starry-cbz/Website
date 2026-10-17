@@ -45,7 +45,17 @@ import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
   <section className="km-section">
     <h2 id="v11-feature-screenshots">V1.1 feature screenshots</h2>
     <p>Bundles, bulk listings, fees, notices and administration use the same vanilla containers and real item displays.</p>
-    <ScreenshotPlaceholder title="V1.1 features" description="Reserved for a real screenshot of bundles, bulk publication, automatic claims or risk review." lang="en" />
+    <Tabs>
+      <Tab title="Bundle contents">
+        <ScreenshotPlaceholder image="/images/kitemarket/v1-1/bundle-contents.png" title="Bundle contents preview" description="Inspect the diamonds, iron ingots and emeralds within a single lot." lang="en" />
+      </Tab>
+      <Tab title="Bulk listings">
+        <ScreenshotPlaceholder image="/images/kitemarket/v1-1/batch-plan.png" title="Bulk publication plan" description="Set each item's quantity and unit price, then confirm each listing individually." lang="en" />
+      </Tab>
+      <Tab title="Supply & fees">
+        <ScreenshotPlaceholder image="/images/kitemarket/v1-1/supply-fees-confirm.png" title="Supply confirmation and fee breakdown" description="Review the delivery quantity, total, fees and income entering the wallet." lang="en" />
+      </Tab>
+    </Tabs>
   </section>
 
   <section className="km-section">
@@ -59,7 +69,7 @@ import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
     <h2 id="ready-for-vanilla-clients-made-for-your-own-design">Ready for vanilla clients, made for your own design</h2>
     <p>The complete vanilla GUI needs no resource pack. A 54-slot layout, 36 listing slots, guided publishing and amount buttons explain each step. Home separates sales, fulfillment and auctions, with profile, claims, wallet and my orders in its corners; favorites, notices, batch claims and review entries open from their dedicated pages, and failed queries report unavailability clearly.</p>
     <p>Configure titles, functional item icons, lore, positions and backgrounds for every page, including the v1.1 pages, with bilingual text and existing home-layout support. Invalid reloads retain the previous valid configuration. There is no in-game appearance editor. Actual items retain their names, enchantments and lore; appearance configuration cannot disguise trade items.</p>
-    <ScreenshotPlaceholder image="/images/kitemarket/screenshot-home.png" title="Market home" description="Entrances for all three trade types, listing drafts and personal assets." lang="en" />
+    <ScreenshotPlaceholder image="/images/kitemarket/v1-1/home-v11.png" title="Market home" description="Entrances for all three trade types, listing drafts and personal assets." lang="en" />
     <p>ItemsAdder v4 compatibility is a base capability. Install your own or a third-party theme to use a resource-pack interface. Missing resources explain the reason and fall back to vanilla; switching preserves drafts. Developers may create configuration themes or Java renderers for private use, free distribution or independent sale without an extra KiteMC theme license. IA theme resources are not bundled, and v1.1 pages reuse the same server-side actions and safety checks.</p>
     <Columns cols={2}>
       <Card title="ItemsAdder integration" icon="puzzle-piece" href="/en/kitemarket/dlc">Install your own theme, register resources and check readiness.</Card>

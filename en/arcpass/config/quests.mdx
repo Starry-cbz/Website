@@ -46,7 +46,7 @@ description: "&7Mine various ores and become a mining star!"
 
 # Quest icon (supports: vanilla material, "itemsadder:ns:id", "oraxen:id")
 icon: IRON_PICKAXE
-# custom-model-data: 0    # Optional CustomModelData (v1.1.5+)
+# custom-model-data: 0    # Optional CustomModelData
 
 # Quest category
 category: mining
@@ -84,6 +84,10 @@ conditions: []
 rewards:
   - "economy_100"
 ```
+
+### Custom Quest Icons {#arcpass-v1-1-5-quest-icons}
+
+The quest `icon` accepts vanilla materials, `itemsadder:namespace:id`, and `oraxen:id`. Add `custom-model-data` to select a custom model for a vanilla material. ItemsAdder and Oraxen icons require the corresponding plugin and a registered item.
 
 ## Objective Types {#objective-types}
 
@@ -139,7 +143,14 @@ objectives:
 objectives:
   - type: walk
     amount: 1000  # blocks
+```
 
+### Online Playtime {#arcpass-v1-8-2-playtime-quests}
+
+Use `playtime` to advance progress once per online minute. This objective requires 60 minutes online:
+
+```yaml
+objectives:
   - type: playtime
     amount: 60  # minutes
 ```

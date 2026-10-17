@@ -6,7 +6,14 @@ canonical: "https://www.kitemc.com/en/kitemarket/v1-1/community"
 
 import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
 
-<ScreenshotPlaceholder title="Community and notices" description="A real gameplay screenshot can be added here later for favorites, subscriptions or the notice center." lang="en" />
+<Tabs>
+  <Tab title="Current favorite state">
+    <ScreenshotPlaceholder image="/images/kitemarket/v1-1/favorites.png" title="Favorite state and removal control" description="The order details explicitly show the saved favorite state and offer removal, so the action's effect is clear." lang="en" />
+  </Tab>
+  <Tab title="Your favorites">
+    <ScreenshotPlaceholder image="/images/kitemarket/v1-1/saved-search.png" title="The actual state of a favorite order" description="The list shows an open golden-carrot order with a quantity of 32, an 18-coin unit price and a seller summary." lang="en" />
+  </Tab>
+</Tabs>
 
 Use `/km community` to manage favorites, saved searches, subscriptions and notices. Use `/km prices` for comparable price references. Preferences and notices persist in the market network; statistics use observed committed trades.
 
@@ -30,6 +37,8 @@ Subscriptions apply to future matching orders. Validated search edits do not aut
 
 The favorite/subscription discovery index supports up to 1,024 players. A full index rejects new registrations before saving preferences. Unsubscribed manual saved searches remain available.
 
+<ScreenshotPlaceholder title="Saved-search and subscription settings" description="Reserved for a real gameplay screenshot of saved filters, the run-search entrance and subscription controls." lang="en" />
+
 <span id="personal-notices" />
 
 ## Personal notices {#v11-personal-notices}
@@ -41,6 +50,8 @@ Notices persist in the market network when players are offline. Disabling person
 Login reports actual unread entries. Online polling combines changes into at most one reminder every 15 seconds. Growth in the same-minute notice produces an update without one message per event.
 
 Delivery does not mark notices read. Opening details or explicitly marking all read updates durable status. Chat shows only a few short order references; details retain targets. Failed reads never appear as zero unread.
+
+<ScreenshotPlaceholder image="/images/kitemarket/v1-1/notifications.png" title="Unread notices and merged events" description="One purchase notice combines two events in this example, retaining its unread state and timestamp." lang="en" />
 
 <span id="public-broadcasts-and-discord" />
 
@@ -74,6 +85,8 @@ Rankings can switch between net income, completed trade count and quantity sold.
 
 The seller index supports up to 1,024 players. Beyond that limit, exact individual statistics continue while complete rankings become explicitly unavailable. Indexed sellers are not presented as a complete network ranking.
 
+<ScreenshotPlaceholder image="/images/kitemarket/v1-1/seller-statistics.png" title="Same-currency seller ranking" description="The tooltip separates completed trades, quantity sold and net income within one currency." lang="en" />
+
 <span id="public-reference-prices" />
 
 ## Public reference prices {#v11-public-reference-prices}
@@ -87,5 +100,7 @@ Reference prices group complete comparable items in one currency over rolling 24
 | Volume | Genuine committed quantity and trade records in the window |
 
 Different properties, bundle compositions or currencies are not forcibly merged. Missing comparable data is not a zero valuation. References are neither executable quotes nor findings of cheating.
+
+<ScreenshotPlaceholder image="/images/kitemarket/v1-1/price-reference.png" title="Oak-log trade-price reference" description="The example shows the median unit price, quantity-weighted mean, traded quantity and trade count from actual trades." lang="en" />
 
 See [administration and risk review](/en/kitemarket/v1-1/administration-risk) for use in review signals.

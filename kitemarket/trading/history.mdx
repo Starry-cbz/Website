@@ -32,7 +32,17 @@ import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
 
 订阅只提醒后续新匹配订单，不自动购买、供货或出价。条件更新先校验候选，失败不覆盖已保存条件。发现索引最多1024人；容量不足时新增收藏或订阅明确拒绝，不留下半保存状态，未订阅的手动保存搜索仍可使用。
 
-<ScreenshotPlaceholder title="收藏与保存搜索" description="此处预留真实游戏截图：订单收藏、保存筛选及订阅开关。" lang="zh" />
+<Tabs>
+  <Tab title="收藏状态">
+    <ScreenshotPlaceholder image="/images/kitemarket/v1-1/favorites.png" title="订单详情中的已收藏状态" description="下界之星明确显示“已收藏”，并提示点击取消收藏，便于确认当前状态。" lang="zh" />
+  </Tab>
+  <Tab title="收藏列表">
+    <ScreenshotPlaceholder image="/images/kitemarket/v1-1/saved-search.png" title="我的收藏与订单摘要" description="收藏列表显示金胡萝卜订单的开放状态、数量、单价及卖家，点击后可继续查看订单。" lang="zh" />
+  </Tab>
+  <Tab title="保存搜索">
+    <ScreenshotPlaceholder title="保存搜索与订阅设置" description="此处预留真实游戏截图：已保存的筛选条件、运行搜索和订阅开关。" lang="zh" />
+  </Tab>
+</Tabs>
 
 ## 持久通知与未读提醒 {#v11-persistent-notifications}
 
@@ -42,7 +52,7 @@ import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
 
 管理员可另外启用默认关闭的游戏广播和 Discord。游戏广播按节点60秒汇总；Discord 对真实订单创建消息、更新余量或最高价，并在终态删除，发送失败不回滚成交。无法确认创建结果时保留 `UNKNOWN`，不自动重复创建。配置与隐私范围见[通知与 Discord](/kitemarket/v1-1/community#公开广播和-discord)。
 
-<ScreenshotPlaceholder title="通知中心与未读状态" description="此处预留真实游戏截图：持久通知列表、合并提醒与已读操作。" lang="zh" />
+<ScreenshotPlaceholder image="/images/kitemarket/v1-1/notifications.png" title="通知中心：未读成交提醒" description="本例将两次购买成交合并为一条未读提醒，同时保留事件数量与时间。" lang="zh" />
 
 ## 卖家窗口、排行与价格参考 {#v11-seller-statistics-and-prices}
 
@@ -52,7 +62,14 @@ import { ScreenshotPlaceholder } from "/snippets/screenshot-placeholder.jsx";
 
 价格参考按同币种和完整可比物品分组，使用滚动24小时、7天、30天窗口，展示单位价中位数、数量加权均价和真实成交量。不同属性、不同整包组合或币种不强行合并；无可比数据不显示零估值。参考价不是保证成交的报价，也不是作弊结论。
 
-<ScreenshotPlaceholder title="卖家统计与公开价格参考" description="此处预留真实游戏截图：UTC 卖家窗口、同币种排行和滚动价格参考。" lang="zh" />
+<Tabs>
+  <Tab title="卖家排行">
+    <ScreenshotPlaceholder image="/images/kitemarket/v1-1/seller-statistics.png" title="卖家排行与真实成交统计" description="本例展示卖家的成交笔数、已售数量与金币净收入；历史销量不代表当前库存。" lang="zh" />
+  </Tab>
+  <Tab title="价格参考">
+    <ScreenshotPlaceholder image="/images/kitemarket/v1-1/price-reference.png" title="同类成交价格统计" description="橡木原木的金币统计分别显示成交单价中位数、数量加权均价、成交数量与笔数。" lang="zh" />
+  </Tab>
+</Tabs>
 
 ## 单笔交易收据
 
