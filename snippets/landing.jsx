@@ -46,7 +46,7 @@ export const LandingFooter = ({ lang = "zh" }) => {
         <a href={english ? "https://license.kitemc.com/en" : "https://license.kitemc.com/"}>{english ? "License Center" : "许可证中心"}</a>
         <a href={english ? "https://discord.gg/dcsBw5Z5ZT" : "https://qm.qq.com/q/R83fq82HWm"}>{english ? "Community" : "加入社区"}</a>
       </nav>
-      <p>{english ? "Tools and plugins for your Minecraft server." : "为你的 Minecraft 服务器提供工具与插件。"}</p>
+      <p>{english ? "Independent software development, starting with Minecraft plugins." : "起步于 Minecraft 插件的独立软件开发。"}</p>
     </footer>
   );
 };

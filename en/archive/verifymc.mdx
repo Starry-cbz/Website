@@ -1,6 +1,6 @@
 ---
-title: "VerifyMC - Historical Documentation"
-description: "Archived documentation for the discontinued Minecraft whitelist and registration plugin, including configuration, API and previous downloads."
+title: "VerifyMC - Maintenance mode"
+description: "VerifyMC is in maintenance mode with no proactive development or updates. Bug reports and PRs are accepted; feature request issues are not accepted."
 mode: "custom"
 canonical: "https://www.kitemc.com/en/archive/verifymc"
 ---
@@ -10,10 +10,10 @@ import { LandingHero, ActionLinks, LandingFooter } from "/snippets/landing.jsx";
 <div className="km-landing">
   <LandingHero
     title="VerifyMC"
-    subtitle="Whitelist & registration · Historical archive"
-    description="VerifyMC is discontinued. This archive preserves historical feature descriptions, configuration and downloads for existing users."
+    subtitle="Whitelist & registration · Maintenance mode"
+    description="VerifyMC is in maintenance mode with no proactive development or updates. Bug reports and PRs are accepted; feature request issues are not accepted. Historical docs and existing downloads remain available."
     image="/images/logo/verifymc.svg"
-    eyebrow="ARCHIVED PROJECT"
+    eyebrow="MAINTENANCE MODE"
     links={[
       { label: "Historical documentation", href: "/en/archive/verifymc/guide" },
       { label: "Previous downloads", href: "/en/archive/verifymc/download" },
@@ -22,7 +22,8 @@ import { LandingHero, ActionLinks, LandingFooter } from "/snippets/landing.jsx";
   />
 
   <section className="km-section">
-    <Warning>VerifyMC is discontinued. No new features, compatibility updates or maintenance are promised. These pages describe historical versions and do not imply support for current Minecraft, dependencies or external services.</Warning>
+    <Warning>VerifyMC is in maintenance mode: no proactive development or updates, but bug reports and PRs are accepted. Feature request issues are not accepted. These pages describe historical versions and do not certify compatibility with current Minecraft versions, dependencies or external services.</Warning>
+    <p>Submit bug reports through <a href="https://github.com/KiteLtd/VerifyMC/issues">GitHub Issues</a> or changes through <a href="https://github.com/KiteLtd/VerifyMC/pulls">Pull Requests</a>. An AI workflow is planned to assist maintenance; it is not yet live.</p>
     <h2 id="historical-features">Historical features</h2>
     <Columns cols={3}>
       <Card title="Email & CAPTCHA" icon="envelope">Email verification, self-hosted math or text CAPTCHA, domain allowlists and alias restrictions.</Card>

@@ -1,6 +1,6 @@
 ---
-title: "VerifyMC - 历史文档"
-description: "已停止维护的 Minecraft 白名单与注册插件。保留历史安装说明、API 和已有版本下载。"
+title: "VerifyMC - 有限维护"
+description: "VerifyMC 白名单与注册插件现处于有限维护模式，不主动开发更新，接收 Bug 反馈与 PR，不受理新增功能的 Issue。"
 mode: "custom"
 canonical: "https://www.kitemc.com/archive/verifymc"
 ---
@@ -10,10 +10,10 @@ import { LandingHero, ActionLinks, LandingFooter } from "/snippets/landing.jsx";
 <div className="km-landing">
   <LandingHero
     title="VerifyMC"
-    subtitle="白名单与注册插件 · 历史文档"
-    description="VerifyMC 已停止维护。本区保留历史功能说明、配置和下载，供已有用户查阅。"
+    subtitle="白名单与注册插件 · 有限维护"
+    description="VerifyMC 现处于有限维护模式，不主动开发更新，接收 Bug 反馈与 PR，不受理新增功能的 Issue。历史文档与已有版本下载继续保留。"
     image="/images/logo/verifymc.svg"
-    eyebrow="归档项目"
+    eyebrow="有限维护"
     links={[
       { label: "阅读历史文档", href: "/archive/verifymc/guide" },
       { label: "历史版本下载", href: "/archive/verifymc/download" },
@@ -22,7 +22,8 @@ import { LandingHero, ActionLinks, LandingFooter } from "/snippets/landing.jsx";
   />
 
   <section className="km-section">
-    <Warning>VerifyMC 已停止维护，不再提供新功能、兼容更新或维护承诺。以下内容描述历史版本，不代表对当前 Minecraft、依赖或外部服务的支持。</Warning>
+    <Warning>VerifyMC 现处于有限维护模式：不主动开发更新，接收 Bug 反馈与 PR，不受理新增功能的 Issue。以下内容描述历史版本，不代表已验证当前 Minecraft、依赖或外部服务的兼容性。</Warning>
+    <p>可通过 <a href="https://github.com/KiteLtd/VerifyMC/issues">GitHub Issues</a> 提交 Bug 反馈，或通过 <a href="https://github.com/KiteLtd/VerifyMC/pulls">Pull Requests</a> 提交改动。计划引入 AI 工作流辅助维护，目前尚未上线运行。</p>
     <h2 id="历史功能">历史功能</h2>
     <Columns cols={3}>
       <Card title="邮箱与图形验证码" icon="envelope">邮箱验证、自托管数学或文字验证码、域名白名单及别名限制。</Card>

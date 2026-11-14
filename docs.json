@@ -2,7 +2,7 @@
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
   "name": "KiteMC",
-  "description": "Minecraft 服务器工具与插件：KiteMarket、ArcPass 与历史文档。",
+  "description": "KiteMC 独立软件开发，起步于 Minecraft 插件，开发范围不限于 Minecraft。现有插件文档涵盖 KiteMarket、ArcPass 与有限维护的 VerifyMC。",
   "colors": {
     "primary": "#5672cd",
     "light": "#839bef",
@@ -249,7 +249,7 @@
             "icon": "box-archive",
             "groups": [
               {
-                "group": "VerifyMC · 已停止维护",
+                "group": "VerifyMC · 有限维护",
                 "pages": [
                   "archive/verifymc",
                   "archive/verifymc/guide"
@@ -520,7 +520,7 @@
             "icon": "box-archive",
             "groups": [
               {
-                "group": "VerifyMC · Discontinued",
+                "group": "VerifyMC · Maintenance mode",
                 "pages": [
                   "en/archive/verifymc",
                   "en/archive/verifymc/guide"

@@ -285,11 +285,11 @@ for (const route of routes) {
     '---',
     '',
   ].join('\n');
-  const discontinued = route.source.includes('/verifymc/') ?
+  const maintenanceNotice = route.source.includes('/verifymc/') ?
     route.locale === 'en' ?
-      '\n<Warning>\nVerifyMC is discontinued. These historical documents remain available for existing users and do not imply active maintenance or current compatibility.\n</Warning>\n' :
-      '\n<Warning>\nVerifyMC 已停止维护。本页保留供已有用户查阅历史配置与使用方法，不表示当前仍在维护或已验证新版本兼容性。\n</Warning>\n' : '';
-  const content = `${fm}${imports}${discontinued}\n${fences.restore(text).trim()}\n`;
+      '\n<Warning>\nVerifyMC is in maintenance mode: no proactive development or updates, but bug reports and PRs are accepted. Feature request issues are not accepted. These pages retain historical configuration and usage instructions and do not certify compatibility with current Minecraft versions, dependencies or external services.\n</Warning>\n' :
+      '\n<Warning>\nVerifyMC 现处于有限维护模式：不主动开发更新，接收 Bug 反馈与 PR，不受理新增功能的 Issue。本页保留历史配置与使用说明，不代表已验证当前 Minecraft、依赖或外部服务的兼容性。\n</Warning>\n' : '';
+  const content = `${fm}${imports}${maintenanceNotice}\n${fences.restore(text).trim()}\n`;
   outputs.push({ route, content });
 }
 

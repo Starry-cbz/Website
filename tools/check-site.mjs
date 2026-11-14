@@ -62,7 +62,10 @@ for (const route of routes) {
   const prose = text.replace(/```[\s\S]*?```/g, '').replace(/`[^`\n]*`/g, '');
   if (route.kind === 'document') assert.ok(!/mode:\s*(custom|wide)/.test(text.split('---')[1]), `Unexpected document mode: ${route.file}`);
   assert.ok(!/:::\s|<script setup|<ActionButton|<LinkGrid|<ProductDownloadLayout|:show-|<template>/.test(prose), `Unconverted Vue: ${route.file}`);
-  if (route.target.includes('/archive/verifymc')) assert.match(text, /停止维护|no longer maintained|discontinued/i);
+  if (route.target.includes('/archive/verifymc')) {
+    assert.match(text, /有限维护|maintenance mode/i, `Missing maintenance-mode notice: ${route.file}`);
+    assert.doesNotMatch(text, /停止维护|no longer maintained|discontinued/i, `Outdated maintenance notice: ${route.file}`);
+  }
   for (const old of route.oldPaths || []) {
     if (canonicalRoute(old) === route.target) continue;
     assert.equal(redirects.get(old), route.target, `Missing redirect: ${old}`);
