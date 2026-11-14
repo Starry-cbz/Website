@@ -1,6 +1,6 @@
 # KiteMC
 
-KiteMC 官网与双语文档，使用 Mintlify。中文为默认语言，英文内容位于 `en/`。
+KiteMC 是起步于 Minecraft 插件的独立软件开发品牌，开发范围不限于 Minecraft。本仓库提供 KiteMC 官网与现有插件的双语文档，使用 Mintlify。中文为默认语言，英文内容位于 `en/`。
 
 [官网](https://www.kitemc.com) · [English](https://www.kitemc.com/en) · [许可证中心](https://license.kitemc.com/) · [GitHub](https://github.com/KiteMC/)
 
@@ -8,7 +8,7 @@ KiteMC 官网与双语文档，使用 Mintlify。中文为默认语言，英文�
 
 - **ArcPass**：通行证、任务、奖励、赛季与开发接口。
 - **KiteMarket**：交易、钱包、配置、运维、ItemsAdder 接入和公开 SDK。
-- **VerifyMC**：已停止维护的历史文档及已有版本下载。
+- **VerifyMC**：有限维护的白名单与注册插件，保留历史文档及已有版本下载。
 
 运行 JAR、SDK、示例和语言／配置包由各产品的 GitHub Releases 承载。SDK 的 GitHub Packages 认证与坐标见对应开发文档；浏览器下载组件只读取公开 Releases，不使用访问令牌。
 
@@ -63,7 +63,7 @@ KiteMarket 的交易、配置与开发内容按专题分开，原有入口页提
 
 KiteMarket 中英文页面共用 `images/kitemarket/screenshot-*.png`。已有首页、竞拍市场、高级条件、供货、钱包、发布条款、领取入口、待领物品及交易收据九张实机截图；竞拍最终确认仍使用 `screenshot-auction-confirm.png` 空位。按实际页面内容命名，不把市场列表的物品提示当作确认页。添加或替换截图时同步媒体摘要，缺图时保留带说明的空框。
 
-VerifyMC 页面应保留停止维护提示。只陈述实际功能及验证范围，不把版本目标或启动检查写成完整兼容认证。
+VerifyMC 页面应保留有限维护提示：不主动开发更新，接收 Bug 反馈与 PR，不受理新增功能的 Issue。AI 工作流辅助维护仍是计划，尚未上线运行。只陈述实际功能及验证范围，不把版本目标或启动检查写成完整兼容认证。
 
 ## 发布
 
@@ -73,7 +73,7 @@ VerifyMC 页面应保留停止维护提示。只陈述实际功能及验证范�
 
 ## English
 
-This repository publishes the KiteMC website and bilingual documentation with Mintlify. Chinese is the default language; translated pages live in `en/`. ArcPass and KiteMarket are current products. VerifyMC documentation is retained as a discontinued archive.
+KiteMC is an independent software development brand that began with Minecraft plugins. Its development scope extends beyond Minecraft. This repository publishes the KiteMC website and bilingual documentation for its current plugins with Mintlify. Chinese is the default language; translated pages live in `en/`. ArcPass and KiteMarket are current products. VerifyMC is in maintenance mode with no proactive development or updates. Bug reports and PRs are accepted; feature request issues are not accepted. An AI workflow is planned to assist maintenance and is not yet live. Historical documentation and existing downloads remain available.
 
 Install Node.js 20.17 or later and the `mint` CLI, then run `mint dev --no-open` from the repository root. Before submitting a pull request, run the validation commands above. `main` deploys through Mintlify.
 

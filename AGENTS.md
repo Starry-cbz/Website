@@ -1,7 +1,7 @@
 # KiteMC documentation
 
 - This repository publishes the KiteMC website and bilingual documentation with Mintlify. `docs.json` controls navigation and redirects; pages are MDX.
-- Keep Chinese and English pages paired. Chinese is the default language. VerifyMC belongs in the historical archive and carries a discontinued notice.
+- Keep Chinese and English pages paired. Chinese is the default language. Keep VerifyMC at its existing archive URLs with a maintenance-mode notice: no proactive development or updates; accept bug reports and PRs, but not feature request issues. AI-assisted maintenance is planned, not live; the scope of feature PRs remains undecided.
 - Describe public capabilities and verified compatibility. Keep internal decisions, local paths, credentials, project memory and temporary evidence outside public Git.
 - Runtime JARs, SDKs, examples and configuration packs are hosted on GitHub. Purchases link to the license platform. Download components read public Releases without browser credentials and match exact asset names.
 - Preserve published URLs through the redirect map and preserve existing heading IDs when editing headings. Update both language links together.
